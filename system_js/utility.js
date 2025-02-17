@@ -1,2 +1,2 @@
-// baseurl="http://localhost/siyatha_v1/";
-baseurl = "https://sts.hrislkonline.com/";
+baseurl="http://localhost/Serandib/";
+// baseurl = "https://sts.hrislkonline.com/";

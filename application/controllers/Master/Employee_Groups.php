@@ -20,13 +20,35 @@ class Employee_Groups extends CI_Controller
     {
         $data['title'] = "Employee Groups | HRM System";
         // $data['data_set'] = $this->Db_model->getData('Grp_ID,EmpGroupName,GracePeriod,NosLeaveForMonth,MaxSLS,Allow1stSession,Allow2ndSession,OTPattern,Sup_ID', 'tbl_emp_group');
-        $data['data_set'] = $this->Db_model->getfilteredData('SELECT tbl_empmaster.Emp_Full_Name,tbl_emp_group.Grp_ID,tbl_emp_group.EmpGroupName,
- tbl_emp_group.Sup_ID,tbl_setting.Ot_m,tbl_setting.Ot_e,tbl_setting.Ot_d_Late,tbl_setting.Late,tbl_setting.late_Grs_prd,tbl_setting.Ed,
- tbl_setting.Min_time_t_ot_m,tbl_setting.Min_time_t_ot_e,tbl_setting.`Round`,tbl_setting.Hd_d_from,tbl_setting.Dot_f_holyday,tbl_setting.Dot_f_offday
-  FROM tbl_setting INNER JOIN tbl_emp_group ON tbl_setting.Group_id = tbl_emp_group.Grp_ID
- INNER JOIN tbl_empmaster ON tbl_emp_group.Sup_ID = tbl_empmaster.EmpNo');
+        $data['data_set'] = $this->Db_model->getfilteredData(
+            'SELECT 
+            emp1.Emp_Full_Name AS Sup_Name, 
+            emp2.Emp_Full_Name AS Admin_Name,
+            tbl_emp_group.Grp_ID,
+            tbl_emp_group.EmpGroupName,
+            tbl_emp_group.Sup_ID,
+            tbl_emp_group.Admin_ID,
+            tbl_setting.Ot_m,
+            tbl_setting.Ot_e,
+            tbl_setting.Ot_d_Late,
+            tbl_setting.Late,
+            tbl_setting.late_Grs_prd,
+            tbl_setting.Ed,
+            tbl_setting.Min_time_t_ot_m,
+            tbl_setting.Min_time_t_ot_e,
+            tbl_setting.`Round`,
+            tbl_setting.Hd_d_from,
+            tbl_setting.Dot_f_holyday,
+            tbl_setting.Dot_f_offday
+            FROM tbl_setting 
+            INNER JOIN tbl_emp_group ON tbl_setting.Group_id = tbl_emp_group.Grp_ID
+            LEFT JOIN tbl_empmaster AS emp1 ON tbl_emp_group.Sup_ID = emp1.EmpNo
+            LEFT JOIN tbl_empmaster AS emp2 ON tbl_emp_group.Admin_ID = emp2.EmpNo
+            '
+        );
         // $data['data_ot'] = $this->Db_model->getData('OTCode,OTName', 'tbl_ot_pattern_hd');
         $data['emp_sup'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
+        $data['emp_admin'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
         $this->load->view('Master/Employee_Groups/index', $data);
     }
     /*
@@ -78,6 +100,9 @@ class Employee_Groups extends CI_Controller
         if ($late_ded_from_ot == 'on') {
             $late_deduct_from_ot = 1;
         }
+        if($late_grace == null) {
+            $late_grace = 0;
+        }
         $FSt = $this->input->post('chk_1st');
         if ($FSt == null) {
             $FSt = 0;
@@ -94,6 +119,10 @@ class Employee_Groups extends CI_Controller
         if ($sup == null) {
             $sup = 9000;
         }
+        $grp_admin = $this->input->post('cmb_Admin');
+        if ($grp_admin == null) {
+            $grp_admin = 0;
+        }
         $group_name = $this->input->post('txt_group_name');
         $check_availble = $this->Db_model->getfilteredData("select * from tbl_emp_group where EmpGroupName='$group_name'");
         // echo $check_availble[0]->Grp_ID;
@@ -103,6 +132,7 @@ class Employee_Groups extends CI_Controller
                 'EmpGroupName' => $this->input->post('txt_group_name'),
                 'GracePeriod' => 0,
                 'Sup_ID' => $sup,
+                'Admin_ID' => $grp_admin,
                 'NosLeaveForMonth' => 0,
                 'MaxSLS' => 0,
                 'Allow1stSession' => 0,
@@ -110,6 +140,7 @@ class Employee_Groups extends CI_Controller
                 'OTPattern' => 'OT0001'
             );
             $result = $this->Db_model->insertData("tbl_emp_group", $data);
+            echo $round;
             $last_in_id = $this->Db_model->getfilteredData("select * from tbl_emp_group where EmpGroupName='$group_name2'");
             $last_insert_id = $last_in_id[0]->Grp_ID;
             $data2 = array(
@@ -154,12 +185,32 @@ class Employee_Groups extends CI_Controller
         //    echo "OkM " . $id;
         $whereArray = array('ID' => $id);
         $this->Db_model->setWhere($whereArray);
-        $data['data_set'] = $this->Db_model->getfilteredData("SELECT tbl_empmaster.Emp_Full_Name,tbl_empmaster.EmpNo,tbl_emp_group.Grp_ID,tbl_emp_group.EmpGroupName,
- tbl_emp_group.Sup_ID,tbl_setting.Ot_m,tbl_setting.Ot_e,tbl_setting.Ot_d_Late,tbl_setting.Late,tbl_setting.late_Grs_prd,tbl_setting.Ed,
- tbl_setting.Min_time_t_ot_m,tbl_setting.Min_time_t_ot_e,tbl_setting.`Round`,tbl_setting.Hd_d_from,tbl_setting.Dot_f_holyday,tbl_setting.Dot_f_offday
-  FROM tbl_setting INNER JOIN tbl_emp_group ON tbl_setting.Group_id = tbl_emp_group.Grp_ID
- INNER JOIN tbl_empmaster ON tbl_emp_group.Sup_ID = tbl_empmaster.EmpNo
-         WHERE tbl_emp_group.Grp_ID = '$id';");
+        $data['data_set'] = $this->Db_model->getfilteredData(
+            'SELECT 
+            emp1.Emp_Full_Name AS Sup_Name, 
+            emp2.Emp_Full_Name AS Admin_Name,
+            tbl_emp_group.Grp_ID,
+            tbl_emp_group.EmpGroupName,
+            tbl_emp_group.Sup_ID,
+            tbl_emp_group.Admin_ID,
+            tbl_setting.Ot_m,
+            tbl_setting.Ot_e,
+            tbl_setting.Ot_d_Late,
+            tbl_setting.Late,
+            tbl_setting.late_Grs_prd,
+            tbl_setting.Ed,
+            tbl_setting.Min_time_t_ot_m,
+            tbl_setting.Min_time_t_ot_e,
+            tbl_setting.`Round`,
+            tbl_setting.Hd_d_from,
+            tbl_setting.Dot_f_holyday,
+            tbl_setting.Dot_f_offday
+            FROM tbl_setting 
+            INNER JOIN tbl_emp_group ON tbl_setting.Group_id = tbl_emp_group.Grp_ID
+            LEFT JOIN tbl_empmaster AS emp1 ON tbl_emp_group.Sup_ID = emp1.EmpNo
+            LEFT JOIN tbl_empmaster AS emp2 ON tbl_emp_group.Admin_ID = emp2.EmpNo
+            '
+        );
         $data['emp_sup'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
         $data['title'] = "Employee Group | HRM System";
         $this->load->view('Master/Employee_Groups/update', $data);
@@ -230,8 +281,16 @@ class Employee_Groups extends CI_Controller
         if ($sup == null) {
             $sup = 9000;
         }
+        $admin = $this->input->post('cmb_Admin');
+        if ($admin == null) {
+            $admin = 0;
+        }
         $group_name = $this->input->post('txt_group_name');
-        $data = array("EmpGroupName" => $group_name, "Sup_ID" => $sup);
+        $data = array(
+            "EmpGroupName" => $group_name, 
+            "Sup_ID" => $sup,
+            "Admin_ID" => $admin,
+        );
         $whereArr = array("Grp_ID" => $group_id);
         $result1 = $this->Db_model->updateData("tbl_emp_group", $data, $whereArr);
         $data1 = array(

@@ -105,7 +105,7 @@
 
                                                                                 <option value="" default>-- Select --</option>
                                                                                 <?php foreach ($emp_sup as $t_data) { ?>
-                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"><?php echo $t_data->Emp_Full_Name; ?></option>
+                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"> <?php echo $t_data->EmpNo . ' - ' . $t_data->Emp_Full_Name; ?></option>
 
                                                                                 <?php }
                                                                                 ?>
@@ -116,7 +116,25 @@
                                                                         </div>
 
                                                                     </div>
+                                                                    
                                                                 </div>
+                                                                <div class="form-group row col-md-12 justify-content-end">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" id="cmb_Admin" name="cmb_Admin">
+
+                                                                                <option value="" default>-- Select --</option>
+                                                                                <?php foreach ($emp_sup as $t_data) { ?>
+                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"> <?php echo $t_data->EmpNo . ' - ' . $t_data->Emp_Full_Name; ?></option>
+                                                                                <?php }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                
 
                                                                 <div class="form-group col-md-12">
                                                                     <div class="form-group col-sm-6">
@@ -195,7 +213,7 @@
                                                                         </div>
                                                                         <label for="focusedinput" class="col-sm-4 control-label">Late Grace Period</label>
                                                                         <div class="col-sm-2">
-                                                                            <input type="number" class="form-control" id="txt_max_l_size" name="round" placeholder="Ex: 120">
+                                                                            <input type="number" class="form-control" id="late_gp" name="late_gp" placeholder="Ex: 120">
                                                                         </div>
 
                                                                     </div>
@@ -260,7 +278,7 @@
                                                                         <th>EARLY DEPARTURE</th>
                                                                         <th>GRACE PERIOD</th>
                                                                         <th>SUPERVISOR NAME</th>
-
+                                                                        <th>GROUP ADMIN</th>
                                                                         <th>EDIT</th>
                                                                         <th>DELETE</th>
 
@@ -278,7 +296,8 @@
                                                                             <td width='100'><?php echo $data->Late; ?></td>
                                                                             <td width='50'><?php echo $data->Ed; ?></td>
                                                                             <td width='50'><?php echo $data->late_Grs_prd; ?></td>
-                                                                            <td width='200'><?php echo $data->Emp_Full_Name; ?></td>
+                                                                            <td width='200'><?php echo $data->Sup_Name; ?></td>
+                                                                            <td width='200'><?php echo $data->Admin_Name; ?></td>
                                                                             <td width='15'>
                                                                             <?php $url = base_url() . "Master/Employee_Groups/updateAttView?id=$data->Grp_ID"; ?>
                                                                                 <a class="edit_data btn btn-green"
@@ -286,7 +305,7 @@
                                                                                     <i class="fa fa-edit"></i> </a>
                                                                             </td>
                                                                             <td width='15'>
-                                                                                <button class='action_comp btn btn-danger' data-toggle='modal' href='javascript:void()' title='DELETE' onclick='delete_id([Grp_ID])'>
+                                                                                <button class='action_comp btn btn-danger' data-toggle='modal' href='javascript:void()' title='DELETE' onclick='delete_id(<?php echo $data->Grp_ID ?>)'>
                                                                                     <i class='fa fa-times-circle'></i>
                                                                                 </button>
                                                                             </td>
@@ -309,6 +328,51 @@
 
                                 <!-- End Grid View -->
                                 <!--***************************-->
+
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h2 class="modal-title">DESIGNATION</h2>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" action="<?php echo base_url(); ?>Master/Designation/edit" method="post">
+                                                    <div class="form-group col-sm-12">
+                                                        <label for="focusedinput" class="col-sm-4 control-label">ID</label>
+                                                        <div class="col-sm-8">
+                                                            <input value="<?php echo $data->Des_ID; ?>" type="text" class="form-control" readonly="readonly" name="id" id="id" class="m-wrap span3" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-12">
+                                                        <label for="focusedinput" class="col-sm-4 control-label">DEPARTMENT</label>
+                                                        <div class="col-sm-8">
+                                                            <input value="<?php echo $data->Desig_Name; ?>" type="text" name="Desig_Name" id="Desig_Name"  class="form-control m-wrap span6"><br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-sm-12">
+                                                        <label for="focusedinput" class="col-sm-4 control-label">ORDER</label>
+                                                        <div class="col-sm-8">
+                                                            <input value="<?php echo $data->Desig_Order; ?>" type="text" name="Desig_Order" id="Desig_Order"  class="form-control m-wrap span6"><br>
+                                                        </div>
+                                                    </div>
+
+
+                                            </div>
+
+                                            <br>
+                                            <!--<input class="btn green" type="submit" value="submit" id="submit">-->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" id="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                            </form>
+                                        </div>
+
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
 
 
 
@@ -350,6 +414,46 @@
         $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/processing.gif" /></p><center>');
 
     });
+
+    function delete_id(id)
+{
+    swal({title: "Are you sure?", text: "You will not be able to recover this data!", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, Delete This!", cancelButtonText: "No, Cancel This!", closeOnConfirm: false, closeOnCancel: false},
+            function (isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        url: baseurl + "index.php/Master/Employee_Groups/ajax_delete/" + id,
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function (data)
+                        {
+
+                            //if success reload ajax table
+                            $('#modal_form').modal('hide');
+                            reload_table();
+                        }
+
+                    });
+
+
+                    swal("Deleted!", "Selected data has been deleted.", "success");
+
+
+                    $(document).ready(function () {
+                        setTimeout(function () {
+                            window.location.replace(baseurl + "Master/Employee_Groups/");
+                        }, 1000);
+                    });
+
+
+                } else {
+                    swal("Cancelled", "Selected data Cancelled", "error");
+
+                }
+
+            });
+
+}
 </script>
 
 </html>

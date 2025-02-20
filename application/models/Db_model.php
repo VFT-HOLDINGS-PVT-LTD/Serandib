@@ -361,6 +361,25 @@ class db_model extends CI_Model {
         }
     }
 
+    function get_auto_emp_no_and_name($q) {
+
+        $this->db->select('*');
+        $this->db->from('tbl_empmaster');
+        $this->db->group_start();
+        $this->db->like('EmpNo', $q);
+        $this->db->or_like('Emp_Full_Name', $q);
+        $this->db->group_end();
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $new_row['label'] = htmlentities(stripslashes($row['Emp_Full_Name']));
+                $new_row['value'] = htmlentities(stripslashes($row['EmpNo']));
+                $row_set[] = $new_row; //build an array
+            }
+            echo json_encode($row_set); //format the array into json data
+        }
+    }
+
     public function get_emp_info() {
         $name = $this->input->post("txt_emp_name");
         $query = "select EmpNo from tbl_empmaster where Emp_Full_Name ='$name' ";

@@ -128,34 +128,19 @@
                                                                                     class="col-sm-4 control-label">Group
                                                                                     Supervisor</label>
                                                                                 <div class="col-sm-8">
-                                                                                    <select class="form-control"
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="txt_supervisor_search"
+                                                                                        id="txt_supervisor_search"
+                                                                                        placeholder="Search by ID or Name"
+                                                                                        value="<?php echo $data_set[0]->Sup_ID . ' - ' . $data_set[0]->Sup_Name; ?>"
+                                                                                        >
+                                                                                    <input type="hidden"
+                                                                                        name="cmb_Supervisor"
                                                                                         id="cmb_Supervisor"
-                                                                                        name="cmb_Supervisor">
+                                                                                        value="<?php echo $data_set[0]->Sup_ID; ?>">
+                                                                                        
 
-                                                                                        <option value="" default>--
-                                                                                            Select --</option>
-                                                                                        <?php foreach ($emp_sup as $t_data) {
-                                                                                            if ($t_data->EmpNo == $data_set[0]->Sup_ID) {
-                                                                                                ?>
-                                                                                                <option selected
-                                                                                                    value="<?php echo $t_data->EmpNo; ?>">
-                                                                                                    <?php echo $t_data->EmpNo . ' - ' . $t_data->Emp_Full_Name; ?>
-                                                                                                </option>
-                                                                                                <?php
-                                                                                            } else {
-                                                                                                ?>
-                                                                                                <option
-                                                                                                    value="<?php echo $t_data->EmpNo; ?>">
-                                                                                                    <?php echo $t_data->EmpNo . ' - ' . $t_data->Emp_Full_Name; ?>
-                                                                                                </option>
-                                                                                                <?php
-                                                                                            }
-                                                                                        }
-                                                                                        ?>
-
-
-
-                                                                                    </select>
                                                                                 </div>
 
                                                                             </div>
@@ -166,39 +151,18 @@
                                                                                 <label for="focusedinput"
                                                                                     class="col-sm-4 control-label">Group
                                                                                     Admin</label>
-                                                                                    <div class="col-sm-8">
-                                                                                        
-                                                                                    
-                                                                                    <select class="form-control"
+                                                                                <div class="col-sm-8">
+                                                                                <input type="text"
+                                                                                        class="form-control"
+                                                                                        name="txt_admin_search"
+                                                                                        id="txt_admin_search"
+                                                                                        placeholder="Search by ID or Name"
+                                                                                        value="<?php echo $data_set[0]->Admin_ID . ' - ' . $data_set[0]->Admin_Name; ?>"
+                                                                                        >
+                                                                                    <input type="hidden"
+                                                                                        name="cmb_Admin"
                                                                                         id="cmb_Admin"
-                                                                                        name="cmb_Admin">
-
-                                                                                        <option value="" default>--
-                                                                                            Select --</option>
-                                                                                            
-                                                                                        <?php foreach ($emp_sup as $u_data) {
-                                                                                            if ($u_data->EmpNo == $data_set[0]->Admin_ID) {
-                                                                                                ?>
-                                                                                                <option selected
-                                                                                                    value="<?php echo $u_data->EmpNo; ?>">
-                                                                                                    <?php echo $u_data->EmpNo . ' - ' . $u_data->Emp_Full_Name; ?>
-                                                                                                </option>
-                                                                                                <?php
-                                                                                            } else {
-                                                                                                ?>
-                                                                                                <option
-                                                                                                    value="<?php echo $u_data->EmpNo; ?>">
-                                                                                                    <?php echo $u_data->EmpNo . ' - ' . $u_data->Emp_Full_Name; ?>
-                                                                                                </option>
-                                                                                                <?php
-                                                                                            }
-                                                                                        }
-                                                                                    
-                                                                                        ?>
-
-
-
-                                                                                    </select>
+                                                                                        value="<?php echo $data_set[0]->Admin_ID; ?>">
                                                                                 </div>
 
                                                                             </div>
@@ -549,6 +513,38 @@
                 $("#hdntext2").val(JSON.stringify(myData));
                 console.log(JSON.stringify(myData));
             }
+            $(function () {
+                $("#txt_supervisor_search").autocomplete({
+                    source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+                    minLength: 1,
+                    select: function (event, ui) {
+                        $("#cmb_Supervisor").val(ui.item.value);
+                        $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label);
+                        return false;
+                    }
+                }).autocomplete("instance")._renderItem = function (ul, item) {
+                    return $("<li>")
+                        .append("<div>" + item.value + " - " + item.label + "</div>")
+                        .appendTo(ul);
+                };
+            });
+
+            $(function () {
+                $("#txt_admin_search").autocomplete({
+                    source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+                    minLength: 1,
+                    select: function (event, ui) {
+                        $("#cmb_Admin").val(ui.item.value);
+                        $("#txt_admin_search").val(ui.item.value + ' - ' + ui.item.label);
+                        return false;
+                    }
+                }).autocomplete("instance")._renderItem = function (ul, item) {
+                    return $("<li>")
+                        .append("<div>" + item.value + " - " + item.label + "</div>")
+                        .appendTo(ul);
+                };
+            });
+
         </script>
 
 </body>

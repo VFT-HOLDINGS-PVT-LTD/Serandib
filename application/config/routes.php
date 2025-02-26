@@ -52,3 +52,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['api/auth/login'] = 'api/Auth/login';
+$route['api/notifications'] = 'api/notification';
+$route['api/messages'] = 'api/Message';
+$route['api/company/companysettings'] = 'api/Companysettings';
+$route['api/company/companydetails'] = 'api/Companydetails';
+$route['api/employee/employeedetails'] = 'api/Employeemaster';
+$route['api/employee/birthdays'] = 'api/Birthdays';
+$route['api/leave/leaveentry'] = 'api/Leaveentry';
+$route['api/leave/leavetype'] = 'api/Leavetype';
+$route['api/leave/leavebalance'] = 'api/Leavebalance';
+$route['api/attendance/attendanceraw'] = 'api/Attendancerawdata';
+$route['api/sales/salary'] = 'api/Salary';
+$route['api/shift/shiftallocation'] = 'api/Shiftallocation';
+
+
+$route['api/mail/test'] = 'api/Email/Emailqueue';
+

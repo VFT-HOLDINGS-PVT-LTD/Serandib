@@ -8,6 +8,7 @@ class Leave_Request extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
         if (!($this->session->userdata('login_user'))) {
             redirect(base_url() . "");
         }
@@ -15,6 +16,7 @@ class Leave_Request extends CI_Controller
          * Load Database model
          */
         $this->load->model('Db_model', '', true);
+        $this->load->library('phpmailer_lib');
     }
 
     /*
@@ -163,9 +165,10 @@ class Leave_Request extends CI_Controller
         $EmpG = $this->Db_model->getfilteredData("select Grp_ID from tbl_empmaster where EmpNo = $Emp ");
 //        var_dump($EmpG);
         $grpID = $EmpG[0]->Grp_ID;
-        $Sup_Data = $this->Db_model->getfilteredData("select Sup_ID from tbl_emp_group where Grp_ID =$grpID; ");
+        $Sup_Data = $this->Db_model->getfilteredData("select Sup_ID,Admin_ID from tbl_emp_group where Grp_ID =$grpID; ");
 
         $Sup_ID = $Sup_Data[0]->Sup_ID;
+        $Admin_ID = $Sup_Data[0]->Admin_ID;
 
 //        var_dump($Sup_ID);die;
 
@@ -199,8 +202,9 @@ class Leave_Request extends CI_Controller
                                 'Apply_Date' => $timestamp,
                                 'Year' => $year,
                                 'Month' => $month,
-                                // 'Sup_AD_APP' => 0,
+                                'Approved_by' => $Admin_ID,
                                 'Sup_AD_APP' => $Sup_ID,
+                                'Is_Approve' => 0,
                                 'Is_Sup_AD_APP' => 0,
                                 'Reason' => $reason,
                                 'Trans_time' => $timestamp,

@@ -126,9 +126,40 @@
 
                                                                     </div>
 
+
                                                                 </div>
-                                                                <div
-                                                                    class="form-group row col-md-12 justify-content-end">
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Allow
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control"
+                                                                                id="cmb_emp_status"
+                                                                                name="cmb_emp_status">
+                                                                                <option value="0" selected>Deny</option>
+                                                                                <option value="1">Allow</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6"
+                                                                        id="group_admin_section" style="display: none;">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_admin_search"
+                                                                                id="txt_admin_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Admin"
+                                                                                id="cmb_Admin">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <!-- <div class="form-group row col-md-12 justify-content-end">
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Group
@@ -143,7 +174,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
 
 
                                                                 <div class="form-group col-md-12">
@@ -349,13 +380,15 @@
                                                                             <td width='100'><?php echo $data->Grp_ID; ?>
                                                                             </td>
                                                                             <td width='100'>
-                                                                                <?php echo $data->EmpGroupName; ?></td>
+                                                                                <?php echo $data->EmpGroupName; ?>
+                                                                            </td>
                                                                             <td width='50'><?php echo $data->Ot_m; ?></td>
                                                                             <td width='50'><?php echo $data->Ot_e; ?></td>
                                                                             <td width='100'><?php echo $data->Late; ?></td>
                                                                             <td width='50'><?php echo $data->Ed; ?></td>
                                                                             <td width='50'>
-                                                                                <?php echo $data->late_Grs_prd; ?></td>
+                                                                                <?php echo $data->late_Grs_prd; ?>
+                                                                            </td>
                                                                             <td width='200'><?php echo $data->Sup_Name; ?>
                                                                             </td>
                                                                             <td width='200'><?php echo $data->Admin_Name; ?>
@@ -494,6 +527,15 @@
     $("#submit").click(function () {
         $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/processing.gif" /></p><center>');
 
+    });
+    $(document).ready(function () {
+        $('#cmb_emp_status').change(function () {
+            if ($(this).val() == '1') {
+                $('#group_admin_section').show();
+            } else {
+                $('#group_admin_section').hide();
+            }
+        });
     });
 
     function delete_id(id) {

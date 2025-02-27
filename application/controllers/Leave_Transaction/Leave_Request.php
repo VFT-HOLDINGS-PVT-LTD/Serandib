@@ -16,7 +16,7 @@ class Leave_Request extends CI_Controller
          * Load Database model
          */
         $this->load->model('Db_model', '', true);
-        $this->load->library('phpmailer_lib');
+        $this->load->model('api_models/EmailQueue_model', 'EmailQueue', true);
     }
 
     /*

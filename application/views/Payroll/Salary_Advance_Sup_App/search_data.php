@@ -48,11 +48,11 @@
 
 
                         echo "<td width='15'>";
-                        echo "<a class='get_data btn btn-primary' href='" . base_url() . "Pay/Salary_Advance_Approve/approve/" . $data->id . "'>APPROVE<i class=''></i> </a>";
+                        echo "<a class='get_data btn btn-primary' href='" . base_url() . "Pay/Salary_Advance_Sup_Approve/approve/" . $data->id . "'>APPROVE<i class=''></i> </a>";
                         echo "</td>";
                         
                         echo "<td width='15'>";
-                        echo "<a class='get_data btn btn-danger' href='" . base_url() . "Pay/Salary_Advance_Approve/reject/" . $data->id . "'>REJECT<i class=''></i> </a>";
+                        echo "<a class='get_data btn btn-danger' href='" . base_url() . "Pay/Salary_Advance_Sup_Approve/reject/" . $data->id . "'>REJECT<i class=''></i> </a>";
                         echo "</td>";
 
                         echo "</tr>";

@@ -49,7 +49,7 @@
                                 <ul class="nav nav-tabs">
 
                                     <li class="active"><a data-toggle="tab" href="#tab1">SALARY ADVANCE</a></li>
-                                    <li><a data-toggle="tab" href="#tab2">VIEW SALARY ADVANCE</a></li>
+                                    <!--<li><a data-toggle="tab" href="#tab2">VIEW SALARY ADVANCE</a></li>-->
 
                                 </ul>
                             </div>

@@ -322,7 +322,7 @@
 
                 $("#search").click(function () {
                     $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/icon-loading.gif" /></p><center>');
-                    $('#search_body').load("<?php echo base_url(); ?>Pay/Salary_Advance_Approve/getSal_Advance", {'txt_emp': $('#txt_emp').val(), 'txt_emp_name': $('#txt_emp_name').val(), 'cmb_desig': $('#cmb_desig').val(), 'cmb_dep': $('#cmb_dep').val(), 'cmb_comp': $('#cmb_comp').val(), 'cmb_years': $('#cmb_years').val(), 'cmb_months': $('#cmb_months').val()});
+                    $('#search_body').load("<?php echo base_url(); ?>Pay/Salary_Advance_Sup_Approve/getSal_Advance", {'txt_emp': $('#txt_emp').val(), 'txt_emp_name': $('#txt_emp_name').val(), 'cmb_desig': $('#cmb_desig').val(), 'cmb_dep': $('#cmb_dep').val(), 'cmb_comp': $('#cmb_comp').val(), 'cmb_years': $('#cmb_years').val(), 'cmb_months': $('#cmb_months').val()});
                 });
 
 

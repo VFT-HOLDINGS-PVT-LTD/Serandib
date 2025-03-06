@@ -52,7 +52,7 @@ $currentUser = $this->session->userdata('login_user');
                                 <ul class="nav nav-tabs">
 
                                     <li class="active"><a data-toggle="tab" href="#tab1">SALARY ADVANCE</a></li>
-                                    <li><a data-toggle="tab" href="#tab2">VIEW SALARY ADVANCE</a></li>
+                                    <!--<li><a data-toggle="tab" href="#tab2">VIEW SALARY ADVANCE</a></li>-->
 
                                 </ul>
                             </div>
@@ -71,7 +71,7 @@ $currentUser = $this->session->userdata('login_user');
                                                         <div class="panel panel-info">
                                                             <div class="panel-heading"><h2>ADD SALARY ADVANCE</h2></div>
                                                             <div class="panel-body">
-                                                                <form class="form-horizontal" id="frm_sal_advance" name="frm_sal_advance" action="<?php echo base_url(); ?>Payroll/Salary_Advance_req/insert_data" method="POST">
+                                                                <form class="form-horizontal" id="frm_sal_advance" name="frm_sal_advance" action="<?php echo base_url(); ?>Pay/Salary_Advance_req/insert_data" method="POST">
 
                                                                     <!--success Message-->
                                                                     <?php if (isset($_SESSION['success_message']) && $_SESSION['success_message'] != '') { ?>

@@ -5,12 +5,14 @@
  * Database model
  */
 
-class db_model extends CI_Model {
+class db_model extends CI_Model
+{
     /*
      * Insert data
      */
 
-    public function insertData($table, $data) {
+    public function insertData($table, $data)
+    {
 
         try {
             $this->db->trans_start();
@@ -28,7 +30,8 @@ class db_model extends CI_Model {
      * Update Data
      */
 
-    public function updateData($tableName, $dataArray, $whereArray) {
+    public function updateData($tableName, $dataArray, $whereArray)
+    {
 
         $this->db->where($whereArray);
         $result = $this->db->update($tableName, $dataArray);
@@ -39,7 +42,8 @@ class db_model extends CI_Model {
      * Get Data
      */
 
-    public function getData($fieldset, $tableName) {
+    public function getData($fieldset, $tableName)
+    {
 
         $this->db->select($fieldset)->from($tableName);
         $query = $this->db->get();
@@ -50,7 +54,8 @@ class db_model extends CI_Model {
      * Get Data Advance
      */
 
-    function getData2($tablename = '', $columns_arr = array(), $where_arr = array(), $limit = 0, $offset = 0, $orderby = array()) {
+    function getData2($tablename = '', $columns_arr = array(), $where_arr = array(), $limit = 0, $offset = 0, $orderby = array())
+    {
         $limit = ($limit == 0) ? Null : $limit;
 
         if (!empty($columns_arr)) {
@@ -66,9 +71,9 @@ class db_model extends CI_Model {
                 $this->db->where($where_arr);
             }
 
-            if ($limit > 0 AND $offset > 0) {
+            if ($limit > 0 and $offset > 0) {
                 $this->db->limit($limit, $offset);
-            } elseif ($limit > 0 AND $offset == 0) {
+            } elseif ($limit > 0 and $offset == 0) {
                 $this->db->limit($limit);
             }
 
@@ -96,7 +101,8 @@ class db_model extends CI_Model {
      * Get Number of Rows
      */
 
-    public function get_num_rows($strSQL) {
+    public function get_num_rows($strSQL)
+    {
 
         $query = $this->db->query($strSQL);
         return $query->num_rows();
@@ -106,7 +112,8 @@ class db_model extends CI_Model {
      * Get SQL Quary Filter Data
      */
 
-    public function getfilteredData($strSQL) {
+    public function getfilteredData($strSQL)
+    {
 
         $query = $this->db->query($strSQL);
         return $query->result();
@@ -116,7 +123,8 @@ class db_model extends CI_Model {
      * Get SQL Quary Delete
      */
 
-    public function getfilteredDelete($strSQL) {
+    public function getfilteredDelete($strSQL)
+    {
 
         $query = $this->db->query($strSQL);
     }
@@ -125,53 +133,61 @@ class db_model extends CI_Model {
      * Delete By
      */
 
-    public function delete_by_id($id, $where, $table) {
+    public function delete_by_id($id, $where, $table)
+    {
 
         $this->db->where($where, $id);
         $this->db->delete($table);
     }
 
-    public function setWhere($whereArray) {
+    public function setWhere($whereArray)
+    {
 
         $this->db->where($whereArray);
     }
 
-    public function get_dropdown() {
+    public function get_dropdown()
+    {
 
         $query = "select EmpNo,Emp_Full_Name from tbl_empmaster where status =1";
         $city_info = $this->db->query($query);
         return $city_info;
     }
 
-    public function get_dropdown_dep() {
+    public function get_dropdown_dep()
+    {
 
         $query = "select Dep_ID,Dep_Name from tbl_departments";
         $city_info = $this->db->query($query);
         return $city_info;
     }
 
-    public function get_dropdown_des() {
+    public function get_dropdown_des()
+    {
 
         $query = "select Des_ID,Desig_Name from tbl_designations";
         $city_info = $this->db->query($query);
         return $city_info;
     }
 
-    public function get_dropdown_group() {
+    public function get_dropdown_group()
+    {
 
         $query = "select Grp_ID,EmpGroupName from tbl_emp_group";
         $city_info = $this->db->query($query);
         return $city_info;
     }
 
-    public function get_dropdown_comp() {
+    public function get_dropdown_comp()
+    {
 
         $query = "select Cmp_ID,Company_Name from tbl_companyprofile";
         $city_info = $this->db->query($query);
         return $city_info;
     }
 
-    public function verification($fieldset, $tableName, $where = '') {
+    public function verification($fieldset, $tableName, $where = '')
+    {
         /*
          * Get Date time
          */
@@ -195,7 +211,7 @@ class db_model extends CI_Model {
                 /*
                  * Set data to Session
                  */
-//                $data = $this->getfilteredData("select * from tbl_empmaster
+                //                $data = $this->getfilteredData("select * from tbl_empmaster
 //                Where username='$username' and password='$password' and Is_allow_login=1");
 
 
@@ -231,15 +247,17 @@ class db_model extends CI_Model {
                                     tbl_user_permisions.attendance_collection,
                                     tbl_user_permisions.attendance_row_data,
                                     tbl_user_permisions.manual_attendance,
+                                    tbl_user_permisions.manual_attendance_view,
                                     tbl_user_permisions.manual_att_request,
-                                     tbl_user_permisions.Is_manual_Sup,
-                                     tbl_user_permisions.Is_manual_Admin,
+                                    tbl_user_permisions.Is_manual_Sup,
+                                    tbl_user_permisions.Is_manual_Admin,
                                     tbl_user_permisions.attendance_process,
                                     tbl_user_permisions.Leave_Transaction,
                                     tbl_user_permisions.view_lv_balance,
                                     tbl_user_permisions.header_lv_nt,
                                     tbl_user_permisions.leave_allocation,
                                     tbl_user_permisions.leave_approve,
+                                    tbl_user_permisions.leave_approve_view,
                                     tbl_user_permisions.leave_entry,
                                     tbl_user_permisions.leave_request,
                                     tbl_user_permisions.leave_adj,
@@ -249,6 +267,7 @@ class db_model extends CI_Model {
                                     tbl_user_permisions.loan_entry,
                                     tbl_user_permisions.salary_increment,
                                     tbl_user_permisions.salary_advance,
+                                    tbl_user_permisions.salary_advance_view,
                                     tbl_user_permisions.request_advance,
                                     tbl_user_permisions.approve_advance,
                                     tbl_user_permisions.payroll_process,
@@ -317,7 +336,8 @@ class db_model extends CI_Model {
         }
     }
 
-    function get_auto_cus_name($q) {
+    function get_auto_cus_name($q)
+    {
         $this->db->select('*');
         $this->db->like('Emp_Full_Name', $q);
         $query = $this->db->get('tbl_empmaster');
@@ -328,12 +348,13 @@ class db_model extends CI_Model {
                 $new_row['value'] = htmlentities(stripslashes($row['EmpNo']));
                 $row_set[] = $new_row; //build an array
             }
-//            var_dump($row_set);die;
+            //            var_dump($row_set);die;
             echo json_encode($row_set); //format the array into json data
         }
     }
 
-    function get_auto_emp_name($q) {
+    function get_auto_emp_name($q)
+    {
         $this->db->select('*');
         $this->db->like('Emp_Full_Name', $q);
         $query = $this->db->get('tbl_empmaster');
@@ -347,7 +368,8 @@ class db_model extends CI_Model {
         }
     }
 
-    function get_auto_emp_no($q) {
+    function get_auto_emp_no($q)
+    {
         $this->db->select('*');
         $this->db->like('EmpNo', $q);
         $query = $this->db->get('tbl_empmaster');
@@ -361,21 +383,44 @@ class db_model extends CI_Model {
         }
     }
 
-    public function get_emp_info() {
+    function get_auto_emp_no_and_name($q)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_empmaster');
+        $this->db->group_start();
+        $this->db->like('EmpNo', $q);
+        $this->db->or_like('Emp_Full_Name', $q);
+        $this->db->group_end();
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $new_row['label'] = htmlentities(stripslashes($row['Emp_Full_Name']));
+                $new_row['value'] = htmlentities(stripslashes($row['EmpNo']));
+                $row_set[] = $new_row; //build an array
+            }
+            echo json_encode($row_set); //format the array into json data
+        }
+    }
+
+    public function get_emp_info()
+    {
         $name = $this->input->post("txt_emp_name");
         $query = "select EmpNo from tbl_empmaster where Emp_Full_Name ='$name' ";
         $info = $this->db->query($query);
         return $info;
     }
 
-    public function get_bank_info() {
+    public function get_bank_info()
+    {
         $cmb_bank_id = $this->input->post("cmb_bank");
         $query = "select distinct Acc_no from tbl_accounts where id ='$cmb_bank_id' ";
         $bank_info = $this->db->query($query);
         return $bank_info;
     }
 
-    public function get_chqno_info() {
+    public function get_chqno_info()
+    {
         $cmb_acc_id = $this->input->post("cmb_acc_no");
         $query = "select distinct lc_no from tbl_cheque_no where id ='$cmb_acc_id' ";
         $bank_info = $this->db->query($query);

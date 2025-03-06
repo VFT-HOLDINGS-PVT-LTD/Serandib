@@ -64,7 +64,7 @@
                         echo "</td>";
 
                         echo "<td width='15'>";
-                        echo "<a class='get_data btn btn-danger' href='" . base_url() . "Leave_Transaction/Leave_Approve/reject/" . $data->LV_ID . "'>REJECT<i class=''></i> </a>";
+                        echo "<a class='get_data btn btn-danger' href='" . base_url() . "Leave_Transaction/Leave_Approve_Sup/reject/" . $data->LV_ID . "'>REJECT<i class=''></i> </a>";
                         echo "</td>";
 
                         echo "</tr>";

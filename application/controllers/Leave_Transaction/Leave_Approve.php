@@ -15,6 +15,7 @@ class Leave_Approve extends CI_Controller
          * Load Database model
          */
         $this->load->model('Db_model', '', TRUE);
+        $this->load->model('api_models/EmailQueue_model', 'EmailQueue', true);
     }
 
     /*
@@ -208,48 +209,207 @@ class Leave_Approve extends CI_Controller
         $supplier_n = $this->Db_model->getfilteredData("SELECT tbl_empmaster.Emp_Full_Name FROM tbl_empmaster WHERE tbl_empmaster.EmpNo = '$supid' ");
         $supplier_name = $supplier_n[0]->Emp_Full_Name;
 
-        // $config = array(
-        //     'protocol' => 'smtp',
-        //     'smtp_host' => 'mail.vfthris.com',
-        //     'smtp_user' => 'mail@vfthris.com',
-        //     'smtp_pass' => 'Wlm7?Ux7g[s1',
-        //     'smtp_port' => 587,
-        //     'charset' => 'utf-8',
-        //     'mailtype' => 'html',
-        //     'newline' => "\r\n"
-        // );
+        $Year = date("Y");
+        //  $mail = new PHPMailer(true);
+        try {
 
-        // $this->load->library("email");
-        // $this->email->initialize($config);
+            // $config = array(
+            //     'protocol' => 'smtp',
+            //     'smtp_host' => 'mail.vfthris.com',
+            //     'smtp_user' => 'mail@vfthris.com',
+            //     'smtp_pass' => 'Wlm7?Ux7g[s1',
+            //     'smtp_port' => 587,
+            //     'charset' => 'utf-8',
+            //     'mailtype' => 'html',
+            //     'newline' => "\r\n"
+            // );
 
-        // $this->email->from("mail@vfthris.com");
-        // $this->email->to($employee_email);
-        // $this->email->message("Leave Request Reject By '$supplier_name'");
-        // $this->email->subject("Leave Request");
+            // $this->load->library("email");
+            // $this->email->initialize($config);
 
-        // if ($this->email->send()) {
-        //     echo "Success";
-        // } else {
-        //     echo "Failed: " . $this->email->print_debugger();
-        // }
-        //End
-        //****** Send message to leave request employee
-        /*
-         * SMS Server configuration
-         */
-        // $sender = "HRM SYSTEM";
-        // $recipient = $Tel;
-        // $message = 'System Response : ' . $Emp_Fullname . ' ' . 'Your Leave Request on' . ' ' . $from_date . ' ' . 'is Approved';
+            // $this->email->from("mail@vfthris.com");
+            // $this->email->to($employee_email);
+            // $this->email->message("Leave Request Reject By '$supplier_name'");
+            // $this->email->subject("Leave Request");
 
-        // $url = 'http://127.0.0.1:9333/ozeki?';
-        // $url .= "action=sendMessage";
-        // $url .= "&login=admin";
-        // $url .= "&password=abc123";
-        // $url .= "&recepient=" . urlencode($recipient);
-        // $url .= "&messageData=" . urlencode($message);
-        // $url .= "&sender=" . urlencode($sender);
-        // file($url);
+            // if ($this->email->send()) {
+            //     echo "Success";
+            // } else {
+            //     echo "Failed: " . $this->email->print_debugger();
+            // }
+            //End
+            //****** Send message to leave request employee
+            /*
+             * SMS Server configuration
+             */
+            // $sender = "HRM SYSTEM";
+            // $recipient = $Tel;
+            // $message = 'System Response : ' . $Emp_Fullname . ' ' . 'Your Leave Request on' . ' ' . $from_date . ' ' . 'is Approved';
 
+            // $url = 'http://127.0.0.1:9333/ozeki?';
+            // $url .= "action=sendMessage";
+            // $url .= "&login=admin";
+            // $url .= "&password=abc123";
+            // $url .= "&recepient=" . urlencode($recipient);
+            // $url .= "&messageData=" . urlencode($message);
+            // $url .= "&sender=" . urlencode($sender);
+            // file($url);
+
+            $mailSubject = "VFT Cloud: Leave Approved";
+
+            // Dynamic HTML content
+            $htmlContent = '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    background-color: #f9f9f9;
+                }
+                table {
+                    width: 100%;
+                }
+                .email-container {
+                    width: 100%;
+                    background-color: #ffffff;
+                    margin: 0 auto;
+                    padding: 20px;
+                    border-radius: 10px;
+                }
+                .email-header {
+                    background-image: url("https://webx.hrislkonline.com/assets/images/login-bg.jpg");
+                    background-size: cover;
+                    background-position: center;
+                    color: white;
+                    padding: 40px 20px;
+                    text-align: center;
+                    border-radius: 10px 10px 0 0;
+                }
+                .email-header h1 {
+                    margin-top: 10px;
+                    font-size: 28px;
+                }
+                .email-body {
+                    padding: 20px;
+                    color: #333333;
+                }
+                .email-footer {
+                    background-color: #f1f1f1;
+                    text-align: center;
+                    padding: 10px 0;
+                    font-size: 12px;
+                    color: #777777;
+                    border-radius: 0 0 10px 10px;
+
+                }
+                    .pg1 {
+                        color: white;
+            }
+                .button, a:visited {
+                    background-color: #001a67; 
+                    color: white;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    display: inline-block;
+                    margin-top: 5px;
+                    text-decoration: none;
+                    display: inline-block;
+                }
+                    .pg1 {
+                        color: white;
+            }
+                @media only screen and (max-width: 600px) {
+                    .email-container {
+                        width: 100%;
+                        padding: 10px;
+                    }
+                }
+                .header img {
+                    max-width: 176px;
+                    display: block; /* Ensure the image is centered */
+                    margin: 0 auto; /* Center the image */
+                    border-radius: 10px;
+                    padding: 15px;
+                }
+                
+            </style>
+        </head>
+        <body><div class="container">
+            <table class="email-container" role="presentation">
+                <tr class="header">
+                    <td>
+                        <img src="https://webx.hrislkonline.com/assets/images/company/logowebx.png" alt="Logo">
+                                        <hr> <!-- Added horizontal line -->
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="email-header">
+                        <h1>Leave Approved</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="email-body">
+                        <h2>Dear ' . $empname1[0]->username . ',</h2>
+                        <p>Your leave request has been approved.</p>
+                    <p class="pg1"><a href="https://webx.hrislkonline.com/Leave_Transaction/Leave_Request/" class="button">View Approved Leave</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="email-footer">
+                        <p>If you have any questions, feel free to <a href="https://support.vftholdings.lk/Open_ticket">contact us</a>.</p>
+                        <p>&copy; <span id="current-year">' . $Year . '</span> VFT HOLDINGS (PVT) LTD | ALL RIGHTS RESERVED</p>
+                    </td>
+                </tr>
+                <tr>
+                <td> <br/>  </td>
+                </tr>
+            </table>
+            </div>
+
+            <script>
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            </script>
+        </body>
+        </html>
+
+
+        ';
+
+            $mailData = [
+                'reciver_id' => $Emp_LV,
+                'reciver_email' => $employee_email,
+                'mail_status' => 0,
+                'mail_subject' => $mailSubject,
+                'mail_body' => $htmlContent
+            ];
+
+
+            $mailResult = $this->EmailQueue->insertMail($mailData);
+
+            // Send email
+            if ($mailResult) {
+                echo "Email added to queue successfully.";
+            } else {
+                echo "Email not sent.";
+            }
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$e}";
+        }
 
 
 
@@ -408,8 +568,8 @@ class Leave_Approve extends CI_Controller
 
 
         $Used = $Balance_Usd[0]->Used - $Day_type;
-        if($Used < 0){
-            $Used = 0;  
+        if ($Used < 0) {
+            $Used = 0;
         }
         $Lv_T_ID = $Balance_Usd[0]->Lv_T_ID;
 
@@ -423,10 +583,10 @@ class Leave_Approve extends CI_Controller
         $employee_email = $empname1[0]->E_mail;
         $empname = $this->Db_model->getfilteredData("SELECT tbl_emp_group.Sup_ID FROM tbl_emp_group WHERE tbl_emp_group.Grp_ID = '$groupid' ");
         $supid = $empname[0]->Sup_ID;
-       
+
         $supplier_n = $this->Db_model->getfilteredData("SELECT tbl_empmaster.Emp_Full_Name FROM tbl_empmaster WHERE tbl_empmaster.EmpNo = '$supid' ");
         $supplier_name = $supplier_n[0]->Emp_Full_Name;
-       
+
         // $config = array(
         //     'protocol' => 'smtp',
         //     'smtp_host' => 'mail.vfthris.com',
@@ -451,6 +611,181 @@ class Leave_Approve extends CI_Controller
         // } else {
         //     echo "Failed: " . $this->email->print_debugger();
         // }
+
+        $Year = date("Y");
+        // $mail = new PHPMailer(true);
+        try {
+            // Server settings
+            // $mail->isSMTP();
+            // $mail->Host = 'mail.hrislkonline.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'noreply@webx.hrislkonline.com';
+            // $mail->Password = 'wxK]LSft*ED}';
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            // $mail->Port = 587;
+
+            // Sender and recipient settings
+            // $mail->setFrom('mail@vfthris.com', 'VFT Cloud');
+            // $mail->addAddress($empname1[0]->E_mail); // Replace with dynamic email
+            // $mail->addReplyTo('noreply@webx.hrislkonline.com', 'No Reply');
+
+            // Email content
+            // $mail->isHTML(true);
+            $mailSubject = "VFT Cloud: Leave Rejected";
+
+            // Dynamic HTML content
+            $htmlContent = '
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Email</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }
+                    .container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        border: 1px solid #ddd;
+                        border-radius: 10px;
+                        background-color: #f9f9f9;
+                    }
+                    table {
+                        width: 100%;
+                    }
+                    .email-container {
+                        width: 100%;
+                        background-color: #ffffff;
+                        margin: 0 auto;
+                        padding: 20px;
+                        border-radius: 10px;
+                    }
+                    .email-header {
+                        background-image: url("https://webx.hrislkonline.com/assets/images/login-bg.jpg");
+                        background-size: cover;
+                        background-position: center;
+                        color: white;
+                        padding: 40px 20px;
+                        text-align: center;
+                        border-radius: 10px 10px 0 0;
+                    }
+                    .email-header h1 {
+                        margin-top: 10px;
+                        font-size: 28px;
+                    }
+                    .email-body {
+                        padding: 20px;
+                        color: #333333;
+                    }
+                    .email-footer {
+                        background-color: #f1f1f1;
+                        text-align: center;
+                        padding: 10px 0;
+                        font-size: 12px;
+                        color: #777777;
+                        border-radius: 0 0 10px 10px;
+
+                    }
+                        .pg1 {
+                            color: white;
+                }
+                    .button, a:visited {
+                        background-color: #001a67; 
+                        color: white;
+                        padding: 10px 20px;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        display: inline-block;
+                        margin-top: 5px;
+                        text-decoration: none;
+                        display: inline-block;
+                    }
+                        .pg1 {
+                            color: white;
+                }
+                    @media only screen and (max-width: 600px) {
+                        .email-container {
+                            width: 100%;
+                            padding: 10px;
+                        }
+                    }
+                    .header img {
+                        max-width: 176px;
+                        display: block; /* Ensure the image is centered */
+                        margin: 0 auto; /* Center the image */
+                        border-radius: 10px;
+                        padding: 15px;
+                    }
+                    
+                </style>
+            </head>
+            <body><div class="container">
+                <table class="email-container" role="presentation">
+                    <tr class="header">
+                        <td>
+                            <img src="https://webx.hrislkonline.com/assets/images/company/logowebx.png" alt="Logo">
+                                            <hr> <!-- Added horizontal line -->
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="email-header">
+                            <h1>Leave Rejected</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="email-body">
+                            <h2>Dear ' . $empname1[0]->username . ',</h2>
+                            <p>Your leave request has been rejected. Please contact the HR department for further details.</p>
+                        <p class="pg1"><a href="https://webx.hrislkonline.com/Leave_Transaction/Leave_Request/" class="button">View Rejected Leave</a></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="email-footer">
+                            <p>If you have any questions, feel free to <a href="https://support.vftholdings.lk/Open_ticket">contact us</a>.</p>
+                            <p>&copy; <span id="current-year">' . $Year . '</span> VFT HOLDINGS (PVT) LTD | ALL RIGHTS RESERVED</p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td> <br/>  </td>
+                    </tr>
+                </table>
+                </div>
+
+                <script>
+                    document.getElementById("current-year").textContent = new Date().getFullYear();
+                </script>
+            </body>
+            </html>
+
+
+            ';
+
+            $mailData = [
+                'reciver_id' => $Emp_LV,
+                'reciver_email' => $employee_email,
+                'mail_status' => 0,
+                'mail_subject' => $mailSubject,
+                'mail_body' => $htmlContent
+            ];
+
+
+            $mailResult = $this->EmailQueue->insertMail($mailData);
+
+            // Send email
+            if ($mailResult) {
+                echo "Email added to queue successfully.";
+            } else {
+                echo "Email not sent.";
+            }
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$e}";
+        }
 
 
 

@@ -1,0 +1,71 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+class Phpmailer_lib {
+    public $mail;
+    
+    public function __construct(){
+        log_message('Debug', 'PHPMailer class is loaded.');
+        
+        // Include PHPMailer library files
+        require_once APPPATH.'third_party/PHPMailer/src/Exception.php';
+        require_once APPPATH.'third_party/PHPMailer/src/PHPMailer.php';
+        require_once APPPATH.'third_party/PHPMailer/src/SMTP.php';
+        
+        $this->mail = new PHPMailer(true);
+        $this->init_settings();
+    }
+    
+    private function init_settings() {
+        try {
+            $this->mail->isSMTP();
+            $this->mail->Host = 'mail.hotelmate.lk'; // Changed to Gmail SMTP
+            $this->mail->SMTPAuth = true;
+            $this->mail->Username = 'test@hotelmate.lk'; // Update with your email
+            $this->mail->Password = '43*!sdUsE8xx'; // Use Gmail App Password
+            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $this->mail->Port = 465;
+            $this->mail->isHTML(true);
+            $this->mail->CharSet = 'UTF-8';
+            
+            // Default sender
+            $this->mail->setFrom('noreply@hotelmate.lk', 'OTP Test HotalMate');
+        } catch (Exception $e) {
+            log_message('error', 'Mailer Error: ' . $e->getMessage());
+        }
+    }
+    
+    public function send_mail($to, $subject, $message, $attachments = array()) {
+        try {
+            $this->mail->clearAddresses();
+            $this->mail->clearAttachments();
+            
+            if (is_array($to)) {
+                foreach ($to as $recipient) {
+                    $this->mail->addAddress($recipient);
+                }
+            } else {
+                $this->mail->addAddress($to);
+            }
+            
+            $this->mail->Subject = $subject;
+            $this->mail->Body = $message;
+            
+            if (!empty($attachments)) {
+                foreach ($attachments as $attachment) {
+                    if (file_exists($attachment)) {
+                        $this->mail->addAttachment($attachment);
+                    }
+                }
+            }
+            
+            return $this->mail->send();
+        } catch (Exception $e) {
+            log_message('error', 'Message could not be sent. Mailer Error: ' . $e->getMessage());
+            return false;
+        }
+    }
+}

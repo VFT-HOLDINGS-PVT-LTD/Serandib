@@ -161,4 +161,11 @@ class View_Employees extends CI_Controller {
         }
     }
 
+    function get_emp_no_and_name() {
+        if (isset($_GET['term'])) {
+            $q = strtolower($_GET['term']);
+            $this->Db_model->get_auto_emp_no_and_name($q);
+        }
+    }
+
 }

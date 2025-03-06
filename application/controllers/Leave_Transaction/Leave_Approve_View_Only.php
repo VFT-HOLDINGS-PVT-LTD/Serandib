@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Leave_Approve_Sup extends CI_Controller
+class Leave_Approve_View_Only extends CI_Controller
 {
 
     public function __construct()
@@ -40,7 +40,7 @@ class Leave_Approve_Sup extends CI_Controller
                                                                         tbl_leave_types lv_typ on lv_al.Lv_T_ID = lv_typ.Lv_T_ID
                                                                         where EmpNo='$Emp'
                                                                     ");
-        $this->load->view('Leave_Transaction/Leave_Approve_Sup/index', $data);
+        $this->load->view('Leave_Transaction/Leave_Approve_View_Only/index', $data);
     }
 
     /*
@@ -137,17 +137,19 @@ class Leave_Approve_Sup extends CI_Controller
     le.Is_pending,
     le.Leave_Date,
     le.Reason,
-    le.Leave_Count
+    le.Leave_Count,
+    le.Is_Cancel,
+    le.Is_Sup_AD_APP,
+    le.Is_Approve
 FROM
     tbl_leave_entry le
     INNER JOIN tbl_empmaster em ON em.EmpNo = le.EmpNo
     INNER JOIN tbl_leave_types lt ON lt.Lv_T_ID = le.Lv_T_ID
     left JOIN tbl_emp_group ON tbl_emp_group.Sup_ID = em.Emp_Full_Name
-WHERE
-    le.Is_pending = 1 AND le.Is_Cancel = 0 and Is_Sup_AD_APP =0 
+
   {$filter}");
 
-        $this->load->view('Leave_Transaction/Leave_Approve_Sup/search_data', $data);
+        $this->load->view('Leave_Transaction/Leave_Approve_View_Only/search_data', $data);
     }
 
     /*
@@ -159,9 +161,6 @@ WHERE
 
         $currentUser = $this->session->userdata('login_user');
         $Emp = $currentUser[0]->EmpNo;
-
-
-
 
         $Emp_Data = $this->Db_model->getfilteredData("select * from tbl_leave_entry where LV_ID=$ID");
         $Emp_No = $Emp_Data[0]->EmpNo;
@@ -185,7 +184,7 @@ WHERE
                 'Is_pending' => 1,
                 'Is_Sup_AD_APP' => 1,
                 'Sup_AD_APP' => $Emp,
-                
+
             );
 
             try {
@@ -712,7 +711,6 @@ WHERE
             'Is_pending' => 0,
             'Is_Approve' => 0,
             'Is_Cancel' => 1,
-            'Is_Sup_AD_APP' => 1,
             'Approved_by' => $Emp,
         );
 

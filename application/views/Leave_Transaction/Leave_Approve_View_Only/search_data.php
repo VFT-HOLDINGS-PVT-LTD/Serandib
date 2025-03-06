@@ -22,20 +22,16 @@
                         <th>LEAVE COUNT</th>
                         <th>MONTH</th>
                         <th>YEAR</th>
-
-
                         <th>STATUS</th>
                         <!--<th>EDIT</th>-->
-                        <th>APPROVE</th>
-                        <th>REJECT</th>
+                        <!-- <th>APPROVE</th>
+                        <th>REJECT</th> -->
 
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     foreach ($data_set as $data) {
-
-
 
                         echo "<tr class='odd gradeX'>";
                         echo "<td width='100'>" . $data->LV_ID . "</td>";
@@ -49,23 +45,40 @@
                         echo "<td width='100'>" . $data->month . "</td>";
                         echo "<td width='100'>" . $data->Year . "</td>";
 
+                        if ($data->Is_Approve == 0 && $data->Is_Sup_AD_APP == 0 && $data->Is_Cancel == 0) {
+                            echo "<td width='15'>";
+                            echo "<span class='get_data label label-warning'>Pending &nbsp;<i class='fa fa-eye'></i> </span>";
+                            echo "</td>";
+                        }
+                        if ($data->Is_Cancel == 1) {
+                            echo "<td width='15'>";
+                            echo "<span class='get_data label label-danger'>Cancelled&nbsp;<i class='fa fa-eye'></i> </span>";
+                            echo "</td>";
+                        }
+                        
+                        if ($data->Is_Cancel == 0 && $data->Is_Approve == 1 && $data->Is_Sup_AD_APP == 1) {
+                            echo "<td width='15'>";
+                            echo "<span class='get_data label label-success'>Approved&nbsp;<i class='fa fa-eye'></i> </span>";
+                            echo "</td>";
+                        }
 
-                        echo "<td width='15'>";
 
-                        echo "<span class='get_data label label-warning'>Pending<i class='fa fa-eye'></i> </span>";
-                        echo "</td>";
+                        // echo "<td width='15'>";
+
+                        // echo "<span class='get_data label label-warning'>Pending<i class='fa fa-eye'></i> </span>";
+                        // echo "</td>";
 
 //                        echo "<td width='15'>";
 //                        echo "<a class='get_data btn btn-green' href='" . base_url() . "Leave_Transaction/Leave_Approve/edit_lv/" . $data->LV_ID . "'>EDIT<i class=''></i> </a>";
 //                        echo "</td>";
 
-                        echo "<td width='15'>";
-                        echo "<a class='get_data btn btn-primary' href='" . base_url() . "Leave_Transaction/Leave_Approve_Sup/approve/" . $data->LV_ID . "'>APPROVE<i class=''></i> </a>";
-                        echo "</td>";
+                        // echo "<td width='15'>";
+                        // echo "<a class='get_data btn btn-primary' href='" . base_url() . "Leave_Transaction/Leave_Approve_Sup/approve/" . $data->LV_ID . "'>APPROVE<i class=''></i> </a>";
+                        // echo "</td>";
 
-                        echo "<td width='15'>";
-                        echo "<a class='get_data btn btn-danger' href='" . base_url() . "Leave_Transaction/Leave_Approve_Sup/reject/" . $data->LV_ID . "'>REJECT<i class=''></i> </a>";
-                        echo "</td>";
+                        // echo "<td width='15'>";
+                        // echo "<a class='get_data btn btn-danger' href='" . base_url() . "Leave_Transaction/Leave_Approve/reject/" . $data->LV_ID . "'>REJECT<i class=''></i> </a>";
+                        // echo "</td>";
 
                         echo "</tr>";
                     }

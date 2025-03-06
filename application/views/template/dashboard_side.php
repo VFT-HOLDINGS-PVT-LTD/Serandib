@@ -192,6 +192,10 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                     <li><a href="<?php echo base_url(); ?>Attendance/Attendance_Manual_Entry_ADMIN">MANUAL ATTENDANCE APPROVE</a></li>
                                 <?php endif; ?>    
 
+                                <?php if ($currentUser[0]->manual_attendance_view == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Attendance/Attendance_Manual_View_Only">MANUAL ATTENDANCE VIEW</a></li>
+                                <?php endif; ?>    
+
                                 <?php if ($currentUser[0]->attendance_process == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Attendance/Attendance_Process_New">ATTENDANCE PROCESS</a></li>
                                 <?php endif; ?>
@@ -226,6 +230,10 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                 
                                  <?php if ($currentUser[0]->leave_approve == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Leave_Transaction/Leave_Approve">LEAVE APPROVE ADMIN</a></li>
+                                <?php endif; ?>
+
+                                <?php if ($currentUser[0]->leave_approve_view == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Leave_Transaction/Leave_Approve_View_Only">LEAVE APPROVE VIEW</a></li>
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->leave_entry == 1): ?>
@@ -289,12 +297,15 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                     <li><a href="<?php echo base_url(); ?>Pay/Welfair">WELFAIR</a></li>
                                 <?php endif; ?>
 
-                                 <?php if ($currentUser[0]->request_advance == 1): ?>
+                                <?php if ($currentUser[0]->request_advance == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Pay/Salary_Advance_req">REQUEST SALARY ADVANCE</a></li>
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->approve_advance == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Pay/Salary_Advance_Approve/">APPROVE SALARY ADVANCE</a></li>
+                                <?php endif; ?>
+                                <?php if ($currentUser[0]->salary_advance_view == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Pay/Salary_Advance_View">SALARY ADVANCE VIEW</a></li>
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->payroll_process == 1): ?>

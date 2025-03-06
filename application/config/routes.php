@@ -68,5 +68,5 @@ $route['api/sales/salary'] = 'api/Salary';
 $route['api/shift/shiftallocation'] = 'api/Shiftallocation';
 
 
-$route['api/mail/test'] = 'api/Email/Emailqueue';
+$route['api/mailqueue/cronsend'] = 'api/Email/Emailqueue';
 

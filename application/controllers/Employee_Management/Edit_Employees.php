@@ -92,6 +92,7 @@ class Edit_Employees extends CI_Controller
                                                                     tbl_empmaster.Is_allow_login,
                                                                     tbl_empmaster.username,
                                                                     tbl_empmaster.password,
+                                                                    tbl_empmaster.View_Only,
                                                                     tbl_empmaster.user_p_id,
                                                                     tbl_departments.Dep_ID,
                                                                     tbl_departments.Dep_Name,
@@ -244,6 +245,8 @@ class Edit_Employees extends CI_Controller
             //            'Is_allow_login' => $Is_Allow,
             'username' => $this->input->post('txt_user_name'),
             'user_p_id' => $this->input->post('cmb_user_level'),
+            'View_Only' => $this->input->post('cmb_view_only'),
+
             'Cmp_ID' => 1,
             'Active_process' => 1,
         );

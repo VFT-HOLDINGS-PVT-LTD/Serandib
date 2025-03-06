@@ -188,6 +188,7 @@ class ADD_Employees extends CI_Controller
                 'Is_allow_login' => 1,
                 'username' => $this->input->post('txt_user_name'),
                 'Password' => hash('sha512', $Password),
+                'View_Only' => $this->input->post('cmb_view_only'),
                 //            'user_p_id' => 2,
                 'user_p_id' => $this->input->post('cmb_user_level'),
                 'Cmp_ID' => 1,

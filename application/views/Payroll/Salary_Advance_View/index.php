@@ -197,7 +197,7 @@
 
 
                                                                     <div class="col-sm-6">
-                                                                        <input  type="button"  id="search" name="search" class="btn-green btn fa fa-check" value="&nbsp;&nbsp;VIEW&nbsp; ADVANCE" >
+                                                                        <input  type="button"  id="search" name="search" class="btn-green btn fa fa-check" value="&nbsp;&nbsp;Search&nbsp; Employee">
                                                                         <input type="button"  id="cancel" name="cancel" class="btn-danger-alt btn fa fa-check" value="&nbsp;&nbsp;CLEAR" >    
                                                                     </div>
                                                                 </form>

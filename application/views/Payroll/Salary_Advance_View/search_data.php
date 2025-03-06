@@ -19,7 +19,8 @@
                         <th>MONTH</th>
                         <th>AMOUNT</th>
                         <th>REQUEST DATE</th>
-                        <th>IS APPROVE</th>
+                        <!-- <th>IS APPROVE</th> -->
+                        <th>STATUS</th>
 <!--                         
                         <th>APPROVE</th>
                         <th>REJECT</th> -->
@@ -41,8 +42,25 @@
                         echo "<td width='100'>" . $data->Month . "</td>";
                         echo "<td width='100'>" . $data->Amount . "</td>";
                         echo "<td width='100'>" . $data->Request_Date . "</td>";
-                        echo "<td width='100'>" . $data->Is_Approve . "</td>";
+                        // echo "<td width='100'>" . $data->Is_Approve . "</td>";
                         
+
+                        if ($data->Is_pending == 1) {
+                            echo "<td width='15'>";
+                            echo "<span class='get_data label label-warning'>Pending &nbsp;<i class='fa fa-eye'></i> </span>";
+                            echo "</td>";
+                        }
+                        if ($data->Is_Cancel == 1) {
+                            echo "<td width='15'>";
+                            echo "<span class='get_data label label-danger'>Cancelled&nbsp;<i class='fa fa-eye'></i> </span>";
+                            echo "</td>";
+                        }
+                        
+                        if ($data->Is_Approve == 1 && $data->Is_Sup_AD_APP == 1) {
+                            echo "<td width='15'>";
+                            echo "<span class='get_data label label-success'>Approved&nbsp;<i class='fa fa-eye'></i> </span>";
+                            echo "</td>";
+                        }
 
 
 

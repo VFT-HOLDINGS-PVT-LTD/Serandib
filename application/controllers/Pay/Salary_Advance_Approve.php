@@ -26,7 +26,7 @@ class Salary_Advance_Approve extends CI_Controller {
         $data['data_emp'] = $this->Db_model->getData('EmpNo,Emp_Full_Name', 'tbl_empmaster');
 
 //        $data['data_loan'] = $this->Db_model->getData('id,loan_name', 'tbl_loan_types');
-$this->load->view('Payroll/Salary_Advance_App/index', $data);
+        $this->load->view('Payroll/Salary_Advance_App/index', $data);
 }
 
     public function dropdown() {

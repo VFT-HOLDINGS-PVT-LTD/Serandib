@@ -242,6 +242,7 @@ class Salary_Advance_View extends CI_Controller {
                                                                     sal_ad.Request_Date,
                                                                     sal_ad.Is_pending,
                                                                     sal_ad.Is_Approve,
+                                                                    sal_ad.Is_Sup_AD_APP,
                                                                     sal_ad.Approved_by,
                                                                     sal_ad.Is_Cancel,
                                                                     sal_ad.Approved_Timestamp,
@@ -254,10 +255,7 @@ class Salary_Advance_View extends CI_Controller {
                                                                         LEFT JOIN
                                                                     tbl_designations dsg ON dsg.Des_ID = Emp.Des_ID
                                                                         LEFT JOIN
-                                                                    tbl_departments dep ON dep.Dep_id = Emp.Dep_id
-                                                                    where
-                                                                    sal_ad.Is_pending = 0 and sal_ad.Is_Cancel=0
-                                                                    {$filter} ");
+                                                                    tbl_departments dep ON dep.Dep_id = Emp.Dep_id {$filter} ");
 
 
         $this->load->view('Payroll/Salary_Advance_View/search_data', $data);

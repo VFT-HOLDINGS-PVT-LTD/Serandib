@@ -32,11 +32,9 @@ class Salary_Advance_req extends CI_Controller {
         $Basic = $Basic_sal[0]->Basic_Allowed;
 
 
-        $Salary_advance = $this->Db_model->getfilteredData("select Amount from tbl_salary_advance where EmpNo=$Emp and Month=MONTH(CURDATE())");
+        $Salary_advance = $this->Db_model->getfilteredData("select Amount from tbl_salary_advance where EmpNo=$Emp and Month=MONTH(CURDATE()) AND Is_Cancel=0");
 
     
-
-        
 
         if (empty($Salary_advance[0]->Amount)) {
             $sal_ad = 0;
@@ -186,7 +184,7 @@ class Salary_Advance_req extends CI_Controller {
             $this->session->set_flashdata('error_message', 'Employee cannot apply more than salary precentage (60%)');
             redirect(base_url() . 'Pay/Salary_Advance_req');
         } else {
-            if ($HasRow[0]->HasRow > 0) {
+            if ($HasRow[0]->HasRow > 5) {
                 $this->session->set_flashdata('error_message', 'Employee already applied salary advance');
                 // $this->load->view('Payroll/Req_Salary_Advance/index');
                 echo "Employee already applied salary advance";

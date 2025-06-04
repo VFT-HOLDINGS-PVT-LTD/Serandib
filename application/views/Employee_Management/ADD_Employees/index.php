@@ -418,7 +418,7 @@
                                                                             Group <span
                                                                                 style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" required=""
+                                                                            <select class="form-control" required="required"
                                                                                 id="cmb_group" name="cmb_group">
 
 

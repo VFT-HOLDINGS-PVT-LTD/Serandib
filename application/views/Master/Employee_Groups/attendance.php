@@ -17,12 +17,11 @@
         #departmentDiv1 {
             /* width: 50%; */
             margin-top: 1rem;
-            background: rgba(255, 255, 255, 0.95);
+            /* background: rgba(255, 255, 255, 0.95); */
             backdrop-filter: blur(20px);
             border-radius: 20px;
-            box-shadow: 10px 20px 40px rgb(185 185 185 / 29%);
-            ;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* box-shadow: 10px 20px 40px rgb(185 185 185 / 29%); */
+            /* border: 1px solid rgba(255, 255, 255, 0.2); */
             overflow: hidden;
             transition: all 0.3s ease;
         }
@@ -201,65 +200,289 @@
             box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
         }
     </style>
-<style>
-    /* From Uiverse.io by adamgiebl */ 
-button {
-  /* font-family: inherit; */
-  font-size: 13px;
-  /* background: #78c552; */
-  color: white;
-  padding: 0.7em 1em;
-  padding-left: 0.9em;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 0px;
-  overflow: hidden;
-  transition: all 0.2s;
-  cursor: pointer;
-  width: 85px;
-  height: 35px;
-}
+    <style>
+        /* From Uiverse.io by adamgiebl */
+        button {
+            /* font-family: inherit; */
+            font-size: 13px;
+            /* background: #78c552; */
+            color: white;
+            padding: 0.7em 1em;
+            padding-left: 0.9em;
+            display: flex;
+            align-items: center;
+            border: none;
+            border-radius: 0px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+            width: 85px;
+            height: 35px;
+        }
 
-button span {
-  display: block;
-  margin-left: 0.3em;
-  transition: all 0.3s ease-in-out;
-}
+        button span {
+            display: block;
+            margin-left: 0.3em;
+            transition: all 0.3s ease-in-out;
+        }
 
-button svg {
-  display: block;
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
-}
+        button svg {
+            display: block;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
+        }
 
-button:hover .svg-wrapper {
-  animation: fly-1 0.6s ease-in-out infinite alternate;
-}
+        button:hover .svg-wrapper {
+            animation: fly-1 0.6s ease-in-out infinite alternate;
+        }
 
-button:hover svg {
-  transform: translateX(1.2em) rotate(45deg) scale(1.1);
-}
+        button:hover svg {
+            transform: translateX(1.2em) rotate(45deg) scale(1.1);
+        }
 
-button:hover span {
-  transform: translateX(5em);
-}
+        button:hover span {
+            transform: translateX(5em);
+        }
 
-button:active {
-  transform: scale(0.95);
-}
+        button:active {
+            transform: scale(0.95);
+        }
 
-@keyframes fly-1 {
-  from {
-    transform: translateY(0.1em);
-  }
+        @keyframes fly-1 {
+            from {
+                transform: translateY(0.1em);
+            }
 
-  to {
-    transform: translateY(-0.1em);
-  }
-}
+            to {
+                transform: translateY(-0.1em);
+            }
+        }
+    </style>
+     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> -->
+    <style>
+       
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
 
- </style>
+        .table-title {
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .table-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        #departmentTable {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: none;
+        }
+
+        #departmentTable thead {
+            background: linear-gradient(60deg, rgba(59, 105, 129, 1) 0%, rgba(54, 120, 150, 0.644782913165266) 100%);
+            color: white;
+        }
+
+        #departmentTable thead th {
+            border: none;
+            padding: 1.2rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        #departmentTable thead th:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #departmentTable tbody td {
+            padding: 1rem;
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+            font-size: 15px;
+            color: #4a5568;
+        }
+
+        #departmentTable tbody tr {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #departmentTable tbody tr:hover {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #departmentTable tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Row number styling */
+        #departmentTable tbody tr td:first-child {
+            font-weight: 600;
+            color: #667eea;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 10px;
+            margin: 5px;
+            text-align: center;
+            width: 60px;
+            position: relative;
+        }
+
+        /* Action buttons */
+        .btn-action {
+            padding: 0.4rem 0.8rem;
+            margin: 0 0.2rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-action:hover::before {
+            left: 100%;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 101, 101, 0.4);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .table-container {
+                margin: 0 1rem;
+                padding: 1rem;
+                border-radius: 15px;
+            }
+
+            .table-title {
+                font-size: 1.5rem;
+            }
+
+            #departmentTable {
+                font-size: 0.8rem;
+            }
+
+            #departmentTable thead th,
+            #departmentTable tbody td {
+                padding: 0.8rem 0.5rem;
+            }
+
+            .btn-action {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Loading animation for empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #718096;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Sortable row indicator */
+        #sortableRows tr {
+            cursor: move;
+        }
+
+        #sortableRows tr:hover {
+            cursor: move;
+        }
+
+        .drag-handle {
+            color: #cbd5e0;
+            cursor: move;
+            margin-right: 0.5rem;
+        }
+
+        .drag-handle:hover {
+            color: #667eea;
+        }
+    </style>
 </head>
 
 <body class="infobar-offcanvas">
@@ -294,7 +517,7 @@ button:active {
                             <ul class="nav nav-tabs">
 
                                 <li class="active"><a data-toggle="tab" href="#tab1">EMPLOYEE GROUPS</a></li>
-                                <li><a data-toggle="tab" href="#tab2">VIEW EMPLOYEE GROUPS</a></li>
+                                <!-- <li><a data-toggle="tab" href="#tab2">VIEW EMPLOYEE GROUPS</a></li> -->
 
 
                             </ul>
@@ -346,33 +569,109 @@ button:active {
 
                                                                 <div class="form-group col-md-12">
 
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Name</label>
+                                                                    <div class="form-group col-sm-8">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Supervisor</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control" id="txt_group_name" name="txt_group_name" placeholder="Ex: Office">
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_supervisor_search"
+                                                                                id="txt_supervisor_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Supervisor"
+                                                                                id="cmb_Supervisor">
                                                                         </div>
 
                                                                     </div>
+                                                                    <div class="form-group col-sm-2">
+                                                                        <button type="button" class="btn btn-success"
+                                                                            id="btn_add_department">Add</button>
+                                                                        <span style="margin-left: 8px;">Click the button
+                                                                            -></span>
+                                                                    </div>
+                                                                    <div class="form-group col-sm-2">
+                                                                        <button type="submit" id="submit" name="submit"
+                                                                            class="btn-success">
+                                                                            <div class="svg-wrapper-1">
+                                                                                <div class="svg-wrapper">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        viewBox="0 0 24 24" width="15"
+                                                                                        height="15">
+                                                                                        <path fill="none"
+                                                                                            d="M0 0h24v24H0z">
+                                                                                        </path>
+                                                                                        <path fill="currentColor"
+                                                                                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                                                                                        </path>
+                                                                                    </svg>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span> NEXT</span>
+                                                                        </button>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <!-- Table to display added departments and percentages -->
+                                                                <!-- Table -->
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="form-group col-sm-2">
+
+                                                                    </div>
+                                                                    <div class="form-group col-sm-8" id="departmentDiv1"
+                                                                        style="display: none;">
+                                                                        <table class="table" id="departmentTable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>
+                                                                                        No
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        Name
+                                                                                    </th>
+                                                                                    <th>
+                                                                                        Action
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="sortableRows">
+                                                                                <!-- Rows dynamically added -->
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="form-group col-md-12"
+                                                                    style="display: none;">
                                                                     <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Supervisor</label>
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Allow
+                                                                            Admin</label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" id="cmb_Supervisor" name="cmb_Supervisor">
-
-                                                                                <option value="" default>-- Select --</option>
-                                                                                <?php foreach ($emp_sup as $t_data) { ?>
-                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"><?php echo $t_data->Emp_Full_Name; ?></option>
-
-                                                                                <?php }
-                                                                                ?>
-
-
-
+                                                                            <select class="form-control"
+                                                                                id="cmb_emp_status"
+                                                                                name="cmb_emp_status">
+                                                                                <option value="0" selected>Deny</option>
+                                                                                <option value="1">Allow</option>
                                                                             </select>
                                                                         </div>
-
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6"
+                                                                        id="group_admin_section" style="display: none;">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_admin_search"
+                                                                                id="txt_admin_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Admin"
+                                                                                id="cmb_Admin">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
 
                                                                 <!-- <div class="form-group row col-md-12 justify-content-end">
                                                                     <div class="form-group col-sm-6">
@@ -392,7 +691,8 @@ button:active {
                                                                 </div> -->
 
 
-                                                                <div class="form-group col-md-12">
+                                                                <div class="form-group col-md-12"
+                                                                    style="display: none;">
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">OT
@@ -434,7 +734,8 @@ button:active {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group col-md-12">
+                                                                <div class="form-group col-md-12"
+                                                                    style="display: none;">
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Late</label>
@@ -521,24 +822,6 @@ button:active {
 
                                                                 </div>
 
-
-
-                                                                        <button type="submit" id="submit" name="submit" class="btn-success">
-                                                                            <div class="svg-wrapper-1">
-                                                                                <div class="svg-wrapper">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                        viewBox="0 0 24 24" width="15"
-                                                                                        height="15">
-                                                                                        <path fill="none"
-                                                                                            d="M0 0h24v24H0z"></path>
-                                                                                        <path fill="currentColor"
-                                                                                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                                                                                        </path>
-                                                                                    </svg>
-                                                                                </div>
-                                                                            </div>
-                                                                            <span> NEXT</span>
-                                                                        </button>
 
                                                             </form>
                                                             <hr>

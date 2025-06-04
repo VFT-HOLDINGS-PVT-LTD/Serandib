@@ -12,254 +12,7 @@
 <head>
     <!-- Styles -->
     <?php $this->load->view('template/css.php'); ?>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <style>
-        #departmentDiv1 {
-            /* width: 50%; */
-            margin-top: 1rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 10px 20px 40px rgb(185 185 185 / 29%);
-            ;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
 
-        /* #departmentDiv1:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-        } */
-
-        /* .table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            color: #2d3748;
-        } */
-
-        .table thead {
-            background: linear-gradient(60deg, rgba(59, 105, 129, 1) 0%, rgba(54, 120, 150, 0.644782913165266) 100%);
-            position: relative;
-            border-radius: 30px;
-        }
-
-        .table thead::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        }
-
-        .table th {
-            padding: 20px 24px;
-            text-align: left;
-            font-weight: 600;
-            color: white;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-        }
-
-        .table th:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 25%;
-            height: 50%;
-            width: 1px;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .table tbody tr {
-            transition: all 0.2s ease;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        /* .table tbody tr:hover {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
-            transform: scale(1.01);
-        } */
-
-        .table tbody tr:last-child {
-            border-bottom: none;
-        }
-
-        .table td {
-            padding: 18px 24px;
-            font-weight: 500;
-            position: relative;
-        }
-
-        .table td:first-child {
-            font-weight: 600;
-            color: #4f46e5;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            #departmentDiv1 {
-                width: 90%;
-                border-radius: 15px;
-                margin: 10px auto;
-            }
-
-            .table th,
-            .table td {
-                padding: 12px 16px;
-                font-size: 12px;
-            }
-        }
-
-        /* Loading animation for dynamic content */
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        .loading-row {
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        /* Modern scrollbar */
-        #departmentDiv1::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        #departmentDiv1::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        #departmentDiv1::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            border-radius: 3px;
-        }
-
-        /* Demo styles for visibility */
-        .demo-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .demo-row {
-            animation: slideInUp 0.5s ease-out forwards;
-            opacity: 0;
-        }
-
-        .demo-row:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .demo-row:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .demo-row:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .action-btn {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
-        }
-    </style>
-<style>
-    /* From Uiverse.io by adamgiebl */ 
-button {
-  /* font-family: inherit; */
-  font-size: 13px;
-  /* background: #78c552; */
-  color: white;
-  padding: 0.7em 1em;
-  padding-left: 0.9em;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 0px;
-  overflow: hidden;
-  transition: all 0.2s;
-  cursor: pointer;
-  width: 85px;
-  height: 35px;
-}
-
-button span {
-  display: block;
-  margin-left: 0.3em;
-  transition: all 0.3s ease-in-out;
-}
-
-button svg {
-  display: block;
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
-}
-
-button:hover .svg-wrapper {
-  animation: fly-1 0.6s ease-in-out infinite alternate;
-}
-
-button:hover svg {
-  transform: translateX(1.2em) rotate(45deg) scale(1.1);
-}
-
-button:hover span {
-  transform: translateX(5em);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-@keyframes fly-1 {
-  from {
-    transform: translateY(0.1em);
-  }
-
-  to {
-    transform: translateY(-0.1em);
-  }
-}
-
- </style>
 </head>
 
 <body class="infobar-offcanvas">
@@ -347,32 +100,64 @@ button:active {
                                                                 <div class="form-group col-md-12">
 
                                                                     <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Name</label>
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Name</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control" id="txt_group_name" name="txt_group_name" placeholder="Ex: Office">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_group_name"
+                                                                                name="txt_group_name"
+                                                                                placeholder="Ex: Office">
                                                                         </div>
 
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Supervisor</label>
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Supervisor</label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" id="cmb_Supervisor" name="cmb_Supervisor">
-
-                                                                                <option value="" default>-- Select --</option>
-                                                                                <?php foreach ($emp_sup as $t_data) { ?>
-                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"><?php echo $t_data->Emp_Full_Name; ?></option>
-
-                                                                                <?php }
-                                                                                ?>
-
-
-
-                                                                            </select>
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_supervisor_search"
+                                                                                id="txt_supervisor_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Supervisor"
+                                                                                id="cmb_Supervisor">
                                                                         </div>
 
                                                                     </div>
+
+
                                                                 </div>
-                                                                
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Allow
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control"
+                                                                                id="cmb_emp_status"
+                                                                                name="cmb_emp_status">
+                                                                                <option value="0" selected>Deny</option>
+                                                                                <option value="1">Allow</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6"
+                                                                        id="group_admin_section" style="display: none;">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_admin_search"
+                                                                                id="txt_admin_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Admin"
+                                                                                id="cmb_Admin">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
 
                                                                 <!-- <div class="form-group row col-md-12 justify-content-end">
                                                                     <div class="form-group col-sm-6">
@@ -523,22 +308,11 @@ button:active {
 
 
 
-                                                                        <button type="submit" id="submit" name="submit" class="btn-success">
-                                                                            <div class="svg-wrapper-1">
-                                                                                <div class="svg-wrapper">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                        viewBox="0 0 24 24" width="15"
-                                                                                        height="15">
-                                                                                        <path fill="none"
-                                                                                            d="M0 0h24v24H0z"></path>
-                                                                                        <path fill="currentColor"
-                                                                                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                                                                                        </path>
-                                                                                    </svg>
-                                                                                </div>
-                                                                            </div>
-                                                                            <span> NEXT</span>
-                                                                        </button>
+
+                                                                <!--submit button-->
+                                                                <?php $this->load->view('template/btn_submit.php'); ?>
+                                                                <!--end submit-->
+
 
                                                             </form>
                                                             <hr>
@@ -748,8 +522,6 @@ button:active {
 
 </body>
 
-<!-- pop model -->
-
 <script>
     $("#success_message_my").hide("bounce", 2000, 'fast');
     $("#submit").click(function () {
@@ -807,13 +579,12 @@ button:active {
 
 
     $(function () {
-        // Autocomplete
         $("#txt_supervisor_search").autocomplete({
             source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
             minLength: 1,
             select: function (event, ui) {
-                $("#cmb_Supervisor").val(ui.item.value); // ID
-                $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label); // Display text
+                $("#cmb_Supervisor").val(ui.item.value);
+                $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label);
                 return false;
             }
         }).autocomplete("instance")._renderItem = function (ul, item) {
@@ -821,12 +592,8 @@ button:active {
                 .append("<div>" + item.value + " - " + item.label + "</div>")
                 .appendTo(ul);
         };
-
-        // Make rows sortable
-        $("#sortableRows").sortable({
-            placeholder: "ui-state-highlight"
-        }).disableSelection();
     });
+
     $(function () {
         $("#txt_admin_search").autocomplete({
             source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
@@ -854,91 +621,8 @@ button:active {
     //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_no" // path to the get_birds method
     //             });
     //         });
-    function updateRowNumbers() {
-        const rows = document.querySelectorAll("#sortableRows tr");
-        rows.forEach((row, index) => {
-            row.querySelector("td").textContent = index + 1;
-        });
-    }
 
-    // Add department row
-    document.getElementById("btn_add_department").addEventListener("click", function () {
-        var departmentInput = document.getElementById("txt_supervisor_search");
-        var departmentId = document.getElementById("cmb_Supervisor").value;
-        var departmentName = departmentInput.value;
 
-        if (departmentName !== "" && departmentId !== "") {
-
-            // ✅ Check for duplicates
-            var exists = false;
-            $("#sortableRows tr").each(function () {
-                if ($(this).attr("data-id") === departmentId) {
-                    exists = true;
-                    return false; // exit loop
-                }
-            });
-
-            if (exists) {
-                alert("This department has already been added.");
-                return;
-            }
-            var tableBody = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
-
-            var newRow = tableBody.insertRow();
-            newRow.setAttribute("data-id", departmentId);
-            newRow.classList.add("draggable");
-
-            var cell1 = newRow.insertCell(0); // No.
-            var cell2 = newRow.insertCell(1); // Department name
-            var cell3 = newRow.insertCell(2); // Remove button
-
-            cell1.textContent = ""; // Will be set by updateRowNumbers
-            cell2.textContent = departmentName;
-            cell3.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-
-            departmentInput.value = "";
-            document.getElementById("cmb_Supervisor").value = "";
-
-            document.getElementById("departmentDiv1").style.display = "block";
-
-            updateRowNumbers();
-        } else {
-            alert("Please select a valid supervisor.");
-        }
-    });
-
-    // Remove row
-    function removeRow(button) {
-        var row = button.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-
-        if (document.querySelectorAll("#sortableRows tr").length === 0) {
-            document.getElementById("departmentDiv1").style.display = "none";
-        }
-
-        updateRowNumbers();
-    }
-
-    // Update on drag-and-drop
-    $(function () {
-        $("#sortableRows").sortable({
-            placeholder: "ui-state-highlight",
-            update: function () {
-                updateRowNumbers();
-            }
-        }).disableSelection();
-    });
 </script>
-
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-
-
-<style>
-    .ui-state-highlight {
-        height: 40px;
-        background-color: #d9edf7;
-        border: 1px dashed #31708f;
-    }
-</style>
 
 </html>

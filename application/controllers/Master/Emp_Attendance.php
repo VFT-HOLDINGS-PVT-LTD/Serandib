@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Employee_Groups extends CI_Controller
+class Emp_Attendance extends CI_Controller
 {
     public function __construct()
     {
@@ -27,113 +27,48 @@ class Employee_Groups extends CI_Controller
  INNER JOIN tbl_empmaster ON tbl_emp_group.Sup_ID = tbl_empmaster.EmpNo');
         // $data['data_ot'] = $this->Db_model->getData('OTCode,OTName', 'tbl_ot_pattern_hd');
         $data['emp_sup'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
-        $this->load->view('Master/Employee_Groups/attendance', $data);
+        $data['data_level'] = $this->Db_model->getData('user_level_id,user_level_name', 'tbl_user_level_master');
+
+        $this->load->view('Master/Emp_Attendance/index', $data);
     }
     /*
      * Insert Departmrnt
      */
     public function insert_data()
     {
-        $ot_m = $this->input->post('ot_m');
-        $ot_e = $this->input->post('ot_e');
-        $min_time_to_ot = $this->input->post('min_t_ot');
-        $min_time_to_mor_ot = $this->input->post('min_t_e_ot');
-        $round = $this->input->post('round');
-        $late = $this->input->post('late');
-        $ed = $this->input->post('ed');
-        $late_deduct_for_full_leave_in_halfd = $this->input->post('sh_lv');
-        $late_ded_from_ot = $this->input->post('late_ot');
-        $dot_for_holyday = $this->input->post('dot_holyday');
-        $dot_for_off = $this->input->post('dot_offday');
-        $late_grace = $this->input->post('late_gp');
-        $ot_mo = 0;
-        $ot_ev = 0;
-        $late_status = 0;
-        $ed_status = 0;
-        $late_deduct_leave_in_halfday = 0;
-        $late_deduct_from_ot = 0;
-        $dot_holyday = 0;
-        $dot_offday = 0;
-        if ($ot_m == 'on') {
-            $ot_mo = 1;
-        }
-        if ($ot_e == 'on') {
-            $ot_ev = 1;
-        }
-        if ($late == 'on') {
-            $late_status = 1;
-        }
-        if ($ed == 'on') {
-            $ed_status = 1;
-        }
-        if ($dot_for_holyday == 'on') {
-            $dot_holyday = 1;
-        }
-        if ($dot_for_off == 'on') {
-            $dot_offday = 1;
-        }
-        if ($late_deduct_for_full_leave_in_halfd == 'on') {
-            $late_deduct_leave_in_halfday = 1;
-        }
-        if ($late_ded_from_ot == 'on') {
-            $late_deduct_from_ot = 1;
-        }
-        $FSt = $this->input->post('chk_1st');
-        if ($FSt == null) {
-            $FSt = 0;
-        } elseif ($FSt == 'on') {
-            $FSt = 1;
-        }
-        $Snd = $this->input->post('chk_2nd');
-        if ($Snd == null) {
-            $Snd = 0;
-        } elseif ($Snd == 'on') {
-            $Snd = 1;
-        }
-        $sup = $this->input->post('cmb_Supervisor');
-        if ($sup == null) {
-            $sup = 9000;
-        }
-        $group_name = $this->input->post('txt_group_name');
-        $check_availble = $this->Db_model->getfilteredData("select * from tbl_emp_group where EmpGroupName='$group_name'");
-        // echo $check_availble[0]->Grp_ID;
-        if (empty($check_availble[0]->Grp_ID)) {
-            $group_name2 = $this->input->post('txt_group_name');
-            $data = array(
-                'EmpGroupName' => $this->input->post('txt_group_name'),
-                'GracePeriod' => 0,
-                'Sup_ID' => $sup,
-                'NosLeaveForMonth' => 0,
-                'MaxSLS' => 0,
-                'Allow1stSession' => 0,
-                'Allow2ndSession' => 0,
-                'OTPattern' => 'OT0001'
-            );
-            $result = $this->Db_model->insertData("tbl_emp_group", $data);
-            $last_in_id = $this->Db_model->getfilteredData("select * from tbl_emp_group where EmpGroupName='$group_name2'");
-            $last_insert_id = $last_in_id[0]->Grp_ID;
-            $data2 = array(
-                'Group_id' => $last_insert_id,
-                'Ot_m' => $ot_mo,
-                'Ot_e' => $ot_ev,
-                'Ot_d_Late' => $late_deduct_from_ot,
-                'Late' => $late_status,
-                'Ed' => $ed_status,
-                'Min_time_t_ot_e' => $min_time_to_ot,
-                'Min_time_t_ot_m' => $min_time_to_mor_ot,
-                'Dot_f_holyday' => $dot_holyday,
-                'Dot_f_offday' => $dot_offday,
-                'Hd_d_from' => $late_deduct_leave_in_halfday,
-                'Round' => $round,
-                'late_Grs_prd' => $late_grace,
-            );
-            $result2 = $this->Db_model->insertData("tbl_setting", $data2);
-            $this->session->set_flashdata('success_message', 'Shift Employee Group Added');
-            //  $this->load->view('Master/Employee_Groups/attendance');
+        $rawData = file_get_contents("php://input");
+        $data = json_decode($rawData, true);
+
+        if (!empty($data['departments'])) {
+            foreach ($data['departments'] as $dept) {
+                $id = $dept['id'];
+                $name = $dept['name'];
+                $selected = isset($dept['selected']) ? $dept['selected'] : null;
+                $Authority = isset($dept['Authority']) ? $dept['Authority'] : null;
+
+                $parts = explode(' - ', $name);
+                $numberOnly = $parts[0];
+                $data = array(
+                    'TypeID' => 1,
+                    'EmpNo' => $numberOnly,
+                    'UserLevelID' => $selected,
+                    'AuthorityID' => $Authority
+                );
+
+                $result = $this->Db_model->insertData("tbl_active", $data);
+
+                // Example: log or insert into database
+                // log_message('info', "ID: $id, Name: $name, Selected: $selected");
+
+                // You can also insert into DB like:
+                // $this->db->insert('department_table', ['id' => $id, 'name' => $name, 'selected_option' => $selected]);
+            }
+
+            echo json_encode($data['departments']);
         } else {
-            $this->session->set_flashdata('Error_message', 'Employee Group Already Added');
+            echo json_encode(['status' => 'error', 'message' => 'No departments received']);
         }
-        // redirect('Master/Employee_Groups/');
+
     }
     /*
      * Get Department data

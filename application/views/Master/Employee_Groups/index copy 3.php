@@ -98,7 +98,7 @@
 
         .table td:first-child {
             font-weight: 600;
-            color: #4f46e5;
+            /* color: #4f46e5; */
         }
 
         /* Responsive adjustments */
@@ -200,66 +200,65 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
         }
+
+        /* BUTTON */
+        /* From Uiverse.io by adamgiebl */
+        button {
+            /* font-family: inherit; */
+            font-size: 13px;
+            /* background: #78c552; */
+            color: white;
+            padding: 0.7em 1em;
+            padding-left: 0.9em;
+            display: flex;
+            align-items: center;
+            border: none;
+            border-radius: 0px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+            width: 85px;
+            height: 35px;
+        }
+
+        button span {
+            display: block;
+            margin-left: 0.3em;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button svg {
+            display: block;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        button:hover .svg-wrapper {
+            animation: fly-1 0.6s ease-in-out infinite alternate;
+        }
+
+        button:hover svg {
+            transform: translateX(1.2em) rotate(45deg) scale(1.1);
+        }
+
+        button:hover span {
+            transform: translateX(5em);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes fly-1 {
+            from {
+                transform: translateY(0.1em);
+            }
+
+            to {
+                transform: translateY(-0.1em);
+            }
+        }
     </style>
-<style>
-    /* From Uiverse.io by adamgiebl */ 
-button {
-  /* font-family: inherit; */
-  font-size: 13px;
-  /* background: #78c552; */
-  color: white;
-  padding: 0.7em 1em;
-  padding-left: 0.9em;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 0px;
-  overflow: hidden;
-  transition: all 0.2s;
-  cursor: pointer;
-  width: 85px;
-  height: 35px;
-}
-
-button span {
-  display: block;
-  margin-left: 0.3em;
-  transition: all 0.3s ease-in-out;
-}
-
-button svg {
-  display: block;
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
-}
-
-button:hover .svg-wrapper {
-  animation: fly-1 0.6s ease-in-out infinite alternate;
-}
-
-button:hover svg {
-  transform: translateX(1.2em) rotate(45deg) scale(1.1);
-}
-
-button:hover span {
-  transform: translateX(5em);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-@keyframes fly-1 {
-  from {
-    transform: translateY(0.1em);
-  }
-
-  to {
-    transform: translateY(-0.1em);
-  }
-}
-
- </style>
 </head>
 
 <body class="infobar-offcanvas">
@@ -347,32 +346,123 @@ button:active {
                                                                 <div class="form-group col-md-12">
 
                                                                     <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Name</label>
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Name</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control" id="txt_group_name" name="txt_group_name" placeholder="Ex: Office">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_group_name"
+                                                                                name="txt_group_name"
+                                                                                placeholder="Ex: Office">
                                                                         </div>
 
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Supervisor</label>
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Allow
+                                                                            Admin</label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" id="cmb_Supervisor" name="cmb_Supervisor">
-
-                                                                                <option value="" default>-- Select --</option>
-                                                                                <?php foreach ($emp_sup as $t_data) { ?>
-                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"><?php echo $t_data->Emp_Full_Name; ?></option>
-
-                                                                                <?php }
-                                                                                ?>
-
-
-
+                                                                            <select class="form-control"
+                                                                                id="cmb_emp_status"
+                                                                                name="cmb_emp_status">
+                                                                                <option value="0" selected>Deny</option>
+                                                                                <option value="1">Allow</option>
                                                                             </select>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="form-group col-md-12">
+
+                                                                    <div class="form-group col-sm-5">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Name</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_group_name"
+                                                                                name="txt_group_name"
+                                                                                placeholder="Ex: Office">
                                                                         </div>
 
                                                                     </div>
+                                                                    <div class="form-group col-sm-5">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Supervisor</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_supervisor_search"
+                                                                                id="txt_supervisor_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Supervisor"
+                                                                                id="cmb_Supervisor">
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group col-sm-2">
+                                                                        <button type="button"
+                                                                            class="btn btn-success col-2"
+                                                                            id="btn_add_department">Add</button>
+                                                                    </div>
+
+
                                                                 </div>
-                                                                
+                                                                <!-- Table to display added departments and percentages -->
+                                                                <!-- Table -->
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="form-group col-sm-2">
+
+                                                                    </div>
+                                                                    <div class="form-group col-sm-8" id="departmentDiv1"
+                                                                        style="display: none;">
+                                                                        <table class="table" id="departmentTable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Approve No</th>
+                                                                                    <th>Name</th>
+                                                                                    <th>Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="sortableRows">
+                                                                                <!-- Rows dynamically added -->
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- <div class="form-group col-md-12">
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Allow
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control"
+                                                                                id="cmb_emp_status"
+                                                                                name="cmb_emp_status">
+                                                                                <option value="0" selected>Deny</option>
+                                                                                <option value="1">Allow</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6"
+                                                                        id="group_admin_section" style="display: none;">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Group
+                                                                            Admin</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                name="txt_admin_search"
+                                                                                id="txt_admin_search"
+                                                                                placeholder="Search by ID or Name">
+                                                                            <input type="hidden" name="cmb_Admin"
+                                                                                id="cmb_Admin">
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+
 
                                                                 <!-- <div class="form-group row col-md-12 justify-content-end">
                                                                     <div class="form-group col-sm-6">
@@ -521,9 +611,13 @@ button:active {
 
                                                                 </div>
 
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="form-group col-sm-2">
 
-
-                                                                        <button type="submit" id="submit" name="submit" class="btn-success">
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <button type="submit" id="submit" name="submit"
+                                                                            class="btn-success" style="font-size: 14px;">
                                                                             <div class="svg-wrapper-1">
                                                                                 <div class="svg-wrapper">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -539,6 +633,9 @@ button:active {
                                                                             </div>
                                                                             <span> NEXT</span>
                                                                         </button>
+                                                                    </div>
+                                                                </div>
+                                                                
 
                                                             </form>
                                                             <hr>
@@ -748,8 +845,6 @@ button:active {
 
 </body>
 
-<!-- pop model -->
-
 <script>
     $("#success_message_my").hide("bounce", 2000, 'fast');
     $("#submit").click(function () {
@@ -868,7 +963,6 @@ button:active {
         var departmentName = departmentInput.value;
 
         if (departmentName !== "" && departmentId !== "") {
-
             // ✅ Check for duplicates
             var exists = false;
             $("#sortableRows tr").each(function () {
@@ -882,6 +976,7 @@ button:active {
                 alert("This department has already been added.");
                 return;
             }
+
             var tableBody = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
 
             var newRow = tableBody.insertRow();
@@ -892,7 +987,7 @@ button:active {
             var cell2 = newRow.insertCell(1); // Department name
             var cell3 = newRow.insertCell(2); // Remove button
 
-            cell1.textContent = ""; // Will be set by updateRowNumbers
+            cell1.textContent = ""; // Will be updated later
             cell2.textContent = departmentName;
             cell3.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
 
@@ -906,6 +1001,7 @@ button:active {
             alert("Please select a valid supervisor.");
         }
     });
+
 
     // Remove row
     function removeRow(button) {

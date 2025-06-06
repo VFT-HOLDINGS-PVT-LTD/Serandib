@@ -354,13 +354,13 @@ button:active {
 
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">Group Supervisor</label>
+                                                                        <label for="focusedinput" class="col-sm-4 control-label">Departments</label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_Supervisor" name="cmb_Supervisor">
 
                                                                                 <option value="" default>-- Select --</option>
-                                                                                <?php foreach ($emp_sup as $t_data) { ?>
-                                                                                    <option value="<?php echo $t_data->EmpNo; ?>"><?php echo $t_data->Emp_Full_Name; ?></option>
+                                                                                <?php foreach ($data_dep as $t_data) { ?>
+                                                                                    <option value="<?php echo $t_data->Dep_ID; ?>"><?php echo $t_data->Dep_Name; ?></option>
 
                                                                                 <?php }
                                                                                 ?>

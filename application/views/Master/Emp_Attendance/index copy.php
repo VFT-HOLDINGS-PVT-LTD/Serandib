@@ -530,220 +530,7 @@
 
 
                                             <div class="row">
-
-                                                <div class="col-md-4">
-                                                    <div class="panel panel-info">
-                                                        <div class="panel-heading">
-                                                            <h2>ADD EMPLOYEE GROUPS</h2>
-                                                        </div>
-
-                                                        <div class="panel-body">
-                                                            <form class="form-horizontal" id="frm_emp_group"
-                                                                name="frm_emp_group"
-                                                                action="<?php echo base_url(); ?>Master/Employee_Groups/insert_Data"
-                                                                method="POST">
-
-                                                                <!-- Success Message -->
-                                                                <?php if (isset($_SESSION['success_message']) && $_SESSION['success_message'] != '') { ?>
-                                                                    <div id="spnmessage"
-                                                                        class="alert alert-success alert-dismissible fade show success_redirect"
-                                                                        role="alert">
-                                                                        <strong>Success!</strong>
-                                                                        <?php echo $_SESSION['success_message']; ?>
-                                                                    </div>
-                                                                <?php } ?>
-
-                                                                <!-- Error Message -->
-                                                                <?php if (isset($_SESSION['error_message']) && $_SESSION['error_message'] != '') { ?>
-                                                                    <div id="spnmessage"
-                                                                        class="alert alert-danger alert-dismissible fade show error_redirect"
-                                                                        role="alert">
-                                                                        <strong>Error!</strong>
-                                                                        <?php echo $_SESSION['error_message']; ?>
-                                                                    </div>
-                                                                <?php } ?>
-
-
-                                                                <div class="form-row mb-5">
-                                                                    <div class="form-group col-md-3">
-                                                                        <img class="imagecss"
-                                                                            src="<?php echo base_url(); ?>assets/images/employee_group.png"
-                                                                            alt="Group Icon" style="max-height: 100px;">
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="form-row mb-5">
-                                                                    <div class="form-group col-md-12">
-                                                                        <label for="txt_group_name">Group Name</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="txt_group_name" name="txt_group_name"
-                                                                            placeholder="Ex: Office">
-                                                                    </div>
-                                                                    <div class="form-group col-md-12">
-                                                                        <label
-                                                                            for="department_select">Department</label>
-                                                                        <select class="form-control"
-                                                                            id="department_select"
-                                                                            name="department_select">
-                                                                            <option value="">-- Select --</option>
-                                                                            <?php foreach ($data_dep as $t_data) { ?>
-                                                                                <option
-                                                                                    value="<?php echo $t_data->Dep_ID; ?>">
-                                                                                    <?php echo $t_data->Dep_Name; ?>
-                                                                                </option>
-                                                                            <?php } ?>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-row mb-5">
-                                                                    <div class="form-group col-md-12">
-                                                                        <h5 class="mt-1" style="margin-top: 15px;">
-                                                                            Additional
-                                                                            Settings</h5>
-                                                                    </div>
-                                                                </div>
-
-
-
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6"
-                                                                        style="margin-top: -8px;">
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input"
-                                                                                type="checkbox" name="ot_m"
-                                                                                id="chk_1st_morning">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_1st_morning">OT Morning</label>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="form-group col-md-6"
-                                                                        style="margin-top: -8px;">
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input"
-                                                                                type="checkbox" name="ot_e"
-                                                                                id="chk_1st_evening">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_1st_evening">OT Evening</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <div class="form-check"
-                                                                            style="margin-top: 1px;">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input" name="late"
-                                                                                id="chk_late">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_late">Late Deduction</label>
-                                                                        </div>
-                                                                        <div class="form-check"
-                                                                            style="margin-top: 10px;">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input" name="ed"
-                                                                                id="chk_ed">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_ed">Early Departure
-                                                                                Deduction</label>
-                                                                        </div>
-                                                                        <div class="form-check"
-                                                                            style="margin-top: 10px;">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input" name="late_ot"
-                                                                                id="chk_late_ot">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_late_ot">Late Deduct from
-                                                                                OT</label>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="form-group col-md-6">
-                                                                        <div class="form-check"
-                                                                            style="margin-top: 1px;">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input"
-                                                                                name="dot_holyday" id="chk_dot_holiday">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_dot_holiday">Double OT for
-                                                                                Holiday Day</label>
-                                                                        </div>
-                                                                        <div class="form-check"
-                                                                            style="margin-top: 10px;">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input"
-                                                                                name="dot_offday" id="chk_dot_offday">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_dot_offday">Double OT for OFF
-                                                                                Day</label>
-                                                                        </div>
-                                                                        <div class="form-check"
-                                                                            style="margin-top: 10px;">
-                                                                            <input type="checkbox"
-                                                                                class="form-check-input" name="sh_lv"
-                                                                                id="chk_sh_lv">
-                                                                            <label class="form-check-label"
-                                                                                for="chk_sh_lv">Late Deduct for Half
-                                                                                Day</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-row">
-                                                                    <div class="form-group col-md-12">
-
-                                                                        <div class="form-check">
-                                                                            <label for="round">Round Up</label>
-                                                                            <input type="number" class="form-control"
-                                                                                id="round" name="round"
-                                                                                placeholder="Ex: 120">
-                                                                        </div>
-                                                                        <div class="form-check mt-2">
-                                                                            <label for="late_gp">Late Grace
-                                                                                Period</label>
-                                                                            <input type="number" class="form-control"
-                                                                                id="late_gp" name="late_gp"
-                                                                                placeholder="Ex: 120">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group col-sm-2"
-                                                                    style="margin-top: 10px;">
-                                                                    <button type="submit"
-                                                                        name="submit" class="btn-success">
-                                                                        <div class="svg-wrapper-1">
-                                                                            <div class="svg-wrapper">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24" width="15"
-                                                                                    height="15">
-                                                                                    <path fill="none" d="M0 0h24v24H0z">
-                                                                                    </path>
-                                                                                    <path fill="currentColor"
-                                                                                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                                                                                    </path>
-                                                                                </svg>
-                                                                            </div>
-                                                                        </div>
-                                                                        <span> NEXT</span>
-                                                                    </button>
-                                                                </div>
-                                                            </form>
-
-                                                            <hr>
-
-                                                            <div id="divmessage" class="mt-3">
-                                                                <div id="spnmessage"></div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-12">
                                                     <div class="panel panel-info">
                                                         <div class="panel-heading">
                                                             <h2>ADD EMPLOYEE GROUPS</h2>
@@ -767,12 +554,12 @@
                                                                     <?php echo $_SESSION['error_message'] ?>
                                                                 </div>
                                                             <?php } ?>
-                                                            <!-- <div class="form-group col-sm-12">
+                                                            <div class="form-group col-sm-12">
                                                                 <div class="col-sm-8">
                                                                     <img class="imagecss"
                                                                         src="<?php echo base_url(); ?>assets/images/employee_group.png">
                                                                 </div>
-                                                            </div> -->
+                                                            </div>
 
                                                             <div class="form-group col-md-12">
 
@@ -790,49 +577,31 @@
                                                                     </div>
 
                                                                 </div>
-                                                                <!-- Buttons for Each Table -->
-                                                                <div class="row">
-                                                                    <div class="form-group col-sm-2"><button
-                                                                            type="button" class="btn btn-success"
-                                                                            id="btn_add_department">Attendance</button></div>
-                                                                    <div class="form-group col-sm-2"><button
-                                                                            type="button" class="btn btn-success"
-                                                                            id="btn_add_department2">Leave</button>
-                                                                    </div>
-                                                                    <div class="form-group col-sm-2"><button
-                                                                            type="button" class="btn btn-success"
-                                                                            id="btn_add_department3">Add 3</button>
-                                                                    </div>
-                                                                    <div class="form-group col-sm-2"><button
-                                                                            type="button" class="btn btn-success"
-                                                                            id="btn_add_department4">Add 4</button>
-                                                                    </div>
-                                                                    <div class="form-group col-sm-2"><button
-                                                                            type="button" class="btn btn-success"
-                                                                            id="btn_add_department5">Add 5</button>
-                                                                    </div>
-                                                                    <div class="form-group col-sm-2"><button
-                                                                            type="button" class="btn btn-success"
-                                                                            id="btn_add_department6">Add 6</button>
-                                                                    </div>
+                                                                <div class="form-group col-sm-2">
+                                                                    <button type="button" class="btn btn-success"
+                                                                        id="btn_add_department">Add</button>
+                                                                    <span style="margin-left: 8px;">Click the button
+                                                                        -></span>
                                                                 </div>
-
-                                                                <!-- ✅ Change type to "button" -->
-<button type="button" id="submit_departments" class="btn-success">
-    <div class="svg-wrapper-1">
-        <div class="svg-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24" width="15" height="15">
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <path fill="currentColor"
-                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                </path>
-            </svg>
-        </div>
-    </div>
-    <span>NEXT</span>
-</button>
-
+                                                                <div class="form-group col-sm-2">
+                                                                    <button type="submit" id="submit_departments"
+                                                                        name="submit" class="btn-success">
+                                                                        <div class="svg-wrapper-1">
+                                                                            <div class="svg-wrapper">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    viewBox="0 0 24 24" width="15"
+                                                                                    height="15">
+                                                                                    <path fill="none" d="M0 0h24v24H0z">
+                                                                                    </path>
+                                                                                    <path fill="currentColor"
+                                                                                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span> NEXT</span>
+                                                                    </button>
+                                                                </div>
 
 
                                                             </div>
@@ -1025,116 +794,38 @@
 
 
                                                     </div>
-                                                    <!-- Tables 1 to 6 -->
-                                                    <!-- Tables 1 to 6 -->
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
-
-                                                            <!-- Table 1 -->
                                                             <div class="form-group col-sm-12" id="departmentDiv1"
                                                                 style="display: none;">
-                                                                <table class="table" id="departmentTable1">
+                                                                <table class="table" id="departmentTable">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>No</th>
-                                                                            <th>Name</th>
-                                                                            <th>User Level Type</th>
-                                                                            <th>Authority Type</th>
-                                                                            <th>Action</th>
+                                                                            <th>
+                                                                                No
+                                                                            </th>
+                                                                            <th>
+                                                                                Name
+                                                                            </th>
+                                                                            <th>
+                                                                                User Level Type
+                                                                            </th>
+                                                                            <th>
+                                                                                Authority Type
+                                                                            </th>
+                                                                            <th>
+                                                                                Action
+                                                                            </th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody id="sortableRows1"></tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <!-- Table 2 -->
-                                                            <div class="form-group col-sm-12" id="departmentDiv2"
-                                                                style="display: none;">
-                                                                <table class="table" id="departmentTable2">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Name</th>
-                                                                            <th>User Level Type</th>
-                                                                            <th>Authority Type</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="sortableRows2"></tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <!-- Table 3 -->
-                                                            <div class="form-group col-sm-12" id="departmentDiv3"
-                                                                style="display: none;">
-                                                                <table class="table" id="departmentTable3">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Name</th>
-                                                                            <th>User Level Type</th>
-                                                                            <th>Authority Type</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="sortableRows3"></tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <!-- Table 4 -->
-                                                            <div class="form-group col-sm-12" id="departmentDiv4"
-                                                                style="display: none;">
-                                                                <table class="table" id="departmentTable4">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Name</th>
-                                                                            <th>User Level Type</th>
-                                                                            <th>Authority Type</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="sortableRows4"></tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <!-- Table 5 -->
-                                                            <div class="form-group col-sm-12" id="departmentDiv5"
-                                                                style="display: none;">
-                                                                <table class="table" id="departmentTable5">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Name</th>
-                                                                            <th>User Level Type</th>
-                                                                            <th>Authority Type</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="sortableRows5"></tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <!-- Table 6 -->
-                                                            <div class="form-group col-sm-12" id="departmentDiv6"
-                                                                style="display: none;">
-                                                                <table class="table" id="departmentTable6">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>No</th>
-                                                                            <th>Name</th>
-                                                                            <th>User Level Type</th>
-                                                                            <th>Authority Type</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="sortableRows6"></tbody>
+                                                                    <tbody id="sortableRows">
+                                                                        <!-- Rows dynamically added -->
+                                                                    </tbody>
                                                                 </table>
                                                             </div>
 
                                                         </div>
                                                     </div>
-
 
                                                 </div>
 
@@ -1389,226 +1080,8 @@
     }
 
 
-    // $(function () {
-    //     // Autocomplete
-    //     $("#txt_supervisor_search").autocomplete({
-    //         source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-    //         minLength: 1,
-    //         select: function (event, ui) {
-    //             $("#cmb_Supervisor").val(ui.item.value); // ID
-    //             $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label); // Display text
-    //             return false;
-    //         }
-    //     }).autocomplete("instance")._renderItem = function (ul, item) {
-    //         return $("<li>")
-    //             .append("<div>" + item.value + " - " + item.label + "</div>")
-    //             .appendTo(ul);
-    //     };
-
-    //     // Make rows sortable
-    //     $("#sortableRows").sortable({
-    //         placeholder: "ui-state-highlight"
-    //     }).disableSelection();
-    // });
-    // $(function () {
-    //     $("#txt_admin_search").autocomplete({
-    //         source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-    //         minLength: 1,
-    //         select: function (event, ui) {
-    //             $("#cmb_Admin").val(ui.item.value);
-    //             $("#txt_admin_search").val(ui.item.value + ' - ' + ui.item.label);
-    //             return false;
-    //         }
-    //     }).autocomplete("instance")._renderItem = function (ul, item) {
-    //         return $("<li>")
-    //             .append("<div>" + item.value + " - " + item.label + "</div>")
-    //             .appendTo(ul);
-    //     };
-    // });
-
-    // // $(function () {
-    // //             $("#txt_emp_name").autocomplete({
-    // //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_name" // path to the get_birds method
-    // //             });
-    // //         });
-
-    // //         $(function () {
-    // //             $("#txt_emp").autocomplete({
-    // //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_no" // path to the get_birds method
-    // //             });
-    // //         });
-    // function updateRowNumbers() {
-    //     const rows = document.querySelectorAll("#sortableRows tr");
-    //     rows.forEach((row, index) => {
-    //         row.querySelector("td").textContent = index + 1;
-    //     });
-    // }
-
-    // // Add department row
-    // document.getElementById("btn_add_department").addEventListener("click", function () {
-    //     var departmentInput = document.getElementById("txt_supervisor_search");
-    //     var departmentId = document.getElementById("cmb_Supervisor").value;
-    //     var departmentName = departmentInput.value;
-
-    //     if (departmentName !== "" && departmentId !== "") {
-    //         var exists = false;
-    //         $("#sortableRows tr").each(function () {
-    //             if ($(this).attr("data-id") === departmentId) {
-    //                 exists = true;
-    //                 return false;
-    //             }
-    //         });
-
-    //         if (exists) {
-    //             alert("This department has already been added.");
-    //             return;
-    //         }
-
-    //         var tableBody = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
-    //         var newRow = tableBody.insertRow();
-    //         newRow.setAttribute("data-id", departmentId);
-    //         newRow.classList.add("draggable");
-
-    //         var cell1 = newRow.insertCell(0); // No.
-    //         var cell2 = newRow.insertCell(1); // Department name
-    //         var cell3 = newRow.insertCell(2); // Dynamic select (PHP rendered)
-    //         var cell4 = newRow.insertCell(3); // Static select
-    //         var cell5 = newRow.insertCell(4); // Remove button
-
-    //         cell1.textContent = "";
-    //         cell2.textContent = departmentName;
-
-    //         // PHP-rendered select should be generated server-side and inserted into the JS variable
-    //         const dynamicSelect = `<?php ob_start(); ?>
-    //         <div style="position: relative; width: 180px;">
-    //             <select class="modern-select" required="required"
-    //                     style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
-    //                 <option value="0">Choose option</option>
-    //                 <?php foreach ($data_level as $data_level1) { ?>
-    //                     <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
-    //                 <?php } ?>
-    //             </select>
-    //             <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
-    //                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    //                 <polyline points="6,9 12,15 18,9"></polyline>
-    //             </svg>
-    //         </div>
-    //     <?php echo trim(preg_replace('/\s+/', ' ', ob_get_clean())); ?>`;
-
-    //         cell3.innerHTML = dynamicSelect;
-
-    //         // Static select dropdown (Approve/View Only)
-    //         cell4.innerHTML = `
-    //         <div style="position: relative; width: 180px;">
-    //             <select class="modern-select" required="required"
-    //                     style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
-    //                 <option value="0">Choose option</option>
-    //                 <option value="1">Approve Type</option>
-    //                 <option value="2">View Only Type</option>
-    //             </select>
-    //             <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
-    //                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    //                 <polyline points="6,9 12,15 18,9"></polyline>
-    //             </svg>
-    //         </div>
-    //     `;
-
-    //         // Remove button
-    //         cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-
-    //         // Reset fields
-    //         departmentInput.value = "";
-    //         document.getElementById("cmb_Supervisor").value = "";
-
-    //         // Show department section
-    //         document.getElementById("departmentDiv1").style.display = "block";
-
-    //         // Update numbering
-    //         updateRowNumbers();
-    //     } else {
-    //         alert("Please select a valid supervisor.");
-    //     }
-    // });
-
-    // // Remove row
-    // function removeRow(button) {
-    //     var row = button.parentNode.parentNode;
-    //     row.parentNode.removeChild(row);
-
-    //     if (document.querySelectorAll("#sortableRows tr").length === 0) {
-    //         document.getElementById("departmentDiv1").style.display = "none";
-    //     }
-
-    //     updateRowNumbers();
-    // }
-
-    // // Update on drag-and-drop
-    // $(function () {
-    //     $("#sortableRows").sortable({
-    //         placeholder: "ui-state-highlight",
-    //         update: function () {
-    //             updateRowNumbers();
-    //         }
-    //     }).disableSelection();
-    // });
-
-
-    // Handle form submission
-    // document.getElementById("submit_departments").addEventListener("click", function () {
-    //     var departments = [];
-
-    //     $("#sortableRows tr").each(function () {
-    //         // var departmentId = $(this).attr("data-id");
-    //         var departmentId = $(this).find("td:nth-child(1)").text().trim();
-    //         var departmentName = $(this).find("td:nth-child(2)").text().trim();
-    //         var selectedValue = $(this).find("td:nth-child(3) select").val(); // Get dropdown value
-    //         var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Get dropdown value
-
-    //         if (!departmentId || !departmentName || selectedValue === "0" || AuthorityValue === "0") {
-    //             alert("Please fill all fields before submitting.");
-    //             return;
-    //         }
-
-    //         departments.push({
-    //             id: departmentId,
-    //             name: departmentName,
-    //             selected: selectedValue,
-    //             Authority: AuthorityValue
-    //         });
-    //     });
-
-    //     if (departments.length === 0) {
-    //         alert("No departments to submit.");
-    //         return;
-    //     }
-
-    //     console.log("Submitting departments:", departments);
-
-    //     $.ajax({
-    //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-    //         type: "POST",
-    //         contentType: "application/json",
-    //         data: JSON.stringify({ departments: departments }),
-    //         dataType: "json",
-    //         success: function (response) {
-    //             console.log("Success:", response);
-    //             alert("Departments submitted successfully!");
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error("Error:", error);
-    //             console.error("Response:", xhr.responseText);
-    //             alert("An error occurred while submitting departments.");
-    //         }
-    //     });
-    // });
-
-
-
-
-</script>
-<script>
-    // Autocomplete
     $(function () {
+        // Autocomplete
         $("#txt_supervisor_search").autocomplete({
             source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
             minLength: 1,
@@ -1622,189 +1095,210 @@
                 .append("<div>" + item.value + " - " + item.label + "</div>")
                 .appendTo(ul);
         };
+
+        // Make rows sortable
+        $("#sortableRows").sortable({
+            placeholder: "ui-state-highlight"
+        }).disableSelection();
+    });
+    $(function () {
+        $("#txt_admin_search").autocomplete({
+            source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+            minLength: 1,
+            select: function (event, ui) {
+                $("#cmb_Admin").val(ui.item.value);
+                $("#txt_admin_search").val(ui.item.value + ' - ' + ui.item.label);
+                return false;
+            }
+        }).autocomplete("instance")._renderItem = function (ul, item) {
+            return $("<li>")
+                .append("<div>" + item.value + " - " + item.label + "</div>")
+                .appendTo(ul);
+        };
     });
 
-    // Dynamic Select - PHP-rendered
-    const dynamicSelect = `<?php ob_start(); ?>
-    <div style="position: relative; width: 180px;">
-        <select class="modern-select" required="required"
-            style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
-                   background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
-                   border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
-            <option value="0">Choose option</option>
-            <?php foreach ($data_level as $data_level1) { ?>
-                <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
-            <?php } ?>
-        </select>
-        <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
-                    pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6,9 12,15 18,9"></polyline>
-        </svg>
-    </div>
-<?php echo trim(preg_replace('/\s+/', ' ', ob_get_clean())); ?>`;
+    // $(function () {
+    //             $("#txt_emp_name").autocomplete({
+    //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_name" // path to the get_birds method
+    //             });
+    //         });
 
-    // Static Select
-    const staticSelect = `
-    <div style="position: relative; width: 180px;">
-        <select class="modern-select" required="required"
-            style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
-                   background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
-                   border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
-            <option value="0">Choose option</option>
-            <option value="1">Approve Type</option>
-            <option value="2">View Only Type</option>
-        </select>
-        <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
-                    pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6,9 12,15 18,9"></polyline>
-        </svg>
-    </div>`;
-
-    // Function to add supervisor row
-    function addSupervisorRow(buttonId, tableId, tbodyId, containerId) {
-        document.getElementById(buttonId).addEventListener("click", function () {
-            var input = document.getElementById("txt_supervisor_search");
-            var supervisorId = document.getElementById("cmb_Supervisor").value;
-            var supervisorName = input.value;
-
-            if (supervisorName !== "" && supervisorId !== "") {
-                var exists = false;
-                $(`#${tbodyId} tr`).each(function () {
-                    if ($(this).attr("data-id") === supervisorId) {
-                        exists = true;
-                        return false;
-                    }
-                });
-
-                if (exists) {
-                    alert("This supervisor has already been added.");
-                    return;
-                }
-
-                var tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-                var newRow = tableBody.insertRow();
-                newRow.setAttribute("data-id", supervisorId);
-                newRow.classList.add("draggable");
-
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var cell4 = newRow.insertCell(3);
-                var cell5 = newRow.insertCell(4);
-
-                cell1.textContent = "";
-                cell2.textContent = supervisorName;
-                cell3.innerHTML = dynamicSelect;
-                cell4.innerHTML = staticSelect;
-                cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-
-                input.value = "";
-                document.getElementById("cmb_Supervisor").value = "";
-
-                document.getElementById(containerId).style.display = "block";
-                updateRowNumbers(tbodyId);
-            } else {
-                alert("Please select a valid supervisor.");
-            }
-        });
-    }
-
-    // Row number updater
-    function updateRowNumbers(tbodyId) {
-        const rows = document.querySelectorAll(`#${tbodyId} tr`);
+    //         $(function () {
+    //             $("#txt_emp").autocomplete({
+    //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_no" // path to the get_birds method
+    //             });
+    //         });
+    function updateRowNumbers() {
+        const rows = document.querySelectorAll("#sortableRows tr");
         rows.forEach((row, index) => {
             row.querySelector("td").textContent = index + 1;
         });
     }
 
-    // Remove row
-    function removeRow(button) {
-        var row = button.parentNode.parentNode;
-        var tbody = row.parentNode;
-        var tableDiv = tbody.closest("div[id^='departmentDiv']");
-        row.remove();
+    // Add department row
+    document.getElementById("btn_add_department").addEventListener("click", function () {
+        var departmentInput = document.getElementById("txt_supervisor_search");
+        var departmentId = document.getElementById("cmb_Supervisor").value;
+        var departmentName = departmentInput.value;
 
-        if (tbody.querySelectorAll("tr").length === 0) {
-            tableDiv.style.display = "none";
-        }
-
-        updateRowNumbers(tbody.id);
-    }
-
-    // Init drag-and-drop and row functions
-    $(function () {
-        for (let i = 1; i <= 6; i++) {
-            addSupervisorRow(`btn_add_department${i === 1 ? '' : i}`, `departmentTable${i}`, `sortableRows${i}`, `departmentDiv${i}`);
-            $(`#sortableRows${i}`).sortable({
-                placeholder: "ui-state-highlight",
-                update: function () {
-                    updateRowNumbers(this.id);
+        if (departmentName !== "" && departmentId !== "") {
+            var exists = false;
+            $("#sortableRows tr").each(function () {
+                if ($(this).attr("data-id") === departmentId) {
+                    exists = true;
+                    return false;
                 }
-            }).disableSelection();
+            });
+
+            if (exists) {
+                alert("This department has already been added.");
+                return;
+            }
+
+            var tableBody = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
+            var newRow = tableBody.insertRow();
+            newRow.setAttribute("data-id", departmentId);
+            newRow.classList.add("draggable");
+
+            var cell1 = newRow.insertCell(0); // No.
+            var cell2 = newRow.insertCell(1); // Department name
+            var cell3 = newRow.insertCell(2); // Dynamic select (PHP rendered)
+            var cell4 = newRow.insertCell(3); // Static select
+            var cell5 = newRow.insertCell(4); // Remove button
+
+            cell1.textContent = "";
+            cell2.textContent = departmentName;
+
+            // PHP-rendered select should be generated server-side and inserted into the JS variable
+            const dynamicSelect = `<?php ob_start(); ?>
+            <div style="position: relative; width: 300px;">
+                <select class="modern-select" required="required"
+                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 100%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
+                    <option value="0">Choose option</option>
+                    <?php foreach ($data_level as $data_level1) { ?>
+                        <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
+                    <?php } ?>
+                </select>
+                <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+            </div>
+        <?php echo trim(preg_replace('/\s+/', ' ', ob_get_clean())); ?>`;
+
+            cell3.innerHTML = dynamicSelect;
+
+            // Static select dropdown (Approve/View Only)
+            cell4.innerHTML = `
+            <div style="position: relative; width: 300px;">
+                <select class="modern-select" required="required"
+                        style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 100%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
+                    <option value="0">Choose option</option>
+                    <option value="1">Approve Type</option>
+                    <option value="2">View Only Type</option>
+                </select>
+                <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+            </div>
+        `;
+
+            // Remove button
+            cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+
+            // Reset fields
+            departmentInput.value = "";
+            document.getElementById("cmb_Supervisor").value = "";
+
+            // Show department section
+            document.getElementById("departmentDiv1").style.display = "block";
+
+            // Update numbering
+            updateRowNumbers();
+        } else {
+            alert("Please select a valid supervisor.");
         }
     });
 
 
-    // upload departments
-document.getElementById("submit_departments").addEventListener("click", function (e) {
 
-    alert("Submitting departments..."); // ✅ Alert to confirm submission
-    console.log("Submitting departments..."); // ✅ Console log for debugging
-    e.preventDefault(); // ✅ Prevents form reload
+    // Remove row
+    function removeRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
 
-    var departments = [];
+        if (document.querySelectorAll("#sortableRows tr").length === 0) {
+            document.getElementById("departmentDiv1").style.display = "none";
+        }
 
-    for (let i = 1; i <= 6; i++) {
-        $("#sortableRows" + i + " tr").each(function () {
+        updateRowNumbers();
+    }
+
+    // Update on drag-and-drop
+    $(function () {
+        $("#sortableRows").sortable({
+            placeholder: "ui-state-highlight",
+            update: function () {
+                updateRowNumbers();
+            }
+        }).disableSelection();
+    });
+
+
+    // Handle form submission
+    document.getElementById("submit_departments").addEventListener("click", function () {
+        var departments = [];
+
+        $("#sortableRows tr").each(function () {
+            // var departmentId = $(this).attr("data-id");
             var departmentId = $(this).find("td:nth-child(1)").text().trim();
             var departmentName = $(this).find("td:nth-child(2)").text().trim();
-            var selectedValue = $(this).find("td:nth-child(3) select").val(); // User Level Type
-            var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Authority Type
+            var selectedValue = $(this).find("td:nth-child(3) select").val(); // Get dropdown value
+            var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Get dropdown value
 
-            if (!departmentId || !departmentName ) {
-                alert("Please fill all fields before submitting in Table " + i + ".");
-                return false;
+            if (!departmentId || !departmentName || selectedValue === "0" || AuthorityValue === "0") {
+                alert("Please fill all fields before submitting.");
+                return;
             }
 
             departments.push({
                 id: departmentId,
                 name: departmentName,
                 selected: selectedValue,
-                Authority: AuthorityValue,
-                table: i
+                Authority: AuthorityValue
             });
         });
-    }
 
-    if (departments.length === 0) {
-        alert("No departments to submit.");
-        return;
-    }
-
-    console.log("Submitting departments:", departments); // ✅ Now this will print
-
-    $.ajax({
-        url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({ departments: departments }),
-        dataType: "json",
-        success: function (response) {
-            console.log("Success:", response);
-            alert("Departments submitted successfully!");
-        },
-        error: function (xhr, status, error) {
-            console.error("Error:", error);
-            console.error("Response:", xhr.responseText);
-            alert("An error occurred while submitting departments.");
+        if (departments.length === 0) {
+            alert("No departments to submit.");
+            return;
         }
+
+        console.log("Submitting departments:", departments);
+
+        $.ajax({
+            url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ departments: departments }),
+            dataType: "json",
+            success: function (response) {
+                console.log("Success:", response);
+                alert("Departments submitted successfully!");
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                console.error("Response:", xhr.responseText);
+                alert("An error occurred while submitting departments.");
+            }
+        });
     });
-});
 
-    
+
+
+
 </script>
-
-
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 

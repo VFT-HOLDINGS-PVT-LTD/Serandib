@@ -28,6 +28,7 @@ class Emp_Attendance extends CI_Controller
         // $data['data_ot'] = $this->Db_model->getData('OTCode,OTName', 'tbl_ot_pattern_hd');
         $data['emp_sup'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
         $data['data_level'] = $this->Db_model->getData('user_level_id,user_level_name', 'tbl_user_level_master');
+        $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
 
         $this->load->view('Master/Emp_Attendance/index', $data);
     }
@@ -55,7 +56,7 @@ class Emp_Attendance extends CI_Controller
                     'AuthorityID' => $Authority
                 );
 
-                $result = $this->Db_model->insertData("tbl_active", $data);
+                // $result = $this->Db_model->insertData("tbl_active", $data);
 
                 // Example: log or insert into database
                 // log_message('info', "ID: $id, Name: $name, Selected: $selected");

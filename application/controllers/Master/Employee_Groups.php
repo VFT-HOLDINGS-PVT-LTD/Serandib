@@ -27,7 +27,8 @@ class Employee_Groups extends CI_Controller
  INNER JOIN tbl_empmaster ON tbl_emp_group.Sup_ID = tbl_empmaster.EmpNo');
         // $data['data_ot'] = $this->Db_model->getData('OTCode,OTName', 'tbl_ot_pattern_hd');
         $data['emp_sup'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
-        $this->load->view('Master/Employee_Groups/attendance', $data);
+        $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
+        $this->load->view('Master/Employee_Groups/index', $data);
     }
     /*
      * Insert Departmrnt
@@ -128,8 +129,9 @@ class Employee_Groups extends CI_Controller
                 'late_Grs_prd' => $late_grace,
             );
             $result2 = $this->Db_model->insertData("tbl_setting", $data2);
-            $this->session->set_flashdata('success_message', 'Shift Employee Group Added');
-            //  $this->load->view('Master/Employee_Groups/attendance');
+            // $this->session->set_flashdata('success_message', 'Shift Employee Group Added');
+            // $this->load->view('Master/Emp_Attendance/index');
+            redirect(base_url() . "Master/Emp_Attendance/index");
         } else {
             $this->session->set_flashdata('Error_message', 'Employee Group Already Added');
         }

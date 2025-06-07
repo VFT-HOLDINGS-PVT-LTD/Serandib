@@ -732,7 +732,20 @@
 
                                                             <div class="form-row">
                                                                 <div class="form-group col-md-12">
-
+                                                                    <div class="form-check">
+                                                                        <label for="round">Min Time to Morning
+                                                                            OT</label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="min_t_ot" name="min_t_ot"
+                                                                            placeholder="Ex: 120">
+                                                                    </div>
+                                                                    <div class="form-check mt-2">
+                                                                        <label for="late_gp">Min Time to Evening
+                                                                            OT</label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="min_t_e_ot" name="min_t_e_ot"
+                                                                            placeholder="Ex: 120">
+                                                                    </div>
                                                                     <div class="form-check">
                                                                         <label for="round">Round Up</label>
                                                                         <input type="number" class="form-control"
@@ -847,6 +860,14 @@
                                                                             <span>SUBMIT</span>
                                                                         </button>
                                                                     </div>
+                                                                    <!-- <div class="col-sm-3">
+                                                                        <button type="button" class="btn btn-info"
+                                                                            id="btn_duplicate_group"
+                                                                            style="width: 100%;">
+                                                                            <i class="fas fa-copy"></i> Duplicate
+                                                                        </button>
+
+                                                                    </div> -->
 
                                                                 </div>
                                                                 <!-- Buttons for Each Table -->
@@ -891,864 +912,776 @@
                                                                     </div>
                                                                 </div>
 
-                                                            </div>
-
-                                                            <!-- Table to display added departments and percentages -->
-                                                            <!-- Table -->
-
-                                                            <div class="form-group col-md-12" style="display: none;">
-                                                                <div class="form-group col-sm-6">
+                                                                <div
+                                                                    style="width: 100%;height: 2px;background-color: #aab4b9; margin-bottom: 15px;margin-top: 20px;">
+                                                                </div>
+                                                                <div class="form-group col-sm-12">
                                                                     <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Allow
-                                                                        Admin</label>
-                                                                    <div class="col-sm-8">
-                                                                        <select class="form-control" id="cmb_emp_status"
-                                                                            name="cmb_emp_status">
-                                                                            <option value="0" selected>Deny</option>
-                                                                            <option value="1">Allow</option>
+                                                                        class="col-sm-2 control-label">Select Existing
+                                                                        Group</label>
+                                                                    <div class="col-sm-6">
+                                                                        <select class="form-control"
+                                                                            id="select_existing_group">
+                                                                            <option value="">-- Select Group
+                                                                                --</option>
+                                                                            <?php foreach ($data_grp as $group) { ?>
+                                                                                <option value="<?= $group->Grp_ID ?>">
+                                                                                    <?= $group->EmpGroupName ?>
+                                                                                </option>
+                                                                            <?php } ?>
                                                                         </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="form-group col-sm-6"
-                                                                    id="group_admin_section" style="display: none;">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Group
-                                                                        Admin</label>
-                                                                    <div class="col-sm-8">
-                                                                        <input type="text" class="form-control"
-                                                                            name="txt_admin_search"
-                                                                            id="txt_admin_search"
-                                                                            placeholder="Search by ID or Name">
-                                                                        <input type="hidden" name="cmb_Admin"
-                                                                            id="cmb_Admin">
+                                                                    <div class="col-sm-4">
+                                                                        <!-- ✅ Change type to "button" -->
+                                                                        <button type="button" class="btn btn-info"
+                                                                            id="btn_duplicate_group" style="width: 60%;">
+                                                                            <i class="fas fa-copy"></i>
+                                                                            Duplicate Group
+                                                                        </button>
                                                                     </div>
+
                                                                 </div>
-                                                            </div>
+                                                                <!-- <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-row">
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label
+                                                                                        for="select_existing_group">Select
+                                                                                        Existing Group</label>
+                                                                                    <select class="form-control"
+                                                                                        id="select_existing_group">
+                                                                                        <option value="">-- Select Group
+                                                                                            --</option>
+                                                                                        <?php foreach ($data_grp as $group) { ?>
+                                                                                            <option
+                                                                                                value="<?= $group->Grp_ID ?>">
+                                                                                                <?= $group->EmpGroupName ?>
+                                                                                            </option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                </div>
 
+                                                                                <div class="form-group col-md-6"
+                                                                                    style="margin-top: 24px;">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-info"
+                                                                                        id="btn_duplicate_group">
+                                                                                        <i class="fas fa-copy"></i>
+                                                                                        Duplicate Group
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
 
-                                                            <!-- <div class="form-group row col-md-12 justify-content-end">
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Group
-                                                                            Admin</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
-                                                                                name="txt_admin_search"
-                                                                                id="txt_admin_search"
-                                                                                placeholder="Search by ID or Name">
-                                                                            <input type="hidden" name="cmb_Admin"
-                                                                                id="cmb_Admin">
                                                                         </div>
-
                                                                     </div>
+
                                                                 </div> -->
 
+                                                                <!-- Table to display added departments and percentages -->
+                                                                <!-- Table -->
 
-                                                            <div class="form-group col-md-12" style="display: none;">
-                                                                <div class="form-group col-sm-6">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">OT
-                                                                        Morning</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox" name="ot_m"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">OT
-                                                                        Evening</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox" name="ot_e"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group col-sm-6">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Min Time to
-                                                                        Morning OT</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="number" class="form-control"
-                                                                            id="txt_max_l_size" name="min_t_ot"
-                                                                            placeholder="Ex: 120">
-                                                                    </div>
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Min Time to
-                                                                        Evening OT</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="number" class="form-control"
-                                                                            id="txt_max_l_size" name="min_t_e_ot"
-                                                                            placeholder="Ex: 120">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-md-12" style="display: none;">
-                                                                <div class="form-group col-sm-6">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Late</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox" name="late"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">ED</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox" name="ed"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group col-sm-6">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-5 control-label">Late decuct
-                                                                        for Leave in Half Day</label>
-                                                                    <div class="col-sm-1 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox" name="sh_lv"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Late deduct
-                                                                        from OT</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox" name="late_ot"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
+
+
+
+                                                                <div id="divmessage" class="">
+
+                                                                    <div id="spnmessage"> </div>
                                                                 </div>
 
-                                                                <div class="form-group col-sm-6">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Double OT for
-                                                                        Holiday</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox"
-                                                                                    name="dot_holyday"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Double OT for
-                                                                        OFF Day</label>
-                                                                    <div class="col-sm-2 icheck-flat">
-                                                                        <div class="checkbox green icheck">
-                                                                            <label><input type="checkbox"
-                                                                                    name="dot_offday"
-                                                                                    id="chk_1st"></label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group col-sm-6">
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Round
-                                                                        Up</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="number" class="form-control"
-                                                                            id="txt_max_l_size" name="round"
-                                                                            placeholder="Ex: 120">
-                                                                    </div>
-                                                                    <label for="focusedinput"
-                                                                        class="col-sm-4 control-label">Late Grace
-                                                                        Period</label>
-                                                                    <div class="col-sm-2">
-                                                                        <input type="number" class="form-control"
-                                                                            id="late_gp" name="late_gp"
-                                                                            placeholder="Ex: 120">
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-
-
-                                                            <hr>
-
-
-                                                            <div id="divmessage" class="">
-
-                                                                <div id="spnmessage"> </div>
-                                                            </div>
-
-                                                        </div>
-
-
-                                                    </div>
-                                                    <!-- Tables 1 to 6 -->
-                                                    <!-- Tables 1 to 6 -->
-                                                    <div class="row">
-                                                        <div class="form-group col-md-12">
-                                                            <div class="col-md-12" id="departmentDiv1"
-                                                                style="display: none;">
-                                                                <div class="panel panel-info">
-                                                                    <div class="panel-body panel-no-padding">
-                                                                        <!-- Table 1 -->
-                                                                        <div class="form-group col-sm-12"
-                                                                            style="margin-top: 25px;">
-                                                                            <span>Attendance</span>
-                                                                            <table
-                                                                                class="table table-striped table-bordered"
-                                                                                id="departmentTable1"
-                                                                                style="margin-top: 15px;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>User Level Type</th>
-                                                                                        <th>Authority Type</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody id="sortableRows1"></tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <!-- Table 2 -->
-                                                            <div class="col-md-12" id="departmentDiv2"
-                                                                style="display: none;">
-                                                                <div class="panel panel-info">
-                                                                    <div class="panel-body panel-no-padding">
-                                                                        <div class="form-group col-sm-12"
-                                                                            style="margin-top: 25px;">
-                                                                            <span>Leave</span>
-                                                                            <table
-                                                                                class="table table-striped table-bordered"
-                                                                                id="departmentTable2"
-                                                                                style="margin-top: 15px;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>User Level Type</th>
-                                                                                        <th>Authority Type</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody id="sortableRows2"></tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- Table 3 -->
-                                                            <div class="col-md-12" id="departmentDiv3"
-                                                                style="display: none;">
-                                                                <div class="panel panel-info">
-                                                                    <div class="panel-body panel-no-padding">
-                                                                        <div class="form-group col-sm-12"
-                                                                            style="margin-top: 25px;">
-                                                                            <span>Perf Evaluation</span>
-                                                                            <table
-                                                                                class="table table-striped table-bordered"
-                                                                                id="departmentTable3"
-                                                                                style="margin-top: 15px;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>User Level Type</th>
-                                                                                        <th>Authority Type</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody id="sortableRows3"></tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- Table 4 -->
-                                                            <div class="col-md-12" id="departmentDiv4"
-                                                                style="display: none;">
-                                                                <div class="panel panel-info">
-                                                                    <div class="panel-body panel-no-padding">
-                                                                        <div class="form-group col-sm-12"
-                                                                            style="margin-top: 25px;">
-                                                                            <span>Salary Advance</span>
-                                                                            <table
-                                                                                class="table table-striped table-bordered"
-                                                                                id="departmentTable4"
-                                                                                style="margin-top: 15px;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>User Level Type</th>
-                                                                                        <th>Authority Type</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody id="sortableRows4"></tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- Table 5 -->
-                                                            <div class="col-md-12" id="departmentDiv5"
-                                                                style="display: none;">
-                                                                <div class="panel panel-info">
-                                                                    <div class="panel-body panel-no-padding">
-                                                                        <div class="form-group col-sm-12"
-                                                                            style="margin-top: 25px;">
-                                                                            <span>OT Approval</span>
-                                                                            <table
-                                                                                class="table table-striped table-bordered"
-                                                                                id="departmentTable5"
-                                                                                style="margin-top: 15px;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>User Level Type</th>
-                                                                                        <th>Authority Type</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody id="sortableRows5"></tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- Table 6 -->
-                                                            <div class="col-md-12" id="departmentDiv6"
-                                                                style="display: none;">
-                                                                <div class="panel panel-info">
-                                                                    <div class="panel-body panel-no-padding">
-                                                                        <div class="form-group col-sm-12"
-                                                                            style="margin-top: 25px;">
-                                                                            <span>Staff Loans</span>
-                                                                            <table
-                                                                                class="table table-striped table-bordered"
-                                                                                id="departmentTable6"
-                                                                                style="margin-top: 15px;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>No</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>User Level Type</th>
-                                                                                        <th>Authority Type</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody id="sortableRows6"></tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
                                                             </div>
 
 
                                                         </div>
-                                                    </div>
+                                                        <!-- Tables 1 to 6 -->
+                                                        <!-- Tables 1 to 6 -->
+                                                        <div class="row">
+                                                            <div class="form-group col-md-12"
+                                                                style="margin-top: -20px;">
+                                                                <div class="col-md-12" id="departmentDiv1"
+                                                                    style="display: none;">
+                                                                    <div class="panel panel-info">
+                                                                        <div class="panel-body panel-no-padding">
+                                                                            <!-- Table 1 -->
+                                                                            <div class="form-group col-sm-12">
+                                                                                <span>Attendance</span>
+                                                                                <table
+                                                                                    class="table table-striped table-bordered"
+                                                                                    id="departmentTable1"
+                                                                                    style="margin-top: 15px;">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>User Level Type</th>
+                                                                                            <th>Authority Type</th>
+                                                                                            <th>Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="sortableRows1"></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Table 2 -->
+                                                                <div class="col-md-12" id="departmentDiv2"
+                                                                    style="display: none;">
+                                                                    <div
+                                                                        style="width: 97%;height: 2px;background-color: #aab4b9;margin-top: -40px;position: absolute;">
+                                                                    </div>
+                                                                    <div class="panel panel-info">
+                                                                        <div class="panel-body panel-no-padding">
+                                                                            <div class="form-group col-sm-12"
+                                                                                style="margin-top: -30px;">
+                                                                                <span>Leave</span>
+                                                                                <table
+                                                                                    class="table table-striped table-bordered"
+                                                                                    id="departmentTable2"
+                                                                                    style="margin-top: 15px;">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>User Level Type</th>
+                                                                                            <th>Authority Type</th>
+                                                                                            <th>Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="sortableRows2"></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
+                                                                <!-- Table 3 -->
+                                                                <div class="col-md-12" id="departmentDiv3"
+                                                                    style="display: none;">
+                                                                    <div
+                                                                        style="width: 97%;height: 2px;background-color: #aab4b9;margin-top: -40px;position: absolute;">
+                                                                    </div>
+                                                                    <div class="panel panel-info">
+                                                                        <div class="panel-body panel-no-padding">
+                                                                            <div class="form-group col-sm-12"
+                                                                                style="margin-top: -30px;">
+                                                                                <span>Perf Evaluation</span>
+                                                                                <table
+                                                                                    class="table table-striped table-bordered"
+                                                                                    id="departmentTable3"
+                                                                                    style="margin-top: 15px;">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>User Level Type</th>
+                                                                                            <th>Authority Type</th>
+                                                                                            <th>Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="sortableRows3"></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Table 4 -->
+                                                                <div class="col-md-12" id="departmentDiv4"
+                                                                    style="display: none;">
+                                                                    <div
+                                                                        style="width: 97%;height: 2px;background-color: #aab4b9;margin-top: -40px;position: absolute;">
+                                                                    </div>
+                                                                    <div class="panel panel-info">
+                                                                        <div class="panel-body panel-no-padding">
+                                                                            <div class="form-group col-sm-12"
+                                                                                style="margin-top: -30px;">
+                                                                                <span>Salary Advance</span>
+                                                                                <table
+                                                                                    class="table table-striped table-bordered"
+                                                                                    id="departmentTable4"
+                                                                                    style="margin-top: 15px;">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>User Level Type</th>
+                                                                                            <th>Authority Type</th>
+                                                                                            <th>Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="sortableRows4"></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Table 5 -->
+                                                                <div class="col-md-12" id="departmentDiv5"
+                                                                    style="display: none;">
+                                                                    <div
+                                                                        style="width: 97%;height: 2px;background-color: #aab4b9;margin-top: -40px;position: absolute;">
+                                                                    </div>
+                                                                    <div class="panel panel-info">
+                                                                        <div class="panel-body panel-no-padding">
+                                                                            <div class="form-group col-sm-12"
+                                                                                style="margin-top: -30px;">
+                                                                                <span>OT Approval</span>
+                                                                                <table
+                                                                                    class="table table-striped table-bordered"
+                                                                                    id="departmentTable5"
+                                                                                    style="margin-top: 15px;">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>User Level Type</th>
+                                                                                            <th>Authority Type</th>
+                                                                                            <th>Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="sortableRows5"></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Table 6 -->
+                                                                <div class="col-md-12" id="departmentDiv6"
+                                                                    style="display: none;">
+                                                                    <div
+                                                                        style="width: 97%;height: 2px;background-color: #aab4b9;margin-top: -40px;position: absolute;">
+                                                                    </div>
+                                                                    <div class="panel panel-info">
+                                                                        <div class="panel-body panel-no-padding">
+                                                                            <div class="form-group col-sm-12"
+                                                                                style="margin-top: -30px;">
+                                                                                <span>Staff Loans</span>
+                                                                                <table
+                                                                                    class="table table-striped table-bordered"
+                                                                                    id="departmentTable6"
+                                                                                    style="margin-top: 15px;">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>No</th>
+                                                                                            <th>Name</th>
+                                                                                            <th>User Level Type</th>
+                                                                                            <th>Authority Type</th>
+                                                                                            <th>Action</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="sortableRows6"></tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
 
                                                 </div>
 
                                             </div>
-
                                         </div>
+
                                     </div>
 
-                                </div>
 
+                                    <!--***************************-->
+                                    <!-- Grid View -->
 
-                                <!--***************************-->
-                                <!-- Grid View -->
+                                    <div class="tab-pane" id="tab2" style="display: none;">
 
-                                <div class="tab-pane" id="tab2">
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-primary">
-                                                <div class="col-md-12">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h2>USER LEVEL DETAILS</h2>
-                                                            <div class="panel-ctrls">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-primary">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h2>USER LEVEL DETAILS</h2>
+                                                                <div class="panel-ctrls">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="panel-body panel-no-padding">
-                                                            <table id="example"
-                                                                class="table table-striped table-bordered"
-                                                                cellspacing="0" width="100%">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>ID</th>
-                                                                        <th>NAME</th>
-                                                                        <th>OT MORNING</th>
-                                                                        <th>OT EVENING</th>
-                                                                        <th>LATE</th>
-                                                                        <th>EARLY DEPARTURE</th>
-                                                                        <th>GRACE PERIOD</th>
-                                                                        <th>SUPERVISOR NAME</th>
-                                                                        <th>GROUP ADMIN</th>
-                                                                        <th>EDIT</th>
-                                                                        <th>DELETE</th>
+                                                            <div class="panel-body panel-no-padding">
+                                                                <table id="example"
+                                                                    class="table table-striped table-bordered"
+                                                                    cellspacing="0" width="100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>ID</th>
+                                                                            <th>NAME</th>
+                                                                            <th>OT MORNING</th>
+                                                                            <th>OT EVENING</th>
+                                                                            <th>LATE</th>
+                                                                            <th>EARLY DEPARTURE</th>
+                                                                            <th>GRACE PERIOD</th>
+                                                                            <th>SUPERVISOR NAME</th>
+                                                                            <th>GROUP ADMIN</th>
+                                                                            <th>EDIT</th>
+                                                                            <th>DELETE</th>
 
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php
-                                                                    foreach ($data_set as $data) {
-                                                                        ?>
-                                                                        <tr class='odd gradeX'>
-                                                                            <td width='100'><?php echo $data->Grp_ID; ?>
-                                                                            </td>
-                                                                            <td width='100'>
-                                                                                <?php echo $data->EmpGroupName; ?>
-                                                                            </td>
-                                                                            <td width='50'><?php echo $data->Ot_m; ?></td>
-                                                                            <td width='50'><?php echo $data->Ot_e; ?></td>
-                                                                            <td width='100'><?php echo $data->Late; ?></td>
-                                                                            <td width='50'><?php echo $data->Ed; ?></td>
-                                                                            <td width='50'>
-                                                                                <?php echo $data->late_Grs_prd; ?>
-                                                                            </td>
-                                                                            <td width='200'><?php echo $data->Sup_Name; ?>
-                                                                            </td>
-                                                                            <td width='200'><?php echo $data->Admin_Name; ?>
-                                                                            </td>
-                                                                            <td width='15'>
-                                                                                <?php $url = base_url() . "Master/Employee_Groups/updateAttView?id=$data->Grp_ID"; ?>
-                                                                                <a class="edit_data btn btn-green"
-                                                                                    href="<?php echo $url; ?>" title="EDIT">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td width='15'>
-                                                                                <button class='action_comp btn btn-danger'
-                                                                                    data-toggle='modal'
-                                                                                    href='javascript:void()' title='DELETE'
-                                                                                    onclick='delete_id(<?php echo $data->Grp_ID ?>)'>
-                                                                                    <i class='fa fa-times-circle'></i>
-                                                                                </button>
-                                                                            </td>
                                                                         </tr>
+                                                                    </thead>
+                                                                    <tbody>
                                                                         <?php
-                                                                    }
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            <div class="panel-footer"></div>
+                                                                        foreach ($data_set as $data) {
+                                                                            ?>
+                                                                            <tr class='odd gradeX'>
+                                                                                <td width='100'><?php echo $data->Grp_ID; ?>
+                                                                                </td>
+                                                                                <td width='100'>
+                                                                                    <?php echo $data->EmpGroupName; ?>
+                                                                                </td>
+                                                                                <td width='50'><?php echo $data->Ot_m; ?>
+                                                                                </td>
+                                                                                <td width='50'><?php echo $data->Ot_e; ?>
+                                                                                </td>
+                                                                                <td width='100'><?php echo $data->Late; ?>
+                                                                                </td>
+                                                                                <td width='50'><?php echo $data->Ed; ?></td>
+                                                                                <td width='50'>
+                                                                                    <?php echo $data->late_Grs_prd; ?>
+                                                                                </td>
+                                                                                <td width='200'>
+                                                                                    <?php echo $data->Sup_Name; ?>
+                                                                                </td>
+                                                                                <td width='200'>
+                                                                                    <?php echo $data->Admin_Name; ?>
+                                                                                </td>
+                                                                                <td width='15'>
+                                                                                    <?php $url = base_url() . "Master/Employee_Groups/updateAttView?id=$data->Grp_ID"; ?>
+                                                                                    <a class="edit_data btn btn-green"
+                                                                                        href="<?php echo $url; ?>"
+                                                                                        title="EDIT">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td width='15'>
+                                                                                    <button
+                                                                                        class='action_comp btn btn-danger'
+                                                                                        data-toggle='modal'
+                                                                                        href='javascript:void()'
+                                                                                        title='DELETE'
+                                                                                        onclick='delete_id(<?php echo $data->Grp_ID ?>)'>
+                                                                                        <i class='fa fa-times-circle'></i>
+                                                                                    </button>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="panel-footer"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+
+
+                                    <!-- End Grid View -->
+                                    <!--***************************-->
+
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;</button>
+                                                    <h2 class="modal-title">DESIGNATION</h2>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal"
+                                                        action="<?php echo base_url(); ?>Master/Designation/edit"
+                                                        method="post">
+                                                        <div class="form-group col-sm-12">
+                                                            <label for="focusedinput"
+                                                                class="col-sm-4 control-label">ID</label>
+                                                            <div class="col-sm-8">
+                                                                <input value="<?php echo $data->Des_ID; ?>" type="text"
+                                                                    class="form-control" readonly="readonly" name="id"
+                                                                    id="id" class="m-wrap span3">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-12">
+                                                            <label for="focusedinput"
+                                                                class="col-sm-4 control-label">DEPARTMENT</label>
+                                                            <div class="col-sm-8">
+                                                                <input value="<?php echo $data->Desig_Name; ?>"
+                                                                    type="text" name="Desig_Name" id="Desig_Name"
+                                                                    class="form-control m-wrap span6"><br>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-12">
+                                                            <label for="focusedinput"
+                                                                class="col-sm-4 control-label">ORDER</label>
+                                                            <div class="col-sm-8">
+                                                                <input value="<?php echo $data->Desig_Order; ?>"
+                                                                    type="text" name="Desig_Order" id="Desig_Order"
+                                                                    class="form-control m-wrap span6"><br>
+                                                            </div>
+                                                        </div>
+
+
+                                                </div>
+
+                                                <br>
+                                                <!--<input class="btn green" type="submit" value="submit" id="submit">-->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="submit" class="btn btn-primary">Save
+                                                        changes</button>
+                                                </div>
+                                                </form>
+                                            </div>
+
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+
+
+
+
+
+
+
 
                                 </div>
 
+                            </div> <!-- .container-fluid -->
+                        </div>
 
-                                <!-- End Grid View -->
-                                <!--***************************-->
+                        <!--Footer-->
+                        <?php $this->load->view('template/footer.php'); ?>
+                        <!--End Footer-->
 
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">&times;</button>
-                                                <h2 class="modal-title">DESIGNATION</h2>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal"
-                                                    action="<?php echo base_url(); ?>Master/Designation/edit"
-                                                    method="post">
-                                                    <div class="form-group col-sm-12">
-                                                        <label for="focusedinput"
-                                                            class="col-sm-4 control-label">ID</label>
-                                                        <div class="col-sm-8">
-                                                            <input value="<?php echo $data->Des_ID; ?>" type="text"
-                                                                class="form-control" readonly="readonly" name="id"
-                                                                id="id" class="m-wrap span3">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group col-sm-12">
-                                                        <label for="focusedinput"
-                                                            class="col-sm-4 control-label">DEPARTMENT</label>
-                                                        <div class="col-sm-8">
-                                                            <input value="<?php echo $data->Desig_Name; ?>" type="text"
-                                                                name="Desig_Name" id="Desig_Name"
-                                                                class="form-control m-wrap span6"><br>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group col-sm-12">
-                                                        <label for="focusedinput"
-                                                            class="col-sm-4 control-label">ORDER</label>
-                                                        <div class="col-sm-8">
-                                                            <input value="<?php echo $data->Desig_Order; ?>" type="text"
-                                                                name="Desig_Order" id="Desig_Order"
-                                                                class="form-control m-wrap span6"><br>
-                                                        </div>
-                                                    </div>
-
-
-                                            </div>
-
-                                            <br>
-                                            <!--<input class="btn green" type="submit" value="submit" id="submit">-->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" id="submit" class="btn btn-primary">Save
-                                                    changes</button>
-                                            </div>
-                                            </form>
-                                        </div>
-
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-
-
-
-
-
-
-
-
-                            </div>
-
-                        </div> <!-- .container-fluid -->
                     </div>
-
-                    <!--Footer-->
-                    <?php $this->load->view('template/footer.php'); ?>
-                    <!--End Footer-->
-
                 </div>
             </div>
-        </div>
 
 
 
 
-        <!-- Load site level scripts -->
+            <!-- Load site level scripts -->
 
-        <?php $this->load->view('template/js.php'); ?> <!-- Initialize scripts for this page-->
+            <?php $this->load->view('template/js.php'); ?> <!-- Initialize scripts for this page-->
 
-        <!-- End loading page level scripts-->
+            <!-- End loading page level scripts-->
 
-        <!--Ajax-->
-        <!-- <script src="<?php echo base_url(); ?>system_js/Master/Emp_Group.js"></script> -->
+            <!--Ajax-->
+            <!-- <script src="<?php echo base_url(); ?>system_js/Master/Emp_Group.js"></script> -->
 
 
 
-        <!-- pop model -->
+            <!-- pop model -->
 
-        <script>
-            $("#success_message_my").hide("bounce", 2000, 'fast');
-            $("#submit").click(function () {
-                $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/processing.gif" /></p><center>');
+            <script>
+                $("#success_message_my").hide("bounce", 2000, 'fast');
+                $("#submit").click(function () {
+                    $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/processing.gif" /></p><center>');
 
-            });
-            $(document).ready(function () {
-                $('#cmb_emp_status').change(function () {
-                    if ($(this).val() == '1') {
-                        $('#group_admin_section').show();
-                    } else {
-                        $('#group_admin_section').hide();
-                    }
                 });
-            });
-
-            function delete_id(id) {
-                swal({ title: "Are you sure?", text: "You will not be able to recover this data!", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, Delete This!", cancelButtonText: "No, Cancel This!", closeOnConfirm: false, closeOnCancel: false },
-                    function (isConfirm) {
-                        if (isConfirm) {
-
-                            $.ajax({
-                                url: baseurl + "index.php/Master/Employee_Groups/ajax_delete/" + id,
-                                type: "POST",
-                                dataType: "JSON",
-                                success: function (data) {
-
-                                    //if success reload ajax table
-                                    $('#modal_form').modal('hide');
-                                    reload_table();
-                                }
-
-                            });
-
-
-                            swal("Deleted!", "Selected data has been deleted.", "success");
-
-
-                            $(document).ready(function () {
-                                setTimeout(function () {
-                                    window.location.replace(baseurl + "Master/Employee_Groups/");
-                                }, 1000);
-                            });
-
-
+                $(document).ready(function () {
+                    $('#cmb_emp_status').change(function () {
+                        if ($(this).val() == '1') {
+                            $('#group_admin_section').show();
                         } else {
-                            swal("Cancelled", "Selected data Cancelled", "error");
-
+                            $('#group_admin_section').hide();
                         }
-
                     });
+                });
+
+                function delete_id(id) {
+                    swal({ title: "Are you sure?", text: "You will not be able to recover this data!", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, Delete This!", cancelButtonText: "No, Cancel This!", closeOnConfirm: false, closeOnCancel: false },
+                        function (isConfirm) {
+                            if (isConfirm) {
+
+                                $.ajax({
+                                    url: baseurl + "index.php/Master/Employee_Groups/ajax_delete/" + id,
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    success: function (data) {
+
+                                        //if success reload ajax table
+                                        $('#modal_form').modal('hide');
+                                        reload_table();
+                                    }
+
+                                });
 
 
-            }
+                                swal("Deleted!", "Selected data has been deleted.", "success");
 
 
-            // $(function () {
-            //     // Autocomplete
-            //     $("#txt_supervisor_search").autocomplete({
-            //         source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-            //         minLength: 1,
-            //         select: function (event, ui) {
-            //             $("#cmb_Supervisor").val(ui.item.value); // ID
-            //             $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label); // Display text
-            //             return false;
-            //         }
-            //     }).autocomplete("instance")._renderItem = function (ul, item) {
-            //         return $("<li>")
-            //             .append("<div>" + item.value + " - " + item.label + "</div>")
-            //             .appendTo(ul);
-            //     };
-
-            //     // Make rows sortable
-            //     $("#sortableRows").sortable({
-            //         placeholder: "ui-state-highlight"
-            //     }).disableSelection();
-            // });
-            // $(function () {
-            //     $("#txt_admin_search").autocomplete({
-            //         source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-            //         minLength: 1,
-            //         select: function (event, ui) {
-            //             $("#cmb_Admin").val(ui.item.value);
-            //             $("#txt_admin_search").val(ui.item.value + ' - ' + ui.item.label);
-            //             return false;
-            //         }
-            //     }).autocomplete("instance")._renderItem = function (ul, item) {
-            //         return $("<li>")
-            //             .append("<div>" + item.value + " - " + item.label + "</div>")
-            //             .appendTo(ul);
-            //     };
-            // });
-
-            // // $(function () {
-            // //             $("#txt_emp_name").autocomplete({
-            // //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_name" // path to the get_birds method
-            // //             });
-            // //         });
-
-            // //         $(function () {
-            // //             $("#txt_emp").autocomplete({
-            // //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_no" // path to the get_birds method
-            // //             });
-            // //         });
-            // function updateRowNumbers() {
-            //     const rows = document.querySelectorAll("#sortableRows tr");
-            //     rows.forEach((row, index) => {
-            //         row.querySelector("td").textContent = index + 1;
-            //     });
-            // }
-
-            // // Add department row
-            // document.getElementById("btn_add_department").addEventListener("click", function () {
-            //     var departmentInput = document.getElementById("txt_supervisor_search");
-            //     var departmentId = document.getElementById("cmb_Supervisor").value;
-            //     var departmentName = departmentInput.value;
-
-            //     if (departmentName !== "" && departmentId !== "") {
-            //         var exists = false;
-            //         $("#sortableRows tr").each(function () {
-            //             if ($(this).attr("data-id") === departmentId) {
-            //                 exists = true;
-            //                 return false;
-            //             }
-            //         });
-
-            //         if (exists) {
-            //             alert("This department has already been added.");
-            //             return;
-            //         }
-
-            //         var tableBody = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
-            //         var newRow = tableBody.insertRow();
-            //         newRow.setAttribute("data-id", departmentId);
-            //         newRow.classList.add("draggable");
-
-            //         var cell1 = newRow.insertCell(0); // No.
-            //         var cell2 = newRow.insertCell(1); // Department name
-            //         var cell3 = newRow.insertCell(2); // Dynamic select (PHP rendered)
-            //         var cell4 = newRow.insertCell(3); // Static select
-            //         var cell5 = newRow.insertCell(4); // Remove button
-
-            //         cell1.textContent = "";
-            //         cell2.textContent = departmentName;
-
-            //         // PHP-rendered select should be generated server-side and inserted into the JS variable
-            //         const dynamicSelect = `<?php ob_start(); ?>
-            //         <div style="position: relative; width: 180px;">
-            //             <select class="modern-select" required="required"
-            //                     style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
-            //                 <option value="0">Choose option</option>
-            //                 <?php foreach ($data_level as $data_level1) { ?>
-            //                     <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
-            //                 <?php } ?>
-            //             </select>
-            //             <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
-            //                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            //                 <polyline points="6,9 12,15 18,9"></polyline>
-            //             </svg>
-            //         </div>
-            //     <?php echo trim(preg_replace('/\s+/', ' ', ob_get_clean())); ?>`;
-
-            //         cell3.innerHTML = dynamicSelect;
-
-            //         // Static select dropdown (Approve/View Only)
-            //         cell4.innerHTML = `
-            //         <div style="position: relative; width: 180px;">
-            //             <select class="modern-select" required="required"
-            //                     style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
-            //                 <option value="0">Choose option</option>
-            //                 <option value="1">Approve Type</option>
-            //                 <option value="2">View Only Type</option>
-            //             </select>
-            //             <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
-            //                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            //                 <polyline points="6,9 12,15 18,9"></polyline>
-            //             </svg>
-            //         </div>
-            //     `;
-
-            //         // Remove button
-            //         cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-
-            //         // Reset fields
-            //         departmentInput.value = "";
-            //         document.getElementById("cmb_Supervisor").value = "";
-
-            //         // Show department section
-            //         document.getElementById("departmentDiv1").style.display = "block";
-
-            //         // Update numbering
-            //         updateRowNumbers();
-            //     } else {
-            //         alert("Please select a valid supervisor.");
-            //     }
-            // });
-
-            // // Remove row
-            // function removeRow(button) {
-            //     var row = button.parentNode.parentNode;
-            //     row.parentNode.removeChild(row);
-
-            //     if (document.querySelectorAll("#sortableRows tr").length === 0) {
-            //         document.getElementById("departmentDiv1").style.display = "none";
-            //     }
-
-            //     updateRowNumbers();
-            // }
-
-            // // Update on drag-and-drop
-            // $(function () {
-            //     $("#sortableRows").sortable({
-            //         placeholder: "ui-state-highlight",
-            //         update: function () {
-            //             updateRowNumbers();
-            //         }
-            //     }).disableSelection();
-            // });
+                                $(document).ready(function () {
+                                    setTimeout(function () {
+                                        window.location.replace(baseurl + "Master/Employee_Groups/");
+                                    }, 1000);
+                                });
 
 
-            // Handle form submission
-            // document.getElementById("submit_departments").addEventListener("click", function () {
-            //     var departments = [];
+                            } else {
+                                swal("Cancelled", "Selected data Cancelled", "error");
 
-            //     $("#sortableRows tr").each(function () {
-            //         // var departmentId = $(this).attr("data-id");
-            //         var departmentId = $(this).find("td:nth-child(1)").text().trim();
-            //         var departmentName = $(this).find("td:nth-child(2)").text().trim();
-            //         var selectedValue = $(this).find("td:nth-child(3) select").val(); // Get dropdown value
-            //         var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Get dropdown value
+                            }
 
-            //         if (!departmentId || !departmentName || selectedValue === "0" || AuthorityValue === "0") {
-            //             alert("Please fill all fields before submitting.");
-            //             return;
-            //         }
-
-            //         departments.push({
-            //             id: departmentId,
-            //             name: departmentName,
-            //             selected: selectedValue,
-            //             Authority: AuthorityValue
-            //         });
-            //     });
-
-            //     if (departments.length === 0) {
-            //         alert("No departments to submit.");
-            //         return;
-            //     }
-
-            //     console.log("Submitting departments:", departments);
-
-            //     $.ajax({
-            //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-            //         type: "POST",
-            //         contentType: "application/json",
-            //         data: JSON.stringify({ departments: departments }),
-            //         dataType: "json",
-            //         success: function (response) {
-            //             console.log("Success:", response);
-            //             alert("Departments submitted successfully!");
-            //         },
-            //         error: function (xhr, status, error) {
-            //             console.error("Error:", error);
-            //             console.error("Response:", xhr.responseText);
-            //             alert("An error occurred while submitting departments.");
-            //         }
-            //     });
-            // });
+                        });
 
 
+                }
 
 
-        </script>
-        <script>
-            // Autocomplete
-            $(function () {
-                $("#txt_supervisor_search").autocomplete({
-                    source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-                    minLength: 1,
-                    select: function (event, ui) {
-                        $("#cmb_Supervisor").val(ui.item.value); // ID
-                        $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label); // Display text
-                        return false;
-                    }
-                }).autocomplete("instance")._renderItem = function (ul, item) {
-                    return $("<li>")
-                        .append("<div>" + item.value + " - " + item.label + "</div>")
-                        .appendTo(ul);
-                };
-            });
+                // $(function () {
+                //     // Autocomplete
+                //     $("#txt_supervisor_search").autocomplete({
+                //         source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+                //         minLength: 1,
+                //         select: function (event, ui) {
+                //             $("#cmb_Supervisor").val(ui.item.value); // ID
+                //             $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label); // Display text
+                //             return false;
+                //         }
+                //     }).autocomplete("instance")._renderItem = function (ul, item) {
+                //         return $("<li>")
+                //             .append("<div>" + item.value + " - " + item.label + "</div>")
+                //             .appendTo(ul);
+                //     };
 
-            // Dynamic Select - PHP-rendered
-            const dynamicSelect = `<?php ob_start(); ?>
+                //     // Make rows sortable
+                //     $("#sortableRows").sortable({
+                //         placeholder: "ui-state-highlight"
+                //     }).disableSelection();
+                // });
+                // $(function () {
+                //     $("#txt_admin_search").autocomplete({
+                //         source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+                //         minLength: 1,
+                //         select: function (event, ui) {
+                //             $("#cmb_Admin").val(ui.item.value);
+                //             $("#txt_admin_search").val(ui.item.value + ' - ' + ui.item.label);
+                //             return false;
+                //         }
+                //     }).autocomplete("instance")._renderItem = function (ul, item) {
+                //         return $("<li>")
+                //             .append("<div>" + item.value + " - " + item.label + "</div>")
+                //             .appendTo(ul);
+                //     };
+                // });
+
+                // // $(function () {
+                // //             $("#txt_emp_name").autocomplete({
+                // //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_name" // path to the get_birds method
+                // //             });
+                // //         });
+
+                // //         $(function () {
+                // //             $("#txt_emp").autocomplete({
+                // //                 source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_auto_emp_no" // path to the get_birds method
+                // //             });
+                // //         });
+                // function updateRowNumbers() {
+                //     const rows = document.querySelectorAll("#sortableRows tr");
+                //     rows.forEach((row, index) => {
+                //         row.querySelector("td").textContent = index + 1;
+                //     });
+                // }
+
+                // // Add department row
+                // document.getElementById("btn_add_department").addEventListener("click", function () {
+                //     var departmentInput = document.getElementById("txt_supervisor_search");
+                //     var departmentId = document.getElementById("cmb_Supervisor").value;
+                //     var departmentName = departmentInput.value;
+
+                //     if (departmentName !== "" && departmentId !== "") {
+                //         var exists = false;
+                //         $("#sortableRows tr").each(function () {
+                //             if ($(this).attr("data-id") === departmentId) {
+                //                 exists = true;
+                //                 return false;
+                //             }
+                //         });
+
+                //         if (exists) {
+                //             alert("This department has already been added.");
+                //             return;
+                //         }
+
+                //         var tableBody = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
+                //         var newRow = tableBody.insertRow();
+                //         newRow.setAttribute("data-id", departmentId);
+                //         newRow.classList.add("draggable");
+
+                //         var cell1 = newRow.insertCell(0); // No.
+                //         var cell2 = newRow.insertCell(1); // Department name
+                //         var cell3 = newRow.insertCell(2); // Dynamic select (PHP rendered)
+                //         var cell4 = newRow.insertCell(3); // Static select
+                //         var cell5 = newRow.insertCell(4); // Remove button
+
+                //         cell1.textContent = "";
+                //         cell2.textContent = departmentName;
+
+                //         // PHP-rendered select should be generated server-side and inserted into the JS variable
+                //         const dynamicSelect = `<?php ob_start(); ?>
+                //         <div style="position: relative; width: 180px;">
+                //             <select class="modern-select" required="required"
+                //                     style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
+                //                 <option value="0">Choose option</option>
+                //                 <?php foreach ($data_level as $data_level1) { ?>
+                //                     <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
+                //                 <?php } ?>
+                //             </select>
+                //             <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
+                //                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                //                 <polyline points="6,9 12,15 18,9"></polyline>
+                //             </svg>
+                //         </div>
+                //     <?php echo trim(preg_replace('/\s+/', ' ', ob_get_clean())); ?>`;
+
+                //         cell3.innerHTML = dynamicSelect;
+
+                //         // Static select dropdown (Approve/View Only)
+                //         cell4.innerHTML = `
+                //         <div style="position: relative; width: 180px;">
+                //             <select class="modern-select" required="required"
+                //                     style="appearance: none; -webkit-appearance: none; -moz-appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 2px solid rgb(143 142 142 / 29%); border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); outline: none;">
+                //                 <option value="0">Choose option</option>
+                //                 <option value="1">Approve Type</option>
+                //                 <option value="2">View Only Type</option>
+                //             </select>
+                //             <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; pointer-events: none; color: #667eea;"
+                //                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                //                 <polyline points="6,9 12,15 18,9"></polyline>
+                //             </svg>
+                //         </div>
+                //     `;
+
+                //         // Remove button
+                //         cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+
+                //         // Reset fields
+                //         departmentInput.value = "";
+                //         document.getElementById("cmb_Supervisor").value = "";
+
+                //         // Show department section
+                //         document.getElementById("departmentDiv1").style.display = "block";
+
+                //         // Update numbering
+                //         updateRowNumbers();
+                //     } else {
+                //         alert("Please select a valid supervisor.");
+                //     }
+                // });
+
+                // // Remove row
+                // function removeRow(button) {
+                //     var row = button.parentNode.parentNode;
+                //     row.parentNode.removeChild(row);
+
+                //     if (document.querySelectorAll("#sortableRows tr").length === 0) {
+                //         document.getElementById("departmentDiv1").style.display = "none";
+                //     }
+
+                //     updateRowNumbers();
+                // }
+
+                // // Update on drag-and-drop
+                // $(function () {
+                //     $("#sortableRows").sortable({
+                //         placeholder: "ui-state-highlight",
+                //         update: function () {
+                //             updateRowNumbers();
+                //         }
+                //     }).disableSelection();
+                // });
+
+
+                // Handle form submission
+                // document.getElementById("submit_departments").addEventListener("click", function () {
+                //     var departments = [];
+
+                //     $("#sortableRows tr").each(function () {
+                //         // var departmentId = $(this).attr("data-id");
+                //         var departmentId = $(this).find("td:nth-child(1)").text().trim();
+                //         var departmentName = $(this).find("td:nth-child(2)").text().trim();
+                //         var selectedValue = $(this).find("td:nth-child(3) select").val(); // Get dropdown value
+                //         var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Get dropdown value
+
+                //         if (!departmentId || !departmentName || selectedValue === "0" || AuthorityValue === "0") {
+                //             alert("Please fill all fields before submitting.");
+                //             return;
+                //         }
+
+                //         departments.push({
+                //             id: departmentId,
+                //             name: departmentName,
+                //             selected: selectedValue,
+                //             Authority: AuthorityValue
+                //         });
+                //     });
+
+                //     if (departments.length === 0) {
+                //         alert("No departments to submit.");
+                //         return;
+                //     }
+
+                //     console.log("Submitting departments:", departments);
+
+                //     $.ajax({
+                //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
+                //         type: "POST",
+                //         contentType: "application/json",
+                //         data: JSON.stringify({ departments: departments }),
+                //         dataType: "json",
+                //         success: function (response) {
+                //             console.log("Success:", response);
+                //             alert("Departments submitted successfully!");
+                //         },
+                //         error: function (xhr, status, error) {
+                //             console.error("Error:", error);
+                //             console.error("Response:", xhr.responseText);
+                //             alert("An error occurred while submitting departments.");
+                //         }
+                //     });
+                // });
+
+
+
+
+            </script>
+            <script>
+                // Autocomplete
+                $(function () {
+                    $("#txt_supervisor_search").autocomplete({
+                        source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+                        minLength: 1,
+                        select: function (event, ui) {
+                            $("#cmb_Supervisor").val(ui.item.value); // ID
+                            $("#txt_supervisor_search").val(ui.item.value + ' - ' + ui.item.label); // Display text
+                            return false;
+                        }
+                    }).autocomplete("instance")._renderItem = function (ul, item) {
+                        return $("<li>")
+                            .append("<div>" + item.value + " - " + item.label + "</div>")
+                            .appendTo(ul);
+                    };
+                });
+
+                // Dynamic Select - PHP-rendered
+                const dynamicSelect = `<?php ob_start(); ?>
     <div style="position: relative; width: 180px;">
         <select class="modern-select" required="required"
             style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
@@ -1766,8 +1699,8 @@
     </div>
 <?php echo trim(preg_replace('/\s+/', ' ', ob_get_clean())); ?>`;
 
-            // Static Select
-            const staticSelect = `
+                // Static Select
+                const staticSelect = `
     <div style="position: relative; width: 180px;">
         <select class="modern-select" required="required"
             style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
@@ -1783,350 +1716,444 @@
         </svg>
     </div>`;
 
-            // Function to add supervisor row
-            function addSupervisorRow(buttonId, tableId, tbodyId, containerId) {
-                document.getElementById(buttonId).addEventListener("click", function () {
-                    var input = document.getElementById("txt_supervisor_search");
-                    var supervisorId = document.getElementById("cmb_Supervisor").value;
-                    var supervisorName = input.value;
+                // Function to add supervisor row
+                function addSupervisorRow(buttonId, tableId, tbodyId, containerId) {
+                    document.getElementById(buttonId).addEventListener("click", function () {
+                        var input = document.getElementById("txt_supervisor_search");
+                        var supervisorId = document.getElementById("cmb_Supervisor").value;
+                        var supervisorName = input.value;
 
-                    if (supervisorName !== "" && supervisorId !== "") {
-                        var exists = false;
-                        $(`#${tbodyId} tr`).each(function () {
-                            if ($(this).attr("data-id") === supervisorId) {
-                                exists = true;
-                                return false;
+                        if (supervisorName !== "" && supervisorId !== "") {
+                            var exists = false;
+                            $(`#${tbodyId} tr`).each(function () {
+                                if ($(this).attr("data-id") === supervisorId) {
+                                    exists = true;
+                                    return false;
+                                }
+                            });
+
+                            if (exists) {
+                                alert("This supervisor has already been added.");
+                                return;
                             }
-                        });
 
-                        if (exists) {
-                            alert("This supervisor has already been added.");
-                            return;
+                            var tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+                            var newRow = tableBody.insertRow();
+                            newRow.setAttribute("data-id", supervisorId);
+                            newRow.classList.add("draggable");
+
+                            var cell1 = newRow.insertCell(0);
+                            var cell2 = newRow.insertCell(1);
+                            var cell3 = newRow.insertCell(2);
+                            var cell4 = newRow.insertCell(3);
+                            var cell5 = newRow.insertCell(4);
+
+                            cell1.textContent = "";
+                            cell2.textContent = supervisorName;
+                            cell3.innerHTML = dynamicSelect;
+                            cell4.innerHTML = staticSelect;
+                            cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)" style="width: 100%;">Remove</button>';
+
+                            input.value = "";
+                            document.getElementById("cmb_Supervisor").value = "";
+
+                            document.getElementById(containerId).style.display = "block";
+                            updateRowNumbers(tbodyId);
+                        } else {
+                            alert("Please select a valid supervisor.");
                         }
-
-                        var tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-                        var newRow = tableBody.insertRow();
-                        newRow.setAttribute("data-id", supervisorId);
-                        newRow.classList.add("draggable");
-
-                        var cell1 = newRow.insertCell(0);
-                        var cell2 = newRow.insertCell(1);
-                        var cell3 = newRow.insertCell(2);
-                        var cell4 = newRow.insertCell(3);
-                        var cell5 = newRow.insertCell(4);
-
-                        cell1.textContent = "";
-                        cell2.textContent = supervisorName;
-                        cell3.innerHTML = dynamicSelect;
-                        cell4.innerHTML = staticSelect;
-                        cell5.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-
-                        input.value = "";
-                        document.getElementById("cmb_Supervisor").value = "";
-
-                        document.getElementById(containerId).style.display = "block";
-                        updateRowNumbers(tbodyId);
-                    } else {
-                        alert("Please select a valid supervisor.");
-                    }
-                });
-            }
-
-            // Row number updater
-            function updateRowNumbers(tbodyId) {
-                const rows = document.querySelectorAll(`#${tbodyId} tr`);
-                rows.forEach((row, index) => {
-                    row.querySelector("td").textContent = index + 1;
-                });
-            }
-
-            // Remove row
-            function removeRow(button) {
-                var row = button.parentNode.parentNode;
-                var tbody = row.parentNode;
-                var tableDiv = tbody.closest("div[id^='departmentDiv']");
-                row.remove();
-
-                if (tbody.querySelectorAll("tr").length === 0) {
-                    tableDiv.style.display = "none";
-                }
-
-                updateRowNumbers(tbody.id);
-            }
-
-            // Init drag-and-drop and row functions
-            $(function () {
-                for (let i = 1; i <= 6; i++) {
-                    addSupervisorRow(`btn_add_department${i === 1 ? '' : i}`, `departmentTable${i}`, `sortableRows${i}`, `departmentDiv${i}`);
-                    $(`#sortableRows${i}`).sortable({
-                        placeholder: "ui-state-highlight",
-                        update: function () {
-                            updateRowNumbers(this.id);
-                        }
-                    }).disableSelection();
-                }
-            });
-
-
-            // upload departments
-            // document.getElementById("submit_departments").addEventListener("click", function (e) {
-
-            //     alert("Submitting departments..."); // ✅ Alert to confirm submission
-            //     console.log("Submitting departments..."); // ✅ Console log for debugging
-            //     e.preventDefault(); // ✅ Prevents form reload
-
-            //     var departments = [];
-
-            //     for (let i = 1; i <= 6; i++) {
-            //         $("#sortableRows" + i + " tr").each(function () {
-            //             var departmentId = $(this).find("td:nth-child(1)").text().trim();
-            //             var departmentName = $(this).find("td:nth-child(2)").text().trim();
-            //             var selectedValue = $(this).find("td:nth-child(3) select").val(); // User Level Type
-            //             var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Authority Type
-
-            //             if (!departmentId || !departmentName) {
-            //                 alert("Please fill all fields before submitting in Table " + i + ".");
-            //                 return false;
-            //             }
-
-            //             departments.push({
-            //                 id: departmentId,
-            //                 name: departmentName,
-            //                 selected: selectedValue,
-            //                 Authority: AuthorityValue,
-            //                 table: i
-            //             });
-            //         });
-            //     }
-
-            //     if (departments.length === 0) {
-            //         alert("No departments to submit.");
-            //         return;
-            //     }
-
-            //     console.log("Submitting departments:", departments); // ✅ Now this will print
-
-            //     $.ajax({
-            //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-            //         type: "POST",
-            //         contentType: "application/json",
-            //         data: JSON.stringify({ departments: departments }),
-            //         dataType: "json",
-            //         success: function (response) {
-            //             console.log("Success:", response);
-            //             alert("Departments submitted successfully!");
-            //         },
-            //         error: function (xhr, status, error) {
-            //             console.error("Error:", error);
-            //             console.error("Response:", xhr.responseText);
-            //             alert("An error occurred while submitting departments.");
-            //         }
-            //     });
-            // });
-
-            // document.getElementById("submit_departments").addEventListener("click", function () {
-            //     // Collect group form values
-            //     const groupName = document.getElementById("txt_group_name").value.trim();
-            //     const departmentSelect = document.getElementById("department_select").value;
-
-            //     const settings = {
-            //         ot_morning: document.getElementById("chk_1st_morning").checked,
-            //         ot_evening: document.getElementById("chk_1st_evening").checked,
-            //         late_deduction: document.getElementById("chk_late").checked,
-            //         early_departure: document.getElementById("chk_ed").checked,
-            //         late_from_ot: document.getElementById("chk_late_ot").checked,
-            //         double_ot_holiday: document.getElementById("chk_dot_holiday").checked,
-            //         double_ot_offday: document.getElementById("chk_dot_offday").checked,
-            //         half_day_late: document.getElementById("chk_sh_lv").checked,
-            //         round_up: document.getElementById("round").value,
-            //         late_grace_period: document.getElementById("late_gp").value
-            //     };
-
-            //     // Validate required fields
-            //     // if (!groupName || !departmentSelect) {
-            //     //     alert("Please enter group name and select a department.");
-            //     //     return;
-            //     // }
-
-            //     // Collect departments from tables 1 to 6
-            //     var departments = [];
-
-            //     for (let i = 1; i <= 6; i++) {
-            //         $("#sortableRows" + i + " tr").each(function () {
-            //             var departmentId = $(this).find("td:nth-child(1)").text().trim();
-            //             var departmentName = $(this).find("td:nth-child(2)").text().trim();
-            //             var selectedValue = $(this).find("td:nth-child(3) select").val();
-            //             var authorityValue = $(this).find("td:nth-child(4) select").val();
-
-            //             if (!departmentId || !departmentName) {
-            //                 alert(`Please complete all dropdowns in Table ${i}.`);
-            //                 return false;
-            //             }
-
-            //             departments.push({
-            //                 id: departmentId,
-            //                 name: departmentName,
-            //                 selected: selectedValue,
-            //                 authority: authorityValue,
-            //                 table: i
-            //             });
-            //         });
-            //     }
-
-            //     if (departments.length === 0) {
-            //         alert("No department rows to submit.");
-            //         return;
-            //     }
-
-            //     const payload = {
-            //         group_name: groupName,
-            //         department_id: departmentSelect,
-            //         settings: settings,
-            //         departments: departments
-            //     };
-
-            //     console.log("Submitting full payload:", payload);
-
-            //     $.ajax({
-            //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-            //         type: "POST",
-            //         contentType: "application/json",
-            //         data: JSON.stringify(payload),
-            //         dataType: "json",
-            //         success: function (response) {
-            //             console.log("✅ Success:", response);
-            //             alert("Group and departments submitted successfully!");
-            //         },
-            //         error: function (xhr, status, error) {
-            //             console.error("❌ Error:", error);
-            //             console.error("❌ Response:", xhr.responseText);
-            //             alert("An error occurred while submitting the form.");
-            //         }
-            //     });
-            // });
-
-
-            document.getElementById("submit_departments").addEventListener("click", function (e) {
-                e.preventDefault();
-
-                // Collect top-level input values
-                var groupName = document.getElementById("txt_group_name").value.trim();
-                var departmentSelect = document.getElementById("department_select").value;
-
-                if (!groupName || departmentSelect === "") {
-                    alert("Please enter Group Name and select a Department.");
-                    return;
-                }
-
-                // Collect settings (checkboxes)
-                var settings = {
-                    ot_morning: document.getElementById("chk_1st_morning").checked,
-                    ot_evening: document.getElementById("chk_1st_evening").checked,
-                    late_deduction: document.getElementById("chk_late").checked,
-                    early_departure: document.getElementById("chk_ed").checked,
-                    late_deduct_ot: document.getElementById("chk_late_ot").checked,
-                    dot_holiday: document.getElementById("chk_dot_holiday").checked,
-                    dot_offday: document.getElementById("chk_dot_offday").checked,
-                    sh_leave: document.getElementById("chk_sh_lv").checked,
-                    round: document.getElementById("round").value,
-                    late_gp: document.getElementById("late_gp").value
-                };
-
-                // Collect departments from all 6 tables
-                var departments = [];
-
-                for (let i = 1; i <= 6; i++) {
-                    $("#sortableRows" + i + " tr").each(function () {
-                        var departmentId = $(this).find("td:nth-child(1)").text().trim();
-                        var departmentName = $(this).find("td:nth-child(2)").text().trim();
-                        var selectedValue = $(this).find("td:nth-child(3) select").val();
-                        var AuthorityValue = $(this).find("td:nth-child(4) select").val();
-
-                        if (!departmentId || !departmentName) {
-                            alert("Please fill all fields in table " + i + " before submitting.");
-                            return false; // break from .each
-                        }
-
-                        departments.push({
-                            id: departmentId,
-                            name: departmentName,
-                            selected: selectedValue,
-                            Authority: AuthorityValue
-                        });
                     });
                 }
 
-                if (departments.length === 0) {
-                    alert("No departments to submit.");
-                    return;
+                // Row number updater
+                function updateRowNumbers(tbodyId) {
+                    const rows = document.querySelectorAll(`#${tbodyId} tr`);
+                    rows.forEach((row, index) => {
+                        row.querySelector("td").textContent = index + 1;
+                    });
                 }
 
-                const payload = {
-                    group_name: groupName,
-                    department_id: departmentSelect,
-                    settings: settings,
-                    departments: departments
-                };
+                // Remove row
+                function removeRow(button) {
+                    var row = button.parentNode.parentNode;
+                    var tbody = row.parentNode;
+                    var tableDiv = tbody.closest("div[id^='departmentDiv']");
+                    row.remove();
 
-                // Show and animate progress bar
-                $("#uploadProgressBar").show();
-                let progress = 0;
-                let interval = setInterval(() => {
-                    if (progress < 90) {
-                        progress += 5;
-                        $("#uploadBar").css("width", progress + "%").text(progress + "%");
+                    if (tbody.querySelectorAll("tr").length === 0) {
+                        tableDiv.style.display = "none";
                     }
-                }, 150);
 
-                // AJAX submission
-                $.ajax({
-                    url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(payload),
-                    dataType: "json",
-                    success: function (response) {
-                        clearInterval(interval);
-                        $("#uploadBar").css("width", "100%").text("100%");
+                    updateRowNumbers(tbody.id);
+                }
 
-                        setTimeout(() => {
-                            $("#uploadProgressBar").fadeOut();
-                            $("#uploadBar").css("width", "0%").text("0%");
-                        }, 1000);
-
-                        console.log("Success:", response);
-                        alert("Group and departments submitted successfully!");
-                    },
-                    error: function (xhr, status, error) {
-                        clearInterval(interval);
-                        $("#uploadBar").css("width", "100%").css("background-color", "red").text("Failed");
-
-                        setTimeout(() => {
-                            $("#uploadProgressBar").fadeOut();
-                            $("#uploadBar").css("width", "0%").css("background-color", "#4caf50").text("0%");
-                        }, 1500);
-
-                        console.error("Error:", error);
-                        console.error("Response:", xhr.responseText);
-                        alert("An error occurred while submitting.");
+                // Init drag-and-drop and row functions
+                $(function () {
+                    for (let i = 1; i <= 6; i++) {
+                        addSupervisorRow(`btn_add_department${i === 1 ? '' : i}`, `departmentTable${i}`, `sortableRows${i}`, `departmentDiv${i}`);
+                        $(`#sortableRows${i}`).sortable({
+                            placeholder: "ui-state-highlight",
+                            update: function () {
+                                updateRowNumbers(this.id);
+                            }
+                        }).disableSelection();
                     }
                 });
-            });
-
-        </script>
 
 
+                // upload departments
+                // document.getElementById("submit_departments").addEventListener("click", function (e) {
 
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+                //     alert("Submitting departments..."); // ✅ Alert to confirm submission
+                //     console.log("Submitting departments..."); // ✅ Console log for debugging
+                //     e.preventDefault(); // ✅ Prevents form reload
+
+                //     var departments = [];
+
+                //     for (let i = 1; i <= 6; i++) {
+                //         $("#sortableRows" + i + " tr").each(function () {
+                //             var departmentId = $(this).find("td:nth-child(1)").text().trim();
+                //             var departmentName = $(this).find("td:nth-child(2)").text().trim();
+                //             var selectedValue = $(this).find("td:nth-child(3) select").val(); // User Level Type
+                //             var AuthorityValue = $(this).find("td:nth-child(4) select").val(); // Authority Type
+
+                //             if (!departmentId || !departmentName) {
+                //                 alert("Please fill all fields before submitting in Table " + i + ".");
+                //                 return false;
+                //             }
+
+                //             departments.push({
+                //                 id: departmentId,
+                //                 name: departmentName,
+                //                 selected: selectedValue,
+                //                 Authority: AuthorityValue,
+                //                 table: i
+                //             });
+                //         });
+                //     }
+
+                //     if (departments.length === 0) {
+                //         alert("No departments to submit.");
+                //         return;
+                //     }
+
+                //     console.log("Submitting departments:", departments); // ✅ Now this will print
+
+                //     $.ajax({
+                //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
+                //         type: "POST",
+                //         contentType: "application/json",
+                //         data: JSON.stringify({ departments: departments }),
+                //         dataType: "json",
+                //         success: function (response) {
+                //             console.log("Success:", response);
+                //             alert("Departments submitted successfully!");
+                //         },
+                //         error: function (xhr, status, error) {
+                //             console.error("Error:", error);
+                //             console.error("Response:", xhr.responseText);
+                //             alert("An error occurred while submitting departments.");
+                //         }
+                //     });
+                // });
+
+                // document.getElementById("submit_departments").addEventListener("click", function () {
+                //     // Collect group form values
+                //     const groupName = document.getElementById("txt_group_name").value.trim();
+                //     const departmentSelect = document.getElementById("department_select").value;
+
+                //     const settings = {
+                //         ot_morning: document.getElementById("chk_1st_morning").checked,
+                //         ot_evening: document.getElementById("chk_1st_evening").checked,
+                //         late_deduction: document.getElementById("chk_late").checked,
+                //         early_departure: document.getElementById("chk_ed").checked,
+                //         late_from_ot: document.getElementById("chk_late_ot").checked,
+                //         double_ot_holiday: document.getElementById("chk_dot_holiday").checked,
+                //         double_ot_offday: document.getElementById("chk_dot_offday").checked,
+                //         half_day_late: document.getElementById("chk_sh_lv").checked,
+                //         round_up: document.getElementById("round").value,
+                //         late_grace_period: document.getElementById("late_gp").value
+                //     };
+
+                //     // Validate required fields
+                //     // if (!groupName || !departmentSelect) {
+                //     //     alert("Please enter group name and select a department.");
+                //     //     return;
+                //     // }
+
+                //     // Collect departments from tables 1 to 6
+                //     var departments = [];
+
+                //     for (let i = 1; i <= 6; i++) {
+                //         $("#sortableRows" + i + " tr").each(function () {
+                //             var departmentId = $(this).find("td:nth-child(1)").text().trim();
+                //             var departmentName = $(this).find("td:nth-child(2)").text().trim();
+                //             var selectedValue = $(this).find("td:nth-child(3) select").val();
+                //             var authorityValue = $(this).find("td:nth-child(4) select").val();
+
+                //             if (!departmentId || !departmentName) {
+                //                 alert(`Please complete all dropdowns in Table ${i}.`);
+                //                 return false;
+                //             }
+
+                //             departments.push({
+                //                 id: departmentId,
+                //                 name: departmentName,
+                //                 selected: selectedValue,
+                //                 authority: authorityValue,
+                //                 table: i
+                //             });
+                //         });
+                //     }
+
+                //     if (departments.length === 0) {
+                //         alert("No department rows to submit.");
+                //         return;
+                //     }
+
+                //     const payload = {
+                //         group_name: groupName,
+                //         department_id: departmentSelect,
+                //         settings: settings,
+                //         departments: departments
+                //     };
+
+                //     console.log("Submitting full payload:", payload);
+
+                //     $.ajax({
+                //         url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
+                //         type: "POST",
+                //         contentType: "application/json",
+                //         data: JSON.stringify(payload),
+                //         dataType: "json",
+                //         success: function (response) {
+                //             console.log("✅ Success:", response);
+                //             alert("Group and departments submitted successfully!");
+                //         },
+                //         error: function (xhr, status, error) {
+                //             console.error("❌ Error:", error);
+                //             console.error("❌ Response:", xhr.responseText);
+                //             alert("An error occurred while submitting the form.");
+                //         }
+                //     });
+                // });
 
 
-        <style>
-            .ui-state-highlight {
-                height: 40px;
-                background-color: #d9edf7;
-                border: 1px dashed #31708f;
-            }
-        </style>
+                document.getElementById("submit_departments").addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    // Collect top-level input values
+                    var groupName = document.getElementById("txt_group_name").value.trim();
+                    var departmentSelect = document.getElementById("department_select").value;
+
+                    if (!groupName || departmentSelect === "") {
+                        alert("Please enter Group Name and select a Department.");
+                        return;
+                    }
+
+                    // Collect settings (checkboxes)
+                    var settings = {
+                        ot_morning: document.getElementById("chk_1st_morning").checked,
+                        ot_evening: document.getElementById("chk_1st_evening").checked,
+                        late_deduction: document.getElementById("chk_late").checked,
+                        early_departure: document.getElementById("chk_ed").checked,
+                        late_deduct_ot: document.getElementById("chk_late_ot").checked,
+                        dot_holiday: document.getElementById("chk_dot_holiday").checked,
+                        dot_offday: document.getElementById("chk_dot_offday").checked,
+                        sh_leave: document.getElementById("chk_sh_lv").checked,
+                        round: document.getElementById("round").value,
+                        late_gp: document.getElementById("late_gp").value,
+                        min_t_ot: document.getElementById("min_t_ot").value,
+                        min_t_e_ot: document.getElementById("min_t_e_ot").value,
+                    };
+
+                    // Collect departments from all 6 tables
+                    var departments = [];
+
+                    for (let i = 1; i <= 6; i++) {
+                        var tableLabel = $("#departmentDiv" + i + " span").text().trim(); // Move this line here
+
+                        $("#sortableRows" + i + " tr").each(function () {
+                            var departmentId = $(this).find("td:nth-child(1)").text().trim();
+                            var departmentName = $(this).find("td:nth-child(2)").text().trim();
+                            var selectedValue = $(this).find("td:nth-child(3) select").val();
+                            var AuthorityValue = $(this).find("td:nth-child(4) select").val();
+
+                            if (!departmentId || !departmentName) {
+                                alert("Please fill all fields in table " + i + " before submitting.");
+                                return false; // break from .each
+                            }
+
+                            departments.push({
+                                id: departmentId,
+                                name: departmentName,
+                                selected: selectedValue,
+                                Authority: AuthorityValue,
+                                button_name: tableLabel // ← Add the button label to the payload
+                            });
+                        });
+                    }
+
+                    if (departments.length === 0) {
+                        alert("No departments to submit.");
+                        return;
+                    }
+
+                    const payload = {
+                        group_name: groupName,
+                        department_id: departmentSelect,
+                        settings: settings,
+                        departments: departments
+                    };
+
+                    console.log("Submitting payload:", payload); // For debugging
+
+                    // Show and animate progress bar
+                    $("#uploadProgressBar").show();
+                    let progress = 0;
+                    let interval = setInterval(() => {
+                        if (progress < 90) {
+                            progress += 5;
+                            $("#uploadBar").css("width", progress + "%").text(progress + "%");
+                        }
+                    }, 150);
+
+                    // AJAX submission
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(payload),
+                        dataType: "json",
+                        success: function (response) {
+                            clearInterval(interval);
+                            $("#uploadBar").css("width", "100%").text("100%");
+
+                            setTimeout(() => {
+                                $("#uploadProgressBar").fadeOut();
+                                $("#uploadBar").css("width", "0%").text("0%");
+                            }, 1000);
+
+                            console.log("Success:", response);
+                            alert("Group and departments submitted successfully!");
+                        },
+                        error: function (xhr, status, error) {
+                            clearInterval(interval);
+                            $("#uploadBar").css("width", "100%").css("background-color", "red").text("Failed");
+
+                            setTimeout(() => {
+                                $("#uploadProgressBar").fadeOut();
+                                $("#uploadBar").css("width", "0%").css("background-color", "#4caf50").text("0%");
+                            }, 1500);
+
+                            console.error("Error:", error);
+                            console.error("Response:", xhr.responseText);
+                            alert("An error occurred while submitting.");
+                        }
+                    });
+                });
+
+
+                // dublicate row function
+                document.getElementById("btn_duplicate_group").addEventListener("click", function () {
+                    var groupId = document.getElementById("select_existing_group").value;
+
+                    if (!groupId) {
+                        alert("Please select a group to duplicate.");
+                        return;
+                    }
+
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>Master/Emp_Attendance/get_group_data",
+                        type: "POST",
+                        data: { group_id: groupId },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.success) {
+                                const tables = response.tables;
+
+                                for (let i = 1; i <= 6; i++) {
+                                    let tbody = $("#sortableRows" + i);
+                                    tbody.empty();
+
+                                    if (tables[i]) {
+                                        tables[i].forEach((row, index) => {
+                                            let html = `
+                                <tr data-id="${row.id}">
+                                    <td>${index + 1}</td>
+                                    <td>${row.emp_no}</td>
+                                    <td>
+                                        <div style="position: relative; width: 180px;">
+                                            <select class="modern-select" required="required"
+                                                style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
+                                                    background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
+                                                    border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
+                                                <option value="0">Choose option</option>
+                                                <?php foreach ($data_level as $data_level1) { ?>
+                                                    <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
+                                                        pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="6,9 12,15 18,9"></polyline>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="position: relative; width: 180px;">
+                                            <select class="modern-select" required="required"
+                                                style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
+                                                    background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
+                                                    border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
+                                                <option value="0">Choose option</option>
+                                                <option value="1">Approve Type</option>
+                                                <option value="2">View Only Type</option>
+                                            </select>
+                                            <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
+                                                        pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="6,9 12,15 18,9"></polyline>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm remove-row" style="width: 100%;">Remove</button>
+                                    </td>
+                                </tr>
+                            `;
+                                            tbody.append(html);
+                                        });
+
+                                        $("#departmentDiv" + i).show();
+                                    } else {
+                                        $("#departmentDiv" + i).hide();
+                                    }
+                                }
+                            } else {
+                                alert("No data found for this group.");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("AJAX Error:", error);
+                            alert("An error occurred while loading the group.");
+                        }
+                    });
+                });
+
+
+            </script>
+
+
+
+            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+
+            <style>
+                .ui-state-highlight {
+                    height: 40px;
+                    background-color: #d9edf7;
+                    border: 1px dashed #31708f;
+                }
+            </style>
 </body>
 
 </html>

@@ -29,13 +29,14 @@ class Emp_Attendance extends CI_Controller
         $data['emp_sup'] = $this->Db_model->getfilteredData("select EmpNo,Emp_Full_Name,Enroll_No from tbl_empmaster where Status=1");
         $data['data_level'] = $this->Db_model->getData('user_level_id,user_level_name', 'tbl_user_level_master');
         $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
+        $data['data_grp'] = $this->Db_model->getData('Grp_ID,EmpGroupName', 'tbl_emp_group');
 
         $this->load->view('Master/Emp_Attendance/index', $data);
     }
     /*
      * Insert Departmrnt
      */
-    public function insert_data()
+    public function insert_data2()
     {
         $rawData = file_get_contents("php://input");
         $data = json_decode($rawData, true);
@@ -71,6 +72,140 @@ class Emp_Attendance extends CI_Controller
         }
 
     }
+
+    public function insert_data()
+    {
+        // Read raw JSON input
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        if (!$data) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['error' => 'Invalid JSON input']));
+        }
+
+        // Extract values
+        $group_name = $data['group_name'] ?? '';
+        $department_id = $data['department_id'] ?? '';
+        $settings = $data['settings'] ?? [];
+        $departments = $data['departments'] ?? [];
+
+        // You can validate required fields here
+        if (empty($group_name) || empty($department_id) || empty($departments)) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['error' => 'Missing required fields']));
+        }
+
+        $data = array(
+            'EmpGroupName' => $group_name,
+            'GracePeriod' => 0,
+            'Sup_ID' => $department_id,
+            'NosLeaveForMonth' => 0,
+            'MaxSLS' => 0,
+            'Allow1stSession' => 0,
+            'Allow2ndSession' => 0,
+            'OTPattern' => 'OT0001'
+        );
+        $result = $this->Db_model->insertData("tbl_emp_group", $data);
+        $last_in_id = $this->Db_model->getfilteredData("select * from tbl_emp_group where EmpGroupName='$group_name'");
+        $group_id = $last_in_id[0]->Grp_ID;
+
+        // if (!$group_id) {
+        //     return $this->output
+        //         ->set_status_header(500)
+        //         ->set_content_type('application/json')
+        //         ->set_output(json_encode(['error' => 'Failed to insert group']));
+        // }
+
+        // Save settings
+        $settings_data = [
+            'Group_id' => $group_id,
+            'Ot_m' => $settings['ot_morning'] ?? 0,
+            'Ot_e' => $settings['ot_evening'] ?? 0,
+            'Late' => $settings['late_deduction'] ?? 0,
+            'Ed' => $settings['early_departure'] ?? 0,
+            'Ot_d_Late' => $settings['late_deduct_ot'] ?? 0,
+            'Dot_f_holyday' => $settings['dot_holiday'] ?? 0,
+            'Dot_f_offday' => $settings['dot_offday'] ?? 0,
+            'Hd_d_from' => $settings['sh_leave'] ?? 0,
+            'Round' => $settings['round'] ?? '',
+            'late_Grs_prd' => $settings['late_gp'] ?? '',
+            'Min_time_t_ot_m' => $settings['min_t_ot'] ?? '',
+            'Min_time_t_ot_e' => $settings['min_t_e_ot'] ?? ''
+        ];
+
+        $result = $this->Db_model->insertData("tbl_setting", $settings_data);
+
+        // Save departments
+        foreach ($departments as $dept) {
+            $parts = explode(' - ', $dept['name']);
+            $numberOnly = $parts[0];
+
+            $TypeName = $dept['button_name'];
+            $Types = $this->Db_model->getfilteredData("select * from tbl_types where Type='$TypeName'");
+            $Typee_id = $Types[0]->ID;
+
+            $dept_data = [
+                'GrpID' => $group_id,
+                'TypeID' => $Typee_id,
+                'EmpNo' => $numberOnly,
+                'UserLevelID' => $dept['selected'],
+                'AuthorityID' => $dept['Authority']
+            ];
+
+            $result = $this->Db_model->insertData("tbl_active", $dept_data);
+        }
+
+        return $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['success' => true, 'message' => 'Data inserted successfully']));
+    }
+    public function get_group_data()
+    {
+        $group_id = $this->input->post('group_id');
+
+        $all_data = $this->Db_model->getfilteredData("SELECT * FROM tbl_active WHERE GrpID = '$group_id'");
+
+        $grouped_data = [];
+
+        foreach ($all_data as $row) {
+            $type_id = $row->TypeID; // 1 to 6 (table index)
+
+            if (!isset($grouped_data[$type_id])) {
+                $grouped_data[$type_id] = [];
+            }
+
+            $Emp_data = $this->Db_model->getfilteredData("SELECT `Emp_Full_Name`,`EmpNo` FROM tbl_empmaster WHERE Enroll_No = '$row->EmpNo'");
+            $Emp_Name = $Emp_data[0]->Emp_Full_Name;
+            $Emp_Num = $Emp_data[0]->EmpNo;
+
+            $EmpNameNum = $Emp_Num . ' - ' . $Emp_Name;
+
+            $grouped_data[$type_id][] = [
+                'id' => $row->ID,
+                'emp_no' => $EmpNameNum,
+                'level' => $row->UserLevelID,
+                'authority' => $row->AuthorityID
+            ];
+        }
+
+        if (!empty($grouped_data)) {
+            echo json_encode([
+                'success' => true,
+                'tables' => $grouped_data
+            ]);
+        } else {
+            echo json_encode(['success' => false]);
+        }
+    }
+
+
+
     /*
      * Get Department data
      */

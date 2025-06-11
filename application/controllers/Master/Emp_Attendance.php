@@ -13,6 +13,8 @@ class Emp_Attendance extends CI_Controller
          */
         $this->load->model('Db_model', '', TRUE);
     }
+
+
     /*
      * Index page in Departmrnt
      */
@@ -140,6 +142,10 @@ class Emp_Attendance extends CI_Controller
 
         $result = $this->Db_model->insertData("tbl_setting", $settings_data);
 
+        date_default_timezone_set('Asia/Colombo'); // Set default timezone
+
+        // Get current date and time
+        $currentDateTime = date("Y-m-d H:i:s");
         // Save departments
         foreach ($departments as $dept) {
             $parts = explode(' - ', $dept['name']);
@@ -154,7 +160,8 @@ class Emp_Attendance extends CI_Controller
                 'TypeID' => $Typee_id,
                 'EmpNo' => $numberOnly,
                 'UserLevelID' => $dept['selected'],
-                'AuthorityID' => $dept['Authority']
+                'AuthorityID' => $dept['Authority'],
+                'CurrentData' => $currentDateTime
             ];
 
             $result = $this->Db_model->insertData("tbl_active", $dept_data);
@@ -337,3 +344,5 @@ class Emp_Attendance extends CI_Controller
         echo json_encode(array("status" => TRUE));
     }
 }
+
+?>

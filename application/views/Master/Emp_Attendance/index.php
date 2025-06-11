@@ -5,7 +5,7 @@
 <head>
   <!-- Styles -->
   <?php $this->load->view('template/css.php'); ?>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> -->
   <style>
     /* Main Layout */
     .new-content-wrapper {
@@ -932,7 +932,6 @@
 
 
     }
-
   </script>
   <script>
     // Autocomplete

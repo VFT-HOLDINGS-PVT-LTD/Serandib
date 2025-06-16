@@ -1,10 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_Levels extends CI_Controller {
+class User_Levels extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         if (!($this->session->userdata('login_user'))) {
             redirect(base_url() . "");
@@ -19,10 +21,12 @@ class User_Levels extends CI_Controller {
      * Index page in Departmrnt
      */
 
-    public function index() {
+    public function index()
+    {
 
         $data['title'] = "User Levels | HRM System";
-        $data['data_set'] = $this->Db_model->getData('user_level_id,user_level_name', 'tbl_user_level_master');
+        // $data['data_set'] = $this->Db_model->getData('user_level_id,user_level_name', 'tbl_user_level_master');
+        $data['data_set'] = $this->Db_model->getfilteredData("select user_level_id,user_level_name from tbl_user_level_master order by priority_id asc");
         $this->load->view('Master/User_Levels/index', $data);
     }
 
@@ -30,7 +34,8 @@ class User_Levels extends CI_Controller {
      * Insert Departmrnt
      */
 
-    public function insert_data() {
+    public function insert_data()
+    {
 
         $data = array(
             'user_level_name' => $this->input->post('txt_user_level')
@@ -42,18 +47,44 @@ class User_Levels extends CI_Controller {
         if ($result) {
             $condition = 1;
         } else {
-            
+
         }
 
         $info[] = array('a' => $condition);
         echo json_encode($info);
     }
 
+    public function update_oderbyData()
+    {
+        $orderData = $this->input->post('orderData');
+
+        if ($orderData) {
+            foreach ($orderData as $item) {
+                $id = $item['id'];
+                $order = $item['order'];
+
+                $data = array("priority_id" => $order);
+                $whereArr = array("user_level_id" => $id);
+                $result = $this->Db_model->updateData("tbl_user_level_master", $data, $whereArr);
+
+                // Update the DB table with new order
+                // $this->db->where('user_level_id', $id)
+                //     ->update('your_table_name', ['sort_order' => $order]);
+            }
+
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'no_data']);
+        }
+    }
+
+
     /*
      * Get Department data
      */
 
-    public function get_details() {
+    public function get_details()
+    {
         $id = $this->input->post('id');
 
         $whereArray = array('user_level_id' => $id);
@@ -69,7 +100,8 @@ class User_Levels extends CI_Controller {
      * Edit Data
      */
 
-    public function edit() {
+    public function edit()
+    {
         $ID = $this->input->post("id", TRUE);
         $UL = $this->input->post("user_level_name", TRUE);
 
@@ -84,7 +116,8 @@ class User_Levels extends CI_Controller {
      * Delete Data
      */
 
-    public function ajax_delete($id) {
+    public function ajax_delete($id)
+    {
         $table = "tbl_user_level_master";
         $where = 'user_level_id';
         $this->Db_model->delete_by_id($id, $where, $table);

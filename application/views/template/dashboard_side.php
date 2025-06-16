@@ -48,6 +48,10 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                     <li><a href="<?php echo base_url(); ?>Master/Department/">DEPARTMENT</a></li>
                                 <?php endif; ?>
 
+                                <?php if ($currentUser[0]->employee_groups == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Master/Emp_Attendance/">SUB DEPARTMENT</a></li>
+                                <?php endif; ?>
+
                                 <?php if ($currentUser[0]->holiday_types == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Master/Holiday_Types/">HOLIDAY TYPES</a></li>
                                 <?php endif; ?>
@@ -118,7 +122,7 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->employee_groups == 1): ?>
-                                    <li><a href="<?php echo base_url(); ?>Master/Employee_Groups/">EMPLOYEE GROUPS</a></li>
+                                    <!-- <li><a href="<?php echo base_url(); ?>Master/Employee_Groups/">EMPLOYEE GROUPS</a></li> -->
                                 <?php endif; ?>
 
 

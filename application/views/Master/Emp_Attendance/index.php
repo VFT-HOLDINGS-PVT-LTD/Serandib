@@ -350,6 +350,10 @@
         margin-bottom: 10px;
       }
     }
+
+    tbody tr {
+      cursor: move;
+    }
   </style>
 </head>
 

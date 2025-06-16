@@ -9,247 +9,348 @@
 <html lang="en">
 
 
-    <head>
-        <!-- Styles -->
-        <?php $this->load->view('template/css.php'); ?>
+<head>
+    <!-- Styles -->
+    <?php $this->load->view('template/css.php'); ?>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        #example tbody tr {
+            cursor: move;
+            color: #000;
+        }
+    </style>
+</head>
 
-    </head>
+<body class="infobar-offcanvas">
 
-    <body class="infobar-offcanvas">
+    <!--header-->
 
-        <!--header-->
+    <?php $this->load->view('template/header.php'); ?>
 
-        <?php $this->load->view('template/header.php'); ?>
+    <!--end header-->
 
-        <!--end header-->
+    <div id="wrapper">
+        <div id="layout-static">
 
-        <div id="wrapper">
-            <div id="layout-static">
+            <!--dashboard side-->
 
-                <!--dashboard side-->
+            <?php $this->load->view('template/dashboard_side.php'); ?>
 
-                <?php $this->load->view('template/dashboard_side.php'); ?>
+            <!--dashboard side end-->
 
-                <!--dashboard side end-->
+            <div class="static-content-wrapper">
+                <div class="static-content">
+                    <div class="page-content">
+                        <ol class="breadcrumb">
 
-                <div class="static-content-wrapper">
-                    <div class="static-content">
-                        <div class="page-content">
-                            <ol class="breadcrumb">
+                            <li class=""><a href="<?php echo base_url(); ?>Dashboard/">HOME</a></li>
+                            <li class="active"><a href="<?php echo base_url(); ?>Master/User_Levels/">USER LEVELS</a>
+                            </li>
 
-                                <li class=""><a href="<?php echo base_url(); ?>Dashboard/">HOME</a></li>
-                                <li class="active"><a href="<?php echo base_url(); ?>Master/User_Levels/">USER LEVELS</a></li>
-
-                            </ol>
-
-
-                            <div class="page-tabs">
-                                <ul class="nav nav-tabs">
-
-                                    <li class="active"><a data-toggle="tab" href="#tab1">USER LEVELS</a></li>
-                                    <li><a data-toggle="tab" href="#tab2">VIEW USER LEVELS</a></li>
-
-
-                                </ul>
-                            </div>
-                            <div class="container-fluid">
+                        </ol>
 
 
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab1">
+                        <div class="page-tabs">
+                            <ul class="nav nav-tabs">
 
-                                        <div class="row">
-                                            <div class="col-xs-12">
-
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="panel panel-info">
-                                                            <div class="panel-heading"><h2>ADD USER LEVELS</h2></div>
-                                                            <div class="panel-body">
-                                                                <form class="form-horizontal" id="frm_user_level" name="frm_user_level" action="<?php echo base_url(); ?>Master/User_Levels/insert_data" method="POST">
-
-                                                                    <div class="form-group col-sm-12">
-                                                                        <div class="col-sm-8">
-                                                                            <img class="imagecss" src="<?php echo base_url(); ?>assets/images/userlevel.png" >
-                                                                        </div>
-                                                                    </div>
+                                <li class="active"><a data-toggle="tab" href="#tab1">USER LEVELS</a></li>
+                                <li><a data-toggle="tab" href="#tab2">VIEW USER LEVELS</a></li>
 
 
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput" class="col-sm-4 control-label">User Level Name</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" class="form-control" required="" id="txt_user_level" name="txt_user_level" placeholder="Ex: Admin">
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col-sm-8 col-sm-offset-2">
-                                                                            <button type="submit" id="submit"  class="btn-primary btn fa fa-check">&nbsp;&nbsp;Submit</button>
-                                                                            <button type="button" id="Cancel" name="Cancel" class="btn btn-danger-alt fa fa-times-circle">&nbsp;&nbsp;Cancel</button>
-                                                                        </div>
-                                                                    </div>
+                            </ul>
+                        </div>
+                        <div class="container-fluid">
 
 
-                                                                </form>
-                                                                <hr>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1">
 
-                                                            </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
 
-                                                            <div id="divmessage" class="">
-                                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                                <div id="spnmessage"> </div>
-                                                            </div>
 
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">
+                                                            <h2>ADD USER LEVELS</h2>
                                                         </div>
+                                                        <div class="panel-body">
+                                                            <form class="form-horizontal" id="frm_user_level"
+                                                                name="frm_user_level"
+                                                                action="<?php echo base_url(); ?>Master/User_Levels/insert_data"
+                                                                method="POST">
 
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <!--***************************-->
-                                    <!--User Level View Grid-->
-
-                                    <div class="tab-pane" id="tab2">
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="panel panel-primary">
-                                                    <div class="col-md-12">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                <h2>USER LEVEL DETAILS</h2>
-                                                                <div class="panel-ctrls">
+                                                                <div class="form-group col-sm-12">
+                                                                    <div class="col-sm-8">
+                                                                        <img class="imagecss"
+                                                                            src="<?php echo base_url(); ?>assets/images/userlevel.png">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="panel-body panel-no-padding">
-                                                                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>ID</th>
-                                                                            <th>USER LEVEL</th>
-                                                                            <th>EDIT</th>
-                                                                            <th>DELETE</th>
-
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php
-                                                                        foreach ($data_set as $data) {
 
 
-                                                                            echo "<tr class='odd gradeX'>";
+                                                                <div class="form-group col-sm-6">
+                                                                    <label for="focusedinput"
+                                                                        class="col-sm-4 control-label">User Level
+                                                                        Name</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" class="form-control"
+                                                                            required="" id="txt_user_level"
+                                                                            name="txt_user_level"
+                                                                            placeholder="Ex: Admin">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                                        <button type="submit" id="submit"
+                                                                            class="btn-primary btn fa fa-check">&nbsp;&nbsp;Submit</button>
+                                                                        <button type="button" id="Cancel" name="Cancel"
+                                                                            class="btn btn-danger-alt fa fa-times-circle">&nbsp;&nbsp;Cancel</button>
+                                                                    </div>
+                                                                </div>
 
 
-                                                                            echo "<td width='100'>" . $data->user_level_id . "</td>";
-                                                                            echo "<td width='100'>" . $data->user_level_name . "</td>";
+                                                            </form>
+                                                            <hr>
 
-                                                                            echo "<td width='15'>";
-                                                                            echo "<button class='get_data btn btn-green'  data-toggle='modal' data-target='#myModal' title='EDIT' data-id='$data->user_level_id' href='" . base_url() . "index.php/Master/Department/get_details" . $data->user_level_id . "'><i class='fa fa-edit'></i></button>";
-                                                                            echo "</td>";
-
-                                                                            echo "<td width='15'>";
-
-                                                                            echo "<button  class='action_comp btn btn-danger' data-toggle='modal' href='javascript:void()' title='DELETE' onclick='delete_id($data->user_level_id)'><i class='fa fa-times-circle'></i></a>";
-
-
-                                                                            echo "</td>";
-
-                                                                            echo "</tr>";
-                                                                        }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
-                                                                <div class="panel-footer"></div>
-                                                            </div>
                                                         </div>
+
+                                                        <div id="divmessage" class="">
+                                                            <button type="button" class="close" data-dismiss="alert"
+                                                                aria-hidden="true">&times;</button>
+                                                            <div id="spnmessage"> </div>
+                                                        </div>
+
                                                     </div>
+
                                                 </div>
+
                                             </div>
+
                                         </div>
-
                                     </div>
-
-
-                                    <!--End View Grid-->
-                                    <!--***************************-->
-
 
                                 </div>
 
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h2 class="modal-title">USER LEVELS</h2>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="<?php echo base_url(); ?>Master/User_Levels/edit" method="post">
-                                                    <div class="form-group col-sm-12">
-                                                        <label for="focusedinput" class="col-sm-4 control-label">ID</label>
-                                                        <div class="col-sm-8">
-                                                            <input value="<?php echo $data->user_level_id; ?>" type="text" class="form-control" readonly="readonly" name="id" id="id" class="m-wrap span3" >
+                                <!--***************************-->
+                                <!--User Level View Grid-->
+
+                                <div class="tab-pane" id="tab2">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel panel-primary">
+                                                <div class="col-md-12">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h2>USER LEVEL DETAILS</h2> <button id="saveOrderBtn"
+                                                                class="btn btn-primary" style="margin-left:10px">SAVE
+                                                                PRIORITY</button>
+
+                                                            <div class="panel-ctrls">
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-body panel-no-padding">
+                                                            <table id="example"
+                                                                class="table table-striped table-bordered"
+                                                                cellspacing="0" width="100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>PRIORITY</th> <!-- New Column -->
+                                                                        <th>ID</th>
+                                                                        <th>USER LEVEL</th>
+                                                                        <th>EDIT</th>
+                                                                        <th>DELETE</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    $index = 1;
+
+                                                                    foreach ($data_set as $data) {
+
+
+                                                                        echo "<tr class='odd gradeX'>";
+
+                                                                        echo "<td class='order-col' width='25'>" . $index++ . "</td>";
+                                                                        echo "<td width='100'>" . $data->user_level_id . "</td>";
+                                                                        echo "<td width='100'>" . $data->user_level_name . "</td>";
+
+                                                                        echo "<td width='15'>";
+                                                                        echo "<button class='get_data btn btn-green'  data-toggle='modal' data-target='#myModal' title='EDIT' data-id='$data->user_level_id' href='" . base_url() . "index.php/Master/Department/get_details" . $data->user_level_id . "'><i class='fa fa-edit'></i></button>";
+                                                                        echo "</td>";
+
+                                                                        echo "<td width='15'>";
+
+                                                                        echo "<button  class='action_comp btn btn-danger' data-toggle='modal' href='javascript:void()' title='DELETE' onclick='delete_id($data->user_level_id)'><i class='fa fa-times-circle'></i></a>";
+
+
+                                                                        echo "</td>";
+
+                                                                        echo "</tr>";
+                                                                    }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="panel-footer"></div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                    <div class="form-group col-sm-12">
-                                                        <label for="focusedinput" class="col-sm-4 control-label">NAME</label>
-                                                        <div class="col-sm-8">
-                                                            <input value="<?php echo $data->user_level_name; ?>" type="text" name="user_level_name" id="user_level_name"  class="form-control m-wrap span6"><br>
-                                                        </div>
+                                </div>
+
+
+                                <!--End View Grid-->
+                                <!--***************************-->
+
+
+                            </div>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">&times;</button>
+                                            <h2 class="modal-title">USER LEVELS</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal"
+                                                action="<?php echo base_url(); ?>Master/User_Levels/edit" method="post">
+                                                <div class="form-group col-sm-12">
+                                                    <label for="focusedinput" class="col-sm-4 control-label">ID</label>
+                                                    <div class="col-sm-8">
+                                                        <input value="<?php echo $data->user_level_id; ?>" type="text"
+                                                            class="form-control" readonly="readonly" name="id" id="id"
+                                                            class="m-wrap span3">
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <label for="focusedinput"
+                                                        class="col-sm-4 control-label">NAME</label>
+                                                    <div class="col-sm-8">
+                                                        <input value="<?php echo $data->user_level_name; ?>" type="text"
+                                                            name="user_level_name" id="user_level_name"
+                                                            class="form-control m-wrap span6"><br>
+                                                    </div>
+                                                </div>
 
 
-                                            </div>
-
-                                            <br>
-                                            <!--<input class="btn green" type="submit" value="submit" id="submit">-->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="submit" id="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                            </form>
                                         </div>
 
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
+                                        <br>
+                                        <!--<input class="btn green" type="submit" value="submit" id="submit">-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" id="submit" class="btn btn-primary">Save
+                                                changes</button>
+                                        </div>
+                                        </form>
+                                    </div>
 
-                        </div> <!-- .container-fluid -->
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                    </div> <!-- .container-fluid -->
 
 
-                        <!--Footer-->
-                        <?php $this->load->view('template/footer.php'); ?>	
-                        <!--End Footer-->
-                    </div>
+                    <!--Footer-->
+                    <?php $this->load->view('template/footer.php'); ?>
+                    <!--End Footer-->
                 </div>
             </div>
+        </div>
 
 
 
 
-            <!-- Load site level scripts -->
+        <!-- Load site level scripts -->
 
-            <?php $this->load->view('template/js.php'); ?>							<!-- Initialize scripts for this page-->
-
-
-            <!-- End loading page level scripts-->
-
-            <!--Ajax-->
-            <script src="<?php echo base_url(); ?>system_js/Master/User_Levels.js"></script>
+        <?php $this->load->view('template/js.php'); ?> <!-- Initialize scripts for this page-->
 
 
-    </body>
+        <!-- End loading page level scripts-->
+
+        <!--Ajax-->
+        <script src="<?php echo base_url(); ?>system_js/Master/User_Levels.js"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- jQuery UI -->
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                $("#example tbody").sortable({
+                    helper: fixHelper,
+                    update: function () {
+                        updateOrderColumn(); // Re-index after drop
+                    }
+                }).disableSelection();
+
+                // Helper to maintain cell widths
+                function fixHelper(e, ui) {
+                    ui.children().each(function () {
+                        $(this).width($(this).width());
+                    });
+                    return ui;
+                }
+
+                // Update ORDER column after sorting
+                function updateOrderColumn() {
+                    $("#example tbody tr").each(function (index) {
+                        $(this).find("td.order-col").text(index + 1);
+                    });
+                }
+            });
+
+
+            // Save the order of rows
+            $(document).ready(function () {
+                // Already existing sortable code...
+
+                $("#saveOrderBtn").click(function () {
+                    var orderData = [];
+
+                    $("#example tbody tr").each(function (index) {
+                        var id = $(this).find("td").eq(1).text(); // ID column (after ORDER)
+                        orderData.push({
+                            id: id,
+                            order: index + 1
+                        });
+                    });
+
+                    // Send to backend via AJAX
+                    $.ajax({
+                        url: "<?= base_url('Master/User_Levels/update_oderbyData') ?>",
+                        method: "POST",
+                        data: { orderData: orderData },
+                        success: function (response) {
+                            alert("Order saved successfully!");
+                        },
+                        error: function () {
+                            alert("Error saving order.");
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+</body>
 
 
 </html>

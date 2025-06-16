@@ -287,7 +287,7 @@
         <!--Ajax-->
         <script src="<?php echo base_url(); ?>system_js/Master/User_Levels.js"></script>
         <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
         <!-- jQuery UI -->
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 

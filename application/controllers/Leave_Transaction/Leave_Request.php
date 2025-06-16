@@ -162,13 +162,26 @@ class Leave_Request extends CI_Controller
          */
         $IsAllocate = $this->Db_model->getfilteredData("select count(EmpNo) as IsAllocate from tbl_leave_allocation where EmpNo=$Emp ");
 
+        $DataLevel = $this->Db_model->getfilteredData("select user_level_id,user_level_name,priority_id from tbl_user_level_master order by priority_id asc");
+        foreach ($DataLevel as $row) {
+            echo $row->priority_id;
+        }
+
         $EmpG = $this->Db_model->getfilteredData("select Grp_ID from tbl_empmaster where EmpNo = $Emp ");
         //        var_dump($EmpG);
         $grpID = $EmpG[0]->Grp_ID;
-        $Sup_Data = $this->Db_model->getfilteredData("select Sup_ID,Admin_ID from tbl_emp_group where Grp_ID =$grpID; ");
-
+        // $Sup_Data = $this->Db_model->getfilteredData("select Sup_ID,Admin_ID from tbl_emp_group where Grp_ID =$grpID; ");
+        $Sup_Data = $this->Db_model->getfilteredData("SELECT tbl_emp_group.Grp_ID,tbl_emp_group.EmpGroupName,tbl_types.`Type`,tbl_active.EmpNo,tbl_user_level_master.user_level_name,tbl_user_level_master.priority_id,tbl_active.AuthorityID FROM tbl_active INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID WHERE tbl_emp_group.Grp_ID = '".$grpID."' AND tbl_types.`Type` = 'Leave'");
         $Sup_ID = $Sup_Data[0]->Sup_ID;
         $Admin_ID = $Sup_Data[0]->Admin_ID;
+
+
+
+
+
+
+
+
 
         //        var_dump($Sup_ID);die;
 

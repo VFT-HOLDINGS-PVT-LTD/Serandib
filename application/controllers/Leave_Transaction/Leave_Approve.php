@@ -82,8 +82,7 @@ class Leave_Approve extends CI_Controller
 
     public function search_employee()
     {
-
-
+        // Get filter inputs
         $emp = $this->input->post("txt_emp");
         $emp_name = $this->input->post("txt_emp_name");
         $desig = $this->input->post("cmb_desig");
@@ -91,57 +90,75 @@ class Leave_Approve extends CI_Controller
         $from_date = $this->input->post("txt_from_date");
         $to_date = $this->input->post("txt_to_date");
 
-
-        // Filter Data by categories
+        // Build dynamic filter string
         $filter = '';
 
+        if (!empty($from_date) && !empty($to_date)) {
+            $filter .= " AND le.Leave_Date BETWEEN '$from_date' AND '$to_date'";
+        }
 
-        if (($this->input->post("txt_from_date")) && ($this->input->post("txt_to_date"))) {
-            if ($filter == '') {
-                $filter = " AND  le.Leave_Date between '$from_date' and '$to_date'";
-            } else {
-                $filter .= " AND  le.Leave_Date  between '$from_date' and '$to_date'";
+        if (!empty($emp)) {
+            $filter .= " AND em.EmpNo = '$emp'";
+        }
+
+        if (!empty($emp_name)) {
+            $filter .= " AND em.Emp_Full_Name = '$emp_name'";
+        }
+
+        if (!empty($desig)) {
+            $filter .= " AND em.Desig_ID = '$desig'";
+        }
+
+        if (!empty($dept)) {
+            $filter .= " AND em.Dept_ID = '$dept'";
+        }
+
+        $query = "
+            SELECT 
+                le.LV_ID,
+                le.EmpNo,
+                em.Emp_Full_Name,
+                lt.leave_name,
+                le.Apply_Date,
+                le.month,
+                le.Year,
+                le.Is_pending,
+                le.Leave_Date,
+                le.Reason,
+                le.Leave_Count,
+                tbl_leave_approve.SupNo,
+                tbl_leave_approve.Priority_ID,
+                tbl_leave_approve.Status,
+                tbl_leave_approve.ID
+            FROM tbl_leave_entry le
+            INNER JOIN tbl_empmaster em ON em.EmpNo = le.EmpNo
+            INNER JOIN tbl_leave_types lt ON lt.Lv_T_ID = le.Lv_T_ID
+            INNER JOIN tbl_leave_approve ON tbl_leave_approve.LV_ID = le.LV_ID
+            WHERE 1=1 $filter
+            ORDER BY tbl_leave_approve.Priority_ID DESC
+        ";
+
+        $data_set = $this->Db_model->getfilteredData($query);
+
+        // Find the first record with Status == 0
+        $selected_record = null;
+        foreach ($data_set as $record) {
+            if ($record->Status == 0) {
+                $selected_record = $record;
+                break;
             }
         }
 
-        if (($this->input->post("txt_emp"))) {
-            if ($filter == null) {
-                $filter = " AND em.EmpNo = '$emp'";
-            } else {
-                $filter .= " AND em.EmpNo = '$emp'";
-            }
+        // Send record as array to match view's foreach structure
+        if ($selected_record !== null) {
+            $data['leave_data'] = [$selected_record]; // Wrap as array
+            // echo json_encode($data['leave_data']);
+            $this->load->view('Leave_Transaction/Leave_Approve/search_data', $data);
+        } else {
+            echo "No pending leave approvals found.";
         }
 
-        if (($this->input->post("txt_emp_name"))) {
-            if ($filter == null) {
-                $filter = " AND em.Emp_Full_Name= '$emp_name'";
-            } else {
-                $filter .= " AND em.Emp_Full_Name = '$emp_name'";
-            }
-        }
 
-        $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
-                                                                    le.LV_ID,
-                                                                    le.EmpNo,
-                                                                    em.Emp_Full_Name,
-                                                                    lt.leave_name,
-                                                                    le.Apply_Date,
-                                                                    le.month,
-                                                                    le.Year,
-                                                                    le.Is_pending,
-                                                                    le.Leave_Date,
-                                                                    le.Reason,
-                                                                    le.Leave_Count
-                                                                FROM
-                                                                    tbl_leave_entry le
-                                                                        INNER JOIN
-                                                                    tbl_empmaster em ON em.EmpNo = le.EmpNo
-                                                                        INNER JOIN
-                                                                    tbl_leave_types lt ON lt.Lv_T_ID = le.Lv_T_ID
-                                                                WHERE
-                                                                    le.Is_pending = 1 and Is_Cancel=0 and Is_Sup_AD_APP =1 {$filter}");
-
-        $this->load->view('Leave_Transaction/Leave_Approve/search_data', $data);
     }
 
     /*
@@ -150,15 +167,68 @@ class Leave_Approve extends CI_Controller
 
     public function approve($ID)
     {
+        $currentUser = $this->session->userdata('login_user');
+        $Emp = $currentUser[0]->EmpNo;
+
+        // Step 1: Update the clicked approval status
+        $data = array(
+            'Status' => 1,
+        );
+
+        $whereArr = array("ID" => $ID);
+        $this->Db_model->updateData("tbl_leave_approve", $data, $whereArr);
+
+        // Step 2: Get LV_ID from this row
+        $row = $this->Db_model->getfilteredData("SELECT LV_ID FROM tbl_leave_approve WHERE ID = '$ID'");
+        if (count($row) > 0) {
+            $LV_ID = $row[0]->LV_ID;
+
+            // Step 3: Check if all statuses for this LV_ID are approved
+            $status_check = $this->Db_model->getfilteredData("SELECT COUNT(*) AS total, 
+                                                                 SUM(CASE WHEN Status = 1 THEN 1 ELSE 0 END) AS approved 
+                                                          FROM tbl_leave_approve 
+                                                          WHERE LV_ID = '$LV_ID'");
+
+            $total = $status_check[0]->total;
+            $approved = $status_check[0]->approved;
+
+            if ($total == $approved) {
+                // echo "success";
+                $data = array(
+                    'Is_Approve' => 1,
+                );
+
+                $whereArr = array("LV_ID" => $LV_ID);
+                $this->Db_model->updateData("tbl_leave_entry", $data, $whereArr);
+                
+                $this->session->set_flashdata('success_message', 'Leave approved successfully');
+                redirect(base_url() . "Leave_Transaction/Leave_Approve");
+                return;
+            }
+        }
+
+        // If not all approved yet
+        // echo "pending";
+        $this->session->set_flashdata('success_message', 'Leave approved successfully');
+        redirect(base_url() . "Leave_Transaction/Leave_Approve");
+    }
+
+
+
+    public function approve1($ID)
+    {
 
         $currentUser = $this->session->userdata('login_user');
         $Emp = $currentUser[0]->EmpNo;
 
         $data = array(
-            'Is_pending' => 0,
-            'Is_Approve' => 1,
-            'Approved_by' => $Emp,
+            'Status' => 1,
         );
+
+        $whereArr = array("ID" => $ID);
+        $result = $this->Db_model->updateData("tbl_leave_approve", $data, $whereArr);
+
+        die;
 
         $LTYpe = $this->Db_model->getfilteredData("select * from tbl_leave_entry where LV_ID = $ID");
         $Emp_LV = $LTYpe[0]->EmpNo;

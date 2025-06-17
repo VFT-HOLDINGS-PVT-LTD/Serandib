@@ -106,6 +106,84 @@ class Leave_Request extends CI_Controller
     public function insert_data()
     {
 
+        $LvSupEmpNo = 0;
+        // $DataLevels = $this->Db_model->getfilteredData("SELECT priority_id, user_level_name,user_level_id FROM tbl_user_level_master ORDER BY priority_id ASC");
+        // // Count total records
+        // $CountID = count($DataLevels);
+
+        // // Loop through all entries
+        // for ($i = 0; $i < $CountID; $i++) {
+        //     $priorityId = $DataLevels[$i]->priority_id;
+        //     $userLevelName = $DataLevels[$i]->user_level_name;
+        //     $userLeveId = $DataLevels[$i]->user_level_id;
+
+        //     // Example: echo or process data
+        //     echo "Priority ID: $priorityId, User Level Name: $userLevelName , $userLeveId<br>";
+
+        //     // if ($CountID == $priorityId) {
+        //         $Sup_Data_Type2 = $this->Db_model->getfilteredData("SELECT tbl_emp_group.Grp_ID,tbl_emp_group.EmpGroupName,tbl_types.`Type`,tbl_active.EmpNo,tbl_user_level_master.user_level_name,tbl_user_level_master.user_level_id,tbl_user_level_master.priority_id,tbl_active.AuthorityID FROM tbl_active INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID WHERE tbl_emp_group.Grp_ID = '1' AND tbl_types.`Type` = 'Leave' AND tbl_user_level_master.priority_id = '".$priorityId."'");
+        //         $SupEmpNo = $Sup_Data_Type2[0]->EmpNo;
+
+        //         if (!empty($SupEmpNo)) {
+        //             $LvSupEmpNo = $SupEmpNo;
+        //         }
+
+        //         // if ($SupEmpNo == 0) {
+        //         //     $priorityId2 = $priorityId - 1;
+        //         //     if ($priorityId2 > 0) {
+        //         //         $Sup_Data_Type2 = $this->Db_model->getfilteredData("SELECT tbl_emp_group.Grp_ID,tbl_emp_group.EmpGroupName,tbl_types.`Type`,tbl_active.EmpNo,tbl_user_level_master.user_level_name,tbl_user_level_master.user_level_id,tbl_user_level_master.priority_id,tbl_active.AuthorityID FROM tbl_active INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID WHERE tbl_emp_group.Grp_ID = '1' AND tbl_types.`Type` = 'Leave' AND tbl_user_level_master.priority_id = '".$priorityId2."'");
+        //         //         $SupEmpNo = $Sup_Data_Type2[0]->EmpNo;
+        //         //     }
+        //         // }
+
+        //     // }
+        // }
+
+        // echo "Test". $LvSupEmpNo;
+
+        // Step 1: Get all priority_id values in ASC order
+// $DataLevels = $this->Db_model->getfilteredData("SELECT priority_id, user_level_name FROM tbl_user_level_master ORDER BY priority_id ASC");
+// $CountID = count($DataLevels);
+
+        //         // Step 2: Start from the last priority_id
+// for ($i = $CountID - 1; $i >= 0; $i--) {
+//     $priorityId = $DataLevels[$i]->priority_id;
+
+        //             // Step 3: Try to get matching data
+//     $Sup_Data_Type2 = $this->Db_model->getfilteredData("
+//         SELECT 
+//             tbl_emp_group.Grp_ID,
+//             tbl_emp_group.EmpGroupName,
+//             tbl_types.`Type`,
+//             tbl_active.EmpNo,
+//             tbl_user_level_master.user_level_name,
+//             tbl_user_level_master.user_level_id,
+//             tbl_user_level_master.priority_id,
+//             tbl_active.AuthorityID 
+//         FROM tbl_active 
+//         INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
+//         INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
+//         INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
+//         WHERE tbl_emp_group.Grp_ID = '1' 
+//             AND tbl_types.`Type` = 'Leave' 
+//             AND tbl_user_level_master.priority_id = '$priorityId'
+//     ");
+
+        //             // Step 4: If data is found, echo and break the loop
+//     if (!empty($Sup_Data_Type2)) {
+//         $SupEmpNo = $Sup_Data_Type2[0]->EmpNo;
+//         // echo "Found EmpNo: $SupEmpNo (Priority ID: $priorityId)<br>";
+//         break;
+//     }
+// }
+
+
+        //         echo "Found EmpNo: $SupEmpNo (Priority ID: $priorityId)<br>";
+
+
+
+        // die;
+
         date_default_timezone_set('Asia/Colombo');
         $date = date_create();
         $timestamp = date_format($date, 'Y-m-d H:i:s');
@@ -162,28 +240,55 @@ class Leave_Request extends CI_Controller
          */
         $IsAllocate = $this->Db_model->getfilteredData("select count(EmpNo) as IsAllocate from tbl_leave_allocation where EmpNo=$Emp ");
 
-        $DataLevel = $this->Db_model->getfilteredData("select user_level_id,user_level_name,priority_id from tbl_user_level_master order by priority_id asc");
-        foreach ($DataLevel as $row) {
-            echo $row->priority_id;
-        }
+        // $DataLevel = $this->Db_model->getfilteredData("select COUNT(user_level_id) AS ID from tbl_user_level_master order by priority_id asc");
+        // $CountID = $DataLevel = $DataLevel[0]->ID;
+        // for ($i=0; $i < $CountID; $i++) { 
 
-        $EmpG = $this->Db_model->getfilteredData("select Grp_ID from tbl_empmaster where EmpNo = $Emp ");
-        //        var_dump($EmpG);
-        $grpID = $EmpG[0]->Grp_ID;
-        // $Sup_Data = $this->Db_model->getfilteredData("select Sup_ID,Admin_ID from tbl_emp_group where Grp_ID =$grpID; ");
-        $Sup_Data = $this->Db_model->getfilteredData("SELECT tbl_emp_group.Grp_ID,tbl_emp_group.EmpGroupName,tbl_types.`Type`,tbl_active.EmpNo,tbl_user_level_master.user_level_name,tbl_user_level_master.priority_id,tbl_active.AuthorityID FROM tbl_active INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID WHERE tbl_emp_group.Grp_ID = '".$grpID."' AND tbl_types.`Type` = 'Leave'");
-        $Sup_ID = $Sup_Data[0]->Sup_ID;
-        $Admin_ID = $Sup_Data[0]->Admin_ID;
+        // }
+
+        //     $DataLevels = $this->Db_model->getfilteredData("SELECT priority_id, user_level_name FROM tbl_user_level_master ORDER BY priority_id ASC");
+        //     $CountID = count($DataLevels);
+
+        //     // Step 2: Start from the last priority_id
+        //     for ($i = $CountID - 1; $i >= 0; $i--) {
+        //         $priorityId = $DataLevels[$i]->priority_id;
+
+        //         // Step 3: Try to get matching data
+        //         $Sup_Data_Type2 = $this->Db_model->getfilteredData("
+        //     SELECT 
+        //         tbl_emp_group.Grp_ID,
+        //         tbl_emp_group.EmpGroupName,
+        //         tbl_types.`Type`,
+        //         tbl_active.EmpNo,
+        //         tbl_user_level_master.user_level_name,
+        //         tbl_user_level_master.user_level_id,
+        //         tbl_user_level_master.priority_id,
+        //         tbl_active.AuthorityID 
+        //     FROM tbl_active 
+        //     INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
+        //     INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
+        //     INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
+        //     WHERE tbl_emp_group.Grp_ID = '1' 
+        //         AND tbl_types.`Type` = 'Leave' 
+        //         AND tbl_user_level_master.priority_id = '$priorityId'
+        // ");
+
+        //         // Step 4: If data is found, echo and break the loop
+        //         if (!empty($Sup_Data_Type2)) {
+        //             $SupEmpNo = $Sup_Data_Type2[0]->EmpNo;
+        //             $LvSupEmpNo = $SupEmpNo;
 
 
-
-
-
-
+        //             // echo "Found EmpNo: $SupEmpNo (Priority ID: $priorityId)<br>";
+        //             break;
+        //         }
+        //     }
 
 
 
         //        var_dump($Sup_ID);die;
+        $EmpG = $this->Db_model->getfilteredData("select Grp_ID from tbl_empmaster where EmpNo = $Emp ");
+        $grpID = $EmpG[0]->Grp_ID;
 
         $IsBalance = $this->Db_model->getfilteredData("select count(Balance) as Balance from tbl_leave_allocation where EmpNo= $Emp and Lv_T_ID=$leave_type and Balance >=$DaysInc");
 
@@ -216,8 +321,8 @@ class Leave_Request extends CI_Controller
                                 'Apply_Date' => $timestamp,
                                 'Year' => $year,
                                 'Month' => $month,
-                                'Approved_by' => $Admin_ID,
-                                'Sup_AD_APP' => $Sup_ID,
+                                'Approved_by' => $LvSupEmpNo,
+                                'Sup_AD_APP' => $LvSupEmpNo,
                                 'Is_Approve' => 0,
                                 'Is_Sup_AD_APP' => 0,
                                 'Reason' => $reason,
@@ -508,7 +613,7 @@ class Leave_Request extends CI_Controller
                         'Year' => $year,
                         'Month' => $month,
                         // 'Sup_AD_APP' => 0,
-                        'Sup_AD_APP' => $Sup_ID,
+                        'Sup_AD_APP' => $LvSupEmpNo,
                         'Is_Sup_AD_APP' => 0,
                         'Reason' => $reason,
                         'Trans_time' => $timestamp,
@@ -521,10 +626,47 @@ class Leave_Request extends CI_Controller
                 if ($HasR[0]->HasRow >= 1) {
                     $this->session->set_flashdata('error_message', 'Already Leave added these days');
                 } else {
-                    /*
+                     /*
                      * Insert Leave Data to leave entry table
                      */
                     $this->db->insert_batch('tbl_leave_entry', $data);
+
+                    // New Approve - Start
+                    $HasRowData = $this->Db_model->getfilteredData("select LV_ID from tbl_leave_entry where EmpNo = '$Emp' and Leave_Date = '$from_date' and Is_Cancel=0 and Lv_T_ID = $leave_type");
+                    $LV_ID = $HasRowData[0]->LV_ID;
+
+                    $Sup_Data_Type2 = $this->Db_model->getfilteredData("
+                        SELECT 
+                            tbl_emp_group.Grp_ID,
+                            tbl_emp_group.EmpGroupName,
+                            tbl_types.`Type`,
+                            tbl_active.EmpNo,
+                            tbl_user_level_master.user_level_name,
+                            tbl_user_level_master.user_level_id,
+                            tbl_user_level_master.priority_id,
+                            tbl_active.AuthorityID 
+                        FROM tbl_active 
+                        INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
+                        INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
+                        INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
+                        WHERE tbl_emp_group.Grp_ID = '".$grpID."' 
+                            AND tbl_types.`Type` = 'Leave' 
+                    ");
+
+                    foreach ($Sup_Data_Type2 as $key) {
+                        $data = array(
+                            array(
+                                'LV_ID' => $LV_ID,
+                                'EmpNo' => $Emp,
+                                'SupNo' => $key->EmpNo,
+                                'Priority_ID' => $key->priority_id,
+                                'Status' => 0,
+                            )
+                        );
+                        $this->db->insert_batch('tbl_leave_approve', $data);
+                    }
+
+                    // New Approve - End
 
                     /*
                      * Get Leave Balance and Used by Employee No | Year | Leave Type

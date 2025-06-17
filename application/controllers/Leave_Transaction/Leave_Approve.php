@@ -80,7 +80,7 @@ class Leave_Approve extends CI_Controller
      * Search Employees by cat
      */
 
-    public function search_employee()
+    public function search_employeeOLD()
     {
         // Get filter inputs
         $emp = $this->input->post("txt_emp");
@@ -152,13 +152,89 @@ class Leave_Approve extends CI_Controller
         // Send record as array to match view's foreach structure
         if ($selected_record !== null) {
             $data['leave_data'] = [$selected_record]; // Wrap as array
-            // echo json_encode($data['leave_data']);
-            $this->load->view('Leave_Transaction/Leave_Approve/search_data', $data);
+            echo json_encode($data['leave_data']);
+            // $this->load->view('Leave_Transaction/Leave_Approve/search_data', $data);
         } else {
             echo "No pending leave approvals found.";
         }
 
 
+    }
+
+    public function search_employee()
+    {
+        $currentUser = $this->session->userdata('login_user');
+        $SupNo = $currentUser[0]->EmpNo;
+
+        // Filters from form
+        $emp = $this->input->post("txt_emp");
+        $emp_name = $this->input->post("txt_emp_name");
+        $desig = $this->input->post("cmb_desig");
+        $dept = $this->input->post("cmb_dep");
+        $from_date = $this->input->post("txt_from_date");
+        $to_date = $this->input->post("txt_to_date");
+
+        // Build dynamic filter
+        $filter = '';
+
+        if (!empty($from_date) && !empty($to_date)) {
+            $filter .= " AND le.Leave_Date BETWEEN '$from_date' AND '$to_date'";
+        }
+        if (!empty($emp)) {
+            $filter .= " AND em.EmpNo = '$emp'";
+        }
+        if (!empty($emp_name)) {
+            $filter .= " AND em.Emp_Full_Name = '$emp_name'";
+        }
+        if (!empty($desig)) {
+            $filter .= " AND em.Desig_ID = '$desig'";
+        }
+        if (!empty($dept)) {
+            $filter .= " AND em.Dept_ID = '$dept'";
+        }
+
+        // Main query: Only show the records with max Priority_ID where Status = 0, and only for current SupNo
+        $query = "
+            SELECT 
+                le.LV_ID,
+                le.EmpNo,
+                em.Emp_Full_Name,
+                lt.leave_name,
+                le.Apply_Date,
+                le.month,
+                le.Year,
+                le.Is_pending,
+                le.Leave_Date,
+                le.Reason,
+                le.Leave_Count,
+                la.SupNo,
+                la.Priority_ID,
+                la.Status,
+                la.ID
+            FROM tbl_leave_entry le
+            INNER JOIN tbl_empmaster em ON em.EmpNo = le.EmpNo
+            INNER JOIN tbl_leave_types lt ON lt.Lv_T_ID = le.Lv_T_ID
+            INNER JOIN tbl_leave_approve la ON la.LV_ID = le.LV_ID
+            WHERE la.Status = 0
+            AND la.SupNo = '$SupNo'
+            AND la.Priority_ID = (
+                SELECT MAX(inner_la.Priority_ID)
+                FROM tbl_leave_approve inner_la
+                WHERE inner_la.LV_ID = la.LV_ID
+                    AND inner_la.Status = 0
+            )
+            $filter
+            ORDER BY le.Apply_Date DESC
+        ";
+
+        $data['leave_data'] = $this->Db_model->getfilteredData($query);
+
+        if (!empty($data['leave_data'])) {
+            $this->load->view('Leave_Transaction/Leave_Approve/search_data', $data);
+            // echo json_encode($data['leave_data']);
+        } else {
+            echo "No pending leave approvals found.";
+        }
     }
 
     /*
@@ -200,7 +276,7 @@ class Leave_Approve extends CI_Controller
 
                 $whereArr = array("LV_ID" => $LV_ID);
                 $this->Db_model->updateData("tbl_leave_entry", $data, $whereArr);
-                
+
                 $this->session->set_flashdata('success_message', 'Leave approved successfully');
                 redirect(base_url() . "Leave_Transaction/Leave_Approve");
                 return;

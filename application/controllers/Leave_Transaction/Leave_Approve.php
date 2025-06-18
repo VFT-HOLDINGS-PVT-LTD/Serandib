@@ -126,16 +126,16 @@ class Leave_Approve extends CI_Controller
                 le.Leave_Date,
                 le.Reason,
                 le.Leave_Count,
-                tbl_leave_approve.SupNo,
-                tbl_leave_approve.Priority_ID,
-                tbl_leave_approve.Status,
-                tbl_leave_approve.ID
+                tbl_approve.SupNo,
+                tbl_approve.Priority_ID,
+                tbl_approve.Status,
+                tbl_approve.ID
             FROM tbl_leave_entry le
             INNER JOIN tbl_empmaster em ON em.EmpNo = le.EmpNo
             INNER JOIN tbl_leave_types lt ON lt.Lv_T_ID = le.Lv_T_ID
-            INNER JOIN tbl_leave_approve ON tbl_leave_approve.LV_ID = le.LV_ID
+            INNER JOIN tbl_approve ON tbl_approve.LV_ID = le.LV_ID
             WHERE 1=1 $filter
-            ORDER BY tbl_leave_approve.Priority_ID DESC
+            ORDER BY tbl_approve.Priority_ID DESC
         ";
 
         $data_set = $this->Db_model->getfilteredData($query);
@@ -214,12 +214,12 @@ class Leave_Approve extends CI_Controller
             FROM tbl_leave_entry le
             INNER JOIN tbl_empmaster em ON em.EmpNo = le.EmpNo
             INNER JOIN tbl_leave_types lt ON lt.Lv_T_ID = le.Lv_T_ID
-            INNER JOIN tbl_leave_approve la ON la.LV_ID = le.LV_ID
+            INNER JOIN tbl_approve la ON la.LV_ID = le.LV_ID
             WHERE la.Status = 0
             AND la.SupNo = '$SupNo'
             AND la.Priority_ID = (
                 SELECT MAX(inner_la.Priority_ID)
-                FROM tbl_leave_approve inner_la
+                FROM tbl_approve inner_la
                 WHERE inner_la.LV_ID = la.LV_ID
                     AND inner_la.Status = 0
             )
@@ -252,17 +252,17 @@ class Leave_Approve extends CI_Controller
         );
 
         $whereArr = array("ID" => $ID);
-        $this->Db_model->updateData("tbl_leave_approve", $data, $whereArr);
+        $this->Db_model->updateData("tbl_approve", $data, $whereArr);
 
         // Step 2: Get LV_ID from this row
-        $row = $this->Db_model->getfilteredData("SELECT LV_ID FROM tbl_leave_approve WHERE ID = '$ID'");
+        $row = $this->Db_model->getfilteredData("SELECT LV_ID FROM tbl_approve WHERE ID = '$ID'");
         if (count($row) > 0) {
             $LV_ID = $row[0]->LV_ID;
 
             // Step 3: Check if all statuses for this LV_ID are approved
             $status_check = $this->Db_model->getfilteredData("SELECT COUNT(*) AS total, 
                                                                  SUM(CASE WHEN Status = 1 THEN 1 ELSE 0 END) AS approved 
-                                                          FROM tbl_leave_approve 
+                                                          FROM tbl_approve 
                                                           WHERE LV_ID = '$LV_ID'");
 
             $total = $status_check[0]->total;
@@ -272,6 +272,7 @@ class Leave_Approve extends CI_Controller
                 // echo "success";
                 $data = array(
                     'Is_Approve' => 1,
+                    'Is_pending' => 0
                 );
 
                 $whereArr = array("LV_ID" => $LV_ID);
@@ -302,7 +303,7 @@ class Leave_Approve extends CI_Controller
         );
 
         $whereArr = array("ID" => $ID);
-        $result = $this->Db_model->updateData("tbl_leave_approve", $data, $whereArr);
+        $result = $this->Db_model->updateData("tbl_approve", $data, $whereArr);
 
         die;
 

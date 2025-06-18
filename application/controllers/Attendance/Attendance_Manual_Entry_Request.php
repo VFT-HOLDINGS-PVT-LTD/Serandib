@@ -1,10 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Attendance_Manual_Entry_Request extends CI_Controller {
+class Attendance_Manual_Entry_Request extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         if (!($this->session->userdata('login_user'))) {
             redirect(base_url() . "");
@@ -19,7 +21,8 @@ class Attendance_Manual_Entry_Request extends CI_Controller {
      * Index page
      */
 
-    public function index() {
+    public function index()
+    {
 
         $data['title'] = "Attendance Manual Entry | HRM System";
         $data['data_set'] = $this->Db_model->getData('EmpNo,Emp_Full_Name', 'tbl_empmaster');
@@ -31,7 +34,8 @@ class Attendance_Manual_Entry_Request extends CI_Controller {
         $this->load->view('Attendance/Attendance_Manual_Entry_Request/index', $data);
     }
 
-    public function dropdown() {
+    public function dropdown()
+    {
 
         $cat = $this->input->post('cmb_cat');
 
@@ -79,7 +83,8 @@ class Attendance_Manual_Entry_Request extends CI_Controller {
      * Search Employee Manual Attendance Entry
      */
 
-     public function emp_manual_entry() {
+    public function emp_manual_entry()
+    {
 
 
         $emp = $this->input->post("txt_employee");
@@ -110,7 +115,7 @@ class Attendance_Manual_Entry_Request extends CI_Controller {
         $EnrollNo = $EmpData[0]->Enroll_No;
 
         $EmpG = $this->Db_model->getfilteredData("select Grp_ID from tbl_empmaster where EmpNo = $emp ");
-//        var_dump($EmpG);
+        //        var_dump($EmpG);
         $grpID = $EmpG[0]->Grp_ID;
         $Sup_Data = $this->Db_model->getfilteredData("select Sup_ID from tbl_emp_group where Grp_ID =$grpID; ");
 
@@ -128,6 +133,43 @@ class Attendance_Manual_Entry_Request extends CI_Controller {
         );
 
         $this->Db_model->insertData('tbl_manual_entry', $data);
+
+        // New Approve - Start
+        $HasRowData = $this->Db_model->getfilteredData("select M_ID from tbl_manual_entry where Enroll_No = '$EnrollNo' and Att_Date = '$att_date' and Is_Cancel=0 and In_Time = '$in_time'");
+        $M_ID = $HasRowData[0]->M_ID;
+
+        $Sup_Data_Type2 = $this->Db_model->getfilteredData("
+                        SELECT 
+                            tbl_emp_group.Grp_ID,
+                            tbl_emp_group.EmpGroupName,
+                            tbl_types.`Type`,
+                            tbl_active.EmpNo,
+                            tbl_user_level_master.user_level_name,
+                            tbl_user_level_master.user_level_id,
+                            tbl_user_level_master.priority_id,
+                            tbl_active.AuthorityID 
+                        FROM tbl_active 
+                        INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
+                        INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
+                        INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
+                        WHERE tbl_emp_group.Grp_ID = '" . $grpID . "' 
+                            AND tbl_types.`Type` = 'Leave' 
+                    ");
+
+        foreach ($Sup_Data_Type2 as $key) {
+            $data = array(
+                array(
+                    'LV_ID' => $M_ID,
+                    'EmpNo' => $EnrollNo,
+                    'SupNo' => $key->EmpNo,
+                    'Priority_ID' => $key->priority_id,
+                    'Status' => 0,
+                )
+            );
+            $this->db->insert_batch('tbl_approve', $data);
+        }
+
+        // New Approve - End
 
 
         // $data = array(

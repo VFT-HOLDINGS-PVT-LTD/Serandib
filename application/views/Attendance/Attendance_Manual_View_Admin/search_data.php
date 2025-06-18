@@ -61,11 +61,11 @@
 //                        echo "</td>";
 
                         echo "<td width='15'>";
-                        echo "<a class='get_data btn btn-primary' href='" . base_url() . "Attendance/Attendance_Manual_Entry_ADMIN/approve/" . $data->M_ID . "'>APPROVE<i class=''></i> </a>";
+                        echo "<a class='get_data btn btn-primary' href='" . base_url() . "Attendance/Attendance_Manual_Entry_ADMIN/approve/" . $data->ID . "'>APPROVE<i class=''></i> </a>";
                         echo "</td>";
 
                        echo "<td width='15'>";
-                       echo "<a class='get_data btn btn-danger' href='" . base_url() . "Attendance/Attendance_Manual_Entry_ADMIN/ajax_StatusReject/" . $data->M_ID . "'>REJECT<i class=''></i> </a>";
+                       echo "<a class='get_data btn btn-danger' href='" . base_url() . "Attendance/Attendance_Manual_Entry_ADMIN/ajax_StatusReject/" . $data->ID . "'>REJECT<i class=''></i> </a>";
                        echo "</td>";
 
                         echo "</tr>";

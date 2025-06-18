@@ -663,7 +663,7 @@ class Leave_Request extends CI_Controller
                                 'Status' => 0,
                             )
                         );
-                        $this->db->insert_batch('tbl_leave_approve', $data);
+                        $this->db->insert_batch('tbl_approve', $data);
                     }
 
                     // New Approve - End

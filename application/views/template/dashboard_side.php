@@ -189,7 +189,7 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->manual_attendance == 1): ?>
-                                    <li><a href="<?php echo base_url(); ?>Attendance/Attendance_Manual_Entry_SAPP">MANUAL ATTENDANCE SUPERVISOR</a></li>
+                                    <!-- <li><a href="<?php echo base_url(); ?>Attendance/Attendance_Manual_Entry_SAPP">MANUAL ATTENDANCE SUPERVISOR</a></li> -->
                                 <?php endif; ?>    
 
                                 <?php if ($currentUser[0]->manual_attendance == 1): ?>
@@ -229,11 +229,11 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
 
                                 <!--<li><a href="ui-progress.html">INDIVIDUAL LEAVE ALLOCATION</a></li>-->
                                 <?php if ($currentUser[0]->leave_approve == 1): ?>
-                                    <li><a href="<?php echo base_url(); ?>Leave_Transaction/Leave_Approve_Sup">LEAVE APPROVE SUPERVISOR</a></li>
+                                    <!-- <li><a href="<?php echo base_url(); ?>Leave_Transaction/Leave_Approve_Sup">LEAVE APPROVE SUPERVISOR</a></li> -->
                                 <?php endif; ?>
                                 
                                  <?php if ($currentUser[0]->leave_approve == 1): ?>
-                                    <li><a href="<?php echo base_url(); ?>Leave_Transaction/Leave_Approve">LEAVE APPROVE ADMIN</a></li>
+                                    <li><a href="<?php echo base_url(); ?>Leave_Transaction/Leave_Approve">LEAVE APPROVE</a></li>
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->leave_approve_view == 1): ?>

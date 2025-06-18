@@ -202,6 +202,43 @@ class Salary_Advance_req extends CI_Controller {
                             'Is_Sup_AD_APP' => 0
                         ));
                     $this->db->insert_batch('tbl_salary_advance', $data);
+
+                    // New Approve - Start
+                    $HasRowData = $this->Db_model->getfilteredData("select id from tbl_salary_advance where EmpNo = '$Emp' and Request_Date = '$Request_date' and Is_Cancel=0 and Month = '$month' and Year = '$year'");
+                    $SA_ID = $HasRowData[0]->id;
+
+                    $Sup_Data_Type2 = $this->Db_model->getfilteredData("
+                        SELECT 
+                            tbl_emp_group.Grp_ID,
+                            tbl_emp_group.EmpGroupName,
+                            tbl_types.`Type`,
+                            tbl_active.EmpNo,
+                            tbl_user_level_master.user_level_name,
+                            tbl_user_level_master.user_level_id,
+                            tbl_user_level_master.priority_id,
+                            tbl_active.AuthorityID 
+                        FROM tbl_active 
+                        INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
+                        INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
+                        INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
+                        WHERE tbl_emp_group.Grp_ID = '".$grpID."' 
+                            AND tbl_types.`Type` = 'Salary Advance' 
+                    ");
+
+                    foreach ($Sup_Data_Type2 as $key) {
+                        $data = array(
+                            array(
+                                'LV_ID' => $SA_ID,
+                                'EmpNo' => $Emp,
+                                'SupNo' => $key->EmpNo,
+                                'Priority_ID' => $key->priority_id,
+                                'Status' => 0,
+                            )
+                        );
+                        $this->db->insert_batch('tbl_approve', $data);
+                    }
+
+                    // New Approve - End
                 }
                 // redirect('Payroll/Salary_Advance_req/index');
                 $empname1 = $this->Db_model->getfilteredData("SELECT tbl_empmaster.Grp_ID,tbl_empmaster.Emp_Full_Name FROM tbl_empmaster WHERE tbl_empmaster.EmpNo = '$Emp'");

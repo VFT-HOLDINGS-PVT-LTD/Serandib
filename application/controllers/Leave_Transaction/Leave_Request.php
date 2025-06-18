@@ -341,6 +341,43 @@ class Leave_Request extends CI_Controller
                              */
                             $this->db->insert_batch('tbl_leave_entry', $data);
 
+                            // New Approve - Start
+                            $HasRowData = $this->Db_model->getfilteredData("select LV_ID from tbl_leave_entry where EmpNo = '$Emp' and Leave_Date = '$from_date' and Is_Cancel=0 and Lv_T_ID = $leave_type");
+                            $LV_ID = $HasRowData[0]->LV_ID;
+
+                            $Sup_Data_Type2 = $this->Db_model->getfilteredData("
+                                SELECT 
+                                    tbl_emp_group.Grp_ID,
+                                    tbl_emp_group.EmpGroupName,
+                                    tbl_types.`Type`,
+                                    tbl_active.EmpNo,
+                                    tbl_user_level_master.user_level_name,
+                                    tbl_user_level_master.user_level_id,
+                                    tbl_user_level_master.priority_id,
+                                    tbl_active.AuthorityID 
+                                FROM tbl_active 
+                                INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
+                                INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
+                                INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
+                                WHERE tbl_emp_group.Grp_ID = '" . $grpID . "' 
+                                    AND tbl_types.`Type` = 'Leave' 
+                            ");
+
+                            foreach ($Sup_Data_Type2 as $key) {
+                                $data = array(
+                                    array(
+                                        'LV_ID' => $LV_ID,
+                                        'EmpNo' => $Emp,
+                                        'SupNo' => $key->EmpNo,
+                                        'Priority_ID' => $key->priority_id,
+                                        'Status' => 0,
+                                    )
+                                );
+                                $this->db->insert_batch('tbl_approve', $data);
+                            }
+
+                            // New Approve - End
+
                             /*
                              * Get Leave Balance and Used by Employee No | Year | Leave Type
                              */
@@ -626,7 +663,7 @@ class Leave_Request extends CI_Controller
                 if ($HasR[0]->HasRow >= 1) {
                     $this->session->set_flashdata('error_message', 'Already Leave added these days');
                 } else {
-                     /*
+                    /*
                      * Insert Leave Data to leave entry table
                      */
                     $this->db->insert_batch('tbl_leave_entry', $data);
@@ -649,7 +686,7 @@ class Leave_Request extends CI_Controller
                         INNER JOIN tbl_emp_group ON tbl_active.GrpID = tbl_emp_group.Grp_ID 
                         INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
                         INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
-                        WHERE tbl_emp_group.Grp_ID = '".$grpID."' 
+                        WHERE tbl_emp_group.Grp_ID = '" . $grpID . "' 
                             AND tbl_types.`Type` = 'Leave' 
                     ");
 

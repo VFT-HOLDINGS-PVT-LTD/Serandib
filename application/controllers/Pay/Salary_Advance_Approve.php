@@ -228,6 +228,9 @@ class Salary_Advance_Approve extends CI_Controller {
 
     public function getSal_Advance() {
 
+        $currentUser = $this->session->userdata('login_user');
+        $SupNo = $currentUser[0]->EmpNo;
+
         $emp = $this->input->post("txt_emp");
         $emp_name = $this->input->post("txt_emp_name");
         $desig = $this->input->post("cmb_desig");
@@ -286,37 +289,78 @@ class Salary_Advance_Approve extends CI_Controller {
         // }
 
 
-        $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
-                                                                    sal_ad.id,
-                                                                    sal_ad.EmpNo,
-                                                                    Emp.Emp_Full_Name,
-                                                                    sal_ad.Amount,
-                                                                    sal_ad.Year,
-                                                                    sal_ad.Month,
-                                                                    sal_ad.Request_Date,
-                                                                    sal_ad.Is_pending,
-                                                                    sal_ad.Is_Approve,
-                                                                    sal_ad.Approved_by,
-                                                                    sal_ad.Is_Cancel,
-                                                                    sal_ad.Approved_Timestamp,
-                                                                    dsg.Desig_Name,
-                                                                    dep.Dep_Name
-                                                                FROM
-                                                                    tbl_salary_advance sal_ad
-                                                                        INNER JOIN
-                                                                    tbl_empmaster Emp ON Emp.EmpNo = sal_ad.EmpNo
-                                                                        LEFT JOIN
-                                                                    tbl_designations dsg ON dsg.Des_ID = Emp.Des_ID
-                                                                        LEFT JOIN
-                                                                    tbl_departments dep ON dep.Dep_id = Emp.Dep_id
-                                                                    WHERE
-                                                                    sal_ad.Is_pending = 1 and sal_ad.Is_Sup_AD_APP = 1 {$filter}
-                                                                     ");
+        // $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
+        //                                                             sal_ad.id,
+        //                                                             sal_ad.EmpNo,
+        //                                                             Emp.Emp_Full_Name,
+        //                                                             sal_ad.Amount,
+        //                                                             sal_ad.Year,
+        //                                                             sal_ad.Month,
+        //                                                             sal_ad.Request_Date,
+        //                                                             sal_ad.Is_pending,
+        //                                                             sal_ad.Is_Approve,
+        //                                                             sal_ad.Approved_by,
+        //                                                             sal_ad.Is_Cancel,
+        //                                                             sal_ad.Approved_Timestamp,
+        //                                                             dsg.Desig_Name,
+        //                                                             dep.Dep_Name
+        //                                                         FROM
+        //                                                             tbl_salary_advance sal_ad
+        //                                                                 INNER JOIN
+        //                                                             tbl_empmaster Emp ON Emp.EmpNo = sal_ad.EmpNo
+        //                                                                 LEFT JOIN
+        //                                                             tbl_designations dsg ON dsg.Des_ID = Emp.Des_ID
+        //                                                                 LEFT JOIN
+        //                                                             tbl_departments dep ON dep.Dep_id = Emp.Dep_id
+        //                                                             WHERE
+        //                                                             sal_ad.Is_pending = 1 and sal_ad.Is_Sup_AD_APP = 1 {$filter}
+        //                                                              ");
 
         // echo $filter;
 
+         $query = $this->Db_model->getfilteredData("SELECT 
+                tbl_salary_advance.id,
+                em.EmpNo,
+                em.Emp_Full_Name,
+                tbl_salary_advance.Request_Date,
+                tbl_salary_advance.Amount,
+                tbl_salary_advance.Month,
+                tbl_salary_advance.Year,
+                tbl_salary_advance.Is_pending,
+                tbl_salary_advance.Is_Approve,
+                tbl_salary_advance.Approved_by,
+                tbl_salary_advance.Is_Cancel,
+                tbl_salary_advance.Approved_Timestamp,
+                la.SupNo,
+                la.Priority_ID,
+                la.Status,
+                la.ID
+            FROM tbl_salary_advance
+            INNER JOIN tbl_empmaster em ON em.EmpNo = tbl_salary_advance.EmpNo
+            INNER JOIN tbl_approve la ON la.LV_ID = tbl_salary_advance.id
+            WHERE la.Status = 0
+            AND la.SupNo = '".$SupNo."'
+            AND la.Priority_ID = (
+                SELECT MAX(inner_la.Priority_ID)
+                FROM tbl_approve inner_la
+                WHERE inner_la.LV_ID = la.LV_ID
+                    AND inner_la.Status = 0
+            )
+             $filter
+            ORDER BY tbl_salary_advance.id DESC ");
 
-        $this->load->view('Payroll/Salary_Advance_App/search_data', $data);
+        // echo $filter;
+
+         $data['salaryAdv_data'] = $this->Db_model->getfilteredData($query);
+
+        if (!empty($data['salaryAdv_data'])) {
+            // $this->load->view('Payroll/Salary_Advance_App/search_data', $data);
+            echo json_encode($data['salaryAdv_data']);
+        } else {
+            echo "No pending leave approvals found.";
+        }
+
+        // $this->load->view('Payroll/Salary_Advance_App/search_data', $data);
     }
 
     /*

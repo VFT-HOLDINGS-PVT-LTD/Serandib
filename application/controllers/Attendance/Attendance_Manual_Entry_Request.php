@@ -153,7 +153,7 @@ class Attendance_Manual_Entry_Request extends CI_Controller
                         INNER JOIN tbl_user_level_master ON tbl_user_level_master.user_level_id = tbl_active.UserLevelID 
                         INNER JOIN tbl_types ON tbl_types.ID = tbl_active.TypeID 
                         WHERE tbl_emp_group.Grp_ID = '" . $grpID . "' 
-                            AND tbl_types.`Type` = 'Leave' 
+                            AND tbl_types.`Type` = 'Attendance' 
                     ");
 
         foreach ($Sup_Data_Type2 as $key) {

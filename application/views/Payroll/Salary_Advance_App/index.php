@@ -68,14 +68,6 @@
 
                                                         <form  class="form-horizontal" id="frm_salary_advance" name="frm_salary_advance" method="POST">
 
-
-                                                            <!--                                                            <div class="form-group col-sm-12">
-                                                                                                                            <div class="col-sm-6">
-                                                                                                                                <img class="imagecss1" src="<?php echo base_url(); ?>assets/images/attendance_inout.png" >
-                                                                                                                            </div>
-                                                            
-                                                                                                                        </div>-->
-
                                                             <div class="form-group col-md-12">
                                                                 <div class="form-group col-sm-3">
                                                                     <label for="focusedinput" class="col-sm-4 control-label">Emp No</label>
@@ -133,65 +125,6 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <!-- <div class="form-group col-sm-3">
-                                                                    <label for="focusedinput" class="col-sm-4 control-label">Designation</label>
-                                                                    <div class="col-sm-8">
-                                                                        <select class="form-control" id="cmb_desig" name="cmb_desig" >
-
-                                                                            <option value="" default>-- Select --</option>
-                                                                            <?php foreach ($data_desig as $t_data) { ?>
-                                                                                <option value="<?php echo $t_data->Des_ID; ?>" ><?php echo $t_data->Desig_Name; ?></option>
-
-                                                                            <?php }
-                                                                            ?>
-
-                                                                        </select>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="form-group col-sm-3">
-                                                                    <label for="focusedinput" class="col-sm-4 control-label">Department</label>
-                                                                    <div class="col-sm-8">
-                                                                        <select class="form-control" id="cmb_dep" name="cmb_dep" >
-
-
-                                                                            <option value="" default>-- Select --</option>
-                                                                            <?php foreach ($data_dep as $t_data) { ?>
-                                                                                <option value="<?php echo $t_data->Dep_ID; ?>" ><?php echo $t_data->Dep_Name; ?></option>
-
-                                                                            <?php }
-                                                                            ?>
-
-                                                                        </select>
-                                                                    </div>
-
-                                                                </div> -->
-
-
-                                                            </div>
-
-                                                            <div class="form-group col-md-12">
-
-                                                                <!-- <div class="form-group col-sm-3">
-                                                                    <label for="focusedinput" class="col-sm-4 control-label">Company</label>
-                                                                    <div class="col-sm-8">
-                                                                        <select class="form-control"  id="cmb_comp" name="cmb_comp" >
-
-
-                                                                            <option value="" default>-- Select --</option>
-                                                                            <?php foreach ($data_cmp as $t_data) { ?>
-                                                                                <option value="<?php echo $t_data->Cmp_ID; ?>" ><?php echo $t_data->Company_Name; ?></option>
-
-                                                                            <?php }
-                                                                            ?>
-
-                                                                        </select>
-                                                                    </div>
-
-                                                                </div> -->
-                                                                
-
-                                                            </div>
 
                                                             <div class="col-sm-6">
                                                                 <input  type="button"  id="search" name="search" class="btn-green btn fa fa-check" value="&nbsp;&nbsp;VIEW&nbsp; REPORT" >
@@ -321,8 +254,8 @@
 
 
                 $("#search").click(function () {
-                    $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/icon-loading.gif" /></p><center>');
-                    $('#search_body').load("<?php echo base_url(); ?>Pay/Salary_Advance_Approve/getSal_Advance", {'txt_emp': $('#txt_emp').val(), 'txt_emp_name': $('#txt_emp_name').val(), 'cmb_desig': $('#cmb_desig').val(), 'cmb_dep': $('#cmb_dep').val(), 'cmb_comp': $('#cmb_comp').val(), 'cmb_years': $('#cmb_years').val(), 'cmb_months': $('#cmb_months').val()});
+                    // $('#search_body').html('<center><p><img style="width: 50;height: 50;" src="<?php echo base_url(); ?>assets/images/icon-loading.gif" /></p><center>');
+                    $('#search_body').load("<?php echo base_url(); ?>Pay/Salary_Advance_Approve/getSal_Advance", {'txt_emp': $('#txt_emp').val(), 'txt_emp_name': $('#txt_emp_name').val(), 'cmb_years': $('#cmb_years').val(), 'cmb_months': $('#cmb_months').val()});
                 });
 
 

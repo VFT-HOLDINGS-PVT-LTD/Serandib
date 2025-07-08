@@ -310,6 +310,7 @@ class ADD_Employees_Outside extends CI_Controller
         echo $Title . "<br>";
         echo $Gender . "<br>";
         echo $Appoint_Date . "<br>";
+        echo $uploaded_file . "<br>";
 
         echo $ol . "<br>";
         echo $al . "<br>";
@@ -374,6 +375,128 @@ class ADD_Employees_Outside extends CI_Controller
 
         echo $User_Name . "<br>";
         echo $User_Level . "<br>";
+
+
+        $data = array(
+                'EmpNo' => $this->input->post('txt_emp_no'),
+                'Cmp_ID' => $Comp_No,
+                // 'Enroll_No' => $this->input->post('txt_enroll_no'),
+                // 'EPFNO' => $this->input->post('txt_epf_no'),
+                // 'EPF_CAT' => $this->input->post('cmb_epf_cat'),
+                // // 'Is_EPF' =>$this->input->post('cmb_if_epf'),
+                // 'OCP_Code' => $this->input->post('txt_ocp_code'),
+                // 'EMP_ST_ID' => $this->input->post('cmb_emp_status'),
+                'Title' => $Title,
+                'Emp_Full_Name' => $Full_Name,
+                'Emp_Name_Int' => $Name_Initials,
+                'Image' => $Image . ".jpg",
+                'Gender' => $Gender,
+                'Status' => 1,
+                // 'Dep_ID' => $this->input->post('cmb_dep'),
+                // 'Des_ID' => $this->input->post('cmb_desig'),
+                // 'Grp_ID' => $this->input->post('cmb_group'),
+                // 'RosterCode' => 'RS0001',
+                // 'OTCode' => $this->input->post('cmb_ot_pattern'),
+                // 'B_id' => $this->input->post('cmb_branch'),
+                // 'BR1' => $this->input->post('txt_BG_Allowance1'),
+                // 'BR2' => $this->input->post('txt_BG_Allowance2'),
+                'ApointDate' => $Appoint_Date,
+                // 'Permanent_Date' => $this->input->post('txt_permanent_date'),
+                // 'Basic_Salary' => $this->input->post('txt_basic_sal'),
+                // 'Incentive' => $this->input->post('txt_Incentive'),
+                // 'Bnk_ID' => $this->input->post('cmb_bank'),
+                'bankName' => $Bank_Name,
+                // 'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
+                'Account_no' => $Account_No,
+                // 'Is_EPF' => $Is_EPF,
+                'Address' => $Address,
+                'District' => $District,
+                'City' => $City,
+                'Temp_Address' => $Temp_Address,
+                'Temp_City' => $Temp_City,
+                'Temp_District' => $Temp_District,
+                'Tel_home' => $Contact_Home,
+                'Tel_mobile' => $Contact_Mobile,
+                'E_mail' => $Email,
+                'Driving_Licence_No' => $Driving_Licence,
+                'NIC' => $NIC,
+                'Passport' => $Passport_No,
+                'DOB' => $DOB,
+                'Blood_group' => $Blood_Group,
+                'Religion' => $Religion,
+                'Civil_status' => $Civil_Status,
+                'Relations_name' => $Rel_Name,
+                'Relations_Tel' => $Rel_Contact,
+                'No_Of_Child' => $No_of_Children,
+                'Emergency_Contact_Name' => $Emergency_Name,
+                'Emergency_Contact_Telephone' => $Emergency_Tel,
+                'Emergency_Contact_Address' => $Emergency_Address,
+                'Emergency_Contact_Relationship' => $Emergency_Relationship,
+
+                
+
+
+
+                
+                // 'Tel_home' => $this->input->post('txt_cont_home'),
+                // 'Tel_mobile' => $this->input->post('txt_cont_mobile'),
+                // 'E_mail' => $this->input->post('txt_email'),
+                // 'NIC' => $this->input->post('txt_nic'),
+                // 'Passport' => $this->input->post('txt_passport'),
+                // 'DOB' => $this->input->post('txt_dob'),
+                // 'Religion' => $this->input->post('cmb_religin'),
+                // 'Civil_status' => $this->input->post('cmb_civil_status'),
+                // 'Blood_group' => $this->input->post('cmb_blood'),
+                // 'Relations_name' => $this->input->post('txt_rel_name'),
+                // 'Relations_Tel' => $this->input->post('txt_rel_cont'),
+                // 'No_Of_Child' => $this->input->post('txt_no_child'),
+                // 'Is_allow_login' => 1,
+                // 'username' => $this->input->post('txt_user_name'),
+                // 'Password' => hash('sha512', $Password),
+                // 'View_Only' => $this->input->post('cmb_view_only'),
+                // //            'user_p_id' => 2,
+                // 'user_p_id' => $this->input->post('cmb_user_level'),
+                // 'Cmp_ID' => 1,
+                // 'Active_process' => 1,
+            );
+            $result = $this->Db_model->insertData("tbl_empmaster", $data);
+
+            $data_bond_guarantor = array(
+                'EmpNo' => $Comp_No,
+                'Name' => $Guarantor_Name,
+                'NIC' => $Guarantor_NIC,
+                'Email' => $Guarantor_Email,
+                'Contact' => $Guarantor_Contact,
+                'Address' => $Guarantor_Address,
+                'BondEntitlement' => $Guarantor_Entitlement,
+                'BondEndDate' => $Bond_End_Date
+            );
+            $result = $this->Db_model->insertData("tbl_bond_guarantor", $data_bond_guarantor);
+
+            $data_referee = array(
+                'EmpNo' => $Comp_No,
+                'Referee_Name' => $Ref1_Name,
+                'Referee_Designation' => $Ref1_Designation,
+                'Referee_NIC' => $Ref1_NIC,
+                'Referee_Contact' => $Ref1_Contact,
+                'Referee_Email' => $Ref1_Email,
+                'Referee_Address' => $Ref1_Address
+                
+            );
+            
+            $result = $this->Db_model->insertData("tbl_referee", $data_referee);
+
+            $data_referee2 = array(
+                'EmpNo' => $Comp_No,
+                'Referee_Name' => $Ref2_Name,
+                'Referee_Designation' => $Ref2_Designation,
+                'Referee_NIC' => $Ref2_NIC,
+                'Referee_Contact' => $Ref2_Contact,
+                'Referee_Email' => $Ref2_Email,
+                'Referee_Address' => $Ref2_Address
+            );
+            $result = $this->Db_model->insertData("tbl_referee", $data_referee2);
+
 
         // Continue with saving to database, validation, etc.
     }

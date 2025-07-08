@@ -209,6 +209,49 @@
 
                                                                     </div> -->
 
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Company No
+                                                                            <span style="color: red;">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_emp_no" name="txt_emp_no"
+                                                                                placeholder="Ex: 00001" required="">
+                                                                            <div id="username_availability_result">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Full Name
+                                                                            <span style="color: red;">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_emp_name" name="txt_emp_name"
+                                                                                required=""
+                                                                                placeholder="Ex: Nimal Silva">
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Name With
+                                                                            Initials
+                                                                            <span style="color: red;">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_emp_name_init"
+                                                                                name="txt_emp_name_init" required=""
+                                                                                placeholder="Ex: L.A.R Silva">
+                                                                        </div>
+
+                                                                    </div>
+
+
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
@@ -229,34 +272,34 @@
                                                                         </div>
 
                                                                     </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Gender</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select required="" class="form-control"
+                                                                                id="cmb_gender" name="cmb_gender">
+
+                                                                                <option value="Male">Male</option>
+                                                                                <option value="Female">Female</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Appoint Date
+                                                                            <span style="color: red;">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_appoint_date"
+                                                                                name="txt_appoint_date" required=""
+                                                                                placeholder="Ex: Select Date">
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group col-md-12">
 
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Full Name
-                                                                            <span style="color: red;">*</span></label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
-                                                                                id="txt_emp_name" name="txt_emp_name"
-                                                                                required="" placeholder="Ex: Nimal">
-                                                                        </div>
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Initials
-                                                                            <span style="color: red;">*</span></label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
-                                                                                id="txt_emp_name_init"
-                                                                                name="txt_emp_name_init" required=""
-                                                                                placeholder="Ex: L.A.R">
-                                                                        </div>
-
-                                                                    </div>
 
 
                                                                     <div class="form-group col-sm-6">
@@ -290,7 +333,7 @@
 
 
                                                                     </div>
-
+                                                                    
 
 
 
@@ -298,19 +341,7 @@
 
                                                                 <div class="form-group col-md-12">
 
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Gender</label>
-                                                                        <div class="col-sm-8">
-                                                                            <select required="" class="form-control"
-                                                                                id="cmb_gender" name="cmb_gender">
 
-                                                                                <option value="Male">Male</option>
-                                                                                <option value="Female">Female</option>
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div>
 
                                                                     <!--                                                                        <div class="form-group col-sm-6 ">
                                                                                                                                                     <label class="col-sm-4 control-label">Status</label>
@@ -445,7 +476,7 @@
                                                                                                                                                     <label for="focusedinput" class="col-sm-4 control-label">OT Pattern</label>
                                                                                                                                                     <div class="col-sm-8">
                                                                                                                                                         <select class="form-control" id="cmb_ot_pattern" name="cmb_ot_pattern">
-                                                                        
+
                                                                                                                                                             <option >--Select--</option>
                                                                                                                                                             <option value="HIGH">HIGH</option>
                                                                                                                                                             <option value="MEDIUM">MEDIUM</option>
@@ -476,18 +507,7 @@
 
 
 
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Appoint Date
-                                                                            <span style="color: red;">*</span></label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
-                                                                                id="txt_appoint_date"
-                                                                                name="txt_appoint_date" required=""
-                                                                                placeholder="Ex: Select Date">
-                                                                        </div>
 
-                                                                    </div>
 
 
                                                                     <!-- <div class="form-group col-sm-6">
@@ -570,7 +590,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div> -->
@@ -680,6 +700,17 @@
                                                                                 placeholder="Ex: 023">
                                                                         </div>
                                                                     </div> -->
+
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Bank
+                                                                            Name</label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_B_Branch" name="txt_B_Branch"
+                                                                                placeholder="Ex: 023">
+                                                                        </div>
+                                                                    </div>
 
 
 
@@ -814,7 +845,8 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Temp City</label>
+                                                                                class="col-sm-4 control-label">Temp
+                                                                                City</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_city" name="txt_city"
@@ -825,7 +857,8 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Temp District</label>
+                                                                                class="col-sm-4 control-label">Temp
+                                                                                District</label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_district"
@@ -891,7 +924,7 @@
                                                                                                                                                     <div class="col-sm-8">
                                                                                                                                                         <input type="text" class="form-control" id="txt_address" name="txt_address" placeholder="Ex: No: 123, Street, City">
                                                                                                                                                     </div>
-                                                                            
+
                                                                                                                                                 </div>-->
 
                                                                         <div class="form-group col-sm-6">
@@ -924,6 +957,17 @@
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">E
                                                                                 Mail</label>
+                                                                            <div class="col-sm-8">
+                                                                                <input type="text" class="form-control"
+                                                                                    id="txt_email" name="txt_email"
+                                                                                    placeholder="Ex: ashan.rathsara@gmail.com">
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="form-group col-sm-6">
+                                                                            <label for="focusedinput"
+                                                                                class="col-sm-4 control-label">Driving Licence No</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_email" name="txt_email"
@@ -1000,10 +1044,6 @@
                                                                             </div>
 
                                                                         </div>
-
-                                                                    </div>
-
-                                                                    <div class="form-group col-md-12">
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Civil
@@ -1026,6 +1066,8 @@
 
                                                                     </div>
 
+                                                                    
+
 
 
 
@@ -1046,11 +1088,12 @@
                                                                     <label style="font-weight: bold; color: #000">Family
                                                                         Details</label>
                                                                     <hr>
-                                                                    <div class="form-horizontal">
+                                                                    
+                                                                    <div class="form-group col-md-12">
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-2 control-label">Blood
+                                                                                class="col-sm-4 control-label">Blood
                                                                                 Group</label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
@@ -1073,7 +1116,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-2 control-label">Relation's
+                                                                                class="col-sm-4 control-label">Relation's
                                                                                 Name</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
@@ -1086,7 +1129,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-2 control-label">Relation's
+                                                                                class="col-sm-4 control-label">Relation's
                                                                                 Contact No</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
@@ -1100,7 +1143,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-2 control-label">No of
+                                                                                class="col-sm-4 control-label">No of
                                                                                 Children</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
@@ -1135,7 +1178,7 @@
                                                                                                                                                                     <div class="form-group icheck-flat">
                                                                                                                                                                         <label class="col-sm-2 control-label">Is Allow Login</label>
                                                                                                                                                                         <div class="col-sm-8 icheck-flat">
-                                                                                
+
                                                                                                                                                                             <label class="checkbox-inline icheck ">
                                                                                                                                                                                 <input type="checkbox" id="Is_Allow" name="Is_Allow">
                                                                                                                                                                             </label>
@@ -1146,7 +1189,7 @@
 
                                                                             <div class="form-group col-sm-6">
                                                                                 <label for="focusedinput"
-                                                                                    class="col-sm-2 control-label">User
+                                                                                    class="col-sm-4 control-label">User
                                                                                     Name <span
                                                                                         style="color: red;">*</span></label>
                                                                                 <div class="col-sm-8">
@@ -1159,24 +1202,23 @@
 
                                                                             </div>
 
-                                                                        </div>
 
                                                                         <!--                                                                            <div class="form-group col-md-12">
-                                                                            
+
                                                                                                                                                             <div class="form-group col-sm-6">
                                                                                                                                                                 <label for="focusedinput" class="col-sm-2 control-label">Password</label>
                                                                                                                                                                 <div class="col-sm-8">
                                                                                                                                                                     <input type="password" class="form-control" id="txt_password" name="txt_password" placeholder="Mr. user login password">
                                                                                                                                                                 </div>
-                                                                            
+
                                                                                                                                                             </div>
-                                                                            
-                                                                            
+
+
                                                                             -->
-                                                                        <div class="form-group col-sm-12">
+                                                                        
                                                                             <div class="col-12 col-md-6 ">
                                                                                 <label for="focusedinput"
-                                                                                    class="col-sm-2 control-label">User
+                                                                                    class="col-sm-4 control-label">User
                                                                                     Level <span
                                                                                         style="color: red;">*</span></label>
                                                                                 <div class="col-sm-8">
@@ -1201,7 +1243,7 @@
 
 
                                                                             </div>
-                                                                            
+
 
                                                                         </div>
 

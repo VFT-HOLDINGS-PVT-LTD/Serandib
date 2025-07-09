@@ -26,7 +26,7 @@ class Outside_View_Employee extends CI_Controller {
         $data['data_bank'] = $this->Db_model->getData('Bnk_ID,bank_name', 'tbl_banks');
         $data['data_cmp'] = $this->Db_model->getData('Cmp_ID,Company_Name', 'tbl_companyprofile');
         $data['data_branch'] = $this->Db_model->getData('B_id,B_name', 'tbl_branches');
-        $data['data_set'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_empmaster_outside");
+        $data['data_set'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_empmaster_outside WHERE Is_Approve = '0' ");
         $this->load->view('Employee_Management/Outside_View_Employee/index', $data);
     }
 

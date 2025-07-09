@@ -89,6 +89,7 @@
                                                                                 <th>IMAGE</th>
                                                                                 <!--<th>VIEW</th>-->
                                                                                 <th>VIEW</th>
+                                                                                <!-- <th>APPROVE</th> -->
 
                                                                             </tr>
                                                                         </thead>
@@ -147,6 +148,12 @@
                                                                                             <i class='fa fa-eye'></i>
                                                                                         </a>
                                                                                     </td>
+                                                                                    <!-- <td width='10'>
+                                                                                        <a class='get_data btn btn-primary'
+                                                                                            href='<?php echo base_url(); ?>Employee_Management/Edit_Employees_Outside/approve/<?php echo $data->Cmp_ID ?>'>
+                                                                                            <i class='fa fa-check'></i>
+                                                                                        </a>
+                                                                                    </td> -->
                                                                                     <!--//                                                                                        echo "<td width='15'>";
             //                                                                                        echo "<a href='".base_url()."index.php/Designation/view".$data->B_Code."'><i class='icon-eye-open'></i></a>";
             //                                                                                        echo  "</td>";-->

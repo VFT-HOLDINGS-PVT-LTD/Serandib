@@ -326,9 +326,21 @@
                                                                             class="col-sm-4 control-label">Bank
                                                                             Name <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
-                                                                                id="bankName" name="bankName"
-                                                                                placeholder="Ex: 023" required="">
+                                                                            <select class="form-control" id="bankName"
+                                                                                name="bankName" required="">
+
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                                <?php foreach ($data_bank as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->Bnk_ID; ?>">
+                                                                                        <?php echo $t_data->bank_name; ?>
+                                                                                    </option>
+
+                                                                                <?php }
+                                                                                ?>
+
+                                                                            </select>
                                                                         </div>
                                                                     </div>
 

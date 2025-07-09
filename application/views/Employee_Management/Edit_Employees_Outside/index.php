@@ -67,7 +67,7 @@
                                                         <div class="tab-pane active" id="horizontal-form">
                                                             <form class="form-horizontal" id="frm_employee_update"
                                                                 name="frm_employee_update"
-                                                                action="<?php echo base_url(); ?>Employee_Management/Edit_Employees/update_emp"
+                                                                action="<?php echo base_url(); ?>Employee_Management/Edit_Employees_Outside/update_emp"
                                                                 method="POST" enctype="multipart/form-data">
 
                                                                 <!--success Message-->
@@ -355,12 +355,12 @@
                                                                         <div class="col-sm-8">
                                                                             <label class="radio-inline icheck">
                                                                                 <input type="radio" id="inlineradio1"
-                                                                                    required="" value="Active"                                                                                                                                                                                                                             <?php echo($data_set[0]->Status == '1') ? 'checked' : '' ?>
+                                                                                    required="" value="Active"                                                                                                               <?php echo($data_set[0]->Status == '1') ? 'checked' : '' ?>
                                                                                     name="employee_status"> Active
                                                                             </label>
                                                                             <label class="radio-inline icheck">
                                                                                 <input type="radio" id="inlineradio2"
-                                                                                    value="Inactive"                                                                                                                                                                                                         <?php echo($data_set[0]->Status == '0') ? 'checked' : '' ?>
+                                                                                    value="Inactive"                                                                                                     <?php echo($data_set[0]->Status == '0') ? 'checked' : '' ?>
                                                                                     name="employee_status"> Inactive
                                                                             </label>
 
@@ -557,16 +557,25 @@
                                                                                 class="col-sm-4 control-label">O/L</label>
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
-                                                                                    <label><input type="checkbox"
-                                                                                            name="ol" id="ol"></label>
+                                                                                    <label>
+                                                                                        <input type="checkbox" name="ol"
+                                                                                            id="ol"                                                                                                    <?php if (! empty($data_set[0]->OL_Data)) {
+                                                                                                            echo 'checked';
+                                                                                                    }
+                                                                                                    ?>>
+                                                                                    </label>
                                                                                 </div>
                                                                             </div>
+
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">A/L</label>
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="al" id="al"></label>
+                                                                                            name="al" id="al"                                                                                                              <?php if (! empty($data_set[0]->AL_Data)) {
+                                                                                                                      echo 'checked';
+                                                                                                              }
+                                                                                                              ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -577,8 +586,11 @@
                                                                             <div class="col-sm-1 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="diploma"
-                                                                                            id="diploma"></label>
+                                                                                            name="diploma" id="diploma"
+                                                                                            <?php if (! empty($data_set[0]->Diploma_Data)) {
+                                                                                                    echo 'checked';
+                                                                                            }
+                                                                                            ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                             <label for="focusedinput"
@@ -587,7 +599,10 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="hnd" id="hnd"></label>
+                                                                                            name="hnd" id="hnd"                                                                                                                <?php if (! empty($data_set[0]->HND_Data)) {
+                                                                                                                        echo 'checked';
+                                                                                                                }
+                                                                                                                ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -598,8 +613,11 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="degree"
-                                                                                            id="degree"></label>
+                                                                                            name="degree" id="degree"
+                                                                                            <?php if (! empty($data_set[0]->Degree_Data)) {
+                                                                                                    echo 'checked';
+                                                                                            }
+                                                                                            ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                             <label for="focusedinput"
@@ -607,8 +625,11 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="master"
-                                                                                            id="master"></label>
+                                                                                            name="master" id="master"
+                                                                                            <?php if (! empty($data_set[0]->Master_Data)) {
+                                                                                                    echo 'checked';
+                                                                                            }
+                                                                                            ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -620,8 +641,11 @@
                                                                             <div class="col-sm-1 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="mphil"
-                                                                                            id="mphil"></label>
+                                                                                            name="mphil" id="mphil"
+                                                                                            <?php if (! empty($data_set[0]->Mphill_Data)) {
+                                                                                                    echo 'checked';
+                                                                                            }
+                                                                                            ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                             <label for="focusedinput"
@@ -630,7 +654,10 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="phd" id="phd"></label>
+                                                                                            name="phd" id="phd"                                                                                                                <?php if (! empty($data_set[0]->PHD_Data)) {
+                                                                                                                        echo 'checked';
+                                                                                                                }
+                                                                                                                ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -642,18 +669,15 @@
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Other</label>
                                                                             <div class="col-sm-8">
-                                                                                <textarea type="text"
-                                                                                    class="form-control" id="other"
-                                                                                    name="other"
-                                                                                    placeholder="Ex:"></textarea>
+                                                                                <textarea class="form-control"
+                                                                                    id="other" name="other"
+                                                                                    placeholder="Ex:"><?php echo $data_set[0]->Academic_Other_Data; ?></textarea>
+
                                                                             </div>
 
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-
 
                                                                 <div class="tab-pane" id="vertical-form">
 
@@ -886,7 +910,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_tmp_address"
                                                                                     name="txt_tmp_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    value="<?php echo $data_set[0]->Temp_Address ?>">
                                                                             </div>
 
                                                                         </div>
@@ -899,7 +924,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_tmp_city"
                                                                                     name="txt_tmp_city"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    value="<?php echo $data_set[0]->Temp_City ?>">
                                                                             </div>
 
                                                                         </div>
@@ -913,7 +939,10 @@
                                                                                     id="cmb_tmp_district"
                                                                                     name="cmb_tmp_district">
 
-                                                                                    <option>--Select--</option>
+                                                                                    <option
+                                                                                        value="<?php echo $data_set[0]->Temp_District ?>">
+                                                                                        <?php echo $data_set[0]->Temp_District ?>
+                                                                                    </option>
                                                                                     <option value="Unknown">Unknown
                                                                                     </option>
                                                                                     <option value="Ampara">Ampara
@@ -1014,7 +1043,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_dLicence"
                                                                                     name="txt_dLicence"
-                                                                                    placeholder="B1234567">
+                                                                                    placeholder="B1234567"
+                                                                                    value="<?php echo $data_set[0]->Driving_Licence_No ?>">
                                                                             </div>
 
                                                                         </div>
@@ -1054,7 +1084,7 @@
                                                                                 class="col-sm-4 control-label">Date of
                                                                                 Birth</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="date" class="form-control"
+                                                                                <input type="text" class="form-control"
                                                                                     value="<?php echo $data_set[0]->DOB ?>"
                                                                                     id="txt_dob" name="txt_dob">
                                                                             </div>
@@ -1226,7 +1256,8 @@
                                                                                     id="txt_emergency_name"
                                                                                     name="txt_emergency_name"
                                                                                     placeholder="Mr. Nimal Perera"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Name ?>">
                                                                             </div>
 
                                                                         </div>
@@ -1242,7 +1273,8 @@
                                                                                     id="txt_emergency_tel"
                                                                                     name="txt_emergency_tel"
                                                                                     placeholder="071 111 222"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Telephone ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1256,7 +1288,8 @@
                                                                                     id="txt_emergency_address"
                                                                                     name="txt_emergency_address"
                                                                                     placeholder="Ex: No: 123, Street, City"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Address ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1269,8 +1302,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_relationship"
                                                                                     name="txt_emergency_relationship"
-                                                                                    placeholder="Ex: Father"
-                                                                                    required="">
+                                                                                    placeholder="Ex: Father" required=""
+                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Relationship ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1294,7 +1327,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_name"
                                                                                     name="txt_bond_guarantor_name"
-                                                                                    placeholder="Mr. Nimal Perera">
+                                                                                    placeholder="Mr. Nimal Perera"
+                                                                                    value="<?php echo $bond_data[0]->Name ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1306,7 +1340,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_address"
                                                                                     name="txt_bond_guarantor_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    value="<?php echo $bond_data[0]->Address ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1317,7 +1352,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_nic"
                                                                                     name="txt_bond_guarantor_nic"
-                                                                                    placeholder="Ex: 123456789V">
+                                                                                    placeholder="Ex: 123456789V"
+                                                                                    value="<?php echo $bond_data[0]->NIC ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1329,7 +1365,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_email"
                                                                                     name="txt_bond_guarantor_email"
-                                                                                    placeholder="nimal@gmail.com">
+                                                                                    placeholder="nimal@gmail.com"
+                                                                                    value="<?php echo $bond_data[0]->Email ?>">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -1340,7 +1377,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_contact"
                                                                                     name="txt_bond_guarantor_contact"
-                                                                                    placeholder="Ex: 071 111 222">
+                                                                                    placeholder="Ex: 071 111 222"
+                                                                                    value="<?php echo $bond_data[0]->Contact ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1352,7 +1390,11 @@
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
                                                                                             name="bond_guarantor_entitlement"
-                                                                                            id="bond_guarantor_entitlement"></label>
+                                                                                            id="bond_guarantor_entitlement"
+                                                                                            <?php if (! empty($bond_data[0]->BondEntitlement)) {
+                                                                                                    echo 'checked';
+                                                                                            }
+                                                                                            ?>></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1366,7 +1408,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="bond_end_date"
                                                                                     placeholder="Select Date"
-                                                                                    name="bond_end_date">
+                                                                                    name="bond_end_date"
+                                                                                    value="<?php echo $bond_data[0]->BondEndDate ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1390,7 +1433,8 @@
                                                                                     id="non_related_referee_name"
                                                                                     name="non_related_referee_name"
                                                                                     placeholder="Mr. Nimal Perera"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[0]->Referee_Name ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1404,7 +1448,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_designation"
                                                                                     name="non_related_referee_designation"
-                                                                                    placeholder="Manager" required="">
+                                                                                    placeholder="Manager" required=""
+                                                                                    value="<?php echo $referee_data[0]->Referee_Designation ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1417,7 +1462,8 @@
                                                                                     id="non_related_referee_nic"
                                                                                     name="non_related_referee_nic"
                                                                                     placeholder="9456565656v"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[0]->Referee_NIC ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1432,7 +1478,8 @@
                                                                                     id="non_related_referee_contact"
                                                                                     name="non_related_referee_contact"
                                                                                     placeholder="071 111 222"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[0]->Referee_Contact ?>">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -1442,7 +1489,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_email"
                                                                                     name="non_related_referee_email"
-                                                                                    placeholder="nimal@gmail.com">
+                                                                                    placeholder="nimal@gmail.com"
+                                                                                    value="<?php echo $referee_data[0]->Referee_Email ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1457,7 +1505,8 @@
                                                                                     id="non_related_referee_address"
                                                                                     name="non_related_referee_address"
                                                                                     placeholder="Ex: No: 123, Street, City"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[0]->Referee_Address ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1481,7 +1530,8 @@
                                                                                     id="non_related_referee_2_name"
                                                                                     name="non_related_referee_2_name"
                                                                                     placeholder="Mr.Nimal Perera"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[1]->Referee_Name ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1495,7 +1545,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_designation"
                                                                                     name="non_related_referee_2_designation"
-                                                                                    placeholder="Manager" required="">
+                                                                                    placeholder="Manager" required=""
+                                                                                    value="<?php echo $referee_data[1]->Referee_Designation ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1508,7 +1559,8 @@
                                                                                     id="non_related_referee_2_nic"
                                                                                     name="non_related_referee_2_nic"
                                                                                     placeholder="9456565656v"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[1]->Referee_NIC ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1523,7 +1575,8 @@
                                                                                     id="non_related_referee_2_contact"
                                                                                     name="non_related_referee_2_contact"
                                                                                     placeholder="071 111 222"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[1]->Referee_Contact ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1534,7 +1587,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_email"
                                                                                     name="non_related_referee_2_email"
-                                                                                    placeholder="nimal@gmail.com">
+                                                                                    placeholder="nimal@gmail.com"
+                                                                                    value="<?php echo $referee_data[1]->Referee_Email ?>">
                                                                             </div>
                                                                         </div>
 
@@ -1548,7 +1602,8 @@
                                                                                     id="non_related_referee_2_address"
                                                                                     name="non_related_referee_2_address"
                                                                                     placeholder="Ex: No: 123, Street, City"
-                                                                                    required="">
+                                                                                    required=""
+                                                                                    value="<?php echo $referee_data[1]->Referee_Address ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1621,162 +1676,73 @@
                                                                                             class="checkbox-inline icheck ">
                                                                                             <input type="checkbox"
                                                                                                 id="Is_Allow"
-                                                                                                name="Is_Allow">
+                                                                                                name="Is_Allow"                                                                                                                <?php if (! empty($data_set[0]->Is_allow_login)) {
+                                                                                                                        echo 'checked';
+                                                                                                                }
+                                                                                                                ?>>
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="form-group col-md-12">
-
-                                                                            <!--                                                                        <div class="form-group col-sm-6">
-                                                                                                                                                            <label for="focusedinput" class="col-sm-2 control-label">Password</label>
-                                                                                                                                                            <div class="col-sm-8">
-                                                                                                                                                                <input type="password" class="form-control" value="<?php echo $data_set[0]->password ?>" id="txt_password" name="txt_password" placeholder="user login password">
-                                                                                                                                                            </div>
-
-                                                                                                                                                        </div>-->
 
 
-                                                                            <!-- <div class="form-group col-sm-6">
-                                                                                <label for="focusedinput"
-                                                                                    class="col-sm-2 control-label">User
-                                                                                    Level</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <select class="form-control"
-                                                                                        required="" id="cmb_user_level"
-                                                                                        name="cmb_user_level">
-
-                                                                                        <?php
-                                                                                            foreach ($data_u_lvl as $t_data) {
-                                                                                                if ($t_data->user_level_id == $data_set[0]->user_level_id) {
-                                                                                                    echo "<option selected value='" . $t_data->user_level_id . "'>" . $t_data->user_level_name . "</option>";
-                                                                                                } else {
-                                                                                                    echo "<option value='" . $t_data->user_level_id . "'>" . $t_data->user_level_name . "</option>";
-                                                                                                }
-                                                                                            }
-                                                                                        ?>
-
-                                                                                    </select>
-                                                                                </div>
-
-                                                                            </div> -->
-                                                                            <div class="form-group col-sm-12">
-
-                                                                                <!-- <div class="col-12 col-md-6 ">
-                                                                                    <label for="focusedinput"
-                                                                                        class="col-sm-2 control-label">
-                                                                                        View
-                                                                                        Only
-                                                                                        <span
-                                                                                            style="color: red;">*</span></label>
-                                                                                    <div class="col-sm-8">
-                                                                                        <select class="form-control"
-                                                                                            required=""
-                                                                                            id="cmb_view_only"
-                                                                                            name="cmb_view_only">
-                                                                                            <option
-                                                                                                value="<?php echo $data_set[0]->View_Only ?>">
-                                                                                                <?php if ($data_set[0]->View_Only == 1) {
-                                                                                                        echo 'Allow';
-                                                                                                    } else {
-                                                                                                        echo 'Deny';
-                                                                                                }?>
-                                                                                            </option>
-                                                                                            <option value="0">Deny
-                                                                                            </option>
-                                                                                            <option value="1">Allow
-                                                                                            </option>
-
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div> -->
-
+                                                                        <div class="form-group col-sm-6">
+                                                                            <label for="focusedinput"
+                                                                                class="col-sm-4 control-label">Remarks</label>
+                                                                            <div class="col-sm-8">
+                                                                                <textarea type="text"
+                                                                                    class="form-control"
+                                                                                    id="txt_remarks" name="txt_remarks"
+                                                                                    placeholder="Ex: Remarks"><?php echo $data_set[0]->Remarks ?></textarea>
                                                                             </div>
 
                                                                         </div>
-
-<div class="form-group col-sm-6">
-                                                                                <label for="focusedinput"
-                                                                                    class="col-sm-4 control-label">Remarks</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <textarea type="text"
-                                                                                        class="form-control"
-                                                                                        id="txt_remarks"
-                                                                                        name="txt_remarks"
-                                                                                        placeholder="Ex: Remarks"><?php echo $data_set[0]->Remarks ?></textarea>
-                                                                                </div>
-
+                                                                        <div class="form-group col-sm-6">
+                                                                            <label for="focusedinput"
+                                                                                class="col-sm-4 control-label">Highlights</label>
+                                                                            <div class="col-sm-8">
+                                                                                <textarea type="text"
+                                                                                    class="form-control" id="txt_high"
+                                                                                    name="txt_high"
+                                                                                    placeholder="Ex:"><?php echo $data_set[0]->highlights ?></textarea>
                                                                             </div>
-                                                                            <div class="form-group col-sm-6">
-                                                                                <label for="focusedinput"
-                                                                                    class="col-sm-4 control-label">Highlights</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <textarea type="text"
-                                                                                        class="form-control"
-                                                                                        id="txt_high" name="txt_high"
-                                                                                        placeholder="Ex:"><?php echo $data_set[0]->highlights ?></textarea>
-                                                                                </div>
 
-                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-
-
-
-
 
                                                                 <div class="row">
 
                                                                 </div>
 
-
-                                                                <!-- <div class="tab-pane" id="tabular-form">
-                                                                    <div class="form-horizontal tabular-form">
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <div class="form-group col-sm-6">
-                                                                                <label for="focusedinput"
-                                                                                    class="col-sm-4 control-label">Remarks</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <textarea type="text"
-                                                                                        class="form-control"
-                                                                                        id="txt_remarks"
-                                                                                        name="txt_remarks"
-                                                                                        placeholder="Ex: Remarks"><?php echo $data_set[0]->Remarks ?></textarea>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="form-group col-sm-6">
-                                                                                <label for="focusedinput"
-                                                                                    class="col-sm-4 control-label">Highlights</label>
-                                                                                <div class="col-sm-8">
-                                                                                    <textarea type="text"
-                                                                                        class="form-control"
-                                                                                        id="txt_high" name="txt_high"
-                                                                                        placeholder="Ex:"><?php echo $data_set[0]->highlights ?></textarea>
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div> -->
-
                                                                 <div class="row">
 
                                                                 </div>
+                                                                <br>
 
+                                                                <!--submit button-->
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                                        <button
+                                                                            style="background-color: #69bf53; padding: 5px 32px; font-size: 18px;"
+                                                                            type="submit" id="submit" name="submit"
+                                                                            class="btn-success  btn fa fa-check">&nbsp;&nbsp;SAVE & APPROVE</button>
+                                                                        <!-- <button
+                                                                            style="padding: 5px 32px; font-size: 18px;"
+                                                                            type="submit" id="submit" name="submit"
+                                                                            class="btn-primary  btn fa fa-check">&nbsp;&nbsp;APPROVE</button> -->
+                                                                        <button
+                                                                            style="padding: 5px 20px; font-size: 18px;"
+                                                                            type="button" id="Cancel" name="Cancel"
+                                                                            class="btn btn-danger-alt fa fa-times-circle">&nbsp;&nbsp;CANCEL</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end submit-->
+
+                                                            </form>
                                                         </div>
-
-
-                                                        <!--submit button-->
-                                                        <?php $this->load->view('template/btn_submit.php'); ?>
-                                                        <!--end submit-->
-
-                                                        </form>
-
                                                         <br>
 
                                                         <div id="divmessage" class="">

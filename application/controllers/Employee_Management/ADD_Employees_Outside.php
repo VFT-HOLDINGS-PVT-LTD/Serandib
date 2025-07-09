@@ -378,7 +378,7 @@ class ADD_Employees_Outside extends CI_Controller
 
 
         $data = array(
-                'EmpNo' => $this->input->post('txt_emp_no'),
+                'EmpNo' => $Comp_No,
                 'Cmp_ID' => $Comp_No,
                 // 'Enroll_No' => $this->input->post('txt_enroll_no'),
                 // 'EPFNO' => $this->input->post('txt_epf_no'),
@@ -459,7 +459,7 @@ class ADD_Employees_Outside extends CI_Controller
                 // 'Cmp_ID' => 1,
                 // 'Active_process' => 1,
             );
-            $result = $this->Db_model->insertData("tbl_empmaster", $data);
+            $result = $this->Db_model->insertData("tbl_empmaster_outside", $data);
 
             $data_bond_guarantor = array(
                 'EmpNo' => $Comp_No,

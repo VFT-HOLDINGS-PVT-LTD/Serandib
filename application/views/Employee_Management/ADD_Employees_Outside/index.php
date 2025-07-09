@@ -94,8 +94,7 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
-                                                                                placeholder="Ex: 00001"
-                                                                                required="required">
+                                                                                placeholder="Ex: 00001" required="">
 
                                                                         </div>
 
@@ -134,7 +133,9 @@
                                                                             class="col-sm-4 control-label">Title</label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
-                                                                                id="cmb_emp_title" name="cmb_emp_title">
+                                                                                id="cmb_emp_title" name="cmb_emp_title"
+                                                                                required>
+                                                                                <option value="">-- Select --</option>
                                                                                 <option value="Unknown.">Unknown
                                                                                 </option>
                                                                                 <option value="Mr.">Mr.</option>
@@ -142,6 +143,7 @@
                                                                                 <option value="Miss.">Miss.</option>
                                                                                 <option value="Dr.">Dr.</option>
                                                                             </select>
+
                                                                         </div>
 
                                                                     </div>
@@ -149,9 +151,9 @@
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Gender</label>
                                                                         <div class="col-sm-8">
-                                                                            <select required="" class="form-control"
-                                                                                id="cmb_gender" name="cmb_gender">
-
+                                                                            <select class="form-control" id="cmb_gender"
+                                                                                name="cmb_gender" required>
+                                                                                <option value="">-- Select --</option>
                                                                                 <option value="Male">Male</option>
                                                                                 <option value="Female">Female</option>
                                                                             </select>
@@ -326,7 +328,7 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="bankName" name="bankName"
-                                                                                placeholder="Ex: 023">
+                                                                                placeholder="Ex: 023" required="">
                                                                         </div>
                                                                     </div>
 
@@ -337,7 +339,7 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_account" name="txt_account"
-                                                                                placeholder="Ex: 112457854">
+                                                                                placeholder="Ex: 112457854" required="">
                                                                         </div>
                                                                     </div>
 
@@ -363,7 +365,8 @@
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_address" name="txt_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -374,7 +377,8 @@
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_city" name="txt_city"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -385,11 +389,10 @@
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_district"
-                                                                                    name="cmb_district">
-
-                                                                                    <option>--Select--</option>
-                                                                                    <option value="Unknown">Unknown
+                                                                                    name="cmb_district" required>
+                                                                                    <option value="">-- Select --
                                                                                     </option>
+
                                                                                     <option value="Ampara">Ampara
                                                                                     </option>
                                                                                     <option value="Anuradhapura">
@@ -564,7 +567,8 @@
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_email" name="txt_email"
-                                                                                    placeholder="Ex: ashan.rathsara@gmail.com">
+                                                                                    placeholder="Ex: nimal@gmail.com"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -593,7 +597,8 @@
                                                                                 <input type="text" required=""
                                                                                     class="form-control" id="txt_nic"
                                                                                     name="txt_nic"
-                                                                                    placeholder="Ex: 123456789V">
+                                                                                    placeholder="Ex: 123456789V"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -630,9 +635,10 @@
                                                                                 Group</label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
-                                                                                    id="cmb_blood" name="cmb_blood">
+                                                                                    id="cmb_blood" name="cmb_blood"
+                                                                                    required>
 
-                                                                                    <option>--Select--</option>
+                                                                                    <option value="">--Select--</option>
                                                                                     <option value="A+">A+</option>
                                                                                     <option value="A-">A-</option>
                                                                                     <option value="B+">B+</option>
@@ -654,20 +660,22 @@
                                                                                 class="col-sm-4 control-label">Religion</label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
-                                                                                    id="cmb_religin" name="cmb_religin">
-                                                                                    <option value="Catholic">Unknown
+                                                                                    id="cmb_religin" name="cmb_religin"
+                                                                                    required>
+                                                                                    <option value=""> --Select--
                                                                                     </option>
                                                                                     <option value="Buddhist">Buddhist
                                                                                     </option>
+                                                                                    <option value="Hindu">Hindu
+                                                                                    </option>
+                                                                                    <option value="Islam">Islam
+                                                                                    </option>
+                                                                                    <option value="Christian">Christian
+                                                                                    </option>
                                                                                     <option value="Catholic">Catholic
                                                                                     </option>
-                                                                                    <option value="Catholic">Hindu
+                                                                                    <option value="Other">Other
                                                                                     </option>
-                                                                                    <option value="Catholic">ISLAM
-                                                                                    </option>
-                                                                                    <option value="Catholic">Other
-                                                                                    </option>
-
                                                                                 </select>
                                                                             </div>
 
@@ -679,8 +687,10 @@
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_civil_status"
-                                                                                    name="cmb_civil_status">
-
+                                                                                    name="cmb_civil_status" required>
+                                                                                    <option value="">--Select--</option>
+                                                                                    <option value="UNKNOWN">UNKNOWN
+                                                                                    </option>
                                                                                     <option value="SINGLE">SINGLE
                                                                                     </option>
                                                                                     <option value="MARRIED">MARRIED
@@ -714,7 +724,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_name"
                                                                                     name="txt_rel_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr. Nimal Perera"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -727,7 +738,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_cont"
                                                                                     name="txt_rel_cont"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="071 111 222"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -764,7 +776,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_name"
                                                                                     name="txt_emergency_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr. Nimal Perera"
+                                                                                    required="">
                                                                             </div>
 
                                                                         </div>
@@ -778,7 +791,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_tel"
                                                                                     name="txt_emergency_tel"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="071 111 222"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -790,7 +804,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_address"
                                                                                     name="txt_emergency_address"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -802,7 +817,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_relationship"
                                                                                     name="txt_emergency_relationship"
-                                                                                    placeholder="Ex: 4">
+                                                                                    placeholder="Ex: Father"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -898,7 +914,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="bond_end_date"
                                                                                     placeholder="Select Date"
-                                                                                    name="bond_end_date" required="">
+                                                                                    name="bond_end_date">
                                                                             </div>
                                                                         </div>
 
@@ -920,7 +936,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_name"
                                                                                     name="non_related_referee_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr. Nimal Perera"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -932,7 +949,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_designation"
                                                                                     name="non_related_referee_designation"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Manager" required="">
                                                                             </div>
                                                                         </div>
 
@@ -943,7 +960,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_nic"
                                                                                     name="non_related_referee_nic"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="9456565656v"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -956,7 +974,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_contact"
                                                                                     name="non_related_referee_contact"
-                                                                                    placeholder="Ex: 4">
+                                                                                    placeholder="071 111 222"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -966,7 +985,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_email"
                                                                                     name="non_related_referee_email"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="nimal@gmail.com">
                                                                             </div>
                                                                         </div>
 
@@ -978,7 +997,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_address"
                                                                                     name="non_related_referee_address"
-                                                                                    placeholder="Ex: 4">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -1000,7 +1020,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_name"
                                                                                     name="non_related_referee_2_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr.Nimal Perera"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -1012,7 +1033,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_designation"
                                                                                     name="non_related_referee_2_designation"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Manager" required="">
                                                                             </div>
                                                                         </div>
 
@@ -1023,7 +1044,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_nic"
                                                                                     name="non_related_referee_2_nic"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="9456565656v"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -1036,7 +1058,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_contact"
                                                                                     name="non_related_referee_2_contact"
-                                                                                    placeholder="Ex: 4">
+                                                                                    placeholder="071 111 222"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
 
@@ -1047,7 +1070,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_email"
                                                                                     name="non_related_referee_2_email"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="nimal@gmail.com">
                                                                             </div>
                                                                         </div>
 
@@ -1058,7 +1081,8 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_address"
                                                                                     name="non_related_referee_2_address"
-                                                                                    placeholder="Ex: 4">
+                                                                                    placeholder="Ex: No: 123, Street, City"
+                                                                                    required="">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1080,14 +1104,13 @@
                                                                             <div class="form-group col-sm-6">
                                                                                 <label for="focusedinput"
                                                                                     class="col-sm-4 control-label">User
-                                                                                    Name <span
-                                                                                        style="color: red;">*</span></label>
+                                                                                    Name</label>
                                                                                 <div class="col-sm-8">
-                                                                                    <input type="text" required=""
+                                                                                    <input type="text"
                                                                                         class="form-control"
                                                                                         id="txt_user_name"
                                                                                         name="txt_user_name"
-                                                                                        placeholder="ashan">
+                                                                                        placeholder="Nimal" required="">
                                                                                 </div>
 
                                                                             </div>
@@ -1098,23 +1121,27 @@
                                                                                     Level <span
                                                                                         style="color: red;">*</span></label>
                                                                                 <div class="col-sm-8">
+                                                                                    <?php $selected_user_level_id = 2; // ID of "User" ?>
                                                                                     <select class="form-control"
-                                                                                        required="" id="cmb_user_level"
+                                                                                        required id="cmb_user_level"
                                                                                         name="cmb_user_level">
-
-
-                                                                                        <option value="" default>--
-                                                                                            Select --</option>
+                                                                                        <option value="">-- Select --
+                                                                                        </option>
                                                                                         <?php foreach ($data_u_lvl as $t_data) { ?>
                                                                                             <option
-                                                                                                value="<?php echo $t_data->user_level_id; ?>">
+                                                                                                value="<?php echo $t_data->user_level_id; ?>"
+                                                                                                <?php
+                                                                                                if ($t_data->user_level_id == $selected_user_level_id) {
+                                                                                                    echo 'selected';
+                                                                                                } else {
+                                                                                                    echo 'disabled';
+                                                                                                }
+                                                                                                ?>>
                                                                                                 <?php echo $t_data->user_level_name; ?>
                                                                                             </option>
-
-                                                                                        <?php }
-                                                                                        ?>
-
+                                                                                        <?php } ?>
                                                                                     </select>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1181,6 +1208,29 @@
 
 
         <script>
+            $("#frm_employee").validate({
+                rules: {
+                    cmb_emp_title: "required",
+                    cmb_gender: "required",
+                    img_employee: "required",
+                    bankName: "required",
+                    txt_account: "required",
+                    txt_address: "required",
+                    txt_city: "required",
+                    cmb_district: "required",
+                    txt_email: {
+                        required: true,
+                        email: true
+                    },
+                },
+                messages: {
+                    cmb_emp_title: "Please select a title",
+                    cmb_gender: "Please select gender",
+                    img_employee: "Please upload an image"
+                }
+            });
+
+
             $('#txt_appoint_date').datepicker({
                 format: "dd/mm/yyyy",
                 "todayHighlight": true,

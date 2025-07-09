@@ -67,7 +67,11 @@
                                                                 action="<?php echo base_url(); ?>Employee_Management/ADD_Employees_Outside/Outside_insert_Data"
                                                                 method="POST" enctype="multipart/form-data">
 
-                                                                <!--success Message-->
+                                                               
+
+                                                                <div class="form-group col-md-12">
+
+                                                                 <!--success Message-->
                                                                 <?php if (isset($_SESSION['success_message']) && $_SESSION['success_message'] != '') { ?>
                                                                     <div id="spnmessage"
                                                                         class="alert alert-dismissable alert-success">
@@ -84,8 +88,6 @@
                                                                         <?php echo $_SESSION['error_message'] ?>
                                                                     </div>
                                                                 <?php } ?>
-
-                                                                <div class="form-group col-md-12">
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"

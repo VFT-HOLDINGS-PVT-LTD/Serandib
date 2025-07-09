@@ -56,7 +56,7 @@ class ADD_Employees extends CI_Controller
     }
 
     //***** INsert Employee
-    public function insert_Data()
+    public function insert_Data1()
     {
 
         $Emp_No = $this->input->post('txt_emp_no');
@@ -198,5 +198,336 @@ class ADD_Employees extends CI_Controller
             $this->session->set_flashdata('success_message', 'Employee Added');
         // }
         redirect('/Employee_Management/ADD_Employees/');
+    }
+
+    public function insert_Data()
+    {
+        $Comp_No = $this->input->post('txt_cmp_no');
+        $Full_Name = $this->input->post('txt_emp_name');
+        $Name_Initials = $this->input->post('txt_emp_name_init');
+        $Title = $this->input->post('cmb_emp_title');
+        $Gender = $this->input->post('cmb_gender');
+        $Appoint_Date = $this->input->post('txt_appoint_date');
+
+        // Academic Qualifications (checkboxes)
+        $ol = $this->input->post('ol');
+        $al = $this->input->post('al');
+        $diploma = $this->input->post('diploma');
+        $hnd = $this->input->post('hnd');
+        $degree = $this->input->post('degree');
+        $master = $this->input->post('master');
+        $mphil = $this->input->post('mphil');
+        $phd = $this->input->post('phd');
+        $other = $this->input->post('other');
+
+        // Payroll
+        $Bank_Name = $this->input->post('bankName');
+        $Account_No = $this->input->post('txt_account');
+
+        // Personal
+        $Address = $this->input->post('txt_address');
+        $City = $this->input->post('txt_city');
+        $District = $this->input->post('cmb_district');
+        $Temp_Address = $this->input->post('txt_tmp_address');
+        $Temp_City = $this->input->post('txt_tmp_city');
+        $Temp_District = $this->input->post('cmb_tmp_district');
+        $Contact_Home = $this->input->post('txt_cont_home');
+        $Contact_Mobile = $this->input->post('txt_cont_mobile');
+        $Email = $this->input->post('txt_email');
+        $Driving_Licence = $this->input->post('txt_dLicence');
+        $NIC = $this->input->post('txt_nic');
+        $Passport_No = $this->input->post('txt_passport');
+        $DOB = $this->input->post('txt_dob');
+        $Blood_Group = $this->input->post('cmb_blood');
+        $Religion = $this->input->post('cmb_religin');
+        $Civil_Status = $this->input->post('cmb_civil_status');
+
+        // Family
+        $Rel_Name = $this->input->post('txt_rel_name');
+        $Rel_Contact = $this->input->post('txt_rel_cont');
+        $No_of_Children = $this->input->post('txt_no_child');
+
+        // Emergency
+        $Emergency_Name = $this->input->post('txt_emergency_name');
+        $Emergency_Tel = $this->input->post('txt_emergency_tel');
+        $Emergency_Address = $this->input->post('txt_emergency_address');
+        $Emergency_Relationship = $this->input->post('txt_emergency_relationship');
+
+        // Bond Guarantor
+        $Guarantor_Name = $this->input->post('txt_bond_guarantor_name');
+        $Guarantor_Address = $this->input->post('txt_bond_guarantor_address');
+        $Guarantor_NIC = $this->input->post('txt_bond_guarantor_nic');
+        $Guarantor_Email = $this->input->post('txt_bond_guarantor_email');
+        $Guarantor_Contact = $this->input->post('txt_bond_guarantor_contact');
+        $Guarantor_Entitlement = $this->input->post('bond_guarantor_entitlement');
+        $Bond_End_Date = $this->input->post('bond_end_date');
+
+        // Referee 01
+        $Ref1_Name = $this->input->post('non_related_referee_name');
+        $Ref1_Designation = $this->input->post('non_related_referee_designation');
+        $Ref1_NIC = $this->input->post('non_related_referee_nic');
+        $Ref1_Contact = $this->input->post('non_related_referee_contact');
+        $Ref1_Email = $this->input->post('non_related_referee_email');
+        $Ref1_Address = $this->input->post('non_related_referee_address');
+
+        // Referee 02
+        $Ref2_Name = $this->input->post('non_related_referee_2_name');
+        $Ref2_Designation = $this->input->post('non_related_referee_2_designation');
+        $Ref2_NIC = $this->input->post('non_related_referee_2_nic');
+        $Ref2_Contact = $this->input->post('non_related_referee_2_contact');
+        $Ref2_Email = $this->input->post('non_related_referee_2_email');
+        $Ref2_Address = $this->input->post('non_related_referee_2_address');
+
+        // Login
+        $User_Name = $this->input->post('txt_user_name');
+        $User_Level = $this->input->post('cmb_user_level');
+
+        // Image Upload Logic
+        $Image = md5($Comp_No);
+        $config['upload_path'] = 'assets/images/Employees/';
+        $config['allowed_types'] = 'jpg|png|docx';
+        $config['max_size'] = 100000;
+        $config['max_width'] = 4000;
+        $config['max_height'] = 4000;
+        $config['file_name'] = $Image . ".jpg";
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('img_employee')) {
+            $upload_data = $this->upload->data();
+            $uploaded_file = $upload_data['file_name'];
+        } else {
+            $uploaded_file = null;
+            // Optionally handle error
+            $error = $this->upload->display_errors();
+            log_message('error', $error);
+        }
+
+        $DataID = $this->Db_model->getfilteredData("SELECT count(EmpID) AS ID FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' AND Is_Approve = '0'");
+        if ($DataID[0]->ID == 0) {
+            $DataIDEmp = $this->Db_model->getfilteredData("SELECT count(EmpID) AS ID FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' AND Is_Approve = '1'");
+            
+            if ($DataIDEmp[0]->ID == 0) {
+
+                // Echoing all variables
+                // echo $Comp_No . "<br>";
+                // echo $Full_Name . "<br>";
+                // echo $Name_Initials . "<br>";
+                // echo $Title . "<br>";
+                // echo $Gender . "<br>";
+                // echo $Appoint_Date . "<br>";
+                // echo $uploaded_file . "<br>";
+
+                // echo $ol . "<br>";
+                // echo $al . "<br>";
+                // echo $diploma . "<br>";
+                // echo $hnd . "<br>";
+                // echo $degree . "<br>";
+                // echo $master . "<br>";
+                // echo $mphil . "<br>";
+                // echo $phd . "<br>";
+                // echo $other . "<br>";
+
+                // echo $Bank_Name . "<br>";
+                // echo $Account_No . "<br>";
+
+                // echo $Address . "<br>";
+                // echo $City . "<br>";
+                // echo $District . "<br>";
+                // echo $Temp_Address . "<br>";
+                // echo $Temp_City . "<br>";
+                // echo $Temp_District . "<br>";
+                // echo $Contact_Home . "<br>";
+                // echo $Contact_Mobile . "<br>";
+                // echo $Email . "<br>";
+                // echo $Driving_Licence . "<br>";
+                // echo $NIC . "<br>";
+                // echo $Passport_No . "<br>";
+                // echo $DOB . "<br>";
+                // echo $Blood_Group . "<br>";
+                // echo $Religion . "<br>";
+                // echo $Civil_Status . "<br>";
+
+                // echo $Rel_Name . "<br>";
+                // echo $Rel_Contact . "<br>";
+                // echo $No_of_Children . "<br>";
+
+                // echo $Emergency_Name . "<br>";
+                // echo $Emergency_Tel . "<br>";
+                // echo $Emergency_Address . "<br>";
+                // echo $Emergency_Relationship . "<br>";
+
+                // echo $Guarantor_Name . "<br>";
+                // echo $Guarantor_Address . "<br>";
+                // echo $Guarantor_NIC . "<br>";
+                // echo $Guarantor_Email . "<br>";
+                // echo $Guarantor_Contact . "<br>";
+                // echo $Guarantor_Entitlement . "<br>";
+                // echo $Bond_End_Date . "<br>";
+
+                // echo $Ref1_Name . "<br>";
+                // echo $Ref1_Designation . "<br>";
+                // echo $Ref1_NIC . "<br>";
+                // echo $Ref1_Contact . "<br>";
+                // echo $Ref1_Email . "<br>";
+                // echo $Ref1_Address . "<br>";
+
+                // echo $Ref2_Name . "<br>";
+                // echo $Ref2_Designation . "<br>";
+                // echo $Ref2_NIC . "<br>";
+                // echo $Ref2_Contact . "<br>";
+                // echo $Ref2_Email . "<br>";
+                // echo $Ref2_Address . "<br>";
+
+                // echo $User_Name . "<br>";
+                // echo $User_Level . "<br>";
+
+
+                $data = array(
+                    'Cmp_ID' => $Comp_No,
+                    'Enroll_No' => $this->input->post('txt_enroll_no'),
+                    'EPFNO' => $this->input->post('txt_epf_no'),
+                    'EPF_CAT' => $this->input->post('cmb_epf_cat'),
+                    'EmpNo' => $this->input->post('txt_emp_no'),
+                    // 'Is_EPF' =>$this->input->post('cmb_if_epf'),
+                    'OCP_Code' => $this->input->post('txt_ocp_code'),
+                    'EMP_ST_ID' => $this->input->post('cmb_emp_status'),
+                    'Title' => $Title,
+                    'Emp_Full_Name' => $Full_Name,
+                    'Emp_Name_Int' => $Name_Initials,
+                    'Image' => $Image . ".jpg",
+                    'Gender' => $Gender,
+                    'Status' => 1,
+                    'Dep_ID' => $this->input->post('cmb_dep'),
+                    'Des_ID' => $this->input->post('cmb_desig'),
+                    'Grp_ID' => $this->input->post('cmb_group'),
+                    'RosterCode' => 'RS0001',
+                    'OTCode' => $this->input->post('cmb_ot_pattern'),
+                    'B_id' => $this->input->post('cmb_branch'),
+                    'BR1' => $this->input->post('txt_BG_Allowance1'),
+                    'BR2' => $this->input->post('txt_BG_Allowance2'),
+                    'ApointDate' => $Appoint_Date,
+                    'Permanent_Date' => $this->input->post('txt_permanent_date'),
+                    'Basic_Salary' => $this->input->post('txt_basic_sal'),
+                    'Incentive' => $this->input->post('txt_Incentive'),
+                    // 'Bnk_ID' => $this->input->post('cmb_bank'),
+                    'Bnk_ID' => $Bank_Name,
+                    'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
+                    'Account_no' => $Account_No,
+                    // 'Is_EPF' => $Is_EPF,
+                    'Address' => $Address,
+                    'District' => $District,
+                    'City' => $City,
+                    'Temp_Address' => $Temp_Address,
+                    'Temp_City' => $Temp_City,
+                    'Temp_District' => $Temp_District,
+                    'Tel_home' => $Contact_Home,
+                    'Tel_mobile' => $Contact_Mobile,
+                    'E_mail' => $Email,
+                    'Driving_Licence_No' => $Driving_Licence,
+                    'NIC' => $NIC,
+                    'Passport' => $Passport_No,
+                    'DOB' => $DOB,
+                    'Blood_group' => $Blood_Group,
+                    'Religion' => $Religion,
+                    'Civil_status' => $Civil_Status,
+                    'Relations_name' => $Rel_Name,
+                    'Relations_Tel' => $Rel_Contact,
+                    'No_Of_Child' => $No_of_Children,
+                    'Emergency_Contact_Name' => $Emergency_Name,
+                    'Emergency_Contact_Telephone' => $Emergency_Tel,
+                    'Emergency_Contact_Address' => $Emergency_Address,
+                    'Emergency_Contact_Relationship' => $Emergency_Relationship,
+                    'OL_Data' => $ol ? 1 : 0,
+                    'AL_Data' => $al ? 1 : 0,
+                    'Diploma_Data' => $diploma ? 1 : 0,
+                    'HND_Data' => $hnd ? 1 : 0,
+                    'Degree_Data' => $degree ? 1 : 0,
+                    'Master_Data' => $master ? 1 : 0,
+                    'Mphill_Data' => $mphil ? 1 : 0,
+                    'PHD_Data' => $phd ? 1 : 0,
+                    'Academic_Other_Data' => $other,
+                    'username' => $User_Name,
+                    'password' => hash('sha512', $this->input->post('txt_nic')),
+                    'Is_allow_login' => 1,
+                    'user_p_id' => $User_Level,
+
+
+
+
+
+
+                    // 'Tel_home' => $this->input->post('txt_cont_home'),
+                    // 'Tel_mobile' => $this->input->post('txt_cont_mobile'),
+                    // 'E_mail' => $this->input->post('txt_email'),
+                    // 'NIC' => $this->input->post('txt_nic'),
+                    // 'Passport' => $this->input->post('txt_passport'),
+                    // 'DOB' => $this->input->post('txt_dob'),
+                    // 'Religion' => $this->input->post('cmb_religin'),
+                    // 'Civil_status' => $this->input->post('cmb_civil_status'),
+                    // 'Blood_group' => $this->input->post('cmb_blood'),
+                    // 'Relations_name' => $this->input->post('txt_rel_name'),
+                    // 'Relations_Tel' => $this->input->post('txt_rel_cont'),
+                    // 'No_Of_Child' => $this->input->post('txt_no_child'),
+                    // 'Is_allow_login' => 1,
+                    // 'username' => $this->input->post('txt_user_name'),
+                    // 'Password' => hash('sha512', $Password),
+                    'View_Only' => $this->input->post('cmb_view_only'),
+                    'Is_Approve' => 1,
+                    // //            'user_p_id' => 2,
+                    // 'user_p_id' => $this->input->post('cmb_user_level'),
+                    // 'Cmp_ID' => 1,
+                    // 'Active_process' => 1,
+                );
+                $result = $this->Db_model->insertData("tbl_empmaster", $data);
+
+                $data_bond_guarantor = array(
+                    'CmpNo' => $Comp_No,
+                    'Name' => $Guarantor_Name,
+                    'NIC' => $Guarantor_NIC,
+                    'Email' => $Guarantor_Email,
+                    'Contact' => $Guarantor_Contact,
+                    'Address' => $Guarantor_Address,
+                    'BondEntitlement' => $Guarantor_Entitlement ? 1 : 0,
+                    'BondEndDate' => $Bond_End_Date
+                );
+                $result = $this->Db_model->insertData("tbl_bond_guarantor", $data_bond_guarantor);
+
+                $data_referee = array(
+                    'CmpNo' => $Comp_No,
+                    'Referee_Name' => $Ref1_Name,
+                    'Referee_Designation' => $Ref1_Designation,
+                    'Referee_NIC' => $Ref1_NIC,
+                    'Referee_Contact' => $Ref1_Contact,
+                    'Referee_Email' => $Ref1_Email,
+                    'Referee_Address' => $Ref1_Address
+
+                );
+
+                $result = $this->Db_model->insertData("tbl_referee", $data_referee);
+
+                $data_referee2 = array(
+                    'CmpNo' => $Comp_No,
+                    'Referee_Name' => $Ref2_Name,
+                    'Referee_Designation' => $Ref2_Designation,
+                    'Referee_NIC' => $Ref2_NIC,
+                    'Referee_Contact' => $Ref2_Contact,
+                    'Referee_Email' => $Ref2_Email,
+                    'Referee_Address' => $Ref2_Address
+                );
+                $result = $this->Db_model->insertData("tbl_referee", $data_referee2);
+
+                $this->session->set_flashdata('success_message', 'Employee Data Added Successfully');
+                redirect('/Employee_Management/ADD_Employees');
+
+            }else {
+                $this->session->set_flashdata('error_message', 'Employee Already Exists');
+                redirect('/Employee_Management/ADD_Employees');
+            }
+        }else {
+            $this->session->set_flashdata('error_message', 'Employee Already Exists');
+            redirect('/Employee_Management/ADD_Employees');
+        }
+        // Continue with saving to database, validation, etc.
     }
 }

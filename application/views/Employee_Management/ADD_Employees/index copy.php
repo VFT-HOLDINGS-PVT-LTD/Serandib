@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+
+
 <!--Add Employee
 
 @author Ashan Rathsara-->
@@ -44,6 +47,23 @@
             <div class="static-content-wrapper">
                 <div class="static-content">
                     <div class="page-content">
+                        <ol class="">
+
+                            <!--                                <li class=""><a href="#">HOME</a></li>
+                                                                <li class="active"><a href="#">EMPLOYEES</a></li>-->
+
+                        </ol>
+
+
+                        <!--                            <div class="page-tabs">
+                                                            <ul class="nav nav-tabs">
+                            
+                                                                <li class="active"><a data-toggle="tab" href="#tab1">EMPLOYEES</a></li>
+                            
+                            
+                            
+                                                            </ul>
+                                                        </div>-->
                         <div class="container-fluid">
 
 
@@ -54,20 +74,30 @@
                                         <div class="col-xs-12">
 
 
-                                            <div class="panel ">
+                                            <div class="panel">
                                                 <div style="background: rgb(59,105,129);
                                                          background: linear-gradient(60deg, rgba(59,105,129,1) 0%, rgba(54,120,150,0.644782913165266) 100%);border-radius: 30px;"
                                                     class="panel-heading">
                                                     <img style="height: 70px; float: left"
                                                         src="<?php echo base_url(); ?>assets/images/user-group.png">
                                                     <h2 style="color: #ffffff">EMPLOYEE</h2>
+                                                    <!--                                                        <div class="options">
+                                                                                                                    <ul class="nav nav-tabs">
+                                                        
+                                                                                                                        <li class="active"><a href="#horizontal-form" data-toggle="tab">MASTER</a></li>
+                                                                                                                        <li ><a href="#vertical-form" data-toggle="tab">PERSONAL DETAILS</a></li>
+                                                                                                                        <li><a href="#bordered-row" data-toggle="tab">OTHER DETAILS</a></li>
+                                                                                                                        <li><a href="#login" data-toggle="tab">LOGIN DETAILS</a></li>
+                                                                                                                        <li><a href="#tabular-form" data-toggle="tab">DOCUMENTS</a></li>
+                                                                                                                    </ul>
+                                                                                                                </div>-->
                                                 </div>
                                                 <div class="panel-body ">
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="horizontal-form">
-                                                            <form class="form-horizontal" id="frm_employee_update"
-                                                                name="frm_employee_update"
-                                                                action="<?php echo base_url(); ?>Employee_Management/Edit_Employees_Outside/update_emp"
+                                                            <form class="form-horizontal" id="frm_employee"
+                                                                name="frm_employee"
+                                                                action="<?php echo base_url(); ?>Employee_Management/ADD_Employees/insert_Data"
                                                                 method="POST" enctype="multipart/form-data">
 
                                                                 <div class="form-group col-md-12">
@@ -94,7 +124,6 @@
                                                                             No</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->EmpNo ?>"
                                                                                 id="txt_emp_no" name="txt_emp_no"
                                                                                 placeholder="Ex: 00001">
                                                                         </div>
@@ -107,7 +136,6 @@
                                                                             No</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Enroll_No ?>"
                                                                                 id="txt_enroll_no" name="txt_enroll_no"
                                                                                 placeholder="Ex: 1">
                                                                         </div>
@@ -120,7 +148,6 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
-                                                                                value="<?php echo $data_set[0]->Cmp_ID ?>"
                                                                                 placeholder="Ex: 00001">
 
                                                                         </div>
@@ -133,7 +160,6 @@
                                                                             No</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->EPFNO ?>"
                                                                                 id="txt_epf_no" name="txt_epf_no"
                                                                                 placeholder="Ex: 1">
                                                                         </div>
@@ -153,16 +179,13 @@
 
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
+                                                                                <?php foreach ($data_epf as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->EPF_CAT; ?>">
+                                                                                        <?php echo $t_data->EPF_CAT_Name; ?>
+                                                                                    </option>
 
-
-                                                                                <?php
-                                                                                foreach ($data_epf as $t_data) {
-                                                                                    if ($t_data->EPF_CAT == $data_set[0]->EPF_CAT) {
-                                                                                        echo "<option selected value='" . $t_data->EPF_CAT . "'>" . $t_data->EPF_CAT_Name . "</option>";
-                                                                                    } else {
-                                                                                        echo "<option value='" . $t_data->EPF_CAT . "'>" . $t_data->EPF_CAT_Name . "</option>";
-                                                                                    }
-                                                                                }
+                                                                                <?php }
                                                                                 ?>
 
                                                                             </select>
@@ -184,16 +207,13 @@
 
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
+                                                                                <?php foreach ($data_status as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->EMP_ST_ID; ?>">
+                                                                                        <?php echo $t_data->EMP_ST_Name; ?>
+                                                                                    </option>
 
-
-                                                                                <?php
-                                                                                foreach ($data_status as $t_data) {
-                                                                                    if ($t_data->EMP_ST_ID == $data_set[0]->EMP_ST_ID) {
-                                                                                        echo "<option selected value='" . $t_data->EMP_ST_ID . "'>" . $t_data->EMP_ST_Name . "</option>";
-                                                                                    } else {
-                                                                                        echo "<option value='" . $t_data->EMP_ST_ID . "'>" . $t_data->EMP_ST_Name . "</option>";
-                                                                                    }
-                                                                                }
+                                                                                <?php }
                                                                                 ?>
 
                                                                             </select>
@@ -209,19 +229,7 @@
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_if_epf"
                                                                                 name="cmb_if_epf">
-                                                                                <option
-                                                                                    value="<?php echo $data_set[0]->Is_EPF ?>">
 
-                                                                                    <?php
-                                                                                    if ($data_set[0]->Is_EPF == 0) {
-                                                                                        $En = "No";
-                                                                                    } elseif ($data_set[0]->Is_EPF == 1) {
-                                                                                        $En = "Yes";
-                                                                                    }
-
-                                                                                    echo $En;
-                                                                                    ?>
-                                                                                </option>
                                                                                 <option value="1">Yes</option>
                                                                                 <option value="0">No</option>
 
@@ -238,7 +246,6 @@
                                                                             Code</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->OCP_Code ?>"
                                                                                 id="txt_ocp_code" name="txt_ocp_code"
                                                                                 placeholder="Ex: 15">
                                                                         </div>
@@ -252,16 +259,15 @@
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
                                                                                 id="cmb_emp_title" name="cmb_emp_title">
-                                                                                <option
-                                                                                    value="<?php echo $data_set[0]->Title ?>">
-                                                                                    <?php echo $data_set[0]->Title ?>
-                                                                                </option>
+
                                                                                 <option value="Unknown.">Unknown
                                                                                 </option>
                                                                                 <option value="Mr.">Mr.</option>
                                                                                 <option value="Mrs.">Mrs.</option>
                                                                                 <option value="Miss.">Miss.</option>
                                                                                 <option value="Dr.">Dr.</option>
+
+
                                                                             </select>
                                                                         </div>
 
@@ -275,7 +281,6 @@
                                                                             Name</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Emp_Full_Name ?>"
                                                                                 id="txt_emp_name" name="txt_emp_name"
                                                                                 required=""
                                                                                 placeholder="Ex: Ashan Rathsara">
@@ -290,7 +295,6 @@
                                                                             Initials</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Emp_Name_Int ?>"
                                                                                 id="txt_emp_name_init"
                                                                                 name="txt_emp_name_init" required=""
                                                                                 placeholder="Ex: L.A.R">
@@ -310,8 +314,6 @@
                                                                                 <div class="fileinput-preview thumbnail mb20"
                                                                                     data-trigger="fileinput"
                                                                                     style="width: 100%; height: 150px;">
-                                                                                    <img
-                                                                                        src="<?php echo base_url() . 'assets/images/Employees/' . $data_set[0]->Image ?>">
                                                                                 </div>
                                                                                 <div>
                                                                                     <a href="#"
@@ -344,10 +346,7 @@
                                                                         <div class="col-sm-8">
                                                                             <select required="" class="form-control"
                                                                                 id="cmb_gender" name="cmb_gender">
-                                                                                <option
-                                                                                    value="<?php echo $data_set[0]->Gender ?>">
-                                                                                    <?php echo $data_set[0]->Gender ?>
-                                                                                </option>
+
                                                                                 <option value="Male">Male</option>
                                                                                 <option value="Female">Female</option>
                                                                             </select>
@@ -377,25 +376,23 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Designation</label>
+                                                                            class="col-sm-4 control-label">Designation
+                                                                            <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" required=""
                                                                                 id="cmb_desig" name="cmb_desig">
 
 
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                                <?php foreach ($data_desig as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->Des_ID; ?>">
+                                                                                        <?php echo $t_data->Desig_Name; ?>
+                                                                                    </option>
 
-
-                                                                                <?php
-                                                                                foreach ($data_DS as $t_data) {
-                                                                                    if ($t_data->Des_ID == $data_set[0]->Des_ID) {
-                                                                                        echo "<option selected value='" . $t_data->Des_ID . "'>" . $t_data->Desig_Name . "</option>";
-                                                                                    } else {
-                                                                                        echo "<option value='" . $t_data->Des_ID . "'>" . $t_data->Desig_Name . "</option>";
-                                                                                    }
-                                                                                }
+                                                                                <?php }
                                                                                 ?>
-
-
 
                                                                             </select>
                                                                         </div>
@@ -403,20 +400,22 @@
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Department</label>
+                                                                            class="col-sm-4 control-label">Department
+                                                                            <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" required=""
                                                                                 id="cmb_dep" name="cmb_dep">
 
 
-                                                                                <?php
-                                                                                foreach ($data_DP as $t_data) {
-                                                                                    if ($t_data->Dep_ID == $data_set[0]->Dep_ID) {
-                                                                                        echo "<option selected value='" . $t_data->Dep_ID . "'>" . $t_data->Dep_Name . "</option>";
-                                                                                    } else {
-                                                                                        echo "<option value='" . $t_data->Dep_ID . "'>" . $t_data->Dep_Name . "</option>";
-                                                                                    }
-                                                                                }
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                                <?php foreach ($data_dep as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->Dep_ID; ?>">
+                                                                                        <?php echo $t_data->Dep_Name; ?>
+                                                                                    </option>
+
+                                                                                <?php }
                                                                                 ?>
 
                                                                             </select>
@@ -426,19 +425,23 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Employee
-                                                                            Group</label>
+                                                                            Group <span
+                                                                                style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" required=""
-                                                                                id="cmb_group" name="cmb_group">
+                                                                            <select class="form-control"
+                                                                                required="required" id="cmb_group"
+                                                                                name="cmb_group">
 
-                                                                                <?php
-                                                                                foreach ($data_Grp as $t_data) {
-                                                                                    if ($t_data->Grp_ID == $data_set[0]->Grp_ID) {
-                                                                                        echo "<option selected value='" . $t_data->Grp_ID . "'>" . $t_data->EmpGroupName . "</option>";
-                                                                                    } else {
-                                                                                        echo "<option value='" . $t_data->Grp_ID . "'>" . $t_data->EmpGroupName . "</option>";
-                                                                                    }
-                                                                                }
+
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                                <?php foreach ($data_grp as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->Grp_ID; ?>">
+                                                                                        <?php echo $t_data->EmpGroupName; ?>
+                                                                                    </option>
+
+                                                                                <?php }
                                                                                 ?>
 
                                                                             </select>
@@ -521,14 +524,13 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Appoint
-                                                                            Date</label>
+                                                                            class="col-sm-4 control-label">Appoint Date
+                                                                            <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->ApointDate ?>"
                                                                                 id="txt_appoint_date"
                                                                                 name="txt_appoint_date" required=""
-                                                                                placeholder="Ex: 35500">
+                                                                                placeholder="Ex: Select Date">
                                                                         </div>
 
                                                                     </div>
@@ -541,7 +543,6 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_permanent_date"
-                                                                                value="<?php echo $data_set[0]->Permanent_Date ?>"
                                                                                 name="txt_permanent_date"
                                                                                 placeholder="Select Date">
                                                                         </div>
@@ -701,7 +702,6 @@
                                                                             Salary</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Basic_Salary ?>"
                                                                                 id="txt_basic_sal" name="txt_basic_sal"
                                                                                 placeholder="Ex: 35500">
                                                                         </div>
@@ -715,7 +715,6 @@
                                                                             class="col-sm-4 control-label">Incentive</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Incentive ?>"
                                                                                 id="txt_Incentive" name="txt_Incentive"
                                                                                 placeholder="Ex: 15500">
                                                                         </div>
@@ -729,7 +728,6 @@
                                                                             Allowance 1</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->BR1 ?>"
                                                                                 id="txt_BG_Allowance"
                                                                                 name="txt_BG_Allowance1"
                                                                                 placeholder="Ex: 5500">
@@ -742,7 +740,6 @@
                                                                             Allowance 2 </label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->BR2 ?>"
                                                                                 id="txt_BG_Allowance"
                                                                                 name="txt_BG_Allowance2"
                                                                                 placeholder="Ex: 5500">
@@ -760,14 +757,15 @@
                                                                             <select class="form-control" id="cmb_bank"
                                                                                 name="cmb_bank">
 
-                                                                                <?php
-                                                                                foreach ($data_bank as $t_data) {
-                                                                                    if ($t_data->Bnk_ID == $data_set[0]->Bnk_ID) {
-                                                                                        echo "<option selected value='" . $t_data->Bnk_ID . "'>" . $t_data->bank_name . "</option>";
-                                                                                    } else {
-                                                                                        echo "<option value='" . $t_data->Bnk_ID . "'>" . $t_data->bank_name . "</option>";
-                                                                                    }
-                                                                                }
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                                <?php foreach ($data_bank as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->Bnk_ID; ?>">
+                                                                                        <?php echo $t_data->bank_name; ?>
+                                                                                    </option>
+
+                                                                                <?php }
                                                                                 ?>
 
                                                                             </select>
@@ -782,7 +780,6 @@
                                                                             ID</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Bnk_Br_ID ?>"
                                                                                 id="txt_B_Branch" name="txt_B_Branch"
                                                                                 placeholder="Ex: 023">
                                                                         </div>
@@ -794,7 +791,6 @@
                                                                             No</label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
-                                                                                value="<?php echo $data_set[0]->Account_no ?>"
                                                                                 id="txt_account" name="txt_account"
                                                                                 placeholder="Ex: 112457854">
                                                                         </div>
@@ -822,7 +818,6 @@
                                                                                 Address</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->Address ?>"
                                                                                     id="txt_address" name="txt_address"
                                                                                     placeholder="Ex: No: 123, Street, City">
                                                                             </div>
@@ -834,7 +829,6 @@
                                                                                 class="col-sm-4 control-label">City</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->City ?>"
                                                                                     id="txt_city" name="txt_city"
                                                                                     placeholder="Ex: No: 123, Street, City">
                                                                             </div>
@@ -849,10 +843,7 @@
                                                                                     id="cmb_district"
                                                                                     name="cmb_district">
 
-                                                                                    <option
-                                                                                        value="<?php echo $data_set[0]->District ?>">
-                                                                                        <?php echo $data_set[0]->District ?>
-                                                                                    </option>
+                                                                                    <option value="">--Select--</option>
                                                                                     <option value="Unknown">Unknown
                                                                                     </option>
                                                                                     <option value="Ampara">Ampara
@@ -915,8 +906,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_tmp_address"
                                                                                     name="txt_tmp_address"
-                                                                                    placeholder="Ex: No: 123, Street, City"
-                                                                                    value="<?php echo $data_set[0]->Temp_Address ?>">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
 
                                                                         </div>
@@ -929,8 +919,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_tmp_city"
                                                                                     name="txt_tmp_city"
-                                                                                    placeholder="Ex: No: 123, Street, City"
-                                                                                    value="<?php echo $data_set[0]->Temp_City ?>">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
 
                                                                         </div>
@@ -944,10 +933,7 @@
                                                                                     id="cmb_tmp_district"
                                                                                     name="cmb_tmp_district">
 
-                                                                                    <option
-                                                                                        value="<?php echo $data_set[0]->Temp_District ?>">
-                                                                                        <?php echo $data_set[0]->Temp_District ?>
-                                                                                    </option>
+                                                                                    <option value="">--Select--</option>
                                                                                     <option value="Unknown">Unknown
                                                                                     </option>
                                                                                     <option value="Ampara">Ampara
@@ -1009,7 +995,6 @@
                                                                                 No (Home)</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->Tel_home ?>"
                                                                                     id="txt_cont_home"
                                                                                     name="txt_cont_home"
                                                                                     placeholder="Ex: 0112 234 567">
@@ -1022,7 +1007,6 @@
                                                                                 No (Mobile)</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->Tel_mobile ?>"
                                                                                     id="txt_cont_mobile"
                                                                                     name="txt_cont_mobile"
                                                                                     placeholder="Ex: 071 733 8110">
@@ -1034,7 +1018,6 @@
                                                                                 class="col-sm-4 control-label">Email</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->E_mail ?>"
                                                                                     id="txt_email" name="txt_email"
                                                                                     placeholder="Ex: ashan.rathsara@gmail.com">
                                                                             </div>
@@ -1048,8 +1031,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_dLicence"
                                                                                     name="txt_dLicence"
-                                                                                    placeholder="B1234567"
-                                                                                    value="<?php echo $data_set[0]->Driving_Licence_No ?>">
+                                                                                    placeholder="B1234567">
                                                                             </div>
 
                                                                         </div>
@@ -1062,7 +1044,6 @@
                                                                                 class="col-sm-4 control-label">NIC</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" required=""
-                                                                                    value="<?php echo $data_set[0]->NIC ?>"
                                                                                     class="form-control" id="txt_nic"
                                                                                     name="txt_nic"
                                                                                     placeholder="Ex: 923244786V">
@@ -1074,9 +1055,7 @@
                                                                                 class="col-sm-4 control-label">Passport
                                                                                 No</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text"
-                                                                                    value="<?php echo $data_set[0]->Passport ?>"
-                                                                                    class="form-control"
+                                                                                <input type="text" class="form-control"
                                                                                     id="txt_passport"
                                                                                     name="txt_passport"
                                                                                     placeholder="Ex: 923244786">
@@ -1090,7 +1069,6 @@
                                                                                 Birth</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->DOB ?>"
                                                                                     id="txt_dob" name="txt_dob">
                                                                             </div>
 
@@ -1103,9 +1081,7 @@
                                                                                 <select class="form-control"
                                                                                     id="cmb_blood" name="cmb_blood">
 
-                                                                                    <option
-                                                                                        value="<?php echo $data_set[0]->Blood_group ?>">
-                                                                                        <?php echo $data_set[0]->Blood_group ?>
+                                                                                    <option value="">--Select--</option>
                                                                                     <option value="A+">A+</option>
                                                                                     <option value="A-">A-</option>
                                                                                     <option value="B+">B+</option>
@@ -1129,10 +1105,7 @@
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_religin" name="cmb_religin">
-                                                                                    <option
-                                                                                        value="<?php echo $data_set[0]->Religion ?>">
-                                                                                        <?php echo $data_set[0]->Religion ?>
-                                                                                    </option>
+                                                                                    <option value="">--Select--</option>
                                                                                     <option value="Buddhist">Buddhist
                                                                                     </option>
                                                                                     <option value="Hindu">Hindu
@@ -1160,10 +1133,7 @@
                                                                                     id="cmb_civil_status"
                                                                                     name="cmb_civil_status">
 
-                                                                                    <option
-                                                                                        value="<?php echo $data_set[0]->Civil_status ?>">
-                                                                                        <?php echo $data_set[0]->Civil_status ?>
-                                                                                    </option>
+                                                                                    <option value="">--Select--</option>
                                                                                     <option value="SINGLE">SINGLE
                                                                                     </option>
                                                                                     <option value="MARRIED">MARRIED
@@ -1198,7 +1168,6 @@
                                                                                 Name</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->Relations_name ?>"
                                                                                     id="txt_rel_name"
                                                                                     name="txt_rel_name"
                                                                                     placeholder="Mr. Ashan Rathsara">
@@ -1212,7 +1181,6 @@
                                                                                 Contact No</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->Relations_Tel ?>"
                                                                                     id="txt_rel_cont"
                                                                                     name="txt_rel_cont"
                                                                                     placeholder="Mr. 071 111 222">
@@ -1227,7 +1195,6 @@
                                                                                 Children</label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    value="<?php echo $data_set[0]->No_Of_Child ?>"
                                                                                     id="txt_no_child"
                                                                                     name="txt_no_child"
                                                                                     placeholder="Ex: 4">
@@ -1259,8 +1226,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_name"
                                                                                     name="txt_emergency_name"
-                                                                                    placeholder="Mr. Nimal Perera"
-                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Name ?>">
+                                                                                    placeholder="Mr. Nimal Perera">
                                                                             </div>
 
                                                                         </div>
@@ -1274,8 +1240,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_tel"
                                                                                     name="txt_emergency_tel"
-                                                                                    placeholder="071 111 222"
-                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Telephone ?>">
+                                                                                    placeholder="071 111 222">
                                                                             </div>
                                                                         </div>
 
@@ -1287,8 +1252,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_address"
                                                                                     name="txt_emergency_address"
-                                                                                    placeholder="Ex: No: 123, Street, City"
-                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Address ?>">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
                                                                         </div>
 
@@ -1300,8 +1264,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_relationship"
                                                                                     name="txt_emergency_relationship"
-                                                                                    placeholder="Ex: Father"
-                                                                                    value="<?php echo $data_set[0]->Emergency_Contact_Relationship ?>">
+                                                                                    placeholder="Ex: Father">
                                                                             </div>
                                                                         </div>
 
@@ -1325,8 +1288,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_name"
                                                                                     name="txt_bond_guarantor_name"
-                                                                                    placeholder="Mr. Nimal Perera"
-                                                                                    value="<?php echo $bond_data[0]->Name ?>">
+                                                                                    placeholder="Mr. Nimal Perera">
                                                                             </div>
                                                                         </div>
 
@@ -1338,8 +1300,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_address"
                                                                                     name="txt_bond_guarantor_address"
-                                                                                    placeholder="Ex: No: 123, Street, City"
-                                                                                    value="<?php echo $bond_data[0]->Address ?>">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
                                                                         </div>
 
@@ -1350,8 +1311,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_nic"
                                                                                     name="txt_bond_guarantor_nic"
-                                                                                    placeholder="Ex: 123456789V"
-                                                                                    value="<?php echo $bond_data[0]->NIC ?>">
+                                                                                    placeholder="Ex: 123456789V">
                                                                             </div>
                                                                         </div>
 
@@ -1363,8 +1323,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_email"
                                                                                     name="txt_bond_guarantor_email"
-                                                                                    placeholder="nimal@gmail.com"
-                                                                                    value="<?php echo $bond_data[0]->Email ?>">
+                                                                                    placeholder="nimal@gmail.com">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -1375,8 +1334,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_contact"
                                                                                     name="txt_bond_guarantor_contact"
-                                                                                    placeholder="Ex: 071 111 222"
-                                                                                    value="<?php echo $bond_data[0]->Contact ?>">
+                                                                                    placeholder="Ex: 071 111 222">
                                                                             </div>
                                                                         </div>
 
@@ -1388,11 +1346,7 @@
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
                                                                                             name="bond_guarantor_entitlement"
-                                                                                            id="bond_guarantor_entitlement"
-                                                                                            <?php if (!empty($bond_data[0]->BondEntitlement)) {
-                                                                                                echo 'checked';
-                                                                                            }
-                                                                                            ?>></label>
+                                                                                            id="bond_guarantor_entitlement"></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1406,8 +1360,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="bond_end_date"
                                                                                     placeholder="Select Date"
-                                                                                    name="bond_end_date"
-                                                                                    value="<?php echo $bond_data[0]->BondEndDate ?>">
+                                                                                    name="bond_end_date">">
                                                                             </div>
                                                                         </div>
 
@@ -1429,8 +1382,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_name"
                                                                                     name="non_related_referee_name"
-                                                                                    placeholder="Mr. Nimal Perera"
-                                                                                    value="<?php echo $referee_data[0]->Referee_Name ?>">
+                                                                                    placeholder="Mr. Nimal Perera">
                                                                             </div>
                                                                         </div>
 
@@ -1443,8 +1395,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_designation"
                                                                                     name="non_related_referee_designation"
-                                                                                    placeholder="Manager"
-                                                                                    value="<?php echo $referee_data[0]->Referee_Designation ?>">
+                                                                                    placeholder="Manager">
                                                                             </div>
                                                                         </div>
 
@@ -1456,8 +1407,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_nic"
                                                                                     name="non_related_referee_nic"
-                                                                                    placeholder="9456565656v"
-                                                                                    value="<?php echo $referee_data[0]->Referee_NIC ?>">
+                                                                                    placeholder="9456565656v">
                                                                             </div>
                                                                         </div>
 
@@ -1470,8 +1420,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_contact"
                                                                                     name="non_related_referee_contact"
-                                                                                    placeholder="071 111 222"
-                                                                                    value="<?php echo $referee_data[0]->Referee_Contact ?>">
+                                                                                    placeholder="071 111 222">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -1481,8 +1430,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_email"
                                                                                     name="non_related_referee_email"
-                                                                                    placeholder="nimal@gmail.com"
-                                                                                    value="<?php echo $referee_data[0]->Referee_Email ?>">
+                                                                                    placeholder="nimal@gmail.com">
                                                                             </div>
                                                                         </div>
 
@@ -1495,8 +1443,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_address"
                                                                                     name="non_related_referee_address"
-                                                                                    placeholder="Ex: No: 123, Street, City"
-                                                                                    value="<?php echo $referee_data[0]->Referee_Address ?>">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
                                                                         </div>
 
@@ -1518,8 +1465,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_name"
                                                                                     name="non_related_referee_2_name"
-                                                                                    placeholder="Mr.Nimal Perera"
-                                                                                    value="<?php echo $referee_data[1]->Referee_Name ?>">
+                                                                                    placeholder="Mr.Nimal Perera">
                                                                             </div>
                                                                         </div>
 
@@ -1532,8 +1478,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_designation"
                                                                                     name="non_related_referee_2_designation"
-                                                                                    placeholder="Manager"
-                                                                                    value="<?php echo $referee_data[1]->Referee_Designation ?>">
+                                                                                    placeholder="Manager">
                                                                             </div>
                                                                         </div>
 
@@ -1545,8 +1490,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_nic"
                                                                                     name="non_related_referee_2_nic"
-                                                                                    placeholder="9456565656v"
-                                                                                    value="<?php echo $referee_data[1]->Referee_NIC ?>">
+                                                                                    placeholder="9456565656v">
                                                                             </div>
                                                                         </div>
 
@@ -1559,8 +1503,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_contact"
                                                                                     name="non_related_referee_2_contact"
-                                                                                    placeholder="071 111 222"
-                                                                                    value="<?php echo $referee_data[1]->Referee_Contact ?>">
+                                                                                    placeholder="071 111 222">
                                                                             </div>
                                                                         </div>
 
@@ -1571,8 +1514,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_email"
                                                                                     name="non_related_referee_2_email"
-                                                                                    placeholder="nimal@gmail.com"
-                                                                                    value="<?php echo $referee_data[1]->Referee_Email ?>">
+                                                                                    placeholder="nimal@gmail.com">
                                                                             </div>
                                                                         </div>
 
@@ -1584,8 +1526,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_address"
                                                                                     name="non_related_referee_2_address"
-                                                                                    placeholder="Ex: No: 123, Street, City"
-                                                                                    value="<?php echo $referee_data[1]->Referee_Address ?>">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1613,7 +1554,6 @@
                                                                                     <input type="text"
                                                                                         autocomplete="off"
                                                                                         class="form-control"
-                                                                                        value="<?php echo $data_set[0]->username ?>"
                                                                                         id="txt_user_name"
                                                                                         name="txt_user_name"
                                                                                         placeholder="Ashan">
@@ -1630,41 +1570,24 @@
                                                                                         id="cmb_user_level"
                                                                                         name="cmb_user_level">
 
+                                                                                        <option value="" default>--
+                                                                                            Select --</option>
+                                                                                        <?php foreach ($data_u_lvl as $t_data) { ?>
+                                                                                            <option
+                                                                                                value="<?php echo $t_data->user_level_id; ?>">
+                                                                                                <?php echo $t_data->user_level_name; ?>
+                                                                                            </option>
 
-                                                                                        <?php
-                                                                                        foreach ($data_u_lvl as $t_data) {
-                                                                                            if ($t_data->user_level_id == $data_set[0]->user_level_id) {
-                                                                                                echo "<option selected value='" . $t_data->user_level_id . "'>" . $t_data->user_level_name . "</option>";
-                                                                                            } else {
-                                                                                                echo "<option value='" . $t_data->user_level_id . "'>" . $t_data->user_level_name . "</option>";
-                                                                                            }
-                                                                                        }
+                                                                                        <?php }
                                                                                         ?>
+
 
                                                                                     </select>
                                                                                 </div>
 
 
                                                                             </div>
-                                                                            <div class="form-group col-sm-6">
-                                                                                <div class="form-group icheck-flat">
-                                                                                    <label
-                                                                                        class="col-sm-4 control-label">Is
-                                                                                        Allow Login</label>
-                                                                                    <div class="col-sm-8 icheck-flat">
-
-                                                                                        <label
-                                                                                            class="checkbox-inline icheck ">
-                                                                                            <input type="checkbox"
-                                                                                                id="Is_Allow"
-                                                                                                name="Is_Allow" <?php if (!empty($data_set[0]->Is_allow_login)) {
-                                                                                                    echo 'checked';
-                                                                                                }
-                                                                                                ?>>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                                                            
                                                                         </div>
 
 
@@ -1676,7 +1599,7 @@
                                                                                 <textarea type="text"
                                                                                     class="form-control"
                                                                                     id="txt_remarks" name="txt_remarks"
-                                                                                    placeholder="Ex: Remarks"><?php echo $data_set[0]->Remarks ?></textarea>
+                                                                                    placeholder="Ex: Remarks"></textarea>
                                                                             </div>
 
                                                                         </div>
@@ -1687,7 +1610,7 @@
                                                                                 <textarea type="text"
                                                                                     class="form-control" id="txt_high"
                                                                                     name="txt_high"
-                                                                                    placeholder="Ex:"><?php echo $data_set[0]->highlights ?></textarea>
+                                                                                    placeholder="Ex:"></textarea>
                                                                             </div>
 
                                                                         </div>
@@ -1704,23 +1627,8 @@
                                                                 <br>
 
                                                                 <!--submit button-->
-                                                                <div class="row">
-                                                                    <div class="col-sm-8 col-sm-offset-2">
-                                                                        <button
-                                                                            style="background-color: #69bf53; padding: 5px 32px; font-size: 18px;"
-                                                                            type="submit" id="submit" name="submit"
-                                                                            class="btn-success  btn fa fa-check">&nbsp;&nbsp;SAVE
-                                                                            & APPROVE</button>
-                                                                        <!-- <button
-                                                                            style="padding: 5px 32px; font-size: 18px;"
-                                                                            type="submit" id="submit" name="submit"
-                                                                            class="btn-primary  btn fa fa-check">&nbsp;&nbsp;APPROVE</button> -->
-                                                                        <button
-                                                                            style="padding: 5px 20px; font-size: 18px;"
-                                                                            type="button" id="Cancel" name="Cancel"
-                                                                            class="btn btn-danger-alt fa fa-times-circle">&nbsp;&nbsp;CANCEL</button>
-                                                                    </div>
-                                                                </div>
+                                                                                                                                <?php $this->load->view('template/btn_submit.php'); ?>
+
                                                                 <!--end submit-->
 
                                                             </form>
@@ -1758,19 +1666,18 @@
 
             <!-- Load site level scripts -->
 
-            <?php $this->load->view('template/js.php'); ?>
+            <?php $this->load->view('template/js.php'); ?> <!-- Initialize scripts for this page-->
+
 
             <!-- Initialize scripts for this page-->
             <script src="<?php echo base_url(); ?>assets/plugins/form-jasnyupload/fileinput.min.js"></script>
             <!-- End loading page level scripts-->
-            <!-- Initialize scripts for this page-->
-
             <!-- End loading page level scripts-->
             <!--Ajax-->
             <!--<script src="<?php echo base_url(); ?>system_js/Master/Employee.js"></script>-->
 
-            <script>
 
+            <script>
                 $('#txt_appoint_date').datepicker({
                     format: "dd/mm/yyyy",
                     "todayHighlight": true,
@@ -1797,9 +1704,8 @@
                 }).on('changeDate', function (ev) {
                     $(this).datepicker('hide');
                 });
-
-
             </script>
+
 
             <script>
                 $(document).ready(function () {
@@ -1838,11 +1744,131 @@
             <!--JQuary Validation-->
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $("#frm_employee_update").validate();
-                    $("#spnmessage").hide("shake", { times: 4 }, 5000);
+                    $("#frm_employee").validate();
+                    $("#spnmessage").hide("shake", {
+                        times: 5
+                    }, 3500);
                 });
             </script>
 
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+
+                    //the min chars for username
+                    var min_chars = 3;
+
+                    //result texts
+                    var characters_error = 'Minimum amount of chars is 3';
+                    var checking_html = 'Checking...';
+
+                    //when button is clicked
+                    $('#check_username_availability').click(function () {
+                        //run the character number check
+                        if ($('#txt_emp_no').val().length < min_chars) {
+                            //if it's bellow the minimum show characters_error text '
+                            $('#username_availability_result').html(characters_error);
+                        } else {
+                            //else show the cheking_text and run the function to check
+                            $('#username_availability_result').html(checking_html);
+                            check_availability();
+                        }
+                    });
+
+                });
+
+                //function to check username availability
+                function check_availability() {
+
+                    //get the username
+                    var username = $('#txt_emp_no').val();
+
+                    //use ajax to run the check
+                    $.post(baseurl + "Employee_Management/ADD_Employees/check_emp", {
+                        EmpNo: username
+                    },
+                        function (result) {
+                            //if the result is 1
+                            if (result == 1) {
+                                //show that the username is available
+                                $('#username_availability_result').html(username + ' is Available');
+                            } else {
+                                //show that the username is NOT available
+                                $('#username_availability_result').html(username + ' is not Available');
+                            }
+                        });
+
+                }
+            </script>
+
+            <script>
+                // JavaScript to handle the display of the department div when "Common" is selected
+                document.getElementById("cmb_percentage").addEventListener("change", function () {
+                    var departmentDiv = document.getElementById("departmentDiv");
+
+                    // Check if "Common" is selected
+                    if (this.value === "Common") {
+                        departmentDiv.style.display = "block";  // Show the department div
+                    } else {
+                        departmentDiv.style.display = "none";  // Hide the department div
+                    }
+                });
+
+                document.getElementById("cmb_percentage").addEventListener("change", function () {
+                    var departmentDiv1 = document.getElementById("departmentDiv1");
+
+                    // Check if "Common" is selected
+                    if (this.value === "Common") {
+                        departmentDiv1.style.display = "block";  // Show the department div
+                    } else {
+                        departmentDiv1.style.display = "none";  // Hide the department div
+                    }
+                });
+
+                // JavaScript to handle adding the department and percentage to the table
+                document.getElementById("btn_add_department").addEventListener("click", function () {
+                    var departmentSelect = document.getElementById("cmb_dep1"); // Ensure this ID matches your department select input
+                    var percentageSelect = document.getElementById("cmb_percentage");
+
+                    var departmentId = departmentSelect.value;
+                    var departmentName = departmentSelect.options[departmentSelect.selectedIndex].text;
+                    var percentage = percentageSelect.value;
+
+                    // Check if both department and percentage are selected
+                    if (departmentId !== "") {
+                        var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
+
+                        // Create a new row and populate it with the department name and percentage
+                        var newRow = table.insertRow();
+                        var cell1 = newRow.insertCell(0);
+                        var cell2 = newRow.insertCell(1);
+                        var cell3 = newRow.insertCell(2);
+
+                        // Add department name to the first column
+                        cell1.innerHTML = departmentName;
+
+                        // Add an input field to the second column for percentage, pre-filled with the selected percentage
+                        cell2.innerHTML = `<input type="text" class="form-control" value="" />`;
+
+                        // Add an action button to the third column (remove button)
+                        cell3.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+
+                        // Clear the selection after adding to the table
+                        departmentSelect.value = "";
+                        percentageSelect.value = "";
+                    } else {
+                        alert("Please select both department and percentage!");
+                    }
+                });
+
+                // Function to remove a row from the table
+                function removeRow(button) {
+                    var row = button.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
+                }
+
+            </script>
 
 </body>
 

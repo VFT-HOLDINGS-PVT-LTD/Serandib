@@ -61,7 +61,22 @@
                                     <div class="row">
                                         <div class="col-xs-12">
 
+                                            <!--success Message-->
+                                            <?php if (isset($_SESSION['success_message']) && $_SESSION['success_message'] != '') { ?>
+                                                <div id="spnmessage" class="alert alert-dismissable alert-success">
+                                                    <strong>Success !</strong>
+                                                    <?php echo $_SESSION['success_message'] ?>
+                                                </div>
+                                            <?php } ?>
 
+                                            <!--Error Message-->
+                                            <?php if (isset($_SESSION['error_message']) && $_SESSION['error_message'] != '') { ?>
+                                                <div id="spnmessage"
+                                                    class="alert alert-dismissable alert-danger error_redirect">
+                                                    <strong>Error !</strong>
+                                                    <?php echo $_SESSION['error_message'] ?>
+                                                </div>
+                                            <?php } ?>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="panel panel-primary">
@@ -81,7 +96,7 @@
                                                                                 <th>CMP ID</th>
                                                                                 <th>FULL NAME</th>
                                                                                 <th>INITIALS WITH NAME</th>
-                                                                                
+
                                                                                 <th>GENDER</th>
                                                                                 <th>NIC</th>
                                                                                 <th>MOBILE NO</th>

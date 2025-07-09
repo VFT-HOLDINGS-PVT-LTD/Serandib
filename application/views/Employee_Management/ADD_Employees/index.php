@@ -121,11 +121,11 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Employee
-                                                                            No</label>
+                                                                            No <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="number" class="form-control"
                                                                                 id="txt_emp_no" name="txt_emp_no"
-                                                                                placeholder="Ex: 00001" >
+                                                                                placeholder="Ex: 00001" required="">
                                                                         </div>
 
                                                                     </div>
@@ -133,22 +133,22 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Enroll
-                                                                            No</label>
+                                                                            No <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="number" class="form-control"
                                                                                 id="txt_enroll_no" name="txt_enroll_no"
-                                                                                placeholder="Ex: 1">
+                                                                                placeholder="Ex: 1" required="">
                                                                         </div>
 
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Company No
+                                                                            class="col-sm-4 control-label">Company No <span style="color: red;">*</span>
                                                                         </label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
-                                                                                placeholder="Ex: 00001">
+                                                                                placeholder="Ex: 00001" required="">
 
                                                                         </div>
 
@@ -157,7 +157,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">EPF
-                                                                            No</label>
+                                                                            No </label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_epf_no" name="txt_epf_no"
@@ -198,11 +198,11 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Employee
-                                                                            Status</label>
+                                                                            Status <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
                                                                                 id="cmb_emp_status"
-                                                                                name="cmb_emp_status">
+                                                                                name="cmb_emp_status" required="">
 
 
                                                                                 <option value="" default>-- Select --
@@ -225,11 +225,11 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">EPF
-                                                                            Liable</label>
+                                                                            Liable <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_if_epf"
-                                                                                name="cmb_if_epf">
-
+                                                                                name="cmb_if_epf" required="">
+                                                                                <option value="">-- Select --</option>
                                                                                 <option value="1">Yes</option>
                                                                                 <option value="0">No</option>
 
@@ -255,11 +255,12 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Title</label>
+                                                                            class="col-sm-4 control-label">Title <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
-                                                                                id="cmb_emp_title" name="cmb_emp_title">
-
+                                                                                id="cmb_emp_title" name="cmb_emp_title" required="">
+                                                                                <option value="" >-- Select --
+                                                                                </option>
                                                                                 <option value="Unknown.">Unknown
                                                                                 </option>
                                                                                 <option value="Mr.">Mr.</option>
@@ -278,7 +279,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Full
-                                                                            Name</label>
+                                                                            Name <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name" name="txt_emp_name"
@@ -292,7 +293,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Name With
-                                                                            Initials</label>
+                                                                            Initials <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name_init"
@@ -306,7 +307,7 @@
                                                                     <div class="form-group col-sm-6">
 
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Image</label>
+                                                                            class="col-sm-4 control-label">Image <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-6">
                                                                             <div class="fileinput fileinput-new"
                                                                                 style="width: 100%;"
@@ -342,11 +343,11 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Gender</label>
+                                                                            class="col-sm-4 control-label">Gender <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select required="" class="form-control"
                                                                                 id="cmb_gender" name="cmb_gender">
-
+                                                                                <option value="" default>-- Select --
                                                                                 <option value="Male">Male</option>
                                                                                 <option value="Female">Female</option>
                                                                             </select>
@@ -355,7 +356,7 @@
                                                                     </div>
 
 
-                                                                    <div class="form-group col-sm-6 ">
+                                                                    <!-- <div class="form-group col-sm-6 ">
                                                                         <label
                                                                             class="col-sm-4 control-label">Status</label>
                                                                         <div class="col-sm-8">
@@ -372,7 +373,7 @@
 
                                                                         </div>
 
-                                                                    </div>
+                                                                    </div> -->
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
@@ -450,7 +451,7 @@
                                                                     </div>
 
 
-                                                                    <div class="form-group col-sm-6">
+                                                                    <!-- <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Roster
                                                                             Pattern</label>
@@ -470,18 +471,19 @@
                                                                             </select>
                                                                         </div>
 
-                                                                    </div>
+                                                                    </div> -->
 
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Branch</label>
+                                                                            class="col-sm-4 control-label">Branch<span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_branch"
-                                                                                name="cmb_branch">
+                                                                                name="cmb_branch" required="">
 
 
-
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
                                                                                 <?php
                                                                                 foreach ($data_branch as $t_data) {
                                                                                     if ($t_data->B_id == $data_set[0]->B_id) {
@@ -752,10 +754,10 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Bank</label>
+                                                                            class="col-sm-4 control-label">Bank <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_bank"
-                                                                                name="cmb_bank">
+                                                                                name="cmb_bank" required="">
 
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
@@ -788,11 +790,11 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Account
-                                                                            No</label>
+                                                                            No <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_account" name="txt_account"
-                                                                                placeholder="Ex: 112457854">
+                                                                                placeholder="Ex: 112457854" required="">
                                                                         </div>
                                                                     </div>
 
@@ -815,33 +817,33 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Full
-                                                                                Address</label>
+                                                                                Address <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_address" name="txt_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City" required="">
                                                                             </div>
 
                                                                         </div>
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">City</label>
+                                                                                class="col-sm-4 control-label">City <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_city" name="txt_city"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City" required="">
                                                                             </div>
 
                                                                         </div>
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">District</label>
+                                                                                class="col-sm-4 control-label">District <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_district"
-                                                                                    name="cmb_district">
+                                                                                    name="cmb_district" required="">
 
                                                                                     <option value="">--Select--</option>
                                                                                     <option value="Unknown">Unknown
@@ -1004,22 +1006,22 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Contact
-                                                                                No (Mobile)</label>
+                                                                                No (Mobile)<span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_cont_mobile"
                                                                                     name="txt_cont_mobile"
-                                                                                    placeholder="Ex: 071 733 8110">
+                                                                                    placeholder="Ex: 071 733 8110" required="">
                                                                             </div>
 
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Email</label>
+                                                                                class="col-sm-4 control-label">Email <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_email" name="txt_email"
-                                                                                    placeholder="Ex: ashan.rathsara@gmail.com">
+                                                                                    placeholder="Ex: ashan.rathsara@gmail.com" required="">
                                                                             </div>
 
                                                                         </div>
@@ -1041,12 +1043,12 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">NIC</label>
+                                                                                class="col-sm-4 control-label">NIC <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" required=""
                                                                                     class="form-control" id="txt_nic"
                                                                                     name="txt_nic"
-                                                                                    placeholder="Ex: 923244786V">
+                                                                                    placeholder="Ex: 923244786V" required="">
                                                                             </div>
 
                                                                         </div>
@@ -1066,10 +1068,10 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Date of
-                                                                                Birth</label>
+                                                                                Birth <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
-                                                                                    id="txt_dob" name="txt_dob">
+                                                                                    id="txt_dob" name="txt_dob" required="">
                                                                             </div>
 
                                                                         </div>
@@ -1101,10 +1103,10 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Religion</label>
+                                                                                class="col-sm-4 control-label">Religion <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
-                                                                                    id="cmb_religin" name="cmb_religin">
+                                                                                    id="cmb_religin" name="cmb_religin" required="">
                                                                                     <option value="">--Select--</option>
                                                                                     <option value="Buddhist">Buddhist
                                                                                     </option>
@@ -1127,11 +1129,11 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Civil
-                                                                                Status</label>
+                                                                                Status <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_civil_status"
-                                                                                    name="cmb_civil_status">
+                                                                                    name="cmb_civil_status" required="">
 
                                                                                     <option value="">--Select--</option>
                                                                                     <option value="SINGLE">SINGLE
@@ -1165,12 +1167,12 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Relation's
-                                                                                Name</label>
+                                                                                Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_name"
                                                                                     name="txt_rel_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr. Nimal Perera" required="">
                                                                             </div>
 
                                                                         </div>
@@ -1178,12 +1180,12 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Relation's
-                                                                                Contact No</label>
+                                                                                Contact No <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_cont"
                                                                                     name="txt_rel_cont"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="Mr. 071 111 222" required="">
                                                                             </div>
 
                                                                         </div>
@@ -1221,12 +1223,12 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Name</label>
+                                                                                Contact Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_name"
                                                                                     name="txt_emergency_name"
-                                                                                    placeholder="Mr. Nimal Perera">
+                                                                                    placeholder="Mr. Nimal Perera" required="">
                                                                             </div>
 
                                                                         </div>
@@ -1235,36 +1237,36 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Telephone</label>
+                                                                                Contact Telephone <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_tel"
                                                                                     name="txt_emergency_tel"
-                                                                                    placeholder="071 111 222">
+                                                                                    placeholder="071 111 222" required="">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Address </label>
+                                                                                Contact Address <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_address"
                                                                                     name="txt_emergency_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City" required="">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Relationship </label>
+                                                                                Contact Relationship <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_relationship"
                                                                                     name="txt_emergency_relationship"
-                                                                                    placeholder="Ex: Father">
+                                                                                    placeholder="Ex: Father" required="">
                                                                             </div>
                                                                         </div>
 
@@ -1360,7 +1362,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="bond_end_date"
                                                                                     placeholder="Select Date"
-                                                                                    name="bond_end_date">">
+                                                                                    name="bond_end_date">
                                                                             </div>
                                                                         </div>
 
@@ -1377,37 +1379,37 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Referee's
-                                                                                Name </label>
+                                                                                Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_name"
                                                                                     name="non_related_referee_name"
-                                                                                    placeholder="Mr. Nimal Perera">
+                                                                                    placeholder="Mr. Nimal Perera" required="">
                                                                             </div>
                                                                         </div>
 
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Designation
+                                                                                class="col-sm-4 control-label">Designation <span style="color: red;">*</span>
                                                                             </label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_designation"
                                                                                     name="non_related_referee_designation"
-                                                                                    placeholder="Manager">
+                                                                                    placeholder="Manager" required="">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">NIC
+                                                                                class="col-sm-4 control-label">NIC <span style="color: red;">*</span>
                                                                             </label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_nic"
                                                                                     name="non_related_referee_nic"
-                                                                                    placeholder="9456565656v">
+                                                                                    placeholder="9456565656v" required="">
                                                                             </div>
                                                                         </div>
 
@@ -1415,12 +1417,12 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Mobile
-                                                                                Number</label>
+                                                                                Number <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_contact"
                                                                                     name="non_related_referee_contact"
-                                                                                    placeholder="071 111 222">
+                                                                                    placeholder="071 111 222" required="">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -1437,13 +1439,13 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Address
+                                                                                class="col-sm-4 control-label">Address <span style="color: red;">*</span>
                                                                             </label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_address"
                                                                                     name="non_related_referee_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City" required="">
                                                                             </div>
                                                                         </div>
 
@@ -1460,37 +1462,37 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Referee's
-                                                                                Name </label>
+                                                                                Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_name"
                                                                                     name="non_related_referee_2_name"
-                                                                                    placeholder="Mr.Nimal Perera">
+                                                                                    placeholder="Mr.Nimal Perera" required="">
                                                                             </div>
                                                                         </div>
 
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Designation
+                                                                                class="col-sm-4 control-label">Designation <span style="color: red;">*</span>
                                                                             </label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_designation"
                                                                                     name="non_related_referee_2_designation"
-                                                                                    placeholder="Manager">
+                                                                                    placeholder="Manager" required="">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">NIC
+                                                                                class="col-sm-4 control-label">NIC <span style="color: red;">*</span>
                                                                             </label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_nic"
                                                                                     name="non_related_referee_2_nic"
-                                                                                    placeholder="9456565656v">
+                                                                                    placeholder="9456565656v" required="">
                                                                             </div>
                                                                         </div>
 
@@ -1498,12 +1500,12 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Mobile
-                                                                                Number </label>
+                                                                                Number <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_contact"
                                                                                     name="non_related_referee_2_contact"
-                                                                                    placeholder="071 111 222">
+                                                                                    placeholder="071 111 222" required="">
                                                                             </div>
                                                                         </div>
 
@@ -1520,13 +1522,13 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Address
+                                                                                class="col-sm-4 control-label">Address <span style="color: red;">*</span>
                                                                             </label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_address"
                                                                                     name="non_related_referee_2_address"
-                                                                                    placeholder="Ex: No: 123, Street, City">
+                                                                                    placeholder="Ex: No: 123, Street, City" required="">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1549,14 +1551,14 @@
                                                                             <div class="form-group col-sm-6">
                                                                                 <label for="focusedinput"
                                                                                     class="col-sm-4 control-label">User
-                                                                                    Name</label>
+                                                                                    Name <span style="color: red;">*</span></label>
                                                                                 <div class="col-sm-8">
                                                                                     <input type="text"
                                                                                         autocomplete="off"
                                                                                         class="form-control"
                                                                                         id="txt_user_name"
                                                                                         name="txt_user_name"
-                                                                                        placeholder="Ashan">
+                                                                                        placeholder="Nimal" required="">
                                                                                 </div>
 
                                                                             </div>
@@ -1564,11 +1566,11 @@
                                                                             <div class="form-group col-md-6 ">
                                                                                 <label for="focusedinput"
                                                                                     class="col-sm-4 control-label">User
-                                                                                    Level </label>
+                                                                                    Level <span style="color: red;">*</span></label>
                                                                                 <div class="col-sm-8">
                                                                                     <select class="form-control"
                                                                                         id="cmb_user_level"
-                                                                                        name="cmb_user_level">
+                                                                                        name="cmb_user_level" required="">
 
                                                                                         <option value="" default>--
                                                                                             Select --</option>
@@ -1678,6 +1680,29 @@
 
 
             <script>
+                $("#frm_employee").validate({
+                rules: {
+                    cmb_emp_title: "required",
+                    cmb_gender: "required",
+                    img_employee: "required",
+                    bankName: "required",
+                    txt_account: "required",
+                    txt_address: "required",
+                    txt_city: "required",
+                    cmb_district: "required",
+                    txt_email: {
+                        required: true,
+                        email: true
+                    },
+                    cmb_if_epf: "required",
+                },
+                messages: {
+                    cmb_emp_title: "Please select a title",
+                    cmb_gender: "Please select gender",
+                    img_employee: "Please upload an image"
+                }
+            });
+
                 $('#txt_appoint_date').datepicker({
                     format: "dd/mm/yyyy",
                     "todayHighlight": true,

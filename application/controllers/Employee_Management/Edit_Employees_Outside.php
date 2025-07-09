@@ -233,7 +233,7 @@ class Edit_Employees_Outside extends CI_Controller
                     // 'Basic_Salary' => $this->input->post('txt_basic_sal'),
                     // 'Incentive' => $this->input->post('txt_Incentive'),
                     // 'Bnk_ID' => $this->input->post('cmb_bank'),
-                    'cmb_bank' => $Bank_Name,
+                    'Bnk_ID' => $Bank_Name,
                     // 'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
                     'Account_no' => $Account_No,
                     'Is_EPF' => $Is_EPF,

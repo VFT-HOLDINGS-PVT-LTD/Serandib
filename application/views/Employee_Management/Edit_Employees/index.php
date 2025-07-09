@@ -1660,7 +1660,7 @@
 
                                                                                         <?php
                                                                                         foreach ($data_u_lvl as $t_data) {
-                                                                                            if ($t_data->user_level_id == $data_set[0]->user_level_id) {
+                                                                                            if ($t_data->user_level_id == $data_set[0]->user_p_id) {
                                                                                                 echo "<option selected value='" . $t_data->user_level_id . "'>" . $t_data->user_level_name . "</option>";
                                                                                             } else {
                                                                                                 echo "<option value='" . $t_data->user_level_id . "'>" . $t_data->user_level_name . "</option>";

@@ -153,6 +153,10 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                     <li><a href="<?php echo base_url(); ?>Employee_Management/View_Employees">VIEW EMPLOYEE</a></li>
                                 <?php endif; ?>
 
+                                <?php if ($currentUser[0]->view_employee == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Employee_Management/Outside_View_Employee">OUTSIDE VIEW EMPLOYEE</a></li>
+                                <?php endif; ?>
+
 
                                 <?php if ($currentUser[0]->Employee_mgt == 1): ?>  
                                 </ul>

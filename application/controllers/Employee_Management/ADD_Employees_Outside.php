@@ -378,7 +378,6 @@ class ADD_Employees_Outside extends CI_Controller
 
 
         $data = array(
-                'EmpNo' => $Comp_No,
                 'Cmp_ID' => $Comp_No,
                 // 'Enroll_No' => $this->input->post('txt_enroll_no'),
                 // 'EPFNO' => $this->input->post('txt_epf_no'),
@@ -432,6 +431,15 @@ class ADD_Employees_Outside extends CI_Controller
                 'Emergency_Contact_Telephone' => $Emergency_Tel,
                 'Emergency_Contact_Address' => $Emergency_Address,
                 'Emergency_Contact_Relationship' => $Emergency_Relationship,
+                'OL_Data' => $ol ? 1 : 0,
+                'AL_Data' => $al ? 1 : 0,
+                'Diploma_Data' => $diploma ? 1 : 0,
+                'HND_Data' => $hnd ? 1 : 0,
+                'Degree_Data' => $degree ? 1 : 0,
+                'Master_Data' => $master ? 1 : 0,
+                'Mphill_Data' => $mphil ? 1 : 0,
+                'PHD_Data' => $phd ? 1 : 0,
+                'Academic_Other_Data' => $other,
 
                 
 
@@ -462,19 +470,19 @@ class ADD_Employees_Outside extends CI_Controller
             $result = $this->Db_model->insertData("tbl_empmaster_outside", $data);
 
             $data_bond_guarantor = array(
-                'EmpNo' => $Comp_No,
+                'CmpNo' => $Comp_No,
                 'Name' => $Guarantor_Name,
                 'NIC' => $Guarantor_NIC,
                 'Email' => $Guarantor_Email,
                 'Contact' => $Guarantor_Contact,
                 'Address' => $Guarantor_Address,
-                'BondEntitlement' => $Guarantor_Entitlement,
+                'BondEntitlement' => $Guarantor_Entitlement ? 1 : 0,
                 'BondEndDate' => $Bond_End_Date
             );
             $result = $this->Db_model->insertData("tbl_bond_guarantor", $data_bond_guarantor);
 
             $data_referee = array(
-                'EmpNo' => $Comp_No,
+                'CmpNo' => $Comp_No,
                 'Referee_Name' => $Ref1_Name,
                 'Referee_Designation' => $Ref1_Designation,
                 'Referee_NIC' => $Ref1_NIC,
@@ -487,7 +495,7 @@ class ADD_Employees_Outside extends CI_Controller
             $result = $this->Db_model->insertData("tbl_referee", $data_referee);
 
             $data_referee2 = array(
-                'EmpNo' => $Comp_No,
+                'CmpNo' => $Comp_No,
                 'Referee_Name' => $Ref2_Name,
                 'Referee_Designation' => $Ref2_Designation,
                 'Referee_NIC' => $Ref2_NIC,

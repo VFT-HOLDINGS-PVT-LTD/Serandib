@@ -130,7 +130,7 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Title</label>
+                                                                            class="col-sm-4 control-label">Title <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
                                                                                 id="cmb_emp_title" name="cmb_emp_title"
@@ -149,7 +149,7 @@
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Gender</label>
+                                                                            class="col-sm-4 control-label">Gender <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_gender"
                                                                                 name="cmb_gender" required>
@@ -178,7 +178,7 @@
                                                                     <div class="form-group col-sm-6">
 
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Image</label>
+                                                                            class="col-sm-4 control-label">Image <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-6">
                                                                             <div class="fileinput fileinput-new"
                                                                                 style="width: 100%;"
@@ -209,7 +209,7 @@
 
                                                                     <label
                                                                         style="font-weight: bold; color: #000">Academic
-                                                                        Qualifications</label>
+                                                                        Qualifications <span style="color: red;">*</span></label>
                                                                     <hr>
 
                                                                     <div class="form-group col-md-12">
@@ -324,7 +324,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Bank
-                                                                            Name</label>
+                                                                            Name <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="bankName" name="bankName"
@@ -335,7 +335,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Account
-                                                                            No</label>
+                                                                            No <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_account" name="txt_account"
@@ -361,7 +361,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Full
-                                                                                Address</label>
+                                                                                Address <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_address" name="txt_address"
@@ -373,7 +373,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">City</label>
+                                                                                class="col-sm-4 control-label">City <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_city" name="txt_city"
@@ -385,7 +385,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">District</label>
+                                                                                class="col-sm-4 control-label">District <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_district"
@@ -563,7 +563,7 @@
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Email</label>
+                                                                                class="col-sm-4 control-label">Email <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_email" name="txt_email"
@@ -635,8 +635,7 @@
                                                                                 Group</label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
-                                                                                    id="cmb_blood" name="cmb_blood"
-                                                                                    required>
+                                                                                    id="cmb_blood" name="cmb_blood">
 
                                                                                     <option value="">--Select--</option>
                                                                                     <option value="A+">A+</option>
@@ -657,7 +656,7 @@
                                                                     <div class="form-group col-md-12">
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Religion</label>
+                                                                                class="col-sm-4 control-label">Religion <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_religin" name="cmb_religin"
@@ -683,7 +682,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Civil
-                                                                                Status</label>
+                                                                                Status <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <select class="form-control"
                                                                                     id="cmb_civil_status"
@@ -719,7 +718,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Relation's
-                                                                                Name</label>
+                                                                                Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_name"
@@ -733,7 +732,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Relation's
-                                                                                Contact No</label>
+                                                                                Contact No <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_cont"
@@ -771,7 +770,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Name</label>
+                                                                                Contact Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_name"
@@ -786,7 +785,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Telephone</label>
+                                                                                Contact Telephone <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_tel"
@@ -799,7 +798,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Address</label>
+                                                                                Contact Address <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_address"
@@ -812,7 +811,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Emergency
-                                                                                Contact Relationship</label>
+                                                                                Contact Relationship <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_emergency_relationship"
@@ -842,7 +841,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_name"
                                                                                     name="txt_bond_guarantor_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr. Nimal Perera">
                                                                             </div>
                                                                         </div>
 
@@ -854,7 +853,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_address"
                                                                                     name="txt_bond_guarantor_address"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Ex: No: 123, Street, City">
                                                                             </div>
                                                                         </div>
 
@@ -865,7 +864,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_nic"
                                                                                     name="txt_bond_guarantor_nic"
-                                                                                    placeholder="Mr. 071 111 222">
+                                                                                    placeholder="Ex: 123456789V">
                                                                             </div>
                                                                         </div>
 
@@ -877,7 +876,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_email"
                                                                                     name="txt_bond_guarantor_email"
-                                                                                    placeholder="Ex: 4">
+                                                                                    placeholder="nimal@gmail.com">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group col-sm-6">
@@ -888,7 +887,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_bond_guarantor_contact"
                                                                                     name="txt_bond_guarantor_contact"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Ex: 071 111 222">
                                                                             </div>
                                                                         </div>
 
@@ -931,7 +930,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Referee's
-                                                                                Name</label>
+                                                                                Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_name"
@@ -944,7 +943,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Designation</label>
+                                                                                class="col-sm-4 control-label">Designation <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_designation"
@@ -955,7 +954,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">NIC</label>
+                                                                                class="col-sm-4 control-label">NIC <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_nic"
@@ -968,8 +967,8 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Phone
-                                                                                Number</label>
+                                                                                class="col-sm-4 control-label">Mobile
+                                                                                Number <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_contact"
@@ -992,7 +991,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Address</label>
+                                                                                class="col-sm-4 control-label">Address <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_address"
@@ -1015,7 +1014,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Referee's
-                                                                                Name</label>
+                                                                                Name <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_name"
@@ -1028,7 +1027,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Designation</label>
+                                                                                class="col-sm-4 control-label">Designation <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_designation"
@@ -1039,7 +1038,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">NIC</label>
+                                                                                class="col-sm-4 control-label">NIC <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_nic"
@@ -1052,8 +1051,8 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Phone
-                                                                                Number</label>
+                                                                                class="col-sm-4 control-label">Mobile
+                                                                                Number <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_contact"
@@ -1076,7 +1075,7 @@
 
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Address</label>
+                                                                                class="col-sm-4 control-label">Address <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
                                                                                 <input type="text" class="form-control"
                                                                                     id="non_related_referee_2_address"
@@ -1104,7 +1103,7 @@
                                                                             <div class="form-group col-sm-6">
                                                                                 <label for="focusedinput"
                                                                                     class="col-sm-4 control-label">User
-                                                                                    Name</label>
+                                                                                    Name <span style="color: red;">*</span></label>
                                                                                 <div class="col-sm-8">
                                                                                     <input type="text"
                                                                                         class="form-control"

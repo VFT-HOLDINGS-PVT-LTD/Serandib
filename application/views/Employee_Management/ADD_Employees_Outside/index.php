@@ -328,8 +328,8 @@
                                                                             class="col-sm-4 control-label">Bank
                                                                             Name <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" id="bankName"
-                                                                                name="bankName" required="">
+                                                                            <select class="form-control" id="cmb_bank"
+                                                                                name="cmb_bank" required="">
 
                                                                                 <option value="" default>-- Select --
                                                                                 </option>

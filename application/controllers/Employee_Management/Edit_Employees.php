@@ -342,7 +342,7 @@ class Edit_Employees extends CI_Controller
         $other = $this->input->post('other');
 
         // Payroll
-        $Bank_Name = $this->input->post('bankName');
+        $Bank_Name = $this->input->post('cmb_bank');
         $Account_No = $this->input->post('txt_account');
 
         // Personal
@@ -402,6 +402,7 @@ class Edit_Employees extends CI_Controller
         // Login
         $User_Name = $this->input->post('txt_user_name');
         $User_Level = $this->input->post('cmb_user_level');
+        $Is_Allow = $this->input->post('Is_Allow');
 
         // $OutSidedata = [
         //     'Is_Approve' => 1,
@@ -477,10 +478,12 @@ class Edit_Employees extends CI_Controller
             'Academic_Other_Data' => $other,
             'username' => $User_Name,
             'password' => hash('sha512', $this->input->post('txt_nic')),
-            'Is_allow_login' => 1,
+            'Is_allow_login' => $Is_Allow ? 1 : 0,
             'user_p_id' => $User_Level,
             'Active_process' => 1,
             'Is_Approve' => 1,
+            'Remarks' => $this->input->post('txt_remarks'),
+            'highlights' => $this->input->post('txt_high')
         ];
         // $result = $this->Db_model->insertData("tbl_empmaster", $data);
 

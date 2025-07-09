@@ -221,7 +221,7 @@ class ADD_Employees extends CI_Controller
         $other = $this->input->post('other');
 
         // Payroll
-        $Bank_Name = $this->input->post('bankName');
+        $Bank_Name = $this->input->post('cmb_bank');
         $Account_No = $this->input->post('txt_account');
 
         // Personal
@@ -451,6 +451,8 @@ class ADD_Employees extends CI_Controller
                     'password' => hash('sha512', $this->input->post('txt_nic')),
                     'Is_allow_login' => 1,
                     'user_p_id' => $User_Level,
+                    'Remarks' => $this->input->post('txt_remarks'),
+                    'highlights' => $this->input->post('txt_high'),
 
 
 

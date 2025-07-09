@@ -125,7 +125,7 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_no" name="txt_emp_no"
-                                                                                placeholder="Ex: 00001">
+                                                                                placeholder="Ex: 00001" >
                                                                         </div>
 
                                                                     </div>
@@ -754,8 +754,8 @@
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Bank</label>
                                                                         <div class="col-sm-8">
-                                                                            <select class="form-control" id="bankName"
-                                                                                name="bankName">
+                                                                            <select class="form-control" id="cmb_bank"
+                                                                                name="cmb_bank">
 
                                                                                 <option value="" default>-- Select --
                                                                                 </option>

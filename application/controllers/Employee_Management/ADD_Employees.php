@@ -483,6 +483,9 @@ class ADD_Employees extends CI_Controller
                 );
                 $result = $this->Db_model->insertData("tbl_empmaster", $data);
 
+                // echo '<pre>' . var_export($data, true) . '</pre>';
+
+
                 $data_bond_guarantor = array(
                     'CmpNo' => $Comp_No,
                     'Name' => $Guarantor_Name,
@@ -494,6 +497,7 @@ class ADD_Employees extends CI_Controller
                     'BondEndDate' => $Bond_End_Date
                 );
                 $result = $this->Db_model->insertData("tbl_bond_guarantor", $data_bond_guarantor);
+                // echo '<pre>' . var_export($data_bond_guarantor, true) . '</pre>';
 
                 $data_referee = array(
                     'CmpNo' => $Comp_No,
@@ -507,6 +511,7 @@ class ADD_Employees extends CI_Controller
                 );
 
                 $result = $this->Db_model->insertData("tbl_referee", $data_referee);
+                // echo '<pre>' . var_export($data_referee, true) . '</pre>';
 
                 $data_referee2 = array(
                     'CmpNo' => $Comp_No,
@@ -518,6 +523,7 @@ class ADD_Employees extends CI_Controller
                     'Referee_Address' => $Ref2_Address
                 );
                 $result = $this->Db_model->insertData("tbl_referee", $data_referee2);
+                // echo '<pre>' . var_export($data_referee2, true) . '</pre>';
 
                 $this->session->set_flashdata('success_message', 'Employee Data Added Successfully');
                 redirect('/Employee_Management/ADD_Employees');

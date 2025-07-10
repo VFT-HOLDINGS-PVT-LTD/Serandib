@@ -143,7 +143,7 @@
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Company No <span style="color: red;">*</span>
+                                                                            class="col-sm-4 control-label">Company No <span style="color: red; font-size: 12px;">(Do not leave any space) *</span>
                                                                         </label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
@@ -425,8 +425,7 @@
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Employee
-                                                                            Group <span
+                                                                            class="col-sm-4 control-label">Sub Department <span
                                                                                 style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
@@ -1678,6 +1677,11 @@
             <!--Ajax-->
             <!--<script src="<?php echo base_url(); ?>system_js/Master/Employee.js"></script>-->
 
+<script>
+document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
+    this.value = this.value.replace(/\s/g, '');
+});
+</script>
 
             <script>
                 $("#frm_employee").validate({
@@ -1702,6 +1706,7 @@
                     img_employee: "Please upload an image"
                 }
             });
+            
 
                 $('#txt_appoint_date').datepicker({
                     format: "dd/mm/yyyy",

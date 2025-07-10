@@ -92,7 +92,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Company No
-                                                                            <span style="color: red;">*</span></label>
+                                                                            <span style="color: red;">(Do not leave any space) *</span></label>
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
@@ -348,6 +348,17 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Branch
+                                                                            ID <span style="color: red;">*</span></label>
+                                                                        <div class="col-sm-8">
+                                                                            <input type="text" class="form-control"
+                                                                                id="txt_B_Branch" name="txt_B_Branch"
+                                                                                placeholder="Ex: 023" required="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Account
                                                                             No <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
@@ -554,7 +565,7 @@
                                                                                 class="col-sm-4 control-label">Contact
                                                                                 No (Home)</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="txt_cont_home"
                                                                                     name="txt_cont_home"
                                                                                     placeholder="Ex: 0112 234 567">
@@ -567,7 +578,7 @@
                                                                                 No (Mobile) <span
                                                                                     style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" required=""
+                                                                                <input type="number" required=""
                                                                                     class="form-control"
                                                                                     id="txt_cont_mobile"
                                                                                     name="txt_cont_mobile"
@@ -579,7 +590,7 @@
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Email <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="email" class="form-control"
                                                                                     id="txt_email" name="txt_email"
                                                                                     placeholder="Ex: nimal@gmail.com"
                                                                                     required="">
@@ -748,7 +759,7 @@
                                                                                 class="col-sm-4 control-label">Relation's
                                                                                 Contact No <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="txt_rel_cont"
                                                                                     name="txt_rel_cont"
                                                                                     placeholder="071 111 222"
@@ -762,7 +773,7 @@
                                                                                 class="col-sm-4 control-label">No of
                                                                                 Children</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="txt_no_child"
                                                                                     name="txt_no_child"
                                                                                     placeholder="Ex: 4">
@@ -801,7 +812,7 @@
                                                                                 class="col-sm-4 control-label">Emergency
                                                                                 Contact Telephone <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="txt_emergency_tel"
                                                                                     name="txt_emergency_tel"
                                                                                     placeholder="071 111 222"
@@ -887,7 +898,7 @@
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Email</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="email" class="form-control"
                                                                                     id="txt_bond_guarantor_email"
                                                                                     name="txt_bond_guarantor_email"
                                                                                     placeholder="nimal@gmail.com">
@@ -898,7 +909,7 @@
                                                                                 class="col-sm-4 control-label">Contact
                                                                                 No</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="txt_bond_guarantor_contact"
                                                                                     name="txt_bond_guarantor_contact"
                                                                                     placeholder="Ex: 071 111 222">
@@ -984,7 +995,7 @@
                                                                                 class="col-sm-4 control-label">Mobile
                                                                                 Number <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="non_related_referee_contact"
                                                                                     name="non_related_referee_contact"
                                                                                     placeholder="071 111 222"
@@ -995,7 +1006,7 @@
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Email</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="email" class="form-control"
                                                                                     id="non_related_referee_email"
                                                                                     name="non_related_referee_email"
                                                                                     placeholder="nimal@gmail.com">
@@ -1068,7 +1079,7 @@
                                                                                 class="col-sm-4 control-label">Mobile
                                                                                 Number <span style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="number" class="form-control"
                                                                                     id="non_related_referee_2_contact"
                                                                                     name="non_related_referee_2_contact"
                                                                                     placeholder="071 111 222"
@@ -1080,7 +1091,7 @@
                                                                             <label for="focusedinput"
                                                                                 class="col-sm-4 control-label">Email</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="email" class="form-control"
                                                                                     id="non_related_referee_2_email"
                                                                                     name="non_related_referee_2_email"
                                                                                     placeholder="nimal@gmail.com">
@@ -1218,6 +1229,11 @@
         <!-- End loading page level scripts-->
         <!--Ajax-->
         <!--<script src="<?php echo base_url(); ?>system_js/Master/Employee.js"></script>-->
+<script>
+document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
+    this.value = this.value.replace(/\s/g, '');
+});
+</script>
 
 
         <script>

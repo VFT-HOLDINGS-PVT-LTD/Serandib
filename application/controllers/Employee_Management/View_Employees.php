@@ -115,7 +115,7 @@ class View_Employees extends CI_Controller {
             }
         }
 
-        $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
+        $data['data_set'] = $this->Db_model->getfilteredData("SELECT tbl_empmaster.EmpID,
                                                                     tbl_empmaster.EmpNo,
                                                                     tbl_empmaster.Emp_Full_Name,
                                                                     tbl_designations.Desig_Name,

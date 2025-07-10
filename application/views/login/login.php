@@ -58,7 +58,7 @@
                                         <div class="card-body text-center">
                                             <!-- Center the card-body content -->
                                             <a href="../main/index.html" class="text-nowrap logo-img d-block mb-4 w-100">
-                                                <img src="https://support.vftholdings.lk/assets/img/logo/vft_logo_2020.png" class="dark-logo" alt="Logo-Dark" style="width: 230px;" />
+                                                <img src="assets/images/company/Serandib-Logo.png" class="dark-logo" alt="Logo-Dark" style="width: 230px;" />
                                             </a>
                                             <h3 class="lh-base mb-4">Let's get you signed in</h3>
 
@@ -91,7 +91,7 @@
                                                         <div id="spnmessage" style="color: #002640;font-weight: bold; margin-top: 0px;"></div>
                                                     </center>
                                                 </div>
-                                                <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-dark w-100 py-8 mb-4 rounded-1" style="background-color:#001a67 ; border-color: #001a67; font-weight: bold;">Sign In</button>
+                                                <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-dark w-100 py-8 mb-4 rounded-1" style="background-color:#0675ba ; border-color: #0675ba; font-weight: bold;">Sign In</button>
                                                 <div class="d-flex align-items-center justify-content-center">
                                                     <p class="fs-12 mb-0 fw-medium">VFT CLOUD V0.8</p>
                                                 </div>

@@ -230,11 +230,11 @@ class Edit_Employees_Outside extends CI_Controller
                     'BR2' => $this->input->post('txt_BG_Allowance2'),
                     'ApointDate' => $Appoint_Date,
                     'Permanent_Date' => $this->input->post('txt_permanent_date'),
-                    // 'Basic_Salary' => $this->input->post('txt_basic_sal'),
-                    // 'Incentive' => $this->input->post('txt_Incentive'),
+                    'Basic_Salary' => $this->input->post('txt_basic_sal'),
+                    'Incentive' => $this->input->post('txt_Incentive'),
                     // 'Bnk_ID' => $this->input->post('cmb_bank'),
                     'Bnk_ID' => $Bank_Name,
-                    // 'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
+                    'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
                     'Account_no' => $Account_No,
                     'Is_EPF' => $Is_EPF,
                     'Address' => $Address,
@@ -279,6 +279,9 @@ class Edit_Employees_Outside extends CI_Controller
                     'highlights' => $this->input->post('txt_high')
                 ];
                 $result = $this->Db_model->insertData("tbl_empmaster", $data);
+
+                        // echo '<pre>' . var_export($data, true) . '</pre>';
+
 
                 $whereArr3 = ["Cmp_ID" => $Comp_No];
                 $result = $this->Db_model->updateData("tbl_empmaster_outside", $data, $whereArr3);

@@ -271,7 +271,14 @@ class Edit_Employees extends CI_Controller
         $Comp_No = $this->input->post('txt_cmp_no');
         $Emp_No = $this->input->post('txt_emp_no');
 
-        $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+
+        $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+
+        if (empty($Cmp_ID)) {
+            $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
+        }else {
+            $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+        }
 
 
         $Image = $DataID[0]->Image;
@@ -424,7 +431,7 @@ class Edit_Employees extends CI_Controller
             'Title' => $Title,
             'Emp_Full_Name' => $Full_Name,
             'Emp_Name_Int' => $Name_Initials,
-            'Image' => $Image . ".jpg",
+            'Image' => $Image,
             'Gender' => $Gender,
             'Status' => $st,
             'Dep_ID' => $this->input->post('cmb_dep'),
@@ -437,11 +444,11 @@ class Edit_Employees extends CI_Controller
             'BR2' => $this->input->post('txt_BG_Allowance2'),
             'ApointDate' => $Appoint_Date,
             'Permanent_Date' => $this->input->post('txt_permanent_date'),
-            // 'Basic_Salary' => $this->input->post('txt_basic_sal'),
-            // 'Incentive' => $this->input->post('txt_Incentive'),
+            'Basic_Salary' => $this->input->post('txt_basic_sal'),
+            'Incentive' => $this->input->post('txt_Incentive'),
             // 'Bnk_ID' => $this->input->post('cmb_bank'),
             'Bnk_ID' => $Bank_Name,
-            // 'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
+            'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
             'Account_no' => $Account_No,
             'Is_EPF' => $Is_EPF,
             'Address' => $Address,
@@ -487,6 +494,8 @@ class Edit_Employees extends CI_Controller
         ];
         // $result = $this->Db_model->insertData("tbl_empmaster", $data);
 
+        // echo '<pre>' . var_export($data, true) . '</pre>';
+
         $whereArr3 = ["Cmp_ID" => $Comp_No];
         $result = $this->Db_model->updateData("tbl_empmaster", $data, $whereArr3);
 
@@ -503,7 +512,7 @@ class Edit_Employees extends CI_Controller
         ];
         $whereArr1 = ["CmpNo" => $Comp_No];
         $result = $this->Db_model->updateData("tbl_bond_guarantor", $data_bond_guarantor, $whereArr1);
-
+        // echo '<pre>' . var_export($data_bond_guarantor, true) . '</pre>';
 
         $this->Db_model->getfilteredDelete("DELETE FROM tbl_referee WHERE CmpNo = '" . $Comp_No . "'");
 
@@ -531,6 +540,7 @@ class Edit_Employees extends CI_Controller
             'Referee_Address' => $Ref2_Address,
         ];
         $result = $this->Db_model->insertData("tbl_referee", $data_referee2);
+        // echo '<pre>' . var_export($data_referee2, true) . '</pre>';
 
         // $data = [
         //     'Enroll_No'       => $this->input->post('txt_enroll_no'),

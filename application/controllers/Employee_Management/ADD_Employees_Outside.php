@@ -193,6 +193,7 @@ class ADD_Employees_Outside extends CI_Controller
             'user_p_id' => $this->input->post('cmb_user_level'),
             'Cmp_ID' => 1,
             'Active_process' => 1,
+
         );
         $result = $this->Db_model->insertData("tbl_empmaster", $data);
         $this->session->set_flashdata('success_message', 'Employee Added');
@@ -411,7 +412,7 @@ class ADD_Employees_Outside extends CI_Controller
                     // 'Incentive' => $this->input->post('txt_Incentive'),
                     // 'Bnk_ID' => $this->input->post('cmb_bank'),
                     'Bnk_ID' => $Bank_Name,
-                    // 'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
+                    'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
                     'Account_no' => $Account_No,
                     // 'Is_EPF' => $Is_EPF,
                     'Address' => $Address,

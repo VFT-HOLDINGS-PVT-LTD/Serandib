@@ -120,7 +120,7 @@
                                                                             class="col-sm-4 control-label">Employee
                                                                             No</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="number" class="form-control"
                                                                                 value="<?php echo $data_set[0]->EmpNo ?>"
                                                                                 id="txt_emp_no" name="txt_emp_no"
                                                                                 placeholder="Ex: 00001">
@@ -133,7 +133,7 @@
                                                                             class="col-sm-4 control-label">Enroll
                                                                             No</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="number" class="form-control"
                                                                                 value="<?php echo $data_set[0]->Enroll_No ?>"
                                                                                 id="txt_enroll_no" name="txt_enroll_no"
                                                                                 placeholder="Ex: 1">
@@ -148,7 +148,12 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
                                                                                 value="<?php echo $data_set[0]->Cmp_ID ?>"
-                                                                                placeholder="Ex: 00001">
+                                                                                placeholder="Ex: 00001" disabled>
+
+                                                                            <input type="text" class="form-control"
+                                                                                 name="txt_cmp_no"
+                                                                                value="<?php echo $data_set[0]->Cmp_ID ?>"
+                                                                                placeholder="Ex: 00001" style="display: none;">
 
                                                                         </div>
 
@@ -452,8 +457,7 @@
                                                                     </div>
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Employee
-                                                                            Group</label>
+                                                                            class="col-sm-4 control-label">Sub Department</label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" required=""
                                                                                 id="cmb_group" name="cmb_group">
@@ -1825,6 +1829,14 @@
                 });
 
 
+$('#bond_end_date').datepicker({
+                format: "dd/mm/yyyy",
+                "todayHighlight": true,
+                autoclose: true,
+                format: 'yyyy/mm/dd'
+            }).on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
             </script>
 
             <script>

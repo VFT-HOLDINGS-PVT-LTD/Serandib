@@ -124,9 +124,10 @@
                                                                                 placeholder="Ex: 00001" disabled>
 
                                                                             <input type="text" class="form-control"
-                                                                                 name="txt_cmp_no"
+                                                                                name="txt_cmp_no"
                                                                                 value="<?php echo $data_set[0]->Cmp_ID ?>"
-                                                                                placeholder="Ex: 00001" style="display:none;">
+                                                                                placeholder="Ex: 00001"
+                                                                                style="display:none;">
 
                                                                         </div>
 
@@ -381,71 +382,78 @@
                                                                     </div>
 
                                                                     <div class="form-group col-sm-6">
-    <label for="focusedinput" class="col-sm-4 control-label">Designation</label>
-    <div class="col-sm-8">
-        <select class="form-control" required="" id="cmb_desig" name="cmb_desig">
-            <?php
-            // Check if Des_ID is null and show default option
-            if ($data_set[0]->Des_ID == null) {
-                echo "<option value=''>-- Select --</option>";
-            }
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Designation</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" required=""
+                                                                                id="cmb_desig" name="cmb_desig">
+                                                                                <?php
+                                                                                // Check if Des_ID is null and show default option
+                                                                                if ($data_set[0]->Des_ID == null) {
+                                                                                    echo "<option value=''>-- Select --</option>";
+                                                                                }
 
-            foreach ($data_DS as $t_data) {
-                // If Des_ID matches, select it
-                if ($t_data->Des_ID == $data_set[0]->Des_ID) {
-                    echo "<option selected value='" . $t_data->Des_ID . "'>" . $t_data->Desig_Name . "</option>";
-                } else {
-                    echo "<option value='" . $t_data->Des_ID . "'>" . $t_data->Desig_Name . "</option>";
-                }
-            }
-            ?>
-        </select>
-    </div>
-</div>
+                                                                                foreach ($data_DS as $t_data) {
+                                                                                    // If Des_ID matches, select it
+                                                                                    if ($t_data->Des_ID == $data_set[0]->Des_ID) {
+                                                                                        echo "<option selected value='" . $t_data->Des_ID . "'>" . $t_data->Desig_Name . "</option>";
+                                                                                    } else {
+                                                                                        echo "<option value='" . $t_data->Des_ID . "'>" . $t_data->Desig_Name . "</option>";
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
                                                                     <div class="form-group col-sm-6">
-    <label for="focusedinput" class="col-sm-4 control-label">Department</label>
-    <div class="col-sm-8">
-        <select class="form-control" required="" id="cmb_dep" name="cmb_dep">
-            <?php
-            // Show default option if no department is selected
-            if ($data_set[0]->Dep_ID == null) {
-                echo "<option value=''>-- Select --</option>";
-            }
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Department</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" required=""
+                                                                                id="cmb_dep" name="cmb_dep">
+                                                                                <?php
+                                                                                // Show default option if no department is selected
+                                                                                if ($data_set[0]->Dep_ID == null) {
+                                                                                    echo "<option value=''>-- Select --</option>";
+                                                                                }
 
-            foreach ($data_DP as $t_data) {
-                if ($t_data->Dep_ID == $data_set[0]->Dep_ID) {
-                    echo "<option selected value='" . $t_data->Dep_ID . "'>" . $t_data->Dep_Name . "</option>";
-                } else {
-                    echo "<option value='" . $t_data->Dep_ID . "'>" . $t_data->Dep_Name . "</option>";
-                }
-            }
-            ?>
-        </select>
-    </div>
-</div>
+                                                                                foreach ($data_DP as $t_data) {
+                                                                                    if ($t_data->Dep_ID == $data_set[0]->Dep_ID) {
+                                                                                        echo "<option selected value='" . $t_data->Dep_ID . "'>" . $t_data->Dep_Name . "</option>";
+                                                                                    } else {
+                                                                                        echo "<option value='" . $t_data->Dep_ID . "'>" . $t_data->Dep_Name . "</option>";
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
-<div class="form-group col-sm-6">
-    <label for="focusedinput" class="col-sm-4 control-label">Sub Department</label>
-    <div class="col-sm-8">
-        <select class="form-control" required="" id="cmb_group" name="cmb_group">
-            <?php
-            // Show default option if no sub-department is selected
-            if ($data_set[0]->Grp_ID == null) {
-                echo "<option value=''>-- Select --</option>";
-            }
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Sub
+                                                                            Department</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" required=""
+                                                                                id="cmb_group" name="cmb_group">
+                                                                                <?php
+                                                                                // Show default option if no sub-department is selected
+                                                                                if ($data_set[0]->Grp_ID == null) {
+                                                                                    echo "<option value=''>-- Select --</option>";
+                                                                                }
 
-            foreach ($data_Grp as $t_data) {
-                if ($t_data->Grp_ID == $data_set[0]->Grp_ID) {
-                    echo "<option selected value='" . $t_data->Grp_ID . "'>" . $t_data->EmpGroupName . "</option>";
-                } else {
-                    echo "<option value='" . $t_data->Grp_ID . "'>" . $t_data->EmpGroupName . "</option>";
-                }
-            }
-            ?>
-        </select>
-    </div>
-</div>
+                                                                                foreach ($data_Grp as $t_data) {
+                                                                                    if ($t_data->Grp_ID == $data_set[0]->Grp_ID) {
+                                                                                        echo "<option selected value='" . $t_data->Grp_ID . "'>" . $t_data->EmpGroupName . "</option>";
+                                                                                    } else {
+                                                                                        echo "<option value='" . $t_data->Grp_ID . "'>" . $t_data->EmpGroupName . "</option>";
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
 
 
@@ -1772,10 +1780,10 @@
             <!--<script src="<?php echo base_url(); ?>system_js/Master/Employee.js"></script>-->
 
             <script>
-document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
-    this.value = this.value.replace(/\s/g, '');
-});
-</script>
+                document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
+                    this.value = this.value.replace(/\s/g, '');
+                });
+            </script>
 
 
             <script>
@@ -1807,14 +1815,14 @@ document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
                     $(this).datepicker('hide');
                 });
 
-$('#bond_end_date').datepicker({
-                format: "dd/mm/yyyy",
-                "todayHighlight": true,
-                autoclose: true,
-                format: 'yyyy/mm/dd'
-            }).on('changeDate', function (ev) {
-                $(this).datepicker('hide');
-            });
+                $('#bond_end_date').datepicker({
+                    format: "dd/mm/yyyy",
+                    "todayHighlight": true,
+                    autoclose: true,
+                    format: 'yyyy/mm/dd'
+                }).on('changeDate', function (ev) {
+                    $(this).datepicker('hide');
+                });
             </script>
 
             <script>

@@ -5,7 +5,7 @@
 
 
 <head>
-    <title><?php echo $title ?></title>
+    <title>VFT CLOUD SYSTEM</title>
     <!-- Styles -->
     <?php $this->load->view('template/css.php'); ?>
 
@@ -67,27 +67,27 @@
                                                                 action="<?php echo base_url(); ?>Employee_Management/ADD_Employees_Outside/Outside_insert_Data"
                                                                 method="POST" enctype="multipart/form-data">
 
-                                                               
+
 
                                                                 <div class="form-group col-md-12">
 
                                                                  <!--success Message-->
-                                                                <?php if (isset($_SESSION['success_message']) && $_SESSION['success_message'] != '') { ?>
+                                                                <?php if (isset($_SESSION['success_message']) && $_SESSION['success_message'] != '') {?>
                                                                     <div id="spnmessage"
                                                                         class="alert alert-dismissable alert-success">
                                                                         <strong>Success !</strong>
                                                                         <?php echo $_SESSION['success_message'] ?>
                                                                     </div>
-                                                                <?php } ?>
+                                                                <?php }?>
 
                                                                 <!--Error Message-->
-                                                                <?php if (isset($_SESSION['error_message']) && $_SESSION['error_message'] != '') { ?>
+                                                                <?php if (isset($_SESSION['error_message']) && $_SESSION['error_message'] != '') {?>
                                                                     <div id="spnmessage"
                                                                         class="alert alert-dismissable alert-danger error_redirect">
                                                                         <strong>Error !</strong>
                                                                         <?php echo $_SESSION['error_message'] ?>
                                                                     </div>
-                                                                <?php } ?>
+                                                                <?php }?>
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
@@ -333,7 +333,7 @@
 
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
-                                                                                <?php foreach ($data_bank as $t_data) { ?>
+                                                                                <?php foreach ($data_bank as $t_data) {?>
                                                                                     <option
                                                                                         value="<?php echo $t_data->Bnk_ID; ?>">
                                                                                         <?php echo $t_data->bank_name; ?>
@@ -1151,19 +1151,19 @@
                                                                                         name="cmb_user_level">
                                                                                         <option value="">-- Select --
                                                                                         </option>
-                                                                                        <?php foreach ($data_u_lvl as $t_data) { ?>
+                                                                                        <?php foreach ($data_u_lvl as $t_data) {?>
                                                                                             <option
                                                                                                 value="<?php echo $t_data->user_level_id; ?>"
                                                                                                 <?php
-                                                                                                if ($t_data->user_level_id == $selected_user_level_id) {
-                                                                                                    echo 'selected';
-                                                                                                } else {
-                                                                                                    echo 'disabled';
+                                                                                                    if ($t_data->user_level_id == $selected_user_level_id) {
+                                                                                                        echo 'selected';
+                                                                                                    } else {
+                                                                                                        echo 'disabled';
                                                                                                 }
-                                                                                                ?>>
+                                                                                                    ?>>
                                                                                                 <?php echo $t_data->user_level_name; ?>
                                                                                             </option>
-                                                                                        <?php } ?>
+                                                                                        <?php }?>
                                                                                     </select>
 
                                                                                 </div>

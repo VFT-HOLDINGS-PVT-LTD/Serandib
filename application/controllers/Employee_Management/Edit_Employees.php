@@ -271,17 +271,49 @@ class Edit_Employees extends CI_Controller
         $Comp_No = $this->input->post('txt_cmp_no');
         $Emp_No = $this->input->post('txt_emp_no');
 
+        $OldImage = $this->input->post('img_Data');
+        $OldImageData = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
 
-        $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+        if ($OldImageData[0]->Image == $OldImage) {
+             $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
 
-        if (empty($Cmp_ID)) {
-            $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
-        }else {
-            $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+            if (empty($Cmp_ID)) {
+                $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
+            }else {
+                $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+            }
+
+            $Image = $DataID[0]->Image;
+        }else{
+            // Image Upload Logic
+            $Image = md5($Comp_No);
+            $config['upload_path'] = 'assets/images/Employees/';
+            $config['allowed_types'] = 'jpg|png|docx';
+            $config['max_size'] = 100000;
+            $config['max_width'] = 4000;
+            $config['max_height'] = 4000;
+            $config['file_name'] = $Image . ".jpg";
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('img_employee')) {
+                $upload_data = $this->upload->data();
+                $uploaded_file = $upload_data['file_name'];
+            } else {
+                $uploaded_file = null;
+                // Optionally handle error
+                $error = $this->upload->display_errors();
+                log_message('error', $error);
+            }
+
+            $Image =  $Image . ".jpg";
         }
 
+        echo $Image; // Debugging line to check the image name
 
-        $Image = $DataID[0]->Image;
+        die;
+
+        
 
         $Is_Allow = $this->input->post('Is_Allow');
 

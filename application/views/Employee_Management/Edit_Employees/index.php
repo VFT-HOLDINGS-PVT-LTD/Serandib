@@ -362,6 +362,9 @@
                                                                             </div>
                                                                         </div>
 
+                                                                        <input type="text" name="img_Data" value="<?php echo $data_set[0]->Image ?>"
+                                                                            style="display: none;">
+
 
                                                                     </div>
 

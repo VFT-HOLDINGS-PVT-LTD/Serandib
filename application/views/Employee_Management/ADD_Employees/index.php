@@ -284,7 +284,7 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name" name="txt_emp_name"
                                                                                 required=""
-                                                                                placeholder="Ex: Ashan Rathsara">
+                                                                                placeholder="Ex: Nimal Silva">
                                                                         </div>
 
                                                                     </div>
@@ -298,7 +298,7 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name_init"
                                                                                 name="txt_emp_name_init" required=""
-                                                                                placeholder="Ex: L.A.R">
+                                                                                placeholder="Ex: L.A.R Silva">
                                                                         </div>
 
                                                                     </div>
@@ -1734,6 +1734,15 @@ document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
                 }).on('changeDate', function (ev) {
                     $(this).datepicker('hide');
                 });
+
+                $('#bond_end_date').datepicker({
+                format: "dd/mm/yyyy",
+                "todayHighlight": true,
+                autoclose: true,
+                format: 'yyyy/mm/dd'
+            }).on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
             </script>
 
 

@@ -148,7 +148,7 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
-                                                                                placeholder="Ex: 00001" required="">
+                                                                                placeholder="Ex: 1234ST" required="">
 
                                                                         </div>
 

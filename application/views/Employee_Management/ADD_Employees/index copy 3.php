@@ -30,15 +30,6 @@
         color: #555;
         font-style: italic;
     }
-
-    .sub-department-row td {
-        border-top: none !important;
-    }
-
-    .sub-arrow {
-        display: inline-block;
-        margin-right: 5px;
-    }
 </style>
 
 <style>
@@ -64,85 +55,7 @@
         border-radius: 0.375rem;
     }
 </style>
-<style>
-    /* .brace-container {
-        position: relative;
-        margin-top: 20px;
-    }
 
-    .brace-symbol {
-        position: absolute;
-        right: 190px;
-        top: 0;
-        font-size: 40px;
-        color: #ccc;
-        line-height: 1;
-        transform: scaleY(3);
-    }
-
-    .total-box {
-        margin-left: auto;
-        width: fit-content;
-        padding: 10px 25px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        background: #f7f9fc;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        color: #444;
-    }
-
-    .total-box span {
-        font-weight: bold;
-    } */
-</style>
-
-<style>
-    .brace-container {
-        position: relative;
-        margin-top: 20px;
-        padding-top: 10px;
-    }
-
-    /* .brace-symbol {
-        position: absolute;
-        right: 200px;
-        top: -30px;
-        font-size: 50px;
-        color: #ccc;
-        transform-origin: top;
-        line-height: 1;
-        pointer-events: none;
-        width: 60%;
-    } */
-
-    .total-box {
-        margin-left: auto;
-        width: fit-content;
-        padding: 10px 25px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        background: #f7f9fc;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        color: #444;
-    }
-
-    .total-box span {
-        font-weight: bold;
-    }
-
-    .brace-symbol {
-        position: absolute;
-        right: 200px;
-        top: -30px;
-        font-size: 50px;
-        color: #ccc;
-        transform-origin: top;
-        line-height: 1;
-        pointer-events: none;
-    }
-</style>
 
 <body class="infobar-offcanvas">
 
@@ -1092,7 +1005,7 @@
 
                                                                     <!-- Table to display added departments and percentages -->
                                                                     <div id="departmentDiv1" style="display: none;"
-                                                                        class="form-group col-sm-8">
+                                                                        class="form-group col-sm-12">
                                                                         <table class="table" id="departmentTable">
                                                                             <thead>
                                                                                 <tr>
@@ -1108,71 +1021,6 @@
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
-
-                                                                    <div class="form-group col-sm-4">
-                                                                        <!-- Total percentage display drawer -->
-                                                                        <!-- Curly Brace Drawer and Total -->
-                                                                        <!-- Curly Brace Drawer and Total Box -->
-                                                                        <div id="braceContainer"
-                                                                            style="position: absolute; right: 430px; top: 35px; pointer-events: none;">
-                                                                            <!-- SVG brace -->
-                                                                            <svg id="braceSVG" viewBox="0 0 60 200"
-                                                                                width="60" height="200"
-                                                                                preserveAspectRatio="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <defs>
-                                                                                    <style>
-                                                                                        .brace-line {
-                                                                                            stroke: rgba(69, 90, 100, 0.87);
-                                                                                            stroke-width: 3;
-                                                                                            fill: none;
-                                                                                            stroke-linecap: round;
-                                                                                            stroke-linejoin: round;
-                                                                                        }
-                                                                                    </style>
-                                                                                </defs>
-
-                                                                                <!-- Top horizontal line -->
-                                                                                <line class="brace-line" x1="10" y1="15"
-                                                                                    x2="45" y2="15" />
-
-                                                                                <!-- Top vertical line -->
-                                                                                <line class="brace-line" x1="45" y1="15"
-                                                                                    x2="45" y2="85" />
-
-                                                                                <!-- Middle horizontal line -->
-                                                                                <line class="brace-line" x1="160"
-                                                                                    y1="85" x2="45" y2="85" />
-
-                                                                                <!-- Bottom vertical line -->
-                                                                                <line class="brace-line" x1="45" y1="85"
-                                                                                    x2="45" y2="155" />
-
-                                                                                <!-- Bottom horizontal line -->
-                                                                                <line class="brace-line" x1="10"
-                                                                                    y1="155" x2="45" y2="155" />
-                                                                            </svg>
-
-                                                                            <!-- Total box overlayed on SVG -->
-                                                                            <div class="total-box" style="
-                                                                                position: absolute;
-                                                                                left: 88px;
-                                                                                top: 40%;
-                                                                                transform: translateY(-50%);
-                                                                                font-size: 18px;
-                                                                                color: #000;
-                                                                                pointer-events: none;
-                                                                            ">
-                                                                                Total: <span id="totalPercentage"
-                                                                                    style="color: red;">0%</span>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
                                                                 </div>
 
                                                                 <div class="row">
@@ -2264,7 +2112,7 @@
         }
     </script>
 
-    <!-- <script>
+    <script>
         // JavaScript to handle the display of the department div when "Common" is selected
         document.getElementById("cmb_percentage").addEventListener("change", function () {
             var departmentDiv = document.getElementById("departmentDiv");
@@ -2337,53 +2185,23 @@
                 return;
             }
 
-            // Get main department percentage from current row (cell index 2)
-            const mainPercentageInput = currentRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-            if (mainPercentage === 0 || isNaN(mainPercentage)) {
-                alert("Please enter a valid percentage for the main department before adding sub-departments.");
-                return;
-            }
-
-            // Count existing sub-department rows below this main row
-            let subDeptCount = 0;
-            for (let i = rowIndexInTbody + 1; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    subDeptCount++;
-                } else {
-                    break;
-                }
-            }
-
-            const newSubDeptCount = subDeptCount + 1;
-            const equalShare = parseFloat((mainPercentage / newSubDeptCount).toFixed(2));
-
-            // Redistribute percentage among all sub-department rows (existing)
-            for (let i = rowIndexInTbody + 1, count = 0; count < subDeptCount; i++, count++) {
-                const percentInput = rows[i].cells[2].querySelector('input');
-                if (percentInput) {
-                    percentInput.value = equalShare;
-                }
-            }
-
-            // Insert new sub-department row
-            const newRow = tableBody.insertRow(rowIndexInTbody + 1 + subDeptCount);
+            const newRow = tableBody.insertRow(rowIndexInTbody + 1);
             newRow.classList.add('sub-department-row');
 
             const cell1 = newRow.insertCell(0); // Label
-            const cell2 = newRow.insertCell(1); // Supervisor
-            const cell3 = newRow.insertCell(2); // Percentage
+            const cell2 = newRow.insertCell(1); // Group Supervisor input
+            const cell3 = newRow.insertCell(2); // Percentage input
             const cell4 = newRow.insertCell(3); // Remove button
             const cell5 = newRow.insertCell(4); // Empty
 
+            // Label cell
+            cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
+
+            // Unique IDs
             const subDeptId = 'sub_dept_' + Date.now();
             const hiddenId = 'cmb_Supervisor_' + Date.now();
 
-            // Sub-department label
-            cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
-            // Supervisor input block
+            // Group Supervisor input
             cell2.innerHTML = `
                 <div class="col-sm-8 new-search-col">
                     <label for="${subDeptId}" class="new-input-label hidden">Group Supervisor</label>
@@ -2392,33 +2210,30 @@
                 </div>
             `;
 
-            // Sub-department percentage input with event listener for validation
+            // Percentage input
             const percentId = 'sub_percent_' + Date.now();
             cell3.innerHTML = `
-                <input type="number" class="form-control form-control-sm sub-percent" 
-                    name="${percentId}" id="${percentId}" 
-                    placeholder="Percentage" value="${equalShare}" 
-                    oninput="validateSubPercentages(this)">
-            `;
+        <input type="number" class="form-control form-control-sm" name="${percentId}" id="${percentId}" placeholder="Percentage">
+    `;
 
             // Remove button
             cell4.innerHTML = `
-                <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-                    <i class="bi bi-x-lg"></i> Remove
-                </button>
-            `;
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
+            <i class="bi bi-x-lg"></i> Remove
+        </button>
+    `;
 
-            // No content for Add column
+            // No content for Add column in sub-row
             cell5.innerHTML = '';
 
-            // Init autocomplete for supervisor search
+            // Dynamically initialize autocomplete for this supervisor input
             setTimeout(function () {
                 $("#" + subDeptId).autocomplete({
                     source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
                     minLength: 1,
                     select: function (event, ui) {
-                        $("#" + hiddenId).val(ui.item.value);
-                        $("#" + subDeptId).val(ui.item.value + ' - ' + ui.item.label);
+                        $("#" + hiddenId).val(ui.item.value); // Store selected ID
+                        $("#" + subDeptId).val(ui.item.value + ' - ' + ui.item.label); // Show full display
                         return false;
                     }
                 }).autocomplete("instance")._renderItem = function (ul, item) {
@@ -2428,7 +2243,6 @@
                 };
             }, 100);
         }
-
 
 
         function removeRow2(button) {
@@ -2436,535 +2250,8 @@
             row.parentNode.removeChild(row);
         }
 
-        function validateSubPercentages(input) {
-            const currentRow = input.closest('tr');
-            const tableBody = currentRow.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(currentRow);
 
-            // Find the main department row above
-            let mainRow = null;
-            for (let i = rowIndex - 1; i >= 0; i--) {
-                if (!rows[i].classList.contains('sub-department-row')) {
-                    mainRow = rows[i];
-                    break;
-                }
-            }
 
-            if (!mainRow) return;
-
-            const mainPercentageInput = mainRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-            // Sum all sub-department percentages
-            let totalSubPercent = 0;
-            for (let i = rowIndex; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    const subInput = rows[i].cells[2].querySelector('input');
-                    totalSubPercent += parseFloat(subInput?.value || 0);
-                } else {
-                    break;
-                }
-            }
-
-            // Allow a margin of error (e.g., 0.1%) due to rounding
-            if (Math.abs(totalSubPercent - mainPercentage) > 0.1) {
-                alert(`Total sub-department percentages (${totalSubPercent}%) must equal the main department's percentage (${mainPercentage}%).`);
-            }
-        }
-
-
-    </script> -->
-    <!-- <script>
-    document.getElementById("cmb_percentage").addEventListener("change", function () {
-        var departmentDiv = document.getElementById("departmentDiv");
-        var departmentDiv1 = document.getElementById("departmentDiv1");
-
-        if (this.value === "Common") {
-            departmentDiv.style.display = "block";
-            departmentDiv1.style.display = "block";
-        } else {
-            departmentDiv.style.display = "none";
-            departmentDiv1.style.display = "none";
-        }
-    });
-
-    document.getElementById("btn_add_department").addEventListener("click", function () {
-        var departmentSelect = document.getElementById("cmb_dep1");
-        var percentageSelect = document.getElementById("cmb_percentage");
-
-        var departmentId = departmentSelect.value;
-        var departmentName = departmentSelect.options[departmentSelect.selectedIndex]?.text || "";
-        var percentage = percentageSelect.value;
-
-        if (departmentId !== "") {
-            var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
-            var newRow = table.insertRow();
-
-            var cell1 = newRow.insertCell(0);
-            var cell2 = newRow.insertCell(1);
-            var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3);
-            var cell5 = newRow.insertCell(4);
-
-            cell1.innerHTML = departmentName;
-            cell2.innerHTML = "";
-            cell3.innerHTML = `<input type="text" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage();" />`;
-            cell4.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-            cell5.innerHTML = '<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>';
-
-            departmentSelect.value = "";
-            percentageSelect.value = "";
-
-            calculateTotalDepartmentPercentage();
-        } else {
-            alert("Please select both department and percentage!");
-        }
-    });
-
-    function removeRow(button) {
-        var row = button.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-        calculateTotalDepartmentPercentage();
-    }
-
-    function AddRow(button) {
-        const currentRow = button.closest('tr');
-        const tableBody = currentRow.parentNode;
-        const rows = Array.from(tableBody.rows);
-        const rowIndexInTbody = rows.indexOf(currentRow);
-
-        const mainPercentageInput = currentRow.cells[2].querySelector('input');
-        const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-        if (mainPercentage === 0 || isNaN(mainPercentage)) {
-            alert("Please enter a valid percentage for the main department before adding sub-departments.");
-            return;
-        }
-
-        let subDeptCount = 0;
-        for (let i = rowIndexInTbody + 1; i < rows.length; i++) {
-            if (rows[i].classList.contains('sub-department-row')) {
-                subDeptCount++;
-            } else {
-                break;
-            }
-        }
-
-        const newSubDeptCount = subDeptCount + 1;
-        const equalShare = parseFloat((mainPercentage / newSubDeptCount).toFixed(2));
-
-        for (let i = rowIndexInTbody + 1, count = 0; count < subDeptCount; i++, count++) {
-            const percentInput = rows[i].cells[2].querySelector('input');
-            if (percentInput) percentInput.value = equalShare;
-        }
-
-        const newRow = tableBody.insertRow(rowIndexInTbody + 1 + subDeptCount);
-        newRow.classList.add('sub-department-row');
-
-        const cell1 = newRow.insertCell(0);
-        const cell2 = newRow.insertCell(1);
-        const cell3 = newRow.insertCell(2);
-        const cell4 = newRow.insertCell(3);
-        const cell5 = newRow.insertCell(4);
-
-        const subDeptId = 'sub_dept_' + Date.now();
-        const hiddenId = 'cmb_Supervisor_' + Date.now();
-
-        cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
-        cell2.innerHTML = `
-            <div class="col-sm-8 new-search-col">
-                <label for="${subDeptId}" class="new-input-label hidden">Group Supervisor</label>
-                <input type="text" class="form-control new-input-control" name="${subDeptId}" id="${subDeptId}" placeholder="Search by ID or Name">
-                <input type="hidden" name="${hiddenId}" id="${hiddenId}">
-            </div>
-        `;
-
-        const percentId = 'sub_percent_' + Date.now();
-        cell3.innerHTML = `
-            <input type="number" class="form-control form-control-sm sub-percent" 
-                name="${percentId}" id="${percentId}" 
-                placeholder="Percentage" value="${equalShare}" 
-                oninput="validateSubPercentages(this)">
-        `;
-
-        cell4.innerHTML = `
-            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-                <i class="bi bi-x-lg"></i> Remove
-            </button>
-        `;
-        cell5.innerHTML = '';
-
-        mainPercentageInput.setAttribute("oninput", "updateSubDeptPercentages(this); calculateTotalDepartmentPercentage();");
-
-        setTimeout(function () {
-            $("#" + subDeptId).autocomplete({
-                source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-                minLength: 1,
-                select: function (event, ui) {
-                    $("#" + hiddenId).val(ui.item.value);
-                    $("#" + subDeptId).val(ui.item.value + ' - ' + ui.item.label);
-                    return false;
-                }
-            }).autocomplete("instance")._renderItem = function (ul, item) {
-                return $("<li>")
-                    .append("<div>" + item.value + " - " + item.label + "</div>")
-                    .appendTo(ul);
-            };
-        }, 100);
-    }
-
-    function removeRow2(button) {
-        const row = button.closest('tr');
-        row.parentNode.removeChild(row);
-    }
-
-    function updateSubDeptPercentages(input) {
-        const currentRow = input.closest('tr');
-        const tableBody = currentRow.parentNode;
-        const rows = Array.from(tableBody.rows);
-        const rowIndex = rows.indexOf(currentRow);
-
-        const newMainPercentage = parseFloat(input.value || 0);
-        if (isNaN(newMainPercentage) || newMainPercentage <= 0) return;
-
-        let subDeptRows = [];
-        for (let i = rowIndex + 1; i < rows.length; i++) {
-            if (rows[i].classList.contains('sub-department-row')) {
-                subDeptRows.push(rows[i]);
-            } else {
-                break;
-            }
-        }
-
-        const subCount = subDeptRows.length;
-        if (subCount === 0) return;
-
-        const newShare = parseFloat((newMainPercentage / subCount).toFixed(2));
-
-        for (const subRow of subDeptRows) {
-            const percentInput = subRow.cells[2].querySelector('input');
-            if (percentInput) percentInput.value = newShare;
-        }
-    }
-
-    function validateSubPercentages(input) {
-        const currentRow = input.closest('tr');
-        const tableBody = currentRow.parentNode;
-        const rows = Array.from(tableBody.rows);
-        const rowIndex = rows.indexOf(currentRow);
-
-        let mainRow = null;
-        for (let i = rowIndex - 1; i >= 0; i--) {
-            if (!rows[i].classList.contains('sub-department-row')) {
-                mainRow = rows[i];
-                break;
-            }
-        }
-
-        if (!mainRow) return;
-
-        const mainPercentageInput = mainRow.cells[2].querySelector('input');
-        const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-        let totalSubPercent = 0;
-        for (let i = rowIndex; i < rows.length; i++) {
-            if (rows[i].classList.contains('sub-department-row')) {
-                const subInput = rows[i].cells[2].querySelector('input');
-                totalSubPercent += parseFloat(subInput?.value || 0);
-            } else {
-                break;
-            }
-        }
-
-        if (Math.abs(totalSubPercent - mainPercentage) > 0.1) {
-            alert(`Total sub-department percentages (${totalSubPercent}%) must equal the main department's percentage (${mainPercentage}%).`);
-        }
-    }
-
-    function calculateTotalDepartmentPercentage() {
-    const table = document.getElementById("departmentTable");
-    const tbody = table.querySelector("tbody");
-    const rows = Array.from(tbody.rows);
-
-    let total = 0;
-    for (let i = 0; i < rows.length; i++) {
-        if (!rows[i].classList.contains('sub-department-row')) {
-            const input = rows[i].cells[2]?.querySelector('input');
-            if (input) {
-                const val = parseFloat(input.value || 0);
-                if (!isNaN(val)) total += val;
-            }
-        }
-    }
-
-    const display = document.getElementById("totalPercentage");
-    display.textContent = total.toFixed(2) + "%";
-
-    if (Math.abs(total - 100) <= 0.1) {
-        display.style.color = "green";
-    } else {
-        display.style.color = "red";
-    }
-}
-
-
-    // Optional: update on page load
-    window.onload = function () {
-        calculateTotalDepartmentPercentage();
-    };
-</script> -->
-    <script>
-        document.getElementById("cmb_percentage").addEventListener("change", function () {
-            var departmentDiv = document.getElementById("departmentDiv");
-            var departmentDiv1 = document.getElementById("departmentDiv1");
-
-            if (this.value === "Common") {
-                departmentDiv.style.display = "block";
-                departmentDiv1.style.display = "block";
-            } else {
-                departmentDiv.style.display = "none";
-                departmentDiv1.style.display = "none";
-            }
-        });
-
-        document.getElementById("btn_add_department").addEventListener("click", function () {
-            var departmentSelect = document.getElementById("cmb_dep1");
-            var percentageSelect = document.getElementById("cmb_percentage");
-
-            var departmentId = departmentSelect.value;
-            var departmentName = departmentSelect.options[departmentSelect.selectedIndex]?.text || "";
-            var percentage = percentageSelect.value;
-
-            if (departmentId !== "") {
-                var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
-                var newRow = table.insertRow();
-
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var cell4 = newRow.insertCell(3);
-                var cell5 = newRow.insertCell(4);
-
-                cell1.innerHTML = departmentName;
-                cell2.innerHTML = "";
-                cell3.innerHTML = `<input type="text" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
-                cell4.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
-                cell5.innerHTML = '<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>';
-
-                departmentSelect.value = "";
-                percentageSelect.value = "";
-
-                calculateTotalDepartmentPercentage();
-                scaleBraceToMatchTable();
-            } else {
-                alert("Please select both department and percentage!");
-            }
-        });
-
-        function removeRow(button) {
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-            calculateTotalDepartmentPercentage();
-            scaleBraceToMatchTable();
-        }
-
-        function AddRow(button) {
-            const currentRow = button.closest('tr');
-            const tableBody = currentRow.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndexInTbody = rows.indexOf(currentRow);
-
-            const mainPercentageInput = currentRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-            if (mainPercentage === 0 || isNaN(mainPercentage)) {
-                alert("Please enter a valid percentage for the main department before adding sub-departments.");
-                return;
-            }
-
-            let subDeptCount = 0;
-            for (let i = rowIndexInTbody + 1; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    subDeptCount++;
-                } else {
-                    break;
-                }
-            }
-
-            const newSubDeptCount = subDeptCount + 1;
-            const equalShare = parseFloat((mainPercentage / newSubDeptCount).toFixed(2));
-
-            for (let i = rowIndexInTbody + 1, count = 0; count < subDeptCount; i++, count++) {
-                const percentInput = rows[i].cells[2].querySelector('input');
-                if (percentInput) percentInput.value = equalShare;
-            }
-
-            const newRow = tableBody.insertRow(rowIndexInTbody + 1 + subDeptCount);
-            newRow.classList.add('sub-department-row');
-
-            const cell1 = newRow.insertCell(0);
-            const cell2 = newRow.insertCell(1);
-            const cell3 = newRow.insertCell(2);
-            const cell4 = newRow.insertCell(3);
-            const cell5 = newRow.insertCell(4);
-
-            const subDeptId = 'sub_dept_' + Date.now();
-            const hiddenId = 'cmb_Supervisor_' + Date.now();
-
-            cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
-            cell2.innerHTML = `
-            <div class="col-sm-8 new-search-col">
-                <label for="${subDeptId}" class="new-input-label hidden">Group Supervisor</label>
-                <input type="text" class="form-control new-input-control" name="${subDeptId}" id="${subDeptId}" placeholder="Search by ID or Name">
-                <input type="hidden" name="${hiddenId}" id="${hiddenId}">
-            </div>
-        `;
-
-            const percentId = 'sub_percent_' + Date.now();
-            cell3.innerHTML = `
-            <input type="number" class="form-control form-control-sm sub-percent" 
-                name="${percentId}" id="${percentId}" 
-                placeholder="Percentage" value="${equalShare}" 
-                oninput="validateSubPercentages(this)">
-        `;
-
-            cell4.innerHTML = `
-            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-                <i class="bi bi-x-lg"></i> Remove
-            </button>
-        `;
-            cell5.innerHTML = '';
-
-            mainPercentageInput.setAttribute("oninput", "updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();");
-
-            setTimeout(function () {
-                $("#" + subDeptId).autocomplete({
-                    source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
-                    minLength: 1,
-                    select: function (event, ui) {
-                        $("#" + hiddenId).val(ui.item.value);
-                        $("#" + subDeptId).val(ui.item.value + ' - ' + ui.item.label);
-                        return false;
-                    }
-                }).autocomplete("instance")._renderItem = function (ul, item) {
-                    return $("<li>")
-                        .append("<div>" + item.value + " - " + item.label + "</div>")
-                        .appendTo(ul);
-                };
-            }, 100);
-
-            scaleBraceToMatchTable();
-        }
-
-        function removeRow2(button) {
-            const row = button.closest('tr');
-            row.parentNode.removeChild(row);
-            scaleBraceToMatchTable();
-        }
-
-        function updateSubDeptPercentages(input) {
-            const currentRow = input.closest('tr');
-            const tableBody = currentRow.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(currentRow);
-
-            const newMainPercentage = parseFloat(input.value || 0);
-            if (isNaN(newMainPercentage) || newMainPercentage <= 0) return;
-
-            let subDeptRows = [];
-            for (let i = rowIndex + 1; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    subDeptRows.push(rows[i]);
-                } else {
-                    break;
-                }
-            }
-
-            const subCount = subDeptRows.length;
-            if (subCount === 0) return;
-
-            const newShare = parseFloat((newMainPercentage / subCount).toFixed(2));
-
-            for (const subRow of subDeptRows) {
-                const percentInput = subRow.cells[2].querySelector('input');
-                if (percentInput) percentInput.value = newShare;
-            }
-        }
-
-        function validateSubPercentages(input) {
-            const currentRow = input.closest('tr');
-            const tableBody = currentRow.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(currentRow);
-
-            let mainRow = null;
-            for (let i = rowIndex - 1; i >= 0; i--) {
-                if (!rows[i].classList.contains('sub-department-row')) {
-                    mainRow = rows[i];
-                    break;
-                }
-            }
-
-            if (!mainRow) return;
-
-            const mainPercentageInput = mainRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-            let totalSubPercent = 0;
-            for (let i = rowIndex; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    const subInput = rows[i].cells[2].querySelector('input');
-                    totalSubPercent += parseFloat(subInput?.value || 0);
-                } else {
-                    break;
-                }
-            }
-
-            if (Math.abs(totalSubPercent - mainPercentage) > 0.1) {
-                alert(`Total sub-department percentages (${totalSubPercent}%) must equal the main department's percentage (${mainPercentage}%).`);
-            }
-        }
-
-        function calculateTotalDepartmentPercentage() {
-            const table = document.getElementById("departmentTable");
-            const tbody = table.querySelector("tbody");
-            const rows = Array.from(tbody.rows);
-
-            let total = 0;
-            for (let i = 0; i < rows.length; i++) {
-                if (!rows[i].classList.contains('sub-department-row')) {
-                    const input = rows[i].cells[2]?.querySelector('input');
-                    if (input) {
-                        const val = parseFloat(input.value || 0);
-                        if (!isNaN(val)) total += val;
-                    }
-                }
-            }
-
-            const display = document.getElementById("totalPercentage");
-            display.textContent = total.toFixed(2) + "%";
-            display.style.color = Math.abs(total - 100) <= 0.1 ? "green" : "red";
-        }
-
-        function scaleBraceToMatchTable() {
-            const table = document.getElementById("departmentTable");
-            const braceSVG = document.getElementById("braceSVG");
-
-            if (table && braceSVG) {
-                const tableHeight = table.offsetHeight;
-                braceSVG.setAttribute("height", tableHeight); // adjust SVG height
-            }
-        }
-
-
-
-        window.onload = function () {
-            calculateTotalDepartmentPercentage();
-            scaleBraceToMatchTable();
-        };
     </script>
 
     <script>

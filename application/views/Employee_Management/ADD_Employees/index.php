@@ -142,6 +142,12 @@
         line-height: 1;
         pointer-events: none;
     }
+
+    #percentError {
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+    }
 </style>
 
 <body class="infobar-offcanvas">
@@ -1163,7 +1169,8 @@
                                                                                 color: #000;
                                                                                 pointer-events: none;
                                                                             ">
-                                                                                Total: <span id="totalPercentage"
+                                                                                Department Total: <span
+                                                                                    id="totalPercentage"
                                                                                     style="color: red;">0%</span>
                                                                             </div>
                                                                         </div>
@@ -2764,11 +2771,28 @@
         });
 
         function removeRow(button) {
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-            calculateTotalDepartmentPercentage();
+            const row = button.closest('tr');
+            const tableBody = row.parentNode;
+            const rows = Array.from(tableBody.rows);
+            const rowIndex = rows.indexOf(row);
+
+            // Step 1: Remove the main department row
+            tableBody.deleteRow(rowIndex);
+
+            // Step 2: Remove all sub-department rows and the status row
+            let i = rowIndex;
+            while (i < tableBody.rows.length) {
+                const currentRow = tableBody.rows[i];
+                if (currentRow.classList.contains('sub-department-row') || currentRow.classList.contains('sub-dept-status-row')) {
+                    tableBody.deleteRow(i); // don't increment i, rows shift up
+                } else {
+                    break; // stop once we hit the next main department
+                }
+            }
+
             scaleBraceToMatchTable();
         }
+
 
         function AddRow(button) {
             const currentRow = button.closest('tr');
@@ -2794,13 +2818,24 @@
             }
 
             const newSubDeptCount = subDeptCount + 1;
-            const equalShare = parseFloat((mainPercentage / newSubDeptCount).toFixed(2));
 
-            for (let i = rowIndexInTbody + 1, count = 0; count < subDeptCount; i++, count++) {
-                const percentInput = rows[i].cells[2].querySelector('input');
-                if (percentInput) percentInput.value = equalShare;
+            // Accurate share distribution
+            let baseShare = Math.floor((mainPercentage / newSubDeptCount) * 100) / 100;
+            let totalBase = baseShare * newSubDeptCount;
+            let remainder = +(mainPercentage - totalBase).toFixed(2);
+            let shares = Array(newSubDeptCount).fill(baseShare);
+            for (let i = 0; i < newSubDeptCount && remainder > 0; i++) {
+                shares[i] = +(shares[i] + 0.01).toFixed(2);
+                remainder = +(remainder - 0.01).toFixed(2);
             }
 
+            // Update existing sub-dept percentages
+            for (let i = rowIndexInTbody + 1, count = 0; count < subDeptCount; i++, count++) {
+                const percentInput = rows[i].cells[2].querySelector('input');
+                if (percentInput) percentInput.value = shares[count];
+            }
+
+            // Insert new sub-dept row with last share
             const newRow = tableBody.insertRow(rowIndexInTbody + 1 + subDeptCount);
             newRow.classList.add('sub-department-row');
 
@@ -2816,27 +2851,30 @@
             cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
 
             cell2.innerHTML = `
-            <div class="col-sm-8 new-search-col">
-                <label for="${subDeptId}" class="new-input-label hidden">Group Supervisor</label>
-                <input type="text" class="form-control new-input-control" name="${subDeptId}" id="${subDeptId}" placeholder="Search by ID or Name">
-                <input type="hidden" name="${hiddenId}" id="${hiddenId}">
-            </div>
-        `;
+                <div class="col-sm-8 new-search-col">
+                    <label for="${subDeptId}" class="new-input-label hidden">Group Supervisor</label>
+                    <input type="text" class="form-control new-input-control" name="${subDeptId}" id="${subDeptId}" placeholder="Search by ID or Name">
+                    <input type="hidden" name="${hiddenId}" id="${hiddenId}">
+                </div>
+            `;
 
             const percentId = 'sub_percent_' + Date.now();
+            const share = shares[subDeptCount]; // last one for the new row
+
             cell3.innerHTML = `
-            <input type="number" class="form-control form-control-sm sub-percent" 
-                name="${percentId}" id="${percentId}" 
-                placeholder="Percentage" value="${equalShare}" 
-                oninput="validateSubPercentages(this)">
-        `;
+                <input type="number" class="form-control form-control-sm sub-percent"
+                    name="${percentId}" id="${percentId}"
+                    placeholder="Percentage" value="${share}"
+                    oninput="validateSubPercentages(this)">
+            `;
 
             cell4.innerHTML = `
-            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-                <i class="bi bi-x-lg"></i> Remove
-            </button>
-        `;
-            cell5.innerHTML = '';
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
+                    <i class="bi bi-x-lg"></i> Remove
+                </button>
+            `;
+
+            cell5.innerHTML = '<span class="percent-error" style="color: red; display: none;"></span>';
 
             mainPercentageInput.setAttribute("oninput", "updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();");
 
@@ -2861,7 +2899,63 @@
 
         function removeRow2(button) {
             const row = button.closest('tr');
-            row.parentNode.removeChild(row);
+            const tableBody = row.parentNode;
+            const rows = Array.from(tableBody.rows);
+            const rowIndex = rows.indexOf(row);
+
+            // Step 1: Remove this sub-department row
+            tableBody.deleteRow(rowIndex);
+
+            // Step 2: Find main department row
+            let mainRow = null;
+            let mainRowIndex = -1;
+            for (let i = rowIndex - 1; i >= 0; i--) {
+                if (!rows[i].classList.contains('sub-department-row') && !rows[i].classList.contains('sub-dept-status-row')) {
+                    mainRow = rows[i];
+                    mainRowIndex = i;
+                    break;
+                }
+            }
+            if (!mainRow) return;
+
+            const mainPercentageInput = mainRow.cells[2].querySelector('input');
+            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
+            if (isNaN(mainPercentage)) return;
+
+            // Step 3: Collect all sub-department rows under this main department (after deletion)
+            const updatedRows = Array.from(tableBody.rows); // refresh after deletion
+            let subDeptRows = [];
+            for (let i = mainRowIndex + 1; i < updatedRows.length; i++) {
+                if (updatedRows[i].classList.contains('sub-department-row')) {
+                    subDeptRows.push(updatedRows[i]);
+                } else {
+                    break;
+                }
+            }
+
+            const subCount = subDeptRows.length;
+            if (subCount === 0) return;
+
+            // Step 4: Recalculate accurate percentage shares
+            let baseShare = Math.floor((mainPercentage / subCount) * 100) / 100;
+            let totalBase = baseShare * subCount;
+            let remainder = +(mainPercentage - totalBase).toFixed(2);
+            let shares = Array(subCount).fill(baseShare);
+            for (let i = 0; i < subCount && remainder > 0; i++) {
+                shares[i] = +(shares[i] + 0.01).toFixed(2);
+                remainder = +(remainder - 0.01).toFixed(2);
+            }
+
+            // Step 5: Update sub-department inputs with new values
+            for (let i = 0; i < subCount; i++) {
+                const input = subDeptRows[i].cells[2].querySelector('input');
+                if (input) input.value = shares[i];
+            }
+
+            // Step 6: Trigger validation
+            const firstInput = subDeptRows[0]?.cells[2]?.querySelector('input');
+            if (firstInput) validateSubPercentages(firstInput);
+
             scaleBraceToMatchTable();
         }
 
@@ -2886,11 +2980,19 @@
             const subCount = subDeptRows.length;
             if (subCount === 0) return;
 
-            const newShare = parseFloat((newMainPercentage / subCount).toFixed(2));
+            // Accurate share distribution
+            let baseShare = Math.floor((newMainPercentage / subCount) * 100) / 100;
+            let totalBase = baseShare * subCount;
+            let remainder = +(newMainPercentage - totalBase).toFixed(2);
+            let shares = Array(subCount).fill(baseShare);
+            for (let i = 0; i < subCount && remainder > 0; i++) {
+                shares[i] = +(shares[i] + 0.01).toFixed(2);
+                remainder = +(remainder - 0.01).toFixed(2);
+            }
 
-            for (const subRow of subDeptRows) {
-                const percentInput = subRow.cells[2].querySelector('input');
-                if (percentInput) percentInput.value = newShare;
+            for (let i = 0; i < subCount; i++) {
+                const percentInput = subDeptRows[i].cells[2].querySelector('input');
+                if (percentInput) percentInput.value = shares[i];
             }
         }
 
@@ -2900,22 +3002,29 @@
             const rows = Array.from(tableBody.rows);
             const rowIndex = rows.indexOf(currentRow);
 
+            // Step 1: Find main department row (above current)
             let mainRow = null;
+            let mainRowIndex = -1;
             for (let i = rowIndex - 1; i >= 0; i--) {
-                if (!rows[i].classList.contains('sub-department-row')) {
+                if (!rows[i].classList.contains('sub-department-row') && !rows[i].classList.contains('sub-dept-status-row')) {
                     mainRow = rows[i];
+                    mainRowIndex = i;
                     break;
                 }
             }
-
             if (!mainRow) return;
 
             const mainPercentageInput = mainRow.cells[2].querySelector('input');
             const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
+            if (isNaN(mainPercentage)) return;
 
+            // Step 2: Collect all sub-department rows directly after main row
             let totalSubPercent = 0;
-            for (let i = rowIndex; i < rows.length; i++) {
+            let subDeptRows = [];
+            let afterRowIndex = mainRowIndex + 1;
+            for (let i = afterRowIndex; i < rows.length; i++) {
                 if (rows[i].classList.contains('sub-department-row')) {
+                    subDeptRows.push(rows[i]);
                     const subInput = rows[i].cells[2].querySelector('input');
                     totalSubPercent += parseFloat(subInput?.value || 0);
                 } else {
@@ -2923,9 +3032,26 @@
                 }
             }
 
-            if (Math.abs(totalSubPercent - mainPercentage) > 0.1) {
-                alert(`Total sub-department percentages (${totalSubPercent}%) must equal the main department's percentage (${mainPercentage}%).`);
+            const match = Math.abs(+totalSubPercent.toFixed(3) - +mainPercentage.toFixed(3)) <= 0.001;
+
+            // Step 3: Remove any existing status row immediately after sub-departments
+            const lastSubIndex = mainRowIndex + subDeptRows.length;
+            if (rows[lastSubIndex + 1]?.classList.contains('sub-dept-status-row')) {
+                tableBody.deleteRow(lastSubIndex + 1);
             }
+
+            // Step 4: Insert new status row
+            const messageRow = tableBody.insertRow(lastSubIndex + 1);
+            messageRow.classList.add('sub-dept-status-row');
+
+            const cell = messageRow.insertCell(0);
+            cell.colSpan = 5;
+            cell.style.textAlign = "center";
+            cell.style.fontWeight = "bold";
+            cell.style.color = match ? "green" : "red";
+            cell.textContent = match
+                ? `✅ Sub-department total matches main department (${mainPercentage.toFixed(2)}%).`
+                : `❌ Sub-department total (${totalSubPercent.toFixed(2)}%) does not match main department (${mainPercentage.toFixed(2)}%).`;
         }
 
         function calculateTotalDepartmentPercentage() {
@@ -2958,8 +3084,6 @@
                 braceSVG.setAttribute("height", tableHeight); // adjust SVG height
             }
         }
-
-
 
         window.onload = function () {
             calculateTotalDepartmentPercentage();

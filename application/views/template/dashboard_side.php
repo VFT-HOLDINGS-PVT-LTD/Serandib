@@ -48,8 +48,12 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                     <li><a href="<?php echo base_url(); ?>Master/Department/">DEPARTMENT</a></li>
                                 <?php endif; ?>
 
+                                <?php if ($currentUser[0]->department == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Master/Sub_Department/">SUB DEPARTMENT</a></li>
+                                <?php endif; ?>
+
                                 <?php if ($currentUser[0]->employee_groups == 1): ?>
-                                    <li><a href="<?php echo base_url(); ?>Master/Emp_Attendance/">SUB DEPARTMENT</a></li>
+                                    <li><a href="<?php echo base_url(); ?>Master/Emp_Attendance/">APPROVE TYPE</a></li>
                                 <?php endif; ?>
 
                                 <?php if ($currentUser[0]->holiday_types == 1): ?>

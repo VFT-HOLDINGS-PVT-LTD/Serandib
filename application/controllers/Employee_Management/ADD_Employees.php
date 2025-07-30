@@ -556,4 +556,11 @@ class ADD_Employees extends CI_Controller
         }
         // Continue with saving to database, validation, etc.
     }
+
+    function get_emp_no_and_name() {
+        if (isset($_GET['term'])) {
+            $q = strtolower($_GET['term']);
+            $this->Db_model->get_auto_sub_deparment($q);
+        }
+    }
 }

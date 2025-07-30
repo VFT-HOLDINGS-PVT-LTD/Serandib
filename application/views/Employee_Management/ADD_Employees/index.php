@@ -2450,7 +2450,7 @@
 
             setTimeout(function () {
                 $("#" + subDeptId).autocomplete({
-                    source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
+                    source: "<?php echo base_url(); ?>Employee_Management/ADD_Employees/get_emp_no_and_name",
                     minLength: 1,
                     select: function (event, ui) {
                         $("#" + hiddenId).val(ui.item.value);

@@ -499,12 +499,12 @@
                                                                         <div class="col-sm-8">
                                                                             <label class="radio-inline icheck">
                                                                                 <input type="radio" id="inlineradio1"
-                                                                                    required="" value="Active"                                                                                                               <?php echo ($data_set[0]->Status == '1') ? 'checked' : '' ?>
+                                                                                    required="" value="Active"                                                                                                                                                                                                                             <?php echo ($data_set[0]->Status == '1') ? 'checked' : '' ?>
                                                                                     name="employee_status"> Active
                                                                             </label>
                                                                             <label class="radio-inline icheck">
                                                                                 <input type="radio" id="inlineradio2"
-                                                                                    value="Inactive"                                                                                                     <?php echo ($data_set[0]->Status == '0') ? 'checked' : '' ?>
+                                                                                    value="Inactive"                                                                                                                                                                                                         <?php echo ($data_set[0]->Status == '0') ? 'checked' : '' ?>
                                                                                     name="employee_status"> Inactive
                                                                             </label>
 
@@ -707,7 +707,7 @@
                                                                                 <div class="checkbox green icheck">
                                                                                     <label>
                                                                                         <input type="checkbox" name="ol"
-                                                                                            id="ol"                                                                                                    <?php if (!empty($data_set[0]->OL_Data)) {
+                                                                                            id="ol"                                                                                                                                                                                                       <?php if (!empty($data_set[0]->OL_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>>
@@ -720,7 +720,7 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="al" id="al"                                                                                                              <?php if (!empty($data_set[0]->AL_Data)) {
+                                                                                            name="al" id="al"                                                                                                                                                                                                                           <?php if (!empty($data_set[0]->AL_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>></label>
@@ -747,7 +747,7 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="hnd" id="hnd"                                                                                                                <?php if (!empty($data_set[0]->HND_Data)) {
+                                                                                            name="hnd" id="hnd"                                                                                                                                                                                                                               <?php if (!empty($data_set[0]->HND_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>></label>
@@ -802,7 +802,7 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="phd" id="phd"                                                                                                                <?php if (!empty($data_set[0]->PHD_Data)) {
+                                                                                            name="phd" id="phd"                                                                                                                                                                                                                               <?php if (!empty($data_set[0]->PHD_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>></label>
@@ -1099,7 +1099,8 @@
                                                                     <!-- Table to display added departments and percentages -->
                                                                     <div id="departmentDiv1" style="display: none;"
                                                                         class="form-group col-sm-8">
-                                                                        <table class="table" id="departmentTable">
+                                                                        <table class="table table-bordered"
+                                                                            id="departmentTable">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Department</th>
@@ -2066,7 +2067,7 @@
                                                                 <br>
 
                                                                 <!--submit button-->
-                                                                <!--                                                                     <?php $this->load->view('template/btn_submit.php'); ?> -->
+                                                                <!--                                                                                                                                         <?php $this->load->view('template/btn_submit.php'); ?> -->
                                                                 <button type="button" id="submitEmployeeForm"
                                                                     class="btn btn-primary">Submit</button>
                                                                 <!--end submit-->
@@ -2272,7 +2273,8 @@
 
         }
     </script>
-    
+
+    <!-- Advance Payroll Details - Start -->
     <script>
         document.getElementById("cmb_percentage").addEventListener("change", function () {
             var departmentDiv = document.getElementById("departmentDiv");
@@ -2300,6 +2302,18 @@
 
             if (departmentId !== "") {
                 var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
+
+                // Check if the department already exists in the table
+                var existingDepartments = Array.from(table.rows).map(row =>
+                    row.cells[0].textContent.trim()
+                );
+
+                if (existingDepartments.includes(departmentName)) {
+                    alert(`The department '${departmentName}' has already been added.`);
+                    return; // Stop here, prevent duplicate
+                }
+
+                // Create new row
                 var newRow = table.insertRow();
 
                 var cell1 = newRow.insertCell(0);
@@ -2314,6 +2328,7 @@
                 cell4.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
                 cell5.innerHTML = '<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>';
 
+                // Reset selects
                 departmentSelect.value = "";
                 percentageSelect.value = "";
 
@@ -2323,6 +2338,7 @@
                 alert("Please select both department and percentage!");
             }
         });
+
 
         function removeRow(button) {
             const row = button.closest('tr');
@@ -2655,7 +2671,9 @@
             scaleBraceToMatchTable();
         };
     </script>
+    <!-- Advance Payroll Details - End -->
 
+    
     <script>
         // Autocomplete
         // $(function () {

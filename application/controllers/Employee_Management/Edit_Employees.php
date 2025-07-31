@@ -50,6 +50,8 @@ class Edit_Employees extends CI_Controller
         $data['data_set'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_empmaster where Cmp_ID='" . $id . "'");
         $data['bond_data'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_bond_guarantor where CmpNo='" . $id . "'");
         $data['referee_data'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_referee where CmpNo='" . $id . "'");
+        $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
+
         // $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
         //                                                             tbl_empmaster.EmpNo,
         //                                                             tbl_empmaster.Enroll_No,
@@ -138,6 +140,13 @@ class Edit_Employees extends CI_Controller
 
         $this->load->view('Employee_Management/Edit_Employees/index', $data);
     }
+
+   public function getData($id) {
+        $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,ADP_Sub_Department_Name FROM tbl_advance_payroll WHERE CmpNo = '" . $id . "'");
+    // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
+    echo json_encode(['advance_payroll_data' => $result]);
+}
+
 
     // public function update_emp()
     // {
@@ -309,9 +318,9 @@ class Edit_Employees extends CI_Controller
             $Image =  $Image . ".jpg";
         }
 
-        echo $Image; // Debugging line to check the image name
+        // echo $Image; // Debugging line to check the image name
 
-        die;
+        // die;
 
         
 

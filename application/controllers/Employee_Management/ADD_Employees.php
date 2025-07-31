@@ -140,68 +140,90 @@ class ADD_Employees extends CI_Controller
         //     $this->session->set_flashdata('error_message', $errors);
         //     // Handle errors (e.g., display errors to the user)
         // } else {
-            $data = array(
-                'EmpNo' => $this->input->post('txt_emp_no'),
-                'Enroll_No' => $this->input->post('txt_enroll_no'),
-                'EPFNO' => $this->input->post('txt_epf_no'),
-                'EPF_CAT' => $this->input->post('cmb_epf_cat'),
-                // 'Is_EPF' =>$this->input->post('cmb_if_epf'),
-                'OCP_Code' => $this->input->post('txt_ocp_code'),
-                'EMP_ST_ID' => $this->input->post('cmb_emp_status'),
-                'Title' => $this->input->post('cmb_emp_title'),
-                'Emp_Full_Name' => $this->input->post('txt_emp_name'),
-                'Emp_Name_Int' => $this->input->post('txt_emp_name_init'),
-                'Image' => $Image . ".jpg",
-                'Gender' => $this->input->post('cmb_gender'),
-                'Status' => 1,
-                'Dep_ID' => $this->input->post('cmb_dep'),
-                'Des_ID' => $this->input->post('cmb_desig'),
-                'Grp_ID' => $this->input->post('cmb_group'),
-                'RosterCode' => 'RS0001',
-                'OTCode' => $this->input->post('cmb_ot_pattern'),
-                'B_id' => $this->input->post('cmb_branch'),
-                'BR1' => $this->input->post('txt_BG_Allowance1'),
-                'BR2' => $this->input->post('txt_BG_Allowance2'),
-                'ApointDate' => $this->input->post('txt_appoint_date'),
-                'Permanent_Date' => $this->input->post('txt_permanent_date'),
-                'Basic_Salary' => $this->input->post('txt_basic_sal'),
-                'Incentive' => $this->input->post('txt_Incentive'),
-                'Bnk_ID' => $this->input->post('cmb_bank'),
-                'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
-                'Account_no' => $this->input->post('txt_account'),
-                'Is_EPF' => $Is_EPF,
-                'Address' => $this->input->post('txt_address'),
-                'District' => $this->input->post('cmb_district'),
-                'City' => $this->input->post('txt_city'),
-                'Tel_home' => $this->input->post('txt_cont_home'),
-                'Tel_mobile' => $this->input->post('txt_cont_mobile'),
-                'E_mail' => $this->input->post('txt_email'),
-                'NIC' => $this->input->post('txt_nic'),
-                'Passport' => $this->input->post('txt_passport'),
-                'DOB' => $this->input->post('txt_dob'),
-                'Religion' => $this->input->post('cmb_religin'),
-                'Civil_status' => $this->input->post('cmb_civil_status'),
-                'Blood_group' => $this->input->post('cmb_blood'),
-                'Relations_name' => $this->input->post('txt_rel_name'),
-                'Relations_Tel' => $this->input->post('txt_rel_cont'),
-                'No_Of_Child' => $this->input->post('txt_no_child'),
-                'Is_allow_login' => 1,
-                'username' => $this->input->post('txt_user_name'),
-                'Password' => hash('sha512', $Password),
-                'View_Only' => $this->input->post('cmb_view_only'),
-                //            'user_p_id' => 2,
-                'user_p_id' => $this->input->post('cmb_user_level'),
-                'Cmp_ID' => 1,
-                'Active_process' => 1,
-            );
-            $result = $this->Db_model->insertData("tbl_empmaster", $data);
-            $this->session->set_flashdata('success_message', 'Employee Added');
+        $data = array(
+            'EmpNo' => $this->input->post('txt_emp_no'),
+            'Enroll_No' => $this->input->post('txt_enroll_no'),
+            'EPFNO' => $this->input->post('txt_epf_no'),
+            'EPF_CAT' => $this->input->post('cmb_epf_cat'),
+            // 'Is_EPF' =>$this->input->post('cmb_if_epf'),
+            'OCP_Code' => $this->input->post('txt_ocp_code'),
+            'EMP_ST_ID' => $this->input->post('cmb_emp_status'),
+            'Title' => $this->input->post('cmb_emp_title'),
+            'Emp_Full_Name' => $this->input->post('txt_emp_name'),
+            'Emp_Name_Int' => $this->input->post('txt_emp_name_init'),
+            'Image' => $Image . ".jpg",
+            'Gender' => $this->input->post('cmb_gender'),
+            'Status' => 1,
+            'Dep_ID' => $this->input->post('cmb_dep'),
+            'Des_ID' => $this->input->post('cmb_desig'),
+            'Grp_ID' => $this->input->post('cmb_group'),
+            'RosterCode' => 'RS0001',
+            'OTCode' => $this->input->post('cmb_ot_pattern'),
+            'B_id' => $this->input->post('cmb_branch'),
+            'BR1' => $this->input->post('txt_BG_Allowance1'),
+            'BR2' => $this->input->post('txt_BG_Allowance2'),
+            'ApointDate' => $this->input->post('txt_appoint_date'),
+            'Permanent_Date' => $this->input->post('txt_permanent_date'),
+            'Basic_Salary' => $this->input->post('txt_basic_sal'),
+            'Incentive' => $this->input->post('txt_Incentive'),
+            'Bnk_ID' => $this->input->post('cmb_bank'),
+            'Bnk_Br_ID' => $this->input->post('txt_B_Branch'),
+            'Account_no' => $this->input->post('txt_account'),
+            'Is_EPF' => $Is_EPF,
+            'Address' => $this->input->post('txt_address'),
+            'District' => $this->input->post('cmb_district'),
+            'City' => $this->input->post('txt_city'),
+            'Tel_home' => $this->input->post('txt_cont_home'),
+            'Tel_mobile' => $this->input->post('txt_cont_mobile'),
+            'E_mail' => $this->input->post('txt_email'),
+            'NIC' => $this->input->post('txt_nic'),
+            'Passport' => $this->input->post('txt_passport'),
+            'DOB' => $this->input->post('txt_dob'),
+            'Religion' => $this->input->post('cmb_religin'),
+            'Civil_status' => $this->input->post('cmb_civil_status'),
+            'Blood_group' => $this->input->post('cmb_blood'),
+            'Relations_name' => $this->input->post('txt_rel_name'),
+            'Relations_Tel' => $this->input->post('txt_rel_cont'),
+            'No_Of_Child' => $this->input->post('txt_no_child'),
+            'Is_allow_login' => 1,
+            'username' => $this->input->post('txt_user_name'),
+            'Password' => hash('sha512', $Password),
+            'View_Only' => $this->input->post('cmb_view_only'),
+            //            'user_p_id' => 2,
+            'user_p_id' => $this->input->post('cmb_user_level'),
+            'Cmp_ID' => 1,
+            'Active_process' => 1,
+        );
+        $result = $this->Db_model->insertData("tbl_empmaster", $data);
+        $this->session->set_flashdata('success_message', 'Employee Added');
         // }
         redirect('/Employee_Management/ADD_Employees/');
     }
 
     public function insert_Data()
     {
+        //  $dept_structure_json = $this->input->post('department_structure');
+        //         $department_structure = json_decode($dept_structure_json, true); // true for associative array
+
+        //         // Example: loop through departments
+        //         foreach ($department_structure as $mainDept) {
+        //             $depId = $mainDept['dep_id'];
+        //             $deptName = $mainDept['department'];
+        //             $deptPercent = $mainDept['percentage'];
+
+        //             // Optional: process sub-departments
+        //             foreach ($mainDept['sub_departments'] as $subDept) {
+        //                 $supervisor = $subDept['supervisor'];
+        //                 $subPercent = $subDept['percentage'];
+
+        //                 // Save or use the data as needed
+
+        //                 // print_r("Main Department: $depId, Percentage: $deptPercent, Sub Department Supervisor: $supervisor, Sub Department Percentage: $subPercent\n");
+        //             print_r($department_structure);
+        //             }
+        //         }
+        //         die;
+
         $Comp_No = $this->input->post('txt_cmp_no');
         $Full_Name = $this->input->post('txt_emp_name');
         $Name_Initials = $this->input->post('txt_emp_name_init');
@@ -223,6 +245,13 @@ class ADD_Employees extends CI_Controller
         // Payroll
         $Bank_Name = $this->input->post('cmb_bank');
         $Account_No = $this->input->post('txt_account');
+        $Advance_Payroll_Data = $this->input->post('cmb_percentage');
+
+        if ($Advance_Payroll_Data == 'Direct') {
+            $AdvancePayroll = '0';
+        } else {
+            $AdvancePayroll = '1';
+        }
 
         // Personal
         $Address = $this->input->post('txt_address');
@@ -306,7 +335,7 @@ class ADD_Employees extends CI_Controller
         $DataID = $this->Db_model->getfilteredData("SELECT count(EmpID) AS ID FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' AND Is_Approve = '0'");
         if ($DataID[0]->ID == 0) {
             $DataIDEmp = $this->Db_model->getfilteredData("SELECT count(EmpID) AS ID FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' AND Is_Approve = '1'");
-            
+
             if ($DataIDEmp[0]->ID == 0) {
 
                 // Echoing all variables
@@ -453,6 +482,7 @@ class ADD_Employees extends CI_Controller
                     'user_p_id' => $User_Level,
                     'Remarks' => $this->input->post('txt_remarks'),
                     'highlights' => $this->input->post('txt_high'),
+                    'Advance_Payroll_Data'=> $AdvancePayroll,
 
 
 
@@ -541,23 +571,73 @@ class ADD_Employees extends CI_Controller
                     $result = $this->Db_model->insertData("tbl_qualifications", $data_qualifactions);
                 }
 
+                $dept_structure_json = $this->input->post('department_structure');
+                $department_structure = json_decode($dept_structure_json, true); // true for associative array
+
+                // Loop through main departments
+                foreach ($department_structure as $mainDept) {
+                    $depId = $mainDept['dep_id'];
+                    $deptName = $mainDept['department'];
+                    $deptPercent = $mainDept['percentage'];
+                    $subDepartments = $mainDept['sub_departments'];
+
+                    // If sub-departments exist
+                    if (!empty($subDepartments)) {
+                        foreach ($subDepartments as $subDept) {
+                            $supervisor = $subDept['supervisor']; // e.g., "14 - HR1"
+                            $subPercent = $subDept['percentage'];
+
+                            // Extract ID from "14 - HR1"
+                            $parts = explode(' - ', $supervisor);
+                            $subdid = isset($parts[0]) ? $parts[0] : null;
+                            $subdName = isset($parts[1]) ? $parts[1] : null;
+
+                            // Insert with sub-department
+                            $data_advance_payroll = array(
+                                'CmpNo' => $Comp_No,
+                                'ADP_Department_ID' => $depId,
+                                'ADP_Department_Percentage' => $deptPercent,
+                                'ADP_Sub_Department_ID' => $subdid,
+                                'ADP_Sub_Department_Name' => $subdName,
+                                'ADP_Sub_Department_Percentage' => $subPercent,
+                            );
+
+                            $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
+                        }
+                    } else {
+                        // Insert only main department when no sub-departments
+                        $data_advance_payroll = array(
+                            'CmpNo' => $Comp_No,
+                            'ADP_Department_ID' => $depId,
+                            'ADP_Department_Percentage' => $deptPercent,
+                            'ADP_Sub_Department_ID' => 0,
+                            'ADP_Sub_Department_Name' => 0,
+                            'ADP_Sub_Department_Percentage' => 0,
+                        );
+
+                        $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
+                    }
+                }
+
+
                 // print_r($qualifications);
 
                 $this->session->set_flashdata('success_message', 'Employee Data Added Successfully');
                 redirect('/Employee_Management/ADD_Employees');
 
-            }else {
+            } else {
                 $this->session->set_flashdata('error_message', 'Employee Already Exists');
                 redirect('/Employee_Management/ADD_Employees');
             }
-        }else {
+        } else {
             $this->session->set_flashdata('error_message', 'Employee Already Exists');
             redirect('/Employee_Management/ADD_Employees');
         }
         // Continue with saving to database, validation, etc.
     }
 
-    function get_emp_no_and_name() {
+    function get_emp_no_and_name()
+    {
         if (isset($_GET['term'])) {
             $q = strtolower($_GET['term']);
             $this->Db_model->get_auto_sub_deparment($q);

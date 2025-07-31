@@ -64,38 +64,6 @@
         border-radius: 0.375rem;
     }
 </style>
-<style>
-    /* .brace-container {
-        position: relative;
-        margin-top: 20px;
-    }
-
-    .brace-symbol {
-        position: absolute;
-        right: 190px;
-        top: 0;
-        font-size: 40px;
-        color: #ccc;
-        line-height: 1;
-        transform: scaleY(3);
-    }
-
-    .total-box {
-        margin-left: auto;
-        width: fit-content;
-        padding: 10px 25px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        background: #f7f9fc;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        color: #444;
-    }
-
-    .total-box span {
-        font-weight: bold;
-    } */
-</style>
 
 <style>
     .brace-container {
@@ -1045,11 +1013,11 @@
                                                                     <div class="form-group col-sm-6 icheck-flat">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Select
-                                                                            Payment Percentage</label>
+                                                                            Payment Percentage <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
                                                                                 id="cmb_percentage"
-                                                                                name="cmb_percentage">
+                                                                                name="cmb_percentage" required="">
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
                                                                                 <option value="Direct">Directly</option>
@@ -1063,7 +1031,7 @@
                                                                 <div class="tab-pane" id="vertical-form">
 
                                                                     <label
-                                                                        style="font-weight: bold; color: #000">Advance
+                                                                        style="font-weight: bold; color: #000; display: none;" id="verticalform1">Advance
                                                                         Payroll
                                                                         Details</label>
                                                                     <hr>
@@ -1073,9 +1041,9 @@
                                                                         style="display: none;">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Department
-                                                                            <span style="color: red;">*</span></label>
+                                                                            </label>
                                                                         <div class="col-sm-7">
-                                                                            <select class="form-control" required=""
+                                                                            <select class="form-control" 
                                                                                 id="cmb_dep1" name="cmb_dep1">
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
@@ -2280,25 +2248,30 @@
             var departmentDiv = document.getElementById("departmentDiv");
             var departmentDiv1 = document.getElementById("departmentDiv1");
             var departmentDiv2 = document.getElementById("departmentDiv2"); // Make sure this ID matches
+            var departmentDiv3 = document.getElementById("verticalform1"); // Make sure this ID matches
+
 
             if (this.value === "Common") {
                 departmentDiv.style.display = "block";
                 departmentDiv1.style.display = "block";
                 departmentDiv2.style.display = "block";
+                departmentDiv3.style.display = "block";
             } else {
                 departmentDiv.style.display = "none";
                 departmentDiv1.style.display = "none";
                 departmentDiv2.style.display = "none"; // Hide when not "Common"
+                departmentDiv3.style.display = "none";
             }
         });
 
         document.getElementById("btn_add_department").addEventListener("click", function () {
             var departmentSelect = document.getElementById("cmb_dep1");
-            var percentageSelect = document.getElementById("cmb_percentage");
+            // var percentageSelect = document.getElementById("cmb_percentage");
 
             var departmentId = departmentSelect.value;
             var departmentName = departmentSelect.options[departmentSelect.selectedIndex]?.text || "";
-            var percentage = percentageSelect.value;
+            // var percentage = percentageSelect.value;
+            var percentage = '';
 
             if (departmentId !== "") {
                 var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
@@ -2322,9 +2295,10 @@
                 var cell4 = newRow.insertCell(3);
                 var cell5 = newRow.insertCell(4);
 
-                cell1.innerHTML = departmentName;
+                // cell1.innerHTML = departmentName;
+                cell1.innerHTML = `<span class="department-name" data-id="${departmentId}">${departmentName}</span>`;
                 cell2.innerHTML = "";
-                cell3.innerHTML = `<input type="text" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
+                cell3.innerHTML = `<input type="number" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
                 cell4.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
                 cell5.innerHTML = '<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>';
 
@@ -2338,7 +2312,6 @@
                 alert("Please select both department and percentage!");
             }
         });
-
 
         function removeRow(button) {
             const row = button.closest('tr');
@@ -2362,7 +2335,6 @@
 
             scaleBraceToMatchTable();
         }
-
 
         function AddRow(button) {
             const currentRow = button.closest('tr');
@@ -2673,7 +2645,7 @@
     </script>
     <!-- Advance Payroll Details - End -->
 
-    
+
     <script>
         // Autocomplete
         // $(function () {
@@ -2796,6 +2768,52 @@
                     formData.append(`qualifications[${index}][notes]`, data.notes || '');
                 });
 
+                // Department + Sub-department data extraction
+                const departmentData = [];
+                const deptTableRows = document.querySelectorAll('#departmentTable tbody tr');
+
+                let currentMainDept = null;
+
+                deptTableRows.forEach(row => {
+                    const isSub = row.classList.contains('sub-department-row');
+
+                    if (!isSub && !row.classList.contains('sub-dept-status-row')) {
+                        // const departmentName = row.cells[0].textContent.trim();
+                        const deptSpan = row.cells[0].querySelector('.department-name');
+                        const departmentName = deptSpan?.textContent.trim() || '';
+                        const departmentId = deptSpan?.getAttribute('data-id') || '';
+
+                        const mainPercentInput = row.cells[2].querySelector('input');
+                        const percentage = mainPercentInput ? parseFloat(mainPercentInput.value || 0) : 0;
+
+                        currentMainDept = {
+                            dep_id: departmentId,
+                            department: departmentName,
+                            percentage: percentage,
+                            sub_departments: []
+                        };
+
+
+                        departmentData.push(currentMainDept);
+                    }
+
+                    if (isSub && currentMainDept) {
+                        const subInput = row.cells[2].querySelector('input');
+                        const subPercentage = subInput ? parseFloat(subInput.value || 0) : 0;
+                        const supervisorInput = row.cells[1].querySelector('input[type="text"]');
+                        const supervisorName = supervisorInput?.value || "";
+
+                        currentMainDept.sub_departments.push({
+                            supervisor: supervisorName,
+                            percentage: subPercentage
+                        });
+                    }
+                });
+
+                // Append departmentData to formData
+                formData.append('department_structure', JSON.stringify(departmentData));
+
+
                 console.log(formData);
 
                 // Submit via fetch
@@ -2812,9 +2830,12 @@
                             text: 'Form submitted successfully!',
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '<?php echo base_url(); ?>Employee_Management/ADD_Employees';
+                            }
                         });
 
-                        window.location.href = '<?php echo base_url(); ?>Employee_Management/ADD_Employees'; // Redirect to the same page or another page
                         // alert('Form submitted successfully!');
                         // form.reset(); // Optional
                     })

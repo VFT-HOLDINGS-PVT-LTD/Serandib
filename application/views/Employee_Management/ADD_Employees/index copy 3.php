@@ -30,15 +30,6 @@
         color: #555;
         font-style: italic;
     }
-
-    .sub-department-row td {
-        border-top: none !important;
-    }
-
-    .sub-arrow {
-        display: inline-block;
-        margin-right: 5px;
-    }
 </style>
 
 <style>
@@ -65,58 +56,6 @@
     }
 </style>
 
-<style>
-    .brace-container {
-        position: relative;
-        margin-top: 20px;
-        padding-top: 10px;
-    }
-
-    /* .brace-symbol {
-        position: absolute;
-        right: 200px;
-        top: -30px;
-        font-size: 50px;
-        color: #ccc;
-        transform-origin: top;
-        line-height: 1;
-        pointer-events: none;
-        width: 60%;
-    } */
-
-    .total-box {
-        margin-left: auto;
-        width: fit-content;
-        padding: 10px 25px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        background: #f7f9fc;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        color: #444;
-    }
-
-    .total-box span {
-        font-weight: bold;
-    }
-
-    .brace-symbol {
-        position: absolute;
-        right: 200px;
-        top: -30px;
-        font-size: 50px;
-        color: #ccc;
-        transform-origin: top;
-        line-height: 1;
-        pointer-events: none;
-    }
-
-    #percentError {
-        font-size: 14px;
-        margin-top: 5px;
-        display: none;
-    }
-</style>
 
 <body class="infobar-offcanvas">
 
@@ -467,12 +406,12 @@
                                                                         <div class="col-sm-8">
                                                                             <label class="radio-inline icheck">
                                                                                 <input type="radio" id="inlineradio1"
-                                                                                    required="" value="Active"                                                                                                                                                                                                                             <?php echo ($data_set[0]->Status == '1') ? 'checked' : '' ?>
+                                                                                    required="" value="Active"                                                                                                               <?php echo ($data_set[0]->Status == '1') ? 'checked' : '' ?>
                                                                                     name="employee_status"> Active
                                                                             </label>
                                                                             <label class="radio-inline icheck">
                                                                                 <input type="radio" id="inlineradio2"
-                                                                                    value="Inactive"                                                                                                                                                                                                         <?php echo ($data_set[0]->Status == '0') ? 'checked' : '' ?>
+                                                                                    value="Inactive"                                                                                                     <?php echo ($data_set[0]->Status == '0') ? 'checked' : '' ?>
                                                                                     name="employee_status"> Inactive
                                                                             </label>
 
@@ -675,7 +614,7 @@
                                                                                 <div class="checkbox green icheck">
                                                                                     <label>
                                                                                         <input type="checkbox" name="ol"
-                                                                                            id="ol"                                                                                                                                                                                                       <?php if (!empty($data_set[0]->OL_Data)) {
+                                                                                            id="ol"                                                                                                    <?php if (!empty($data_set[0]->OL_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>>
@@ -688,7 +627,7 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="al" id="al"                                                                                                                                                                                                                           <?php if (!empty($data_set[0]->AL_Data)) {
+                                                                                            name="al" id="al"                                                                                                              <?php if (!empty($data_set[0]->AL_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>></label>
@@ -715,7 +654,7 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="hnd" id="hnd"                                                                                                                                                                                                                               <?php if (!empty($data_set[0]->HND_Data)) {
+                                                                                            name="hnd" id="hnd"                                                                                                                <?php if (!empty($data_set[0]->HND_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>></label>
@@ -770,7 +709,7 @@
                                                                             <div class="col-sm-2 icheck-flat">
                                                                                 <div class="checkbox green icheck">
                                                                                     <label><input type="checkbox"
-                                                                                            name="phd" id="phd"                                                                                                                                                                                                                               <?php if (!empty($data_set[0]->PHD_Data)) {
+                                                                                            name="phd" id="phd"                                                                                                                <?php if (!empty($data_set[0]->PHD_Data)) {
                                                                                                 echo 'checked';
                                                                                             }
                                                                                             ?>></label>
@@ -1013,11 +952,11 @@
                                                                     <div class="form-group col-sm-6 icheck-flat">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Select
-                                                                            Payment Percentage <span style="color: red;">*</span></label>
+                                                                            Payment Percentage</label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
                                                                                 id="cmb_percentage"
-                                                                                name="cmb_percentage" required="">
+                                                                                name="cmb_percentage">
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
                                                                                 <option value="Direct">Directly</option>
@@ -1031,7 +970,7 @@
                                                                 <div class="tab-pane" id="vertical-form">
 
                                                                     <label
-                                                                        style="font-weight: bold; color: #000; display: none;" id="verticalform1">Advance
+                                                                        style="font-weight: bold; color: #000">Advance
                                                                         Payroll
                                                                         Details</label>
                                                                     <hr>
@@ -1041,9 +980,9 @@
                                                                         style="display: none;">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Department
-                                                                            </label>
+                                                                            <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-7">
-                                                                            <select class="form-control" 
+                                                                            <select class="form-control" required=""
                                                                                 id="cmb_dep1" name="cmb_dep1">
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
@@ -1066,9 +1005,8 @@
 
                                                                     <!-- Table to display added departments and percentages -->
                                                                     <div id="departmentDiv1" style="display: none;"
-                                                                        class="form-group col-sm-8">
-                                                                        <table class="table table-bordered"
-                                                                            id="departmentTable">
+                                                                        class="form-group col-sm-12">
+                                                                        <table class="table" id="departmentTable">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Department</th>
@@ -1083,74 +1021,6 @@
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
-
-                                                                    <div class="form-group col-sm-4">
-                                                                        <!-- Total percentage display drawer -->
-                                                                        <!-- Curly Brace Drawer and Total -->
-                                                                        <!-- Curly Brace Drawer and Total Box -->
-                                                                        <div id="braceContainer"
-                                                                            style="position: absolute; right: 430px; top: 35px; pointer-events: none;">
-                                                                            <!-- SVG brace -->
-                                                                            <svg id="braceSVG" viewBox="0 0 60 200"
-                                                                                width="60" height="200"
-                                                                                preserveAspectRatio="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <defs>
-                                                                                    <style>
-                                                                                        .brace-line {
-                                                                                            stroke: rgba(69, 90, 100, 0.87);
-                                                                                            stroke-width: 3;
-                                                                                            fill: none;
-                                                                                            stroke-linecap: round;
-                                                                                            stroke-linejoin: round;
-                                                                                        }
-                                                                                    </style>
-                                                                                </defs>
-
-                                                                                <!-- Top horizontal line -->
-                                                                                <line class="brace-line" x1="10" y1="15"
-                                                                                    x2="45" y2="15" />
-
-                                                                                <!-- Top vertical line -->
-                                                                                <line class="brace-line" x1="45" y1="15"
-                                                                                    x2="45" y2="85" />
-
-                                                                                <!-- Middle horizontal line -->
-                                                                                <line class="brace-line" x1="160"
-                                                                                    y1="85" x2="45" y2="85" />
-
-                                                                                <!-- Bottom vertical line -->
-                                                                                <line class="brace-line" x1="45" y1="85"
-                                                                                    x2="45" y2="155" />
-
-                                                                                <!-- Bottom horizontal line -->
-                                                                                <line class="brace-line" x1="10"
-                                                                                    y1="155" x2="45" y2="155" />
-                                                                            </svg>
-
-                                                                            <!-- Total box overlayed on SVG -->
-                                                                            <div class="total-box" id="departmentDiv2"
-                                                                                style="display: none;
-                                                                                    position: absolute;
-                                                                                    left: 88px;
-                                                                                    top: 40%;
-                                                                                    transform: translateY(-50%);
-                                                                                    font-size: 18px;
-                                                                                    color: #000;
-                                                                                    pointer-events: none;
-                                                                                ">
-                                                                                Department Total: <span
-                                                                                    id="totalPercentage"
-                                                                                    style="color: red;">0%</span>
-                                                                            </div>
-
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
                                                                 </div>
 
                                                                 <div class="row">
@@ -2035,7 +1905,7 @@
                                                                 <br>
 
                                                                 <!--submit button-->
-                                                                <!--                                                                                                                                         <?php $this->load->view('template/btn_submit.php'); ?> -->
+                                                                <!--                                                                     <?php $this->load->view('template/btn_submit.php'); ?> -->
                                                                 <button type="button" id="submitEmployeeForm"
                                                                     class="btn btn-primary">Submit</button>
                                                                 <!--end submit-->
@@ -2242,98 +2112,66 @@
         }
     </script>
 
-    <!-- Advance Payroll Details - Start -->
     <script>
+        // JavaScript to handle the display of the department div when "Common" is selected
         document.getElementById("cmb_percentage").addEventListener("change", function () {
             var departmentDiv = document.getElementById("departmentDiv");
-            var departmentDiv1 = document.getElementById("departmentDiv1");
-            var departmentDiv2 = document.getElementById("departmentDiv2"); // Make sure this ID matches
-            var departmentDiv3 = document.getElementById("verticalform1"); // Make sure this ID matches
 
-
+            // Check if "Common" is selected
             if (this.value === "Common") {
-                departmentDiv.style.display = "block";
-                departmentDiv1.style.display = "block";
-                departmentDiv2.style.display = "block";
-                departmentDiv3.style.display = "block";
+                departmentDiv.style.display = "block";  // Show the department div
             } else {
-                departmentDiv.style.display = "none";
-                departmentDiv1.style.display = "none";
-                departmentDiv2.style.display = "none"; // Hide when not "Common"
-                departmentDiv3.style.display = "none";
+                departmentDiv.style.display = "none";  // Hide the department div
             }
         });
 
+        document.getElementById("cmb_percentage").addEventListener("change", function () {
+            var departmentDiv1 = document.getElementById("departmentDiv1");
+
+            // Check if "Common" is selected
+            if (this.value === "Common") {
+                departmentDiv1.style.display = "block";  // Show the department div
+            } else {
+                departmentDiv1.style.display = "none";  // Hide the department div
+            }
+        });
+
+        // JavaScript to handle adding the department and percentage to the table
         document.getElementById("btn_add_department").addEventListener("click", function () {
             var departmentSelect = document.getElementById("cmb_dep1");
-            // var percentageSelect = document.getElementById("cmb_percentage");
+            var percentageSelect = document.getElementById("cmb_percentage");
 
             var departmentId = departmentSelect.value;
             var departmentName = departmentSelect.options[departmentSelect.selectedIndex]?.text || "";
-            // var percentage = percentageSelect.value;
-            var percentage = '';
+            var percentage = percentageSelect.value;
 
             if (departmentId !== "") {
                 var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
-
-                // Check if the department already exists in the table
-                var existingDepartments = Array.from(table.rows).map(row =>
-                    row.cells[0].textContent.trim()
-                );
-
-                if (existingDepartments.includes(departmentName)) {
-                    alert(`The department '${departmentName}' has already been added.`);
-                    return; // Stop here, prevent duplicate
-                }
-
-                // Create new row
                 var newRow = table.insertRow();
 
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var cell4 = newRow.insertCell(3);
-                var cell5 = newRow.insertCell(4);
+                var cell1 = newRow.insertCell(0); // Department
+                var cell2 = newRow.insertCell(1); // Supervisor will be inserted later
+                var cell3 = newRow.insertCell(2); // Percentage
+                var cell4 = newRow.insertCell(3); // Remove button
+                var cell5 = newRow.insertCell(4); // Add button
 
-                // cell1.innerHTML = departmentName;
-                cell1.innerHTML = `<span class="department-name" data-id="${departmentId}">${departmentName}</span>`;
-                cell2.innerHTML = "";
-                cell3.innerHTML = `<input type="number" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
+                cell1.innerHTML = departmentName;
+                cell2.innerHTML = ""; // Supervisor input comes here later
+                cell3.innerHTML = `<input type="text" class="form-control" value="${percentage}" />`;
                 cell4.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
                 cell5.innerHTML = '<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>';
 
-                // Reset selects
+                // Clear selections
                 departmentSelect.value = "";
                 percentageSelect.value = "";
-
-                calculateTotalDepartmentPercentage();
-                scaleBraceToMatchTable();
             } else {
                 alert("Please select both department and percentage!");
             }
         });
 
         function removeRow(button) {
-            const row = button.closest('tr');
-            const tableBody = row.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(row);
-
-            // Step 1: Remove the main department row
-            tableBody.deleteRow(rowIndex);
-
-            // Step 2: Remove all sub-department rows and the status row
-            let i = rowIndex;
-            while (i < tableBody.rows.length) {
-                const currentRow = tableBody.rows[i];
-                if (currentRow.classList.contains('sub-department-row') || currentRow.classList.contains('sub-dept-status-row')) {
-                    tableBody.deleteRow(i); // don't increment i, rows shift up
-                } else {
-                    break; // stop once we hit the next main department
-                }
-            }
-
-            scaleBraceToMatchTable();
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
         }
 
         function AddRow(button) {
@@ -2342,56 +2180,28 @@
             const rows = Array.from(tableBody.rows);
             const rowIndexInTbody = rows.indexOf(currentRow);
 
-            const mainPercentageInput = currentRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-
-            if (mainPercentage === 0 || isNaN(mainPercentage)) {
-                alert("Please enter a valid percentage for the main department before adding sub-departments.");
+            if (rowIndexInTbody === -1) {
+                console.error('Could not find current row in tbody');
                 return;
             }
 
-            let subDeptCount = 0;
-            for (let i = rowIndexInTbody + 1; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    subDeptCount++;
-                } else {
-                    break;
-                }
-            }
-
-            const newSubDeptCount = subDeptCount + 1;
-
-            // Accurate share distribution
-            let baseShare = Math.floor((mainPercentage / newSubDeptCount) * 100) / 100;
-            let totalBase = baseShare * newSubDeptCount;
-            let remainder = +(mainPercentage - totalBase).toFixed(2);
-            let shares = Array(newSubDeptCount).fill(baseShare);
-            for (let i = 0; i < newSubDeptCount && remainder > 0; i++) {
-                shares[i] = +(shares[i] + 0.01).toFixed(2);
-                remainder = +(remainder - 0.01).toFixed(2);
-            }
-
-            // Update existing sub-dept percentages
-            for (let i = rowIndexInTbody + 1, count = 0; count < subDeptCount; i++, count++) {
-                const percentInput = rows[i].cells[2].querySelector('input');
-                if (percentInput) percentInput.value = shares[count];
-            }
-
-            // Insert new sub-dept row with last share
-            const newRow = tableBody.insertRow(rowIndexInTbody + 1 + subDeptCount);
+            const newRow = tableBody.insertRow(rowIndexInTbody + 1);
             newRow.classList.add('sub-department-row');
 
-            const cell1 = newRow.insertCell(0);
-            const cell2 = newRow.insertCell(1);
-            const cell3 = newRow.insertCell(2);
-            const cell4 = newRow.insertCell(3);
-            const cell5 = newRow.insertCell(4);
+            const cell1 = newRow.insertCell(0); // Label
+            const cell2 = newRow.insertCell(1); // Group Supervisor input
+            const cell3 = newRow.insertCell(2); // Percentage input
+            const cell4 = newRow.insertCell(3); // Remove button
+            const cell5 = newRow.insertCell(4); // Empty
 
+            // Label cell
+            cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
+
+            // Unique IDs
             const subDeptId = 'sub_dept_' + Date.now();
             const hiddenId = 'cmb_Supervisor_' + Date.now();
 
-            cell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
+            // Group Supervisor input
             cell2.innerHTML = `
                 <div class="col-sm-8 new-search-col">
                     <label for="${subDeptId}" class="new-input-label hidden">Group Supervisor</label>
@@ -2400,33 +2210,30 @@
                 </div>
             `;
 
+            // Percentage input
             const percentId = 'sub_percent_' + Date.now();
-            const share = shares[subDeptCount]; // last one for the new row
-
             cell3.innerHTML = `
-                <input type="number" class="form-control form-control-sm sub-percent"
-                    name="${percentId}" id="${percentId}"
-                    placeholder="Percentage" value="${share}"
-                    oninput="validateSubPercentages(this)">
-            `;
+        <input type="number" class="form-control form-control-sm" name="${percentId}" id="${percentId}" placeholder="Percentage">
+    `;
 
+            // Remove button
             cell4.innerHTML = `
-                <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-                    <i class="bi bi-x-lg"></i> Remove
-                </button>
-            `;
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
+            <i class="bi bi-x-lg"></i> Remove
+        </button>
+    `;
 
-            cell5.innerHTML = '<span class="percent-error" style="color: red; display: none;"></span>';
+            // No content for Add column in sub-row
+            cell5.innerHTML = '';
 
-            mainPercentageInput.setAttribute("oninput", "updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();");
-
+            // Dynamically initialize autocomplete for this supervisor input
             setTimeout(function () {
                 $("#" + subDeptId).autocomplete({
-                    source: "<?php echo base_url(); ?>Employee_Management/ADD_Employees/get_emp_no_and_name",
+                    source: "<?php echo base_url(); ?>Employee_Management/View_Employees/get_emp_no_and_name",
                     minLength: 1,
                     select: function (event, ui) {
-                        $("#" + hiddenId).val(ui.item.value);
-                        $("#" + subDeptId).val(ui.item.value + ' - ' + ui.item.label);
+                        $("#" + hiddenId).val(ui.item.value); // Store selected ID
+                        $("#" + subDeptId).val(ui.item.value + ' - ' + ui.item.label); // Show full display
                         return false;
                     }
                 }).autocomplete("instance")._renderItem = function (ul, item) {
@@ -2435,216 +2242,17 @@
                         .appendTo(ul);
                 };
             }, 100);
-
-            scaleBraceToMatchTable();
         }
+
 
         function removeRow2(button) {
-            const row = button.closest('tr');
-            const tableBody = row.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(row);
-
-            // Step 1: Remove this sub-department row
-            tableBody.deleteRow(rowIndex);
-
-            // Step 2: Find main department row
-            let mainRow = null;
-            let mainRowIndex = -1;
-            for (let i = rowIndex - 1; i >= 0; i--) {
-                if (!rows[i].classList.contains('sub-department-row') && !rows[i].classList.contains('sub-dept-status-row')) {
-                    mainRow = rows[i];
-                    mainRowIndex = i;
-                    break;
-                }
-            }
-            if (!mainRow) return;
-
-            const mainPercentageInput = mainRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-            if (isNaN(mainPercentage)) return;
-
-            // Step 3: Collect all sub-department rows under this main department (after deletion)
-            const updatedRows = Array.from(tableBody.rows); // refresh after deletion
-            let subDeptRows = [];
-            for (let i = mainRowIndex + 1; i < updatedRows.length; i++) {
-                if (updatedRows[i].classList.contains('sub-department-row')) {
-                    subDeptRows.push(updatedRows[i]);
-                } else {
-                    break;
-                }
-            }
-
-            const subCount = subDeptRows.length;
-            if (subCount === 0) return;
-
-            // Step 4: Recalculate accurate percentage shares
-            let baseShare = Math.floor((mainPercentage / subCount) * 100) / 100;
-            let totalBase = baseShare * subCount;
-            let remainder = +(mainPercentage - totalBase).toFixed(2);
-            let shares = Array(subCount).fill(baseShare);
-            for (let i = 0; i < subCount && remainder > 0; i++) {
-                shares[i] = +(shares[i] + 0.01).toFixed(2);
-                remainder = +(remainder - 0.01).toFixed(2);
-            }
-
-            // Step 5: Update sub-department inputs with new values
-            for (let i = 0; i < subCount; i++) {
-                const input = subDeptRows[i].cells[2].querySelector('input');
-                if (input) input.value = shares[i];
-            }
-
-            // Step 6: Trigger validation
-            const firstInput = subDeptRows[0]?.cells[2]?.querySelector('input');
-            if (firstInput) validateSubPercentages(firstInput);
-
-            scaleBraceToMatchTable();
+            var row = button.closest('tr');
+            row.parentNode.removeChild(row);
         }
 
-        function updateSubDeptPercentages(input) {
-            const currentRow = input.closest('tr');
-            const tableBody = currentRow.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(currentRow);
 
-            const newMainPercentage = parseFloat(input.value || 0);
-            if (isNaN(newMainPercentage) || newMainPercentage <= 0) return;
 
-            let subDeptRows = [];
-            for (let i = rowIndex + 1; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    subDeptRows.push(rows[i]);
-                } else {
-                    break;
-                }
-            }
-
-            const subCount = subDeptRows.length;
-            if (subCount === 0) return;
-
-            // Accurate share distribution
-            let baseShare = Math.floor((newMainPercentage / subCount) * 100) / 100;
-            let totalBase = baseShare * subCount;
-            let remainder = +(newMainPercentage - totalBase).toFixed(2);
-            let shares = Array(subCount).fill(baseShare);
-            for (let i = 0; i < subCount && remainder > 0; i++) {
-                shares[i] = +(shares[i] + 0.01).toFixed(2);
-                remainder = +(remainder - 0.01).toFixed(2);
-            }
-
-            for (let i = 0; i < subCount; i++) {
-                const percentInput = subDeptRows[i].cells[2].querySelector('input');
-                if (percentInput) percentInput.value = shares[i];
-            }
-        }
-
-        function validateSubPercentages(input) {
-            const currentRow = input.closest('tr');
-            const tableBody = currentRow.parentNode;
-            const rows = Array.from(tableBody.rows);
-            const rowIndex = rows.indexOf(currentRow);
-
-            // Step 1: Find main department row (above current)
-            let mainRow = null;
-            let mainRowIndex = -1;
-            for (let i = rowIndex - 1; i >= 0; i--) {
-                if (!rows[i].classList.contains('sub-department-row') && !rows[i].classList.contains('sub-dept-status-row')) {
-                    mainRow = rows[i];
-                    mainRowIndex = i;
-                    break;
-                }
-            }
-            if (!mainRow) return;
-
-            const mainPercentageInput = mainRow.cells[2].querySelector('input');
-            const mainPercentage = parseFloat(mainPercentageInput?.value || 0);
-            if (isNaN(mainPercentage)) return;
-
-            // Step 2: Collect all sub-department rows directly after main row
-            let totalSubPercent = 0;
-            let subDeptRows = [];
-            let afterRowIndex = mainRowIndex + 1;
-            for (let i = afterRowIndex; i < rows.length; i++) {
-                if (rows[i].classList.contains('sub-department-row')) {
-                    subDeptRows.push(rows[i]);
-                    const subInput = rows[i].cells[2].querySelector('input');
-                    totalSubPercent += parseFloat(subInput?.value || 0);
-                } else {
-                    break;
-                }
-            }
-
-            const match = Math.abs(+totalSubPercent.toFixed(3) - +mainPercentage.toFixed(3)) <= 0.001;
-
-            // Step 3: Remove any existing status row immediately after sub-departments
-            const lastSubIndex = mainRowIndex + subDeptRows.length;
-            if (rows[lastSubIndex + 1]?.classList.contains('sub-dept-status-row')) {
-                tableBody.deleteRow(lastSubIndex + 1);
-            }
-
-            // Step 4: Insert new status row
-            const messageRow = tableBody.insertRow(lastSubIndex + 1);
-            messageRow.classList.add('sub-dept-status-row');
-
-            const cell = messageRow.insertCell(0);
-            cell.colSpan = 5;
-            cell.style.textAlign = "center";
-            cell.style.fontWeight = "bold";
-            cell.style.color = match ? "green" : "red";
-            cell.textContent = match
-                ? `✅ Sub-department total matches main department (${mainPercentage.toFixed(2)}%).`
-                : `❌ Sub-department total (${totalSubPercent.toFixed(2)}%) does not match main department (${mainPercentage.toFixed(2)}%).`;
-
-            // If matched, auto-hide row and message after 5 seconds
-            if (match) {
-                const row = cell.closest("tr"); // Adjust if your row element is different
-                setTimeout(() => {
-                    if (row) {
-                        row.style.display = "none"; // hide the entire row
-                    }
-                }, 5000);
-            }
-
-        }
-
-        function calculateTotalDepartmentPercentage() {
-            const table = document.getElementById("departmentTable");
-            const tbody = table.querySelector("tbody");
-            const rows = Array.from(tbody.rows);
-
-            let total = 0;
-            for (let i = 0; i < rows.length; i++) {
-                if (!rows[i].classList.contains('sub-department-row')) {
-                    const input = rows[i].cells[2]?.querySelector('input');
-                    if (input) {
-                        const val = parseFloat(input.value || 0);
-                        if (!isNaN(val)) total += val;
-                    }
-                }
-            }
-
-            const display = document.getElementById("totalPercentage");
-            display.textContent = total.toFixed(2) + "%";
-            display.style.color = Math.abs(total - 100) <= 0.1 ? "green" : "red";
-        }
-
-        function scaleBraceToMatchTable() {
-            const table = document.getElementById("departmentTable");
-            const braceSVG = document.getElementById("braceSVG");
-
-            if (table && braceSVG) {
-                const tableHeight = table.offsetHeight;
-                braceSVG.setAttribute("height", tableHeight); // adjust SVG height
-            }
-        }
-
-        window.onload = function () {
-            calculateTotalDepartmentPercentage();
-            scaleBraceToMatchTable();
-        };
     </script>
-    <!-- Advance Payroll Details - End -->
-
 
     <script>
         // Autocomplete
@@ -2768,52 +2376,6 @@
                     formData.append(`qualifications[${index}][notes]`, data.notes || '');
                 });
 
-                // Department + Sub-department data extraction
-                const departmentData = [];
-                const deptTableRows = document.querySelectorAll('#departmentTable tbody tr');
-
-                let currentMainDept = null;
-
-                deptTableRows.forEach(row => {
-                    const isSub = row.classList.contains('sub-department-row');
-
-                    if (!isSub && !row.classList.contains('sub-dept-status-row')) {
-                        // const departmentName = row.cells[0].textContent.trim();
-                        const deptSpan = row.cells[0].querySelector('.department-name');
-                        const departmentName = deptSpan?.textContent.trim() || '';
-                        const departmentId = deptSpan?.getAttribute('data-id') || '';
-
-                        const mainPercentInput = row.cells[2].querySelector('input');
-                        const percentage = mainPercentInput ? parseFloat(mainPercentInput.value || 0) : 0;
-
-                        currentMainDept = {
-                            dep_id: departmentId,
-                            department: departmentName,
-                            percentage: percentage,
-                            sub_departments: []
-                        };
-
-
-                        departmentData.push(currentMainDept);
-                    }
-
-                    if (isSub && currentMainDept) {
-                        const subInput = row.cells[2].querySelector('input');
-                        const subPercentage = subInput ? parseFloat(subInput.value || 0) : 0;
-                        const supervisorInput = row.cells[1].querySelector('input[type="text"]');
-                        const supervisorName = supervisorInput?.value || "";
-
-                        currentMainDept.sub_departments.push({
-                            supervisor: supervisorName,
-                            percentage: subPercentage
-                        });
-                    }
-                });
-
-                // Append departmentData to formData
-                formData.append('department_structure', JSON.stringify(departmentData));
-
-
                 console.log(formData);
 
                 // Submit via fetch
@@ -2830,12 +2392,9 @@
                             text: 'Form submitted successfully!',
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = '<?php echo base_url(); ?>Employee_Management/ADD_Employees';
-                            }
                         });
 
+                        window.location.href = '<?php echo base_url(); ?>Employee_Management/ADD_Employees'; // Redirect to the same page or another page
                         // alert('Form submitted successfully!');
                         // form.reset(); // Optional
                     })

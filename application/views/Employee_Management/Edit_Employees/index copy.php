@@ -23,122 +23,6 @@
         padding: 5px;
     }
 </style>
-<style type="text/css">
-    .thumb-image {
-        float: left;
-        width: 200px;
-        height: 250px;
-        position: relative;
-        padding: 5px;
-    }
-
-    tr td:first-child strong {
-        color: #555;
-        font-style: italic;
-    }
-
-    .sub-department-row td {
-        border-top: none !important;
-    }
-
-    .sub-arrow {
-        display: inline-block;
-        margin-right: 5px;
-    }
-</style>
-
-<style>
-    .sub-department-row td {
-        border-top: none !important;
-        padding-top: 0.25rem;
-        padding-bottom: 0.25rem;
-    }
-
-    .sub-arrow {
-        margin-left: 15px;
-        color: #0d6efd;
-        font-weight: bold;
-    }
-
-    .sub-department-label {
-        font-style: italic;
-        color: #6c757d;
-        font-size: 13px;
-        font-weight: bold;
-    }
-
-    .form-control-sm {
-        font-size: 0.875rem;
-        border-radius: 0.375rem;
-    }
-</style>
-
-<style>
-    .brace-container {
-        position: relative;
-        margin-top: 20px;
-        padding-top: 10px;
-    }
-
-    /* .brace-symbol {
-        position: absolute;
-        right: 200px;
-        top: -30px;
-        font-size: 50px;
-        color: #ccc;
-        transform-origin: top;
-        line-height: 1;
-        pointer-events: none;
-        width: 60%;
-    } */
-
-    .total-box {
-        margin-left: auto;
-        width: fit-content;
-        padding: 10px 25px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        background: #f7f9fc;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        color: #444;
-    }
-
-    .total-box span {
-        font-weight: bold;
-    }
-
-    .brace-symbol {
-        position: absolute;
-        right: 200px;
-        top: -30px;
-        font-size: 50px;
-        color: #ccc;
-        transform-origin: top;
-        line-height: 1;
-        pointer-events: none;
-    }
-
-    #percentError {
-        font-size: 14px;
-        margin-top: 5px;
-        display: none;
-    }
-
-    .department-name {
-        font-weight: bold;
-        color: #333;
-        font-size: 13px;
-    }
-
-    .form-control {
-        color: #333;
-        font-weight: bold;
-        /* font-size: 14px;
-        padding: 10px;
-        border-radius: 4px; */
-    }
-</style>
 
 <body class="infobar-offcanvas">
 
@@ -960,19 +844,17 @@
                                                                                 style="color: red;">*</span>
                                                                         </label>
                                                                         <?php
-                                                                        $paymentType = isset($data_set[0]->Advance_Payroll_Data) ? $data_set[0]->Advance_Payroll_Data : '';
-                                                                        ?>
-                                                                        <div class="col-sm-8">
-                                                                            <!-- Payment Type Dropdown -->
-                                                                            <select class="form-control"
-                                                                                id="cmb_percentage"
-                                                                                name="cmb_percentage" required>
-                                                                                <option value="">-- Select Percentage --
-                                                                                </option>
-                                                                                <option value="1" <?= $paymentType == '1' ? 'selected' : '' ?>>Common</option>
-                                                                                <option value="2" <?= $paymentType == '0' ? 'selected' : '' ?>>Directly</option>
-                                                                            </select>
-                                                                        </div>
+$paymentType = isset($data_set[0]->Advance_Payroll_Data) ? $data_set[0]->Advance_Payroll_Data : '';
+?>
+
+<!-- Payment Type Dropdown -->
+<select class="form-control" id="cmb_percentage" name="cmb_percentage" required>
+    <option value="">-- Select Percentage --</option>
+    <option value="1" <?= $paymentType == '1' ? 'selected' : '' ?>>Common</option>
+    <option value="2" <?= $paymentType == '0' ? 'selected' : '' ?>>Directly</option>
+</select>
+
+
                                                                     </div>
 
                                                                     <div class="tab-pane" id="vertical-form">
@@ -984,119 +866,102 @@
                                                                             Details</label>
                                                                         <hr>
 
-                                                                        <!-- Department Dropdown (Hidden by default) -->
-                                                                        <div class="form-group col-sm-6"
-                                                                            id="departmentDiv" style="display: none;">
-                                                                            <label for="focusedinput"
-                                                                                class="col-sm-4 control-label">Department
-                                                                            </label>
-                                                                            <div class="col-sm-7">
-                                                                                <select class="form-control"
-                                                                                    id="cmb_dep1" name="cmb_dep1">
-                                                                                    <option value="" default>-- Select
-                                                                                        --
-                                                                                    </option>
-                                                                                    <?php foreach ($data_dep as $t_data) { ?>
-                                                                                        <option
-                                                                                            value="<?php echo $t_data->Dep_ID; ?>">
-                                                                                            <?php echo $t_data->Dep_Name; ?>
-                                                                                        </option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
-                                                                            <button type="button"
-                                                                                class="btn btn-success col-2"
-                                                                                id="btn_add_department">Add</button>
-                                                                        </div>
+                                                                       <div class="tab-pane" id="vertical-form">
 
-                                                                        <div class="form-group col-sm-6">
+    <label style="font-weight: bold; color: #000;" id="verticalform1">Advance Payroll Details</label>
+    <hr>
 
-                                                                        </div>
+    <!-- Department Dropdown -->
+    <div class="form-group col-sm-6" id="departmentDiv">
+        <label for="cmb_dep1" class="col-sm-4 control-label">Department</label>
+        <div class="col-sm-7">
+            <select class="form-control" id="cmb_dep1" name="cmb_dep1">
+                <option value="">-- Select --</option>
+                <?php foreach ($data_dep as $t_data): ?>
+                    <option value="<?= $t_data->Dep_ID ?>"><?= $t_data->Dep_Name ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button type="button" class="btn btn-success col-2" id="btn_add_department">Add</button>
+    </div>
 
-                                                                        <!-- Table to display added departments and percentages -->
-                                                                        <div id="departmentDiv1" style="display: none;"
-                                                                            class="form-group col-sm-8">
-                                                                            <table class="table table-bordered"
-                                                                                id="departmentTable">
-                                                                                <thead>
-                                                                                    <tr style="font-size: 13.5px;">
-                                                                                        <th>Department</th>
-                                                                                        <th>Sub Department</th>
-                                                                                        <th>Percentage</th>
-                                                                                        <th>Remove</th>
-                                                                                        <th>Add</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <!-- Rows will be added dynamically here -->
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
+    <!-- Departments Table -->
+    <div id="departmentDiv1" class="form-group col-sm-8">
+        <table class="table table-bordered" id="departmentTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Sub Department</th>
+                    <th>Percentage</th>
+                    <th>Remove</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($advance_payroll_data as $row): ?>
+                    <?php if ($row->IsSubDept == 0): ?>
+                        <!-- Department Row -->
+                        <tr class="department-row" data-dep-id="<?= $row->Department_ID ?>">
+                            <td><strong><?= $row->Department ?></strong></td>
+                            <td></td>
+                            <td>
+                                <input type="number" min="0" max="100" step="0.01" class="form-control percentage-input dept-percentage" value="<?= $row->Percentage ?>" />
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm remove-department">Remove</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm add-subdepartment">Add</button>
+                            </td>
+                        </tr>
+                        <!-- Sub-departments rows under this department -->
+                        <?php foreach ($advance_payroll_data as $sub): ?>
+                            <?php if ($sub->IsSubDept == 1 && $sub->Parent_Department_ID == $row->Department_ID): ?>
+                                <tr class="subdepartment-row" data-parent-dep-id="<?= $row->Department_ID ?>">
+                                    <td style="padding-left: 30px;">↳ Sub Dept.</td>
+                                    <td>
+                                        <input type="text" class="form-control subdept-name" placeholder="Search by ID or Name" value="<?= $sub->SubDepartment ?>" />
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="100" step="0.01" class="form-control percentage-input subdept-percentage" value="<?= $sub->Percentage ?>" />
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-secondary btn-sm remove-subdepartment">Remove</button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 
-                                                                        <div class="form-group col-sm-4">
-                                                                            <!-- Total percentage display drawer -->
-                                                                            <!-- Curly Brace Drawer and Total -->
-                                                                            <!-- Curly Brace Drawer and Total Box -->
-                                                                            <div id="braceContainer"
-                                                                                style="position: absolute; right: 430px; top: 35px; pointer-events: none;">
-                                                                                <!-- SVG brace -->
-                                                                                <svg id="braceSVG" viewBox="0 0 60 200"
-                                                                                    width="60" height="200"
-                                                                                    preserveAspectRatio="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <defs>
-                                                                                        <style>
-                                                                                            .brace-line {
-                                                                                                stroke: rgba(69, 90, 100, 0.87);
-                                                                                                stroke-width: 3;
-                                                                                                fill: none;
-                                                                                                stroke-linecap: round;
-                                                                                                stroke-linejoin: round;
-                                                                                            }
-                                                                                        </style>
-                                                                                    </defs>
+    <!-- Total Percentage Display -->
+    <div class="form-group col-sm-4" style="position: relative;">
+        <div id="braceContainer" style="position: absolute; right: -150px; top: 0; height: 100%; pointer-events: none;">
+            <svg viewBox="0 0 60 200" width="60" height="200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    .brace-line {
+                        stroke: rgba(69, 90, 100, 0.87);
+                        stroke-width: 3;
+                        fill: none;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                    }
+                </style>
+                <line class="brace-line" x1="10" y1="15" x2="45" y2="15" />
+                <line class="brace-line" x1="45" y1="15" x2="45" y2="185" />
+                <line class="brace-line" x1="10" y1="185" x2="45" y2="185" />
+            </svg>
+            <div class="total-box" style="position: absolute; left: 65px; top: 50%; transform: translateY(-50%); font-size: 18px; font-weight: bold; color: #000; pointer-events: none;">
+                Department Total: <span id="totalPercentage" style="color: green;">0.00%</span>
+            </div>
+        </div>
+    </div>
 
-                                                                                    <!-- Top horizontal line -->
-                                                                                    <line class="brace-line" x1="10"
-                                                                                        y1="15" x2="45" y2="15" />
-
-                                                                                    <!-- Top vertical line -->
-                                                                                    <line class="brace-line" x1="45"
-                                                                                        y1="15" x2="45" y2="85" />
-
-                                                                                    <!-- Middle horizontal line -->
-                                                                                    <line class="brace-line" x1="160"
-                                                                                        y1="85" x2="45" y2="85" />
-
-                                                                                    <!-- Bottom vertical line -->
-                                                                                    <line class="brace-line" x1="45"
-                                                                                        y1="85" x2="45" y2="155" />
-
-                                                                                    <!-- Bottom horizontal line -->
-                                                                                    <line class="brace-line" x1="10"
-                                                                                        y1="155" x2="45" y2="155" />
-                                                                                </svg>
-
-                                                                                <!-- Total box overlayed on SVG -->
-                                                                                <div class="total-box"
-                                                                                    id="departmentDiv2" style="display: none;
-                                                                                    position: absolute;
-                                                                                    left: 88px;
-                                                                                    top: 40%;
-                                                                                    transform: translateY(-50%);
-                                                                                    font-size: 18px;
-                                                                                    color: #000;
-                                                                                    pointer-events: none;
-                                                                                ">
-                                                                                    Department Total: <span
-                                                                                        id="totalPercentage"
-                                                                                        style="color: red;">0%</span>
-                                                                                </div>
-
-                                                                            </div>
-
-
-                                                                        </div>
+</div>
 
 
 
@@ -2217,281 +2082,8 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-
-        // old
-        // function loadAdvancePayrollData(companyId) {
-        //     fetch(`<?php echo base_url(); ?>Employee_Management/Edit_Employees/getData/${companyId}`)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             const rows = data.advance_payroll_data || [];
-        //             const table = document.querySelector("#departmentTable tbody");
-        //             table.innerHTML = ""; // Clear existing rows
-
-        //             const departmentMap = {};
-
-        //             // Group data by department
-        //             rows.forEach(row => {
-        //                 const depId = row.ADP_Department_ID;
-        //                 const depPerc = parseFloat(row.ADP_Department_Percentage);
-        //                 const subDepId = row.ADP_Sub_Department_ID;
-        //                 const subDepPerc = parseFloat(row.ADP_Sub_Department_Percentage);
-        //                 const subDepName = row.ADP_Sub_Department_Name || "";
-
-        //                 if (!departmentMap[depId]) {
-        //                     departmentMap[depId] = {
-        //                         percentage: depPerc,
-        //                         subDepartments: []
-        //                     };
-        //                 }
-
-        //                 if (subDepId) {
-        //                     departmentMap[depId].subDepartments.push({
-        //                         subDepId: subDepId,
-        //                         percentage: subDepPerc,
-        //                         ADP_Sub_Department_Name: subDepName
-        //                     });
-        //                 }
-
-        //                 console.log(depId, departmentMap[depId]);
-        //             });
-
-        //             // Render each department with its sub-departments
-        //             for (const depId in departmentMap) {
-        //                 const dep = departmentMap[depId];
-
-
-
-        //                 // Get department name from the select options
-        //                 const depSelect = document.getElementById("cmb_dep1");
-        //                 const depOption = Array.from(depSelect.options).find(opt => opt.value === depId);
-        //                 const depName = depOption ? depOption.text : "Unknown";
-
-        //                 // console.log(depOption, depName);
-
-        //                 // Insert main department row
-        //                 const newRow = table.insertRow();
-        //                 const cell1 = newRow.insertCell(0);
-        //                 const cell2 = newRow.insertCell(1);
-        //                 const cell3 = newRow.insertCell(2);
-        //                 const cell4 = newRow.insertCell(3);
-        //                 const cell5 = newRow.insertCell(4);
-
-        //                 cell1.innerHTML = `<span class="department-name" data-id="${depId}">${depName}</span>`;
-        //                 cell2.innerHTML = "";
-        //                 cell3.innerHTML = `<input type="number" class="form-control" value="${dep.percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
-        //                 cell4.innerHTML = `<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>`;
-        //                 cell5.innerHTML = `<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>`;
-
-        //                 // Insert sub-department rows
-        //                 dep.subDepartments.forEach(sd => {
-        //                     const subRow = table.insertRow();
-        //                     subRow.classList.add('sub-department-row');
-
-        //                     const subCell1 = subRow.insertCell(0);
-        //                     const subCell2 = subRow.insertCell(1);
-        //                     const subCell3 = subRow.insertCell(2);
-        //                     const subCell4 = subRow.insertCell(3);
-        //                     const subCell5 = subRow.insertCell(4);
-
-        //                     const subId = 'sub_dept_' + Date.now() + Math.floor(Math.random() * 1000);
-        //                     const hiddenId = 'cmb_Supervisor_' + Date.now() + Math.floor(Math.random() * 1000);
-
-        //                     subCell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
-        //                     subCell2.innerHTML = `
-        //                     <div class="col-sm-8 new-search-col">
-        //                         <label for="${subId}" class="new-input-label hidden">Group Supervisor</label>
-        //                         <input type="text" class="form-control new-input-control" name="${subId}" id="${subId}" 
-        //                             value="${(sd.subDepId || sd.ADP_Sub_Department_ID)} - ${sd.ADP_Sub_Department_Name}" placeholder="Search by ID or Name">
-        //                         <input type="hidden" name="${hiddenId}" id="${hiddenId}" value="${sd.subDepId || sd.ADP_Sub_Department_ID}">
-        //                     </div>`;
-
-
-        //                     subCell3.innerHTML = `
-        //                 <input type="number" class="form-control form-control-sm sub-percent"
-        //                     name="sub_percent_${Date.now() + Math.floor(Math.random() * 1000)}"
-        //                     value="${sd.percentage}"
-        //                     oninput="validateSubPercentages(this)">
-        //             `;
-
-        //                     subCell4.innerHTML = `
-        //                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-        //                     <i class="bi bi-x-lg"></i> Remove
-        //                 </button>
-        //             `;
-
-        //                     subCell5.innerHTML = `<span class="percent-error" style="color: red; display: none;"></span>`;
-
-        //                     // Initialize autocomplete for this input
-        //                     setTimeout(() => {
-        //                         $("#" + subId).autocomplete({
-        //                             source: "<?php echo base_url(); ?>Employee_Management/ADD_Employees/get_emp_no_and_name",
-        //                             minLength: 1,
-        //                             select: function (event, ui) {
-        //                                 $("#" + hiddenId).val(ui.item.value);
-        //                                 $("#" + subId).val(ui.item.value + ' - ' + ui.item.label);
-        //                                 return false;
-        //                             }
-        //                         }).autocomplete("instance")._renderItem = function (ul, item) {
-        //                             return $("<li>").append("<div>" + item.value + " - " + item.label + "</div>").appendTo(ul);
-        //                         };
-        //                     }, 100);
-        //                 });
-        //             }
-
-        //             calculateTotalDepartmentPercentage();
-        //             scaleBraceToMatchTable();
-        //         })
-        //         .catch(error => console.error("Error fetching advance payroll data:", error));
-        // }
-
-        function loadAdvancePayrollData(companyId) {
-            fetch(`<?php echo base_url(); ?>Employee_Management/Edit_Employees/getData/${companyId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const rows = data.advance_payroll_data || [];
-                    const table = document.querySelector("#departmentTable tbody");
-                    table.innerHTML = ""; // Clear table
-
-                    const departmentMap = {};
-
-                    // Group by department
-                    rows.forEach(row => {
-                        const depId = row.ADP_Department_ID;
-                        const depPerc = parseFloat(row.ADP_Department_Percentage);
-                        const subDepId = parseInt(row.ADP_Sub_Department_ID);
-                        const subDepPerc = parseFloat(row.ADP_Sub_Department_Percentage || 0);
-                        const subDepName = row.ADP_Sub_Department_Name || "";
-
-                        if (!departmentMap[depId]) {
-                            departmentMap[depId] = {
-                                percentage: depPerc,
-                                subDepartments: []
-                            };
-                        }
-
-                        if (subDepId && subDepId !== 0) {
-                            departmentMap[depId].subDepartments.push({
-                                subDepId: subDepId,
-                                percentage: subDepPerc,
-                                ADP_Sub_Department_Name: subDepName
-                            });
-                        }
-                    });
-
-                    // Render table rows
-                    for (const depId in departmentMap) {
-                        const dep = departmentMap[depId];
-
-                        const depSelect = document.getElementById("cmb_dep1");
-                        const depOption = Array.from(depSelect.options).find(opt => opt.value === depId);
-                        const depName = depOption ? depOption.text : "Unknown";
-
-                        const newRow = table.insertRow();
-                        const cell1 = newRow.insertCell(0);
-                        const cell2 = newRow.insertCell(1);
-                        const cell3 = newRow.insertCell(2);
-                        const cell4 = newRow.insertCell(3);
-                        const cell5 = newRow.insertCell(4);
-
-                        cell1.innerHTML = `<span class="department-name" data-id="${depId}">${depName}</span>`;
-                        cell2.innerHTML = "";
-                        cell3.innerHTML = `<input type="number" class="form-control" value="${dep.percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
-                        cell4.innerHTML = `<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>`;
-                        cell5.innerHTML = `<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>`;
-
-                        // Sub-department rows (only if sub-departments exist)
-                        dep.subDepartments.forEach(sd => {
-                            const subRow = table.insertRow();
-                            subRow.classList.add('sub-department-row');
-
-                            const subCell1 = subRow.insertCell(0);
-                            const subCell2 = subRow.insertCell(1);
-                            const subCell3 = subRow.insertCell(2);
-                            const subCell4 = subRow.insertCell(3);
-                            const subCell5 = subRow.insertCell(4);
-
-                            const subId = 'sub_dept_' + Date.now() + Math.floor(Math.random() * 1000);
-                            const hiddenId = 'cmb_Supervisor_' + Date.now() + Math.floor(Math.random() * 1000);
-
-                            subCell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
-                            subCell2.innerHTML = `
-                        <div class="col-sm-8 new-search-col">
-                            <label for="${subId}" class="new-input-label hidden">Group Supervisor</label>
-                            <input type="text" class="form-control new-input-control" name="${subId}" id="${subId}" 
-                                value="${sd.subDepId} - ${sd.ADP_Sub_Department_Name}" placeholder="Search by ID or Name">
-                            <input type="hidden" name="${hiddenId}" id="${hiddenId}" value="${sd.subDepId}">
-                        </div>`;
-
-                            subCell3.innerHTML = `
-                        <input type="number" class="form-control form-control-sm sub-percent"
-                            name="sub_percent_${Date.now() + Math.floor(Math.random() * 1000)}"
-                            value="${sd.percentage}"
-                            oninput="validateSubPercentages(this)">
-                    `;
-
-                            subCell4.innerHTML = `
-                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-                            <i class="bi bi-x-lg"></i> Remove
-                        </button>
-                    `;
-
-                            subCell5.innerHTML = `<span class="percent-error" style="color: red; display: none;"></span>`;
-
-                            // Enable jQuery UI Autocomplete
-                            setTimeout(() => {
-                                $("#" + subId).autocomplete({
-                                    source: "<?php echo base_url(); ?>Employee_Management/ADD_Employees/get_emp_no_and_name",
-                                    minLength: 1,
-                                    select: function (event, ui) {
-                                        $("#" + hiddenId).val(ui.item.value);
-                                        $("#" + subId).val(ui.item.value + ' - ' + ui.item.label);
-                                        return false;
-                                    }
-                                }).autocomplete("instance")._renderItem = function (ul, item) {
-                                    return $("<li>").append("<div>" + item.value + " - " + item.label + "</div>").appendTo(ul);
-                                };
-                            }, 100);
-                        });
-                    }
-
-                    calculateTotalDepartmentPercentage();
-                    scaleBraceToMatchTable();
-                })
-                .catch(error => console.error("Error fetching advance payroll data:", error));
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const cmbPercentage = document.getElementById("cmb_percentage");
-            const companyId = "<?php echo $data_set[0]->Cmp_ID ?>";
-
-            function toggleAdvanceView(value) {
-                const show = value === '1';
-                document.getElementById("vertical-form").style.display = show ? "" : "none";
-                document.getElementById("verticalform1").style.display = show ? "block" : "none";
-                document.getElementById("departmentDiv").style.display = show ? "block" : "none";
-                document.getElementById("departmentDiv1").style.display = show ? "block" : "none";
-                document.getElementById("departmentDiv2").style.display = show ? "block" : "none";
-
-                if (show) {
-                    loadAdvancePayrollData(companyId);
-                }
-            }
-
-            toggleAdvanceView(cmbPercentage.value);
-
-            cmbPercentage.addEventListener("change", function () {
-                toggleAdvanceView(this.value);
-            });
-        });
-
-    </script>
-
     <!-- Advance Payroll Details - Start -->
-    <script>
+    <!-- <script>
         document.getElementById("cmb_percentage").addEventListener("change", function () {
             var departmentDiv = document.getElementById("departmentDiv");
             var departmentDiv1 = document.getElementById("departmentDiv1");
@@ -2890,8 +2482,38 @@
             calculateTotalDepartmentPercentage();
             scaleBraceToMatchTable();
         };
-    </script>
+    </script> -->
     <!-- Advance Payroll Details - End -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    function updateDepartmentTotal() {
+        let total = 0;
+        document.querySelectorAll('#departmentTable tbody tr.department-row').forEach(deptRow => {
+            // Sum main department percentage
+            const deptPercentage = parseFloat(deptRow.querySelector('.dept-percentage').value) || 0;
+            total += deptPercentage;
+
+            // Sum all subdepartment percentages for this department
+            const depId = deptRow.getAttribute('data-dep-id');
+            document.querySelectorAll(`#departmentTable tbody tr.subdepartment-row[data-parent-dep-id="${depId}"] .subdept-percentage`).forEach(subInput => {
+                total += parseFloat(subInput.value) || 0;
+            });
+        });
+
+        document.getElementById('totalPercentage').textContent = total.toFixed(2) + '%';
+    }
+
+    // Update total on input change
+    document.querySelectorAll('.percentage-input').forEach(input => {
+        input.addEventListener('input', updateDepartmentTotal);
+    });
+
+    // Initial total calculation
+    updateDepartmentTotal();
+
+    // You can add event handlers for Add/Remove buttons as needed
+});
+</script>
 </body>
 
 

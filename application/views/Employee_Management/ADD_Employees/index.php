@@ -1013,7 +1013,8 @@
                                                                     <div class="form-group col-sm-6 icheck-flat">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Select
-                                                                            Payment Percentage <span style="color: red;">*</span></label>
+                                                                            Payment Percentage <span
+                                                                                style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control"
                                                                                 id="cmb_percentage"
@@ -1031,7 +1032,8 @@
                                                                 <div class="tab-pane" id="vertical-form">
 
                                                                     <label
-                                                                        style="font-weight: bold; color: #000; display: none;" id="verticalform1">Advance
+                                                                        style="font-weight: bold; color: #000; display: none;"
+                                                                        id="verticalform1">Advance
                                                                         Payroll
                                                                         Details</label>
                                                                     <hr>
@@ -1041,10 +1043,10 @@
                                                                         style="display: none;">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Department
-                                                                            </label>
+                                                                        </label>
                                                                         <div class="col-sm-7">
-                                                                            <select class="form-control" 
-                                                                                id="cmb_dep1" name="cmb_dep1">
+                                                                            <select class="form-control" id="cmb_dep1"
+                                                                                name="cmb_dep1">
                                                                                 <option value="" default>-- Select --
                                                                                 </option>
                                                                                 <?php foreach ($data_dep as $t_data) { ?>
@@ -1089,7 +1091,7 @@
                                                                         <!-- Curly Brace Drawer and Total -->
                                                                         <!-- Curly Brace Drawer and Total Box -->
                                                                         <div id="braceContainer"
-                                                                            style="position: absolute; right: 430px; top: 35px; pointer-events: none;">
+                                                                            style="position: absolute; right: 310px; top: 35px; pointer-events: none;">
                                                                             <!-- SVG brace -->
                                                                             <svg id="braceSVG" viewBox="0 0 60 200"
                                                                                 width="60" height="200"
@@ -2313,6 +2315,28 @@
             }
         });
 
+        // function removeRow1(button) {
+        //     const row = button.closest('tr');
+        //     const tableBody = row.parentNode;
+        //     const rows = Array.from(tableBody.rows);
+        //     const rowIndex = rows.indexOf(row);
+
+        //     // Step 1: Remove the main department row
+        //     tableBody.deleteRow(rowIndex);
+
+        //     // Step 2: Remove all sub-department rows and the status row
+        //     let i = rowIndex;
+        //     while (i < tableBody.rows.length) {
+        //         const currentRow = tableBody.rows[i];
+        //         if (currentRow.classList.contains('sub-department-row') || currentRow.classList.contains('sub-dept-status-row')) {
+        //             tableBody.deleteRow(i); // don't increment i, rows shift up
+        //         } else {
+        //             break; // stop once we hit the next main department
+        //         }
+        //     }
+
+        //     scaleBraceToMatchTable();
+        // }
         function removeRow(button) {
             const row = button.closest('tr');
             const tableBody = row.parentNode;
@@ -2333,8 +2357,10 @@
                 }
             }
 
+            calculateTotalDepartmentPercentage();
             scaleBraceToMatchTable();
         }
+
 
         function AddRow(button) {
             const currentRow = button.closest('tr');

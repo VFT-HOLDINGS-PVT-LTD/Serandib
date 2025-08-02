@@ -144,8 +144,14 @@ class Edit_Employees extends CI_Controller
    public function getData($id) {
         $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,ADP_Sub_Department_Name FROM tbl_advance_payroll WHERE CmpNo = '" . $id . "'");
     // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
-    echo json_encode(['advance_payroll_data' => $result]);
-}
+         echo json_encode(['advance_payroll_data' => $result]);
+    }
+
+     public function getAcademicData($id) {
+        $result = $this->Db_model->getfilteredData("SELECT Q_ID,Qualifications_Types,Qualifications_Description FROM tbl_qualifications WHERE CmpNo = '" . $id . "'");
+    // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
+         echo json_encode(['academic_data' => $result]);
+    }
 
 
     // public function update_emp()

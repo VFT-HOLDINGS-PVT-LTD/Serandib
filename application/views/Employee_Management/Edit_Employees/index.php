@@ -208,10 +208,11 @@
                                                 <div class="panel-body ">
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="horizontal-form">
-                                                            <form class="form-horizontal" id="frm_employee_update"
+                                                            <!-- <form class="form-horizontal" id="frm_employee_update"
                                                                 name="frm_employee_update"
                                                                 action="<?php echo base_url(); ?>Employee_Management/Edit_Employees/update_emp"
-                                                                method="POST" enctype="multipart/form-data">
+                                                                method="POST" enctype="multipart/form-data"> -->
+                                                            <form id="employeeForm" enctype="multipart/form-data">
 
                                                                 <div class="form-group col-md-12">
                                                                     <!--success Message-->
@@ -703,7 +704,7 @@
 
                                                                 </div>
 
-                                                                <div class="tab-pane" id="vertical-form">
+                                                                <!-- <div class="tab-pane" id="vertical-form">
 
                                                                     <label
                                                                         style="font-weight: bold; color: #000">Academic
@@ -837,8 +838,112 @@
 
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
 
+                                                                <div class="tab-pane" id="vertical-form">
+
+                                                                    <label
+                                                                        style="font-weight: bold; color: #000">Academic
+                                                                        Qualifications <span
+                                                                            style="color: red;">*</span></label>
+                                                                    <hr>
+
+                                                                    <div class="form-group col-md-12">
+
+                                                                        <div class="form-group col-sm-6">
+                                                                            <label for="focusedinput"
+                                                                                class="col-sm-4 control-label">Qualification
+                                                                                <span
+                                                                                    style="color: red;">*</span></label>
+                                                                            <div class="col-sm-8">
+                                                                                <select class="form-control"
+                                                                                    id="qualificationSelect">
+                                                                                    <option value="">-- Select
+                                                                                        Qualification
+                                                                                        --</option>
+                                                                                    <option value="ol">O/L (Ordinary
+                                                                                        Level)
+                                                                                    </option>
+                                                                                    <option value="al">A/L (Advanced
+                                                                                        Level)
+                                                                                    </option>
+                                                                                    <option value="diploma">Diploma
+                                                                                    </option>
+                                                                                    <option value="hnd">Higher National
+                                                                                        Diploma (HND)</option>
+                                                                                    <option value="degree">Degree
+                                                                                    </option>
+                                                                                    <option value="master">Master
+                                                                                    </option>
+                                                                                    <option value="mphil">Master of
+                                                                                        Philosophy (MPhil)</option>
+                                                                                    <option value="phd">Doctor of
+                                                                                        Philosophy
+                                                                                        (PhD)</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="form-group col-sm-6">
+                                                                            <label for="focusedinput"
+                                                                                class="col-sm-4 control-label">Notes
+                                                                                <span
+                                                                                    style="color: red;">*</span></label>
+                                                                            <div class="col-sm-6">
+                                                                                <textarea class="form-control"
+                                                                                    id="notesInput" rows="2"
+                                                                                    placeholder="Additional notes or remarks"></textarea>
+                                                                            </div>
+                                                                            <div class="col-sm-1">
+                                                                                <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    id="addQualification">Add</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="form-group col-sm-6">
+                                                                            <div class="col-sm-2"></div>
+
+                                                                            <div class="col-sm-10">
+                                                                                <!-- Hidden inputs to store selected qualifications -->
+                                                                                <div id="hiddenInputs"></div>
+
+                                                                                <div class="form-group row">
+                                                                                    <div
+                                                                                        class="table-container col-sm-12">
+                                                                                        <!-- <h4>Selected Qualifications</h4> -->
+                                                                                        <table
+                                                                                            class="table table-striped table-bordered"
+                                                                                            id="qualificationTable">
+                                                                                            <thead class="thead-dark">
+                                                                                                <tr>
+                                                                                                    <th>Qualification
+                                                                                                    </th>
+                                                                                                    <th>Notes</th>
+                                                                                                    <th>Action</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody
+                                                                                                id="qualificationTableBody">
+                                                                                                <tr id="emptyRow">
+                                                                                                    <td colspan="3"
+                                                                                                        class="text-center text-muted">
+                                                                                                        No
+                                                                                                        qualifications
+                                                                                                        added</td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                                 <div class="tab-pane" id="vertical-form">
 
                                                                     <label
@@ -1038,7 +1143,7 @@
                                                                             <!-- Curly Brace Drawer and Total -->
                                                                             <!-- Curly Brace Drawer and Total Box -->
                                                                             <div id="braceContainer"
-                                                                                style="position: absolute; right: 430px; top: 35px; pointer-events: none;">
+                                                                                style="position: absolute; right: 310px; top: 35px; pointer-events: none;">
                                                                                 <!-- SVG brace -->
                                                                                 <svg id="braceSVG" viewBox="0 0 60 200"
                                                                                     width="60" height="200"
@@ -2561,6 +2666,7 @@
             }
         });
 
+  
         function removeRow(button) {
             const row = button.closest('tr');
             const tableBody = row.parentNode;
@@ -2581,6 +2687,7 @@
                 }
             }
 
+            calculateTotalDepartmentPercentage();
             scaleBraceToMatchTable();
         }
 
@@ -2892,6 +2999,8 @@
         };
     </script>
     <!-- Advance Payroll Details - End -->
+
+
 </body>
 
 

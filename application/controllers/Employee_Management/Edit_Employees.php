@@ -141,17 +141,19 @@ class Edit_Employees extends CI_Controller
         $this->load->view('Employee_Management/Edit_Employees/index', $data);
     }
 
-   public function getData($id) {
+    public function getData($id)
+    {
         $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,ADP_Sub_Department_Name FROM tbl_advance_payroll WHERE CmpNo = '" . $id . "'");
-    // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
-         echo json_encode(['advance_payroll_data' => $result]);
+        // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
+        echo json_encode(['advance_payroll_data' => $result]);
     }
 
-     public function getAcademicData($id) {
+    public function getAcademicData($id)
+    {
         $result = $this->Db_model->getfilteredData("SELECT Q_ID,Qualifications_Types,Qualifications_Description FROM tbl_qualifications WHERE CmpNo = '" . $id . "'");
-    // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
-         echo json_encode(['academic_data' => $result]);
+        echo json_encode(['academic_data' => $result]);
     }
+
 
 
     // public function update_emp()
@@ -284,22 +286,24 @@ class Edit_Employees extends CI_Controller
     public function update_emp()
     {
         $Comp_No = $this->input->post('txt_cmp_no');
+        echo $Comp_No; // Debugging line to check the company number
+        die;
         $Emp_No = $this->input->post('txt_emp_no');
 
         $OldImage = $this->input->post('img_Data');
         $OldImageData = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
 
         if ($OldImageData[0]->Image == $OldImage) {
-             $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+            $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
 
             if (empty($Cmp_ID)) {
                 $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
-            }else {
+            } else {
                 $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
             }
 
             $Image = $DataID[0]->Image;
-        }else{
+        } else {
             // Image Upload Logic
             $Image = md5($Comp_No);
             $config['upload_path'] = 'assets/images/Employees/';
@@ -321,14 +325,14 @@ class Edit_Employees extends CI_Controller
                 log_message('error', $error);
             }
 
-            $Image =  $Image . ".jpg";
+            $Image = $Image . ".jpg";
         }
 
         // echo $Image; // Debugging line to check the image name
 
         // die;
 
-        
+
 
         $Is_Allow = $this->input->post('Is_Allow');
 

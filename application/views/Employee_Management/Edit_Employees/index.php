@@ -1,8 +1,3 @@
-<!--Add Employee
-
-@author Ashan Rathsara-->
-
-
 <html lang="en">
 
 
@@ -208,10 +203,6 @@
                                                 <div class="panel-body ">
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="horizontal-form">
-                                                            <!-- <form class="form-horizontal" id="frm_employee_update"
-                                                                name="frm_employee_update"
-                                                                action="<?php echo base_url(); ?>Employee_Management/Edit_Employees/update_emp"
-                                                                method="POST" enctype="multipart/form-data"> -->
                                                             <form id="employeeForm" enctype="multipart/form-data">
 
                                                                 <div class="form-group col-md-12">
@@ -943,7 +934,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="tab-pane" id="vertical-form">
 
                                                                     <label
@@ -2324,134 +2315,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-
-        // old
-        // function loadAdvancePayrollData(companyId) {
-        //     fetch(`<?php echo base_url(); ?>Employee_Management/Edit_Employees/getData/${companyId}`)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             const rows = data.advance_payroll_data || [];
-        //             const table = document.querySelector("#departmentTable tbody");
-        //             table.innerHTML = ""; // Clear existing rows
-
-        //             const departmentMap = {};
-
-        //             // Group data by department
-        //             rows.forEach(row => {
-        //                 const depId = row.ADP_Department_ID;
-        //                 const depPerc = parseFloat(row.ADP_Department_Percentage);
-        //                 const subDepId = row.ADP_Sub_Department_ID;
-        //                 const subDepPerc = parseFloat(row.ADP_Sub_Department_Percentage);
-        //                 const subDepName = row.ADP_Sub_Department_Name || "";
-
-        //                 if (!departmentMap[depId]) {
-        //                     departmentMap[depId] = {
-        //                         percentage: depPerc,
-        //                         subDepartments: []
-        //                     };
-        //                 }
-
-        //                 if (subDepId) {
-        //                     departmentMap[depId].subDepartments.push({
-        //                         subDepId: subDepId,
-        //                         percentage: subDepPerc,
-        //                         ADP_Sub_Department_Name: subDepName
-        //                     });
-        //                 }
-
-        //                 console.log(depId, departmentMap[depId]);
-        //             });
-
-        //             // Render each department with its sub-departments
-        //             for (const depId in departmentMap) {
-        //                 const dep = departmentMap[depId];
-
-
-
-        //                 // Get department name from the select options
-        //                 const depSelect = document.getElementById("cmb_dep1");
-        //                 const depOption = Array.from(depSelect.options).find(opt => opt.value === depId);
-        //                 const depName = depOption ? depOption.text : "Unknown";
-
-        //                 // console.log(depOption, depName);
-
-        //                 // Insert main department row
-        //                 const newRow = table.insertRow();
-        //                 const cell1 = newRow.insertCell(0);
-        //                 const cell2 = newRow.insertCell(1);
-        //                 const cell3 = newRow.insertCell(2);
-        //                 const cell4 = newRow.insertCell(3);
-        //                 const cell5 = newRow.insertCell(4);
-
-        //                 cell1.innerHTML = `<span class="department-name" data-id="${depId}">${depName}</span>`;
-        //                 cell2.innerHTML = "";
-        //                 cell3.innerHTML = `<input type="number" class="form-control" value="${dep.percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
-        //                 cell4.innerHTML = `<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>`;
-        //                 cell5.innerHTML = `<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>`;
-
-        //                 // Insert sub-department rows
-        //                 dep.subDepartments.forEach(sd => {
-        //                     const subRow = table.insertRow();
-        //                     subRow.classList.add('sub-department-row');
-
-        //                     const subCell1 = subRow.insertCell(0);
-        //                     const subCell2 = subRow.insertCell(1);
-        //                     const subCell3 = subRow.insertCell(2);
-        //                     const subCell4 = subRow.insertCell(3);
-        //                     const subCell5 = subRow.insertCell(4);
-
-        //                     const subId = 'sub_dept_' + Date.now() + Math.floor(Math.random() * 1000);
-        //                     const hiddenId = 'cmb_Supervisor_' + Date.now() + Math.floor(Math.random() * 1000);
-
-        //                     subCell1.innerHTML = `<span class="sub-arrow">↳</span> <span class="sub-department-label">Sub Dept.</span>`;
-
-        //                     subCell2.innerHTML = `
-        //                     <div class="col-sm-8 new-search-col">
-        //                         <label for="${subId}" class="new-input-label hidden">Group Supervisor</label>
-        //                         <input type="text" class="form-control new-input-control" name="${subId}" id="${subId}" 
-        //                             value="${(sd.subDepId || sd.ADP_Sub_Department_ID)} - ${sd.ADP_Sub_Department_Name}" placeholder="Search by ID or Name">
-        //                         <input type="hidden" name="${hiddenId}" id="${hiddenId}" value="${sd.subDepId || sd.ADP_Sub_Department_ID}">
-        //                     </div>`;
-
-
-        //                     subCell3.innerHTML = `
-        //                 <input type="number" class="form-control form-control-sm sub-percent"
-        //                     name="sub_percent_${Date.now() + Math.floor(Math.random() * 1000)}"
-        //                     value="${sd.percentage}"
-        //                     oninput="validateSubPercentages(this)">
-        //             `;
-
-        //                     subCell4.innerHTML = `
-        //                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow2(this)">
-        //                     <i class="bi bi-x-lg"></i> Remove
-        //                 </button>
-        //             `;
-
-        //                     subCell5.innerHTML = `<span class="percent-error" style="color: red; display: none;"></span>`;
-
-        //                     // Initialize autocomplete for this input
-        //                     setTimeout(() => {
-        //                         $("#" + subId).autocomplete({
-        //                             source: "<?php echo base_url(); ?>Employee_Management/ADD_Employees/get_emp_no_and_name",
-        //                             minLength: 1,
-        //                             select: function (event, ui) {
-        //                                 $("#" + hiddenId).val(ui.item.value);
-        //                                 $("#" + subId).val(ui.item.value + ' - ' + ui.item.label);
-        //                                 return false;
-        //                             }
-        //                         }).autocomplete("instance")._renderItem = function (ul, item) {
-        //                             return $("<li>").append("<div>" + item.value + " - " + item.label + "</div>").appendTo(ul);
-        //                         };
-        //                     }, 100);
-        //                 });
-        //             }
-
-        //             calculateTotalDepartmentPercentage();
-        //             scaleBraceToMatchTable();
-        //         })
-        //         .catch(error => console.error("Error fetching advance payroll data:", error));
-        // }
-
         function loadAdvancePayrollData(companyId) {
             fetch(`<?php echo base_url(); ?>Employee_Management/Edit_Employees/getData/${companyId}`)
                 .then(response => response.json())
@@ -2666,7 +2529,7 @@
             }
         });
 
-  
+
         function removeRow(button) {
             const row = button.closest('tr');
             const tableBody = row.parentNode;
@@ -2999,6 +2862,193 @@
         };
     </script>
     <!-- Advance Payroll Details - End -->
+
+    <script>
+        // ✅ Declare only once
+        const selectedQualifications = [];
+
+        // ✅ Fetch and load academic data on page load
+        window.onload = function () {
+            loadAcademicData();
+        };
+
+        function loadAcademicData() {
+            const companyId = "<?php echo $data_set[0]->Cmp_ID ?>";
+
+            fetch(`<?php echo base_url(); ?>Employee_Management/Edit_Employees/getAcademicData/${companyId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const qualifications = data.academic_data || [];
+
+                    qualifications.forEach(item => {
+                        const qualificationData = {
+                            qualification: item.Qualifications_Types,
+                            qualificationText: getQualificationText(item.Qualifications_Types),
+                            notes: item.Qualifications_Description
+                        };
+                        selectedQualifications.push(qualificationData);
+                    });
+
+                    rebuildTable();
+                    document.getElementById('emptyRow').style.display = selectedQualifications.length ? 'none' : 'table-row';
+                })
+                .catch(error => {
+                    console.error('Error fetching academic data:', error);
+                });
+        }
+
+        function getQualificationText(value) {
+            switch (value) {
+                case 'ol': return 'O/L (Ordinary Level)';
+                case 'al': return 'A/L (Advanced Level)';
+                case 'diploma': return 'Diploma';
+                case 'hnd': return 'Higher National Diploma (HND)';
+                case 'degree': return 'Degree';
+                case 'master': return 'Master';
+                case 'mphil': return 'Master of Philosophy (MPhil)';
+                case 'phd': return 'Doctor of Philosophy (PhD)';
+                default: return value;
+            }
+        }
+
+        document.getElementById('addQualification').addEventListener('click', function () {
+            const selectElement = document.getElementById('qualificationSelect');
+            const selectedValue = selectElement.value;
+            const selectedText = selectElement.options[selectElement.selectedIndex].text;
+            const notes = document.getElementById('notesInput').value.trim();
+
+            if (!selectedValue) return;
+
+            if (selectedQualifications.some(q => q.qualification === selectedValue)) return;
+
+            const qualificationData = {
+                qualification: selectedValue,
+                qualificationText: selectedText,
+                notes: notes
+            };
+
+            selectedQualifications.push(qualificationData);
+            rebuildTable();
+            clearFormFields();
+            document.getElementById('emptyRow').style.display = 'none';
+
+            const qualError = document.getElementById('qualification_error');
+            if (qualError) qualError.style.display = 'none';
+        });
+
+        function rebuildTable() {
+            const tableBody = document.getElementById('qualificationTableBody');
+            tableBody.innerHTML = `
+            <tr id="emptyRow" style="display: ${selectedQualifications.length === 0 ? 'table-row' : 'none'}">
+                <td colspan="3" class="text-center text-muted">No qualifications added</td>
+            </tr>
+        `;
+
+            selectedQualifications.forEach((data, index) => {
+                const row = document.createElement('tr');
+                row.id = 'row_' + index;
+
+                row.innerHTML = `
+                <td>${data.qualificationText}</td>
+                <td>${data.notes || '-'}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="removeQualification(${index})">
+                        Remove
+                    </button>
+                </td>
+            `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        function removeQualification(index) {
+            selectedQualifications.splice(index, 1);
+            rebuildTable();
+            if (selectedQualifications.length === 0) {
+                document.getElementById('emptyRow').style.display = 'table-row';
+            }
+        }
+
+        function clearFormFields() {
+            document.getElementById('qualificationSelect').value = '';
+            document.getElementById('notesInput').value = '';
+        }
+    </script>
+
+    <script>
+        document.getElementById("employeeForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            // ✅ Append selected qualifications
+            selectedQualifications.forEach((q, i) => {
+                formData.append(`qualifications[${i}][type]`, q.qualification);
+                formData.append(`qualifications[${i}][notes]`, q.notes);
+            });
+
+            // ✅ Append advance payroll departments and subdepartments
+            const tableRows = document.querySelectorAll("#departmentTable tbody tr");
+            let depIndex = 0;
+
+            tableRows.forEach((row, i) => {
+                const isSubDept = row.classList.contains("sub-department-row");
+                const isStatusRow = row.classList.contains("sub-dept-status-row");
+
+                if (!isSubDept && !isStatusRow) {
+                    const depId = row.querySelector(".department-name")?.dataset.id;
+                    const depPerc = row.cells[2].querySelector("input")?.value;
+
+                    formData.append(`advance_payroll[${depIndex}][department_id]`, depId);
+                    formData.append(`advance_payroll[${depIndex}][department_percentage]`, depPerc);
+
+                    // Collect subdepartments under this department
+                    let subIndex = 0;
+                    let nextRow = row.nextElementSibling;
+                    while (nextRow && nextRow.classList.contains("sub-department-row")) {
+                        const subInput = nextRow.querySelector("input[type='text']");
+                        const subValue = subInput?.value || "";
+                        const subId = subValue.split(" - ")[0].trim();
+                        const subName = subValue.split(" - ")[1]?.trim() || "";
+                        const percent = nextRow.querySelector(".sub-percent")?.value;
+
+                        formData.append(`advance_payroll[${depIndex}][subdepartments][${subIndex}][sub_id]`, subId);
+                        formData.append(`advance_payroll[${depIndex}][subdepartments][${subIndex}][sub_name]`, subName);
+                        formData.append(`advance_payroll[${depIndex}][subdepartments][${subIndex}][percentage]`, percent);
+
+                        nextRow = nextRow.nextElementSibling;
+                        subIndex++;
+                    }
+
+                    depIndex++;
+                }
+            });
+
+            console.log("Form Data:", Object.fromEntries(formData.entries()));
+
+            // ✅ Submit to backend
+            fetch("<?php echo base_url(); ?>Employee_Management/Edit_Employees/update_emp", {
+                method: "POST",
+                body: formData,
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    // if (data.status === "success") {
+                    //     Swal.fire("Success", data.message || "Employee updated successfully!", "success");
+                    // } else {
+                    //     Swal.fire("Error", data.message || "Failed to update!", "error");
+                    // }
+                })
+                .catch(err => {
+                    console.error("Error submitting form:", err);
+                    Swal.fire("Error", "Something went wrong during submission", "error");
+                });
+        });
+    </script>
+
 
 
 </body>

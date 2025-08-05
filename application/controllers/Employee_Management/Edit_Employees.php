@@ -286,8 +286,6 @@ class Edit_Employees extends CI_Controller
     public function update_emp()
     {
         $Comp_No = $this->input->post('txt_cmp_no');
-        echo $Comp_No; // Debugging line to check the company number
-        die;
         $Emp_No = $this->input->post('txt_emp_no');
 
         $OldImage = $this->input->post('img_Data');
@@ -545,7 +543,8 @@ class Edit_Employees extends CI_Controller
         ];
         // $result = $this->Db_model->insertData("tbl_empmaster", $data);
 
-        // echo '<pre>' . var_export($data, true) . '</pre>';
+        echo '<pre>' . var_export($data, true) . '</pre>';
+        die;
 
         $whereArr3 = ["Cmp_ID" => $Comp_No];
         $result = $this->Db_model->updateData("tbl_empmaster", $data, $whereArr3);

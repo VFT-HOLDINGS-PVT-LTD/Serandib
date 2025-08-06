@@ -2222,7 +2222,7 @@
     <?php $this->load->view('template/js.php'); ?>
 
     <!-- Initialize scripts for this page-->
-    <script src="<?php echo base_url(); ?>assets/plugins/form-jasnyupload/fileinput.min.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/plugins/form-jasnyupload/fileinput.min.js"></script> -->
     <!-- End loading page level scripts-->
     <!-- Initialize scripts for this page-->
 
@@ -2622,7 +2622,7 @@
             const share = shares[subDeptCount]; // last one for the new row
 
             cell3.innerHTML = `
-                <input type="number" class="form-control form-control-sm sub-percent"
+                <input type="number" step="any" class="form-control form-control-sm sub-percent"
                     name="${percentId}" id="${percentId}"
                     placeholder="Percentage" value="${share}"
                     oninput="validateSubPercentages(this)">
@@ -3038,6 +3038,7 @@
                     console.log(data);
                     // if (data.status === "success") {
                     //     Swal.fire("Success", data.message || "Employee updated successfully!", "success");
+                    //     window.location.href = '<?php echo base_url(); ?>Employee_Management/View_Employees';
                     // } else {
                     //     Swal.fire("Error", data.message || "Failed to update!", "error");
                     // }

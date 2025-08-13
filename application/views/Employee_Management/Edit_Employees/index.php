@@ -908,7 +908,8 @@
                                                                                             class="table table-striped table-bordered"
                                                                                             id="qualificationTable">
                                                                                             <thead class="thead-dark">
-                                                                                                <tr>
+                                                                                                <tr
+                                                                                                    style="font-size: 13.5px;">
                                                                                                     <th>Qualification
                                                                                                     </th>
                                                                                                     <th>Notes</th>
@@ -917,9 +918,11 @@
                                                                                             </thead>
                                                                                             <tbody
                                                                                                 id="qualificationTableBody">
-                                                                                                <tr id="emptyRow">
+                                                                                                <tr id="emptyRow"
+                                                                                                    style="font-size: 13.5px;">
                                                                                                     <td colspan="3"
-                                                                                                        class="text-center text-muted">
+                                                                                                        class="text-center text-muted"
+                                                                                                        style="font-size: 13.5px;">
                                                                                                         No
                                                                                                         qualifications
                                                                                                         added</td>
@@ -1057,6 +1060,7 @@
                                                                         </label>
                                                                         <?php
                                                                         $paymentType = isset($data_set[0]->Advance_Payroll_Data) ? $data_set[0]->Advance_Payroll_Data : '';
+                                                                        // echo $paymentType;
                                                                         ?>
                                                                         <div class="col-sm-8">
                                                                             <!-- Payment Type Dropdown -->
@@ -1066,12 +1070,12 @@
                                                                                 <option value="">-- Select Percentage --
                                                                                 </option>
                                                                                 <option value="1" <?= $paymentType == '1' ? 'selected' : '' ?>>Common</option>
-                                                                                <option value="2" <?= $paymentType == '0' ? 'selected' : '' ?>>Directly</option>
+                                                                                <option value="0" <?= $paymentType == '0' ? 'selected' : '' ?>>Directly</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="tab-pane" id="vertical-form">
+                                                                    <div class="tab-pane" id="vertical-form1">
 
                                                                         <label
                                                                             style="font-weight: bold; color: #000; display: none;"
@@ -1134,7 +1138,7 @@
                                                                             <!-- Curly Brace Drawer and Total -->
                                                                             <!-- Curly Brace Drawer and Total Box -->
                                                                             <div id="braceContainer"
-                                                                                style="position: absolute; right: 310px; top: 35px; pointer-events: none;">
+                                                                                style="position: absolute; right: 310px; top: 35px; pointer-events: none; ">
                                                                                 <!-- SVG brace -->
                                                                                 <svg id="braceSVG" viewBox="0 0 60 200"
                                                                                     width="60" height="200"
@@ -2366,7 +2370,7 @@
 
                         cell1.innerHTML = `<span class="department-name" data-id="${depId}">${depName}</span>`;
                         cell2.innerHTML = "";
-                        cell3.innerHTML = `<input type="number" class="form-control" value="${dep.percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
+                        cell3.innerHTML = `<input type="text" class="form-control" value="${dep.percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
                         cell4.innerHTML = `<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>`;
                         cell5.innerHTML = `<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>`;
 
@@ -2395,7 +2399,7 @@
                         </div>`;
 
                             subCell3.innerHTML = `
-                        <input type="number" class="form-control form-control-sm sub-percent"
+                        <input type="text" class="form-control form-control-sm sub-percent"
                             name="sub_percent_${Date.now() + Math.floor(Math.random() * 1000)}"
                             value="${sd.percentage}"
                             oninput="validateSubPercentages(this)">
@@ -2438,7 +2442,7 @@
 
             function toggleAdvanceView(value) {
                 const show = value === '1';
-                document.getElementById("vertical-form").style.display = show ? "" : "none";
+                document.getElementById("vertical-form1").style.display = show ? "" : "none";
                 document.getElementById("verticalform1").style.display = show ? "block" : "none";
                 document.getElementById("departmentDiv").style.display = show ? "block" : "none";
                 document.getElementById("departmentDiv1").style.display = show ? "block" : "none";
@@ -2514,7 +2518,7 @@
                 // cell1.innerHTML = departmentName;
                 cell1.innerHTML = `<span class="department-name" data-id="${departmentId}">${departmentName}</span>`;
                 cell2.innerHTML = "";
-                cell3.innerHTML = `<input type="number" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
+                cell3.innerHTML = `<input type="text" class="form-control" value="${percentage}" oninput="updateSubDeptPercentages(this); calculateTotalDepartmentPercentage(); scaleBraceToMatchTable();" />`;
                 cell4.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
                 cell5.innerHTML = '<button type="button" class="btn btn-primary" onclick="AddRow(this)">Add</button>';
 
@@ -2622,7 +2626,7 @@
             const share = shares[subDeptCount]; // last one for the new row
 
             cell3.innerHTML = `
-                <input type="number" step="any" class="form-control form-control-sm sub-percent"
+                <input type="text" step="any" class="form-control form-control-sm sub-percent"
                     name="${percentId}" id="${percentId}"
                     placeholder="Percentage" value="${share}"
                     oninput="validateSubPercentages(this)">
@@ -2939,7 +2943,7 @@
         function rebuildTable() {
             const tableBody = document.getElementById('qualificationTableBody');
             tableBody.innerHTML = `
-            <tr id="emptyRow" style="display: ${selectedQualifications.length === 0 ? 'table-row' : 'none'}">
+            <tr id="emptyRow" style="font-size: 13.5px; display: ${selectedQualifications.length === 0 ? 'table-row' : 'none'}">
                 <td colspan="3" class="text-center text-muted">No qualifications added</td>
             </tr>
         `;
@@ -2949,8 +2953,8 @@
                 row.id = 'row_' + index;
 
                 row.innerHTML = `
-                <td>${data.qualificationText}</td>
-                <td>${data.notes || '-'}</td>
+                <td style="font-size: 13px; font-weight:bold;">${data.qualificationText}</td>
+                <td style="font-size: 13px; font-weight:bold;">${data.notes || '-'}</td>
                 <td>
                     <button type="button" class="btn btn-sm btn-danger" onclick="removeQualification(${index})">
                         Remove
@@ -3035,18 +3039,41 @@
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
-                    // if (data.status === "success") {
-                    //     Swal.fire("Success", data.message || "Employee updated successfully!", "success");
-                    //     window.location.href = '<?php echo base_url(); ?>Employee_Management/View_Employees';
-                    // } else {
-                    //     Swal.fire("Error", data.message || "Failed to update!", "error");
-                    // }
+                    // console.log(data);
+                    if (data.status === "success") {
+                        Swal.fire("Success", data.message || "Employee updated successfully!", "success");
+                        window.location.href = '<?php echo base_url(); ?>Employee_Management/View_Employees';
+                    } else {
+                        Swal.fire("Error", data.message || "Failed to update!", "error");
+                    }
                 })
                 .catch(err => {
                     console.error("Error submitting form:", err);
                     Swal.fire("Error", "Something went wrong during submission", "error");
                 });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const percentageSelect = document.getElementById('cmb_percentage');
+            const braceContainer = document.getElementById('braceContainer');
+
+            function toggleBraceVisibility() {
+                const selectedValue = percentageSelect.value;
+                if (selectedValue === '0' || selectedValue === '2') {
+                    // Hide if 'Directly' (value '0' or '2', depending on your logic)
+                    if (braceContainer) braceContainer.style.display = 'none';
+                } else {
+                    // Show otherwise
+                    if (braceContainer) braceContainer.style.display = 'block';
+                }
+            }
+
+            // Initial check on page load
+            toggleBraceVisibility();
+
+            // Listen to changes
+            percentageSelect.addEventListener('change', toggleBraceVisibility);
         });
     </script>
 

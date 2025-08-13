@@ -459,6 +459,7 @@ class Edit_Employees extends CI_Controller
         $User_Name = $this->input->post('txt_user_name');
         $User_Level = $this->input->post('cmb_user_level');
         $Is_Allow = $this->input->post('Is_Allow');
+        $adv = $this->input->post('cmb_percentage');
 
         // $OutSidedata = [
         //     'Is_Approve' => 1,
@@ -539,7 +540,8 @@ class Edit_Employees extends CI_Controller
             'Active_process' => 1,
             'Is_Approve' => 1,
             'Remarks' => $this->input->post('txt_remarks'),
-            'highlights' => $this->input->post('txt_high')
+            'highlights' => $this->input->post('txt_high'),
+            'Advance_Payroll_Data' => $adv ? 1 : 0,
         ];
         // $result = $this->Db_model->insertData("tbl_empmaster", $data);
 
@@ -610,88 +612,100 @@ class Edit_Employees extends CI_Controller
             }
         }
 
-        $this->Db_model->getfilteredDelete("DELETE FROM tbl_advance_payroll WHERE CmpNo = '" . $Comp_No . "'");
+        if ($adv == 1) {
+            $this->Db_model->getfilteredDelete("DELETE FROM tbl_advance_payroll WHERE CmpNo = '" . $Comp_No . "'");
 
-        // 3. Advance Payroll
-        $advance_payroll = $this->input->post('advance_payroll');
+            // 3. Advance Payroll
+            $advance_payroll = $this->input->post('advance_payroll');
 
-        // print_r($advance_payroll);
-        // die;
+            // print_r($advance_payroll);
+            // die;
 
-        // print_r($advance_payroll);
-        // die;
-        // if (!empty($advance_payroll)) {
-        //     foreach ($advance_payroll as $row) {
-        //         $dep_data = [
-        //             'Emp_ID' => $employee_id,
-        //             'ADP_Department_ID' => $row['department_id'],
-        //             'ADP_Department_Percentage' => $row['department_percentage']
-        //         ];
-        //         $dep_id = $this->Employee_model->saveDepartment($dep_data); // Save main dept and get ID
+            // print_r($advance_payroll);
+            // die;
+            // if (!empty($advance_payroll)) {
+            //     foreach ($advance_payroll as $row) {
+            //         $dep_data = [
+            //             'Emp_ID' => $employee_id,
+            //             'ADP_Department_ID' => $row['department_id'],
+            //             'ADP_Department_Percentage' => $row['department_percentage']
+            //         ];
+            //         $dep_id = $this->Employee_model->saveDepartment($dep_data); // Save main dept and get ID
 
-        //         // Sub-departments
-        //         if (!empty($row['subdepartments'])) {
-        //             foreach ($row['subdepartments'] as $sub) {
-        //                 $sub_data = [
-        //                     'ADP_Department_ID' => $row['department_id'], // or use $dep_id
-        //                     'Emp_ID' => $employee_id,
-        //                     'ADP_Sub_Department_ID' => $sub['sub_id'],
-        //                     'ADP_Sub_Department_Name' => $sub['sub_name'],
-        //                     'ADP_Sub_Department_Percentage' => $sub['percentage']
-        //                 ];
-        //                 $this->Employee_model->saveSubDepartment($sub_data);
-        //             }
-        //         }
-        //     }
-        // }
+            //         // Sub-departments
+            //         if (!empty($row['subdepartments'])) {
+            //             foreach ($row['subdepartments'] as $sub) {
+            //                 $sub_data = [
+            //                     'ADP_Department_ID' => $row['department_id'], // or use $dep_id
+            //                     'Emp_ID' => $employee_id,
+            //                     'ADP_Sub_Department_ID' => $sub['sub_id'],
+            //                     'ADP_Sub_Department_Name' => $sub['sub_name'],
+            //                     'ADP_Sub_Department_Percentage' => $sub['percentage']
+            //                 ];
+            //                 $this->Employee_model->saveSubDepartment($sub_data);
+            //             }
+            //         }
+            //     }
+            // }
 
-        foreach ($advance_payroll as $mainDept) {
-            $depId = $mainDept['department_id'];
-            // $deptName = $mainDept['department'];
-            $deptPercent = $mainDept['department_percentage'];
-            $subDepartments = $mainDept['subdepartments'];
+            foreach ($advance_payroll as $mainDept) {
+                $depId = $mainDept['department_id'];
+                // $deptName = $mainDept['department'];
+                $deptPercent = $mainDept['department_percentage'];
+                $subDepartments = $mainDept['subdepartments'];
 
-            // If sub-departments exist
-            if (!empty($subDepartments)) {
-                foreach ($subDepartments as $subDept) {
-                    $subdId = $subDept['sub_id'];
-                    $subdName = $subDept['sub_name'];
-                    $subPercent = $subDept['percentage'];
+                // If sub-departments exist
+                if (!empty($subDepartments)) {
+                    foreach ($subDepartments as $subDept) {
+                        $subdId = $subDept['sub_id'];
+                        $subdName = $subDept['sub_name'];
+                        $subPercent = $subDept['percentage'];
 
-                    // print_r($subdId);
-                    // die;
+                        // print_r($subdId);
+                        // die;
 
-                    // Extract ID from "14 - HR1"
-                    // $parts = explode(' - ', $supervisor);
-                    // $subdid = isset($parts[0]) ? $parts[0] : null;
-                    // $subdName = isset($parts[1]) ? $parts[1] : null;
+                        // Extract ID from "14 - HR1"
+                        // $parts = explode(' - ', $supervisor);
+                        // $subdid = isset($parts[0]) ? $parts[0] : null;
+                        // $subdName = isset($parts[1]) ? $parts[1] : null;
 
-                    // Insert with sub-department
+                        // Insert with sub-department
+                        $data_advance_payroll = array(
+                            'CmpNo' => $Comp_No,
+                            'ADP_Department_ID' => $depId,
+                            'ADP_Department_Percentage' => $deptPercent,
+                            'ADP_Sub_Department_ID' => $subdId,
+                            'ADP_Sub_Department_Name' => $subdName,
+                            'ADP_Sub_Department_Percentage' => $subPercent,
+                        );
+
+                        $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
+                    }
+                } else {
+                    $subdId = '';
+                    // Insert only main department when no sub-departments
+                    if ($subdId = '' || $subdId == null) {
+                        $subdId = 0; // Default value if no sub-department
+                    } else {
+                        $subdId = $subdId;
+                    }
                     $data_advance_payroll = array(
                         'CmpNo' => $Comp_No,
                         'ADP_Department_ID' => $depId,
                         'ADP_Department_Percentage' => $deptPercent,
-                        'ADP_Sub_Department_ID' => $subdid,
-                        'ADP_Sub_Department_Name' => $subdName,
-                        'ADP_Sub_Department_Percentage' => $subPercent,
+                        'ADP_Sub_Department_ID' => $subdId,
+                        'ADP_Sub_Department_Name' => 0,
+                        'ADP_Sub_Department_Percentage' => 0,
                     );
 
                     $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
                 }
-            } else {
-                // Insert only main department when no sub-departments
-                $data_advance_payroll = array(
-                    'CmpNo' => $Comp_No,
-                    'ADP_Department_ID' => $depId,
-                    'ADP_Department_Percentage' => $deptPercent,
-                    'ADP_Sub_Department_ID' => 0,
-                    'ADP_Sub_Department_Name' => 0,
-                    'ADP_Sub_Department_Percentage' => 0,
-                );
-
-                $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
             }
+        }else {
+            $this->Db_model->getfilteredDelete("DELETE FROM tbl_advance_payroll WHERE CmpNo = '" . $Comp_No . "'");
         }
+
+
 
         if ($result) {
             echo json_encode(['status' => 'success', 'message' => 'Employee updated successfully']);

@@ -200,6 +200,13 @@ class ADD_Employees extends CI_Controller
         redirect('/Employee_Management/ADD_Employees/');
     }
 
+    public function getBranchesByBank() {
+        $bank_id = $this->input->post('bank_id');
+        $branches = $this->Db_model->getfilteredData("SELECT * FROM tbl_bank_branches WHERE tbl_bank_branches.Bank_Id = '$bank_id' "); // Replace with your model method to fetch branches
+    
+        echo json_encode($branches);
+    }
+
     public function insert_Data()
     {
         //  $dept_structure_json = $this->input->post('department_structure');

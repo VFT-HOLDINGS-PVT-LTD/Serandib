@@ -958,6 +958,42 @@
                                                                     </div>
 
 
+                                                                    <!-- <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Salary
+                                                                            Bank</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control" id="cmb_bank_1"
+                                                                                name="cmb_bank_1">
+
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                                <?php foreach ($data_bank as $t_data) { ?>
+                                                                                    <option
+                                                                                        value="<?php echo $t_data->Bnk_ID; ?>">
+                                                                                        <?php echo $t_data->bank_name; ?>
+                                                                                    </option>
+
+                                                                                <?php }
+                                                                                ?>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group col-sm-6">
+                                                                        <label for="focusedinput"
+                                                                            class="col-sm-4 control-label">Sal.
+                                                                            Branch</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select class="form-control"
+                                                                                id="cmb_bank_branch_1"
+                                                                                name="cmb_bank_branch_1">
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div> -->
 
 
                                                                     <div class="form-group col-sm-6">
@@ -990,9 +1026,15 @@
                                                                             class="col-sm-4 control-label">Branch
                                                                             ID</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <select class="form-control"
+                                                                                id="txt_B_Branch"
+                                                                                name="txt_B_Branch">
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                            </select>
+                                                                            <!-- <input type="text" class="form-control"
                                                                                 id="txt_B_Branch" name="txt_B_Branch"
-                                                                                placeholder="Ex: 023">
+                                                                                placeholder="Ex: 023"> -->
                                                                         </div>
                                                                     </div>
 
@@ -2090,6 +2132,50 @@
     <script>
         document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
             this.value = this.value.replace(/\s/g, '');
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#cmb_bank').change(function () {
+                var bankId = $(this).val();
+
+                if (bankId) {
+                    $.ajax({
+                        url: baseurl +
+                            "Employee_Management/ADD_Employees/getBranchesByBank", // Replace with your server-side URL
+                        type: 'POST',
+                        data: {
+                            bank_id: bankId
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var branchDropdown = $('#txt_B_Branch');
+                            branchDropdown.empty(); // Clear existing options
+                            branchDropdown.append(
+                                '<option value="">-- Select --</option>'
+                            ); // Add default option
+
+                            $.each(data, function (index, branch) {
+                                // alert(branch.Branch_Name);
+                                branchDropdown.append('<option value="' +
+                                    branch.ID + '">' + branch
+                                        .Branch_Name + '</option>');
+                            });
+                            // alert(JSON.stringify(data));
+                        },
+                        error: function () {
+                            alert('Error fetching branches. Please try again.');
+                        }
+
+                        
+                    });
+                } else {
+                    $('#cmb_branch').empty().append(
+                        '<option value="">-- Select --</option>'); // Reset branch dropdown
+                }
+            });
         });
     </script>
 

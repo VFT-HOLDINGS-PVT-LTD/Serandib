@@ -436,8 +436,7 @@
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Bank
-                                                                            Name <span
+                                                                            class="col-sm-4 control-label">Bank <span
                                                                                 style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
                                                                             <select class="form-control" id="cmb_bank"
@@ -458,17 +457,24 @@
                                                                         </div>
                                                                     </div>
 
+
+
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
                                                                             class="col-sm-4 control-label">Branch
-                                                                            ID <span
-                                                                                style="color: red;">*</span></label>
+                                                                            ID</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <select class="form-control"
+                                                                                id="txt_B_Branch" name="txt_B_Branch">
+                                                                                <option value="" default>-- Select --
+                                                                                </option>
+                                                                            </select>
+                                                                            <!-- <input type="text" class="form-control"
                                                                                 id="txt_B_Branch" name="txt_B_Branch"
-                                                                                placeholder="Ex: 023" required="">
+                                                                                placeholder="Ex: 023"> -->
                                                                         </div>
                                                                     </div>
+
 
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput"
@@ -1368,185 +1374,229 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
 
-        <!-- Load site level scripts -->
+    <!-- Load site level scripts -->
 
-        <?php $this->load->view('template/js.php'); ?> <!-- Initialize scripts for this page-->
+    <?php $this->load->view('template/js.php'); ?> <!-- Initialize scripts for this page-->
 
 
-        <!-- Initialize scripts for this page-->
-        <script src="<?php echo base_url(); ?>assets/plugins/form-jasnyupload/fileinput.min.js"></script>
-        <!-- End loading page level scripts-->
-        <!-- End loading page level scripts-->
-        <!--Ajax-->
-        <!--<script src="<?php echo base_url(); ?>system_js/Master/Employee.js"></script>-->
-        <script>
-            document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
-                this.value = this.value.replace(/\s/g, '');
+    <!-- Initialize scripts for this page-->
+    <script src="<?php echo base_url(); ?>assets/plugins/form-jasnyupload/fileinput.min.js"></script>
+    <!-- End loading page level scripts-->
+    <!-- End loading page level scripts-->
+    <!--Ajax-->
+    <!--<script src="<?php echo base_url(); ?>system_js/Master/Employee.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('txt_cmp_no').addEventListener('input', function (e) {
+            this.value = this.value.replace(/\s/g, '');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#cmb_bank').change(function () {
+                var bankId = $(this).val();
+
+                if (bankId) {
+                    $.ajax({
+                        url: baseurl +
+                            "Employee_Management/ADD_Employees/getBranchesByBank", // Replace with your server-side URL
+                        type: 'POST',
+                        data: {
+                            bank_id: bankId
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            var branchDropdown = $('#txt_B_Branch');
+                            branchDropdown.empty(); // Clear existing options
+                            branchDropdown.append(
+                                '<option value="">-- Select --</option>'
+                            ); // Add default option
+
+                            $.each(data, function (index, branch) {
+                                // alert(branch.Branch_Name);
+                                branchDropdown.append('<option value="' +
+                                    branch.ID + '">' + branch
+                                        .Branch_Name + '</option>');
+                            });
+                            // alert(JSON.stringify(data));
+                        },
+                        error: function () {
+                            alert('Error fetching branches. Please try again.');
+                        }
+
+
+                    });
+                } else {
+                    $('#cmb_branch').empty().append(
+                        '<option value="">-- Select --</option>'); // Reset branch dropdown
+                }
             });
-        </script>
+        });
+    </script>
 
-
-        <script>
-            $("#frm_employee").validate({
-                rules: {
-                    cmb_emp_title: "required",
-                    cmb_gender: "required",
-                    img_employee: "required",
-                    bankName: "required",
-                    txt_account: "required",
-                    txt_address: "required",
-                    txt_city: "required",
-                    cmb_district: "required",
-                    txt_email: {
-                        required: true,
-                        email: true
-                    },
+    <script>
+        $("#frm_employee").validate({
+            rules: {
+                cmb_emp_title: "required",
+                cmb_gender: "required",
+                img_employee: "required",
+                bankName: "required",
+                txt_account: "required",
+                txt_address: "required",
+                txt_city: "required",
+                cmb_district: "required",
+                txt_email: {
+                    required: true,
+                    email: true
                 },
-                messages: {
-                    cmb_emp_title: "Please select a title",
-                    cmb_gender: "Please select gender",
-                    img_employee: "Please upload an image"
+            },
+            messages: {
+                cmb_emp_title: "Please select a title",
+                cmb_gender: "Please select gender",
+                img_employee: "Please upload an image"
+            }
+        });
+
+
+        $('#txt_appoint_date').datepicker({
+            format: "dd/mm/yyyy",
+            "todayHighlight": true,
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+
+        $('#txt_permanent_date').datepicker({
+            format: "dd/mm/yyyy",
+            "todayHighlight": true,
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+
+        $('#txt_dob').datepicker({
+            format: "dd/mm/yyyy",
+            "todayHighlight": true,
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+
+        $('#bond_end_date').datepicker({
+            format: "dd/mm/yyyy",
+            "todayHighlight": true,
+            autoclose: true,
+            format: 'yyyy/mm/dd'
+        }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#img_employee").on('change', function () {
+                //Get count of selected files
+                var countFiles = $(this)[0].files.length;
+                var imgPath = $(this)[0].value;
+                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                var image_holder = $("#image-holder");
+                image_holder.empty();
+                if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                    if (typeof (FileReader) != "undefined") {
+                        //loop for each file selected for uploaded.
+                        for (var i = 0; i < countFiles; i++) {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $("<img />", {
+                                    "src": e.target.result,
+                                    "class": "thumb-image"
+                                }).appendTo(image_holder);
+                            }
+                            image_holder.show();
+                            reader.readAsDataURL($(this)[0].files[i]);
+                        }
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                } else {
+                    alert("Pls select only images");
+                }
+            });
+        });
+    </script>
+
+
+    <!--JQuary Validation-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#frm_employee").validate();
+            $("#spnmessage").hide("shake", {
+                times: 5
+            }, 3500);
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            //the min chars for username
+            var min_chars = 3;
+
+            //result texts
+            var characters_error = 'Minimum amount of chars is 3';
+            var checking_html = 'Checking...';
+
+            //when button is clicked
+            $('#check_username_availability').click(function () {
+                //run the character number check
+                if ($('#txt_emp_no').val().length < min_chars) {
+                    //if it's bellow the minimum show characters_error text '
+                    $('#username_availability_result').html(characters_error);
+                } else {
+                    //else show the cheking_text and run the function to check
+                    $('#username_availability_result').html(checking_html);
+                    check_availability();
                 }
             });
 
+        });
 
-            $('#txt_appoint_date').datepicker({
-                format: "dd/mm/yyyy",
-                "todayHighlight": true,
-                autoclose: true,
-                format: 'yyyy/mm/dd'
-            }).on('changeDate', function (ev) {
-                $(this).datepicker('hide');
-            });
+        //function to check username availability
+        function check_availability() {
 
-            $('#txt_permanent_date').datepicker({
-                format: "dd/mm/yyyy",
-                "todayHighlight": true,
-                autoclose: true,
-                format: 'yyyy/mm/dd'
-            }).on('changeDate', function (ev) {
-                $(this).datepicker('hide');
-            });
+            //get the username
+            var username = $('#txt_emp_no').val();
 
-            $('#txt_dob').datepicker({
-                format: "dd/mm/yyyy",
-                "todayHighlight": true,
-                autoclose: true,
-                format: 'yyyy/mm/dd'
-            }).on('changeDate', function (ev) {
-                $(this).datepicker('hide');
-            });
-
-            $('#bond_end_date').datepicker({
-                format: "dd/mm/yyyy",
-                "todayHighlight": true,
-                autoclose: true,
-                format: 'yyyy/mm/dd'
-            }).on('changeDate', function (ev) {
-                $(this).datepicker('hide');
-            });
-        </script>
-
-
-        <script>
-            $(document).ready(function () {
-                $("#img_employee").on('change', function () {
-                    //Get count of selected files
-                    var countFiles = $(this)[0].files.length;
-                    var imgPath = $(this)[0].value;
-                    var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-                    var image_holder = $("#image-holder");
-                    image_holder.empty();
-                    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-                        if (typeof (FileReader) != "undefined") {
-                            //loop for each file selected for uploaded.
-                            for (var i = 0; i < countFiles; i++) {
-                                var reader = new FileReader();
-                                reader.onload = function (e) {
-                                    $("<img />", {
-                                        "src": e.target.result,
-                                        "class": "thumb-image"
-                                    }).appendTo(image_holder);
-                                }
-                                image_holder.show();
-                                reader.readAsDataURL($(this)[0].files[i]);
-                            }
-                        } else {
-                            alert("This browser does not support FileReader.");
-                        }
+            //use ajax to run the check
+            $.post(baseurl + "Employee_Management/ADD_Employees/check_emp", {
+                EmpNo: username
+            },
+                function (result) {
+                    //if the result is 1
+                    if (result == 1) {
+                        //show that the username is available
+                        $('#username_availability_result').html(username + ' is Available');
                     } else {
-                        alert("Pls select only images");
-                    }
-                });
-            });
-        </script>
-
-
-        <!--JQuary Validation-->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#frm_employee").validate();
-                $("#spnmessage").hide("shake", {
-                    times: 5
-                }, 3500);
-            });
-        </script>
-
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-
-                //the min chars for username
-                var min_chars = 3;
-
-                //result texts
-                var characters_error = 'Minimum amount of chars is 3';
-                var checking_html = 'Checking...';
-
-                //when button is clicked
-                $('#check_username_availability').click(function () {
-                    //run the character number check
-                    if ($('#txt_emp_no').val().length < min_chars) {
-                        //if it's bellow the minimum show characters_error text '
-                        $('#username_availability_result').html(characters_error);
-                    } else {
-                        //else show the cheking_text and run the function to check
-                        $('#username_availability_result').html(checking_html);
-                        check_availability();
+                        //show that the username is NOT available
+                        $('#username_availability_result').html(username + ' is not Available');
                     }
                 });
 
-            });
+        }
+    </script>
 
-            //function to check username availability
-            function check_availability() {
-
-                //get the username
-                var username = $('#txt_emp_no').val();
-
-                //use ajax to run the check
-                $.post(baseurl + "Employee_Management/ADD_Employees/check_emp", {
-                    EmpNo: username
-                },
-                    function (result) {
-                        //if the result is 1
-                        if (result == 1) {
-                            //show that the username is available
-                            $('#username_availability_result').html(username + ' is Available');
-                        } else {
-                            //show that the username is NOT available
-                            $('#username_availability_result').html(username + ' is not Available');
-                        }
-                    });
-
-            }
-        </script>
-
-        <!-- <script>
+    <!-- <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const form = document.getElementById('employeeForm');
                 const submitBtn = document.getElementById('submitEmployeeForm');
@@ -1583,9 +1633,9 @@
             });
         </script> -->
 
-       
 
-        <!-- <script>
+
+    <!-- <script>
             let selectedQualifications = [];
 
             // Qualification labels mapping
@@ -1760,7 +1810,7 @@
             });
         </script> -->
 
-        <!-- <script>
+    <!-- <script>
             let selectedQualifications = [];
 
             // Qualification labels mapping
@@ -1923,144 +1973,144 @@
                 clearFormFields();
             }
         </script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <script>
-            let selectedQualifications = [];
+    <script>
+        let selectedQualifications = [];
 
-            const qualificationLabels = {
-                'O/L': 'O/L (Ordinary Level)',
-                'A/L': 'A/L (Advanced Level)',
-                'Diploma': 'Diploma',
-                'HND': 'Higher National Diploma (HND)',
-                'Degree': 'Degree',
-                'Master': 'Master',
-                'MPhil': 'Master of Philosophy (MPhil)',
-                'PhD    ': 'Doctor of Philosophy (PhD)'
-            };
+        const qualificationLabels = {
+            'O/L': 'O/L (Ordinary Level)',
+            'A/L': 'A/L (Advanced Level)',
+            'Diploma': 'Diploma',
+            'HND': 'Higher National Diploma (HND)',
+            'Degree': 'Degree',
+            'Master': 'Master',
+            'MPhil': 'Master of Philosophy (MPhil)',
+            'PhD    ': 'Doctor of Philosophy (PhD)'
+        };
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const form = document.getElementById('employeeForm');
-                const submitBtn = document.getElementById('submitEmployeeForm');
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('employeeForm');
+            const submitBtn = document.getElementById('submitEmployeeForm');
 
-                // ✅ Automatically insert error messages for all required fields
-                const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
-                requiredFields.forEach(field => {
-                    const errorP = document.createElement('p');
-                    errorP.className = 'text-danger error-message';
-                    errorP.textContent = 'This field is required!';
-                    errorP.style.display = 'none';
+            // ✅ Automatically insert error messages for all required fields
+            const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+            requiredFields.forEach(field => {
+                const errorP = document.createElement('p');
+                errorP.className = 'text-danger error-message';
+                errorP.textContent = 'This field is required!';
+                errorP.style.display = 'none';
 
-                    if (field.id) {
-                        errorP.id = 'error_' + field.id;
-                    }
+                if (field.id) {
+                    errorP.id = 'error_' + field.id;
+                }
 
-                    field.insertAdjacentElement('afterend', errorP);
-                });
-
-                // Qualification Add Handler
-                document.getElementById('addQualification').addEventListener('click', function () {
-                    const selectElement = document.getElementById('qualificationSelect');
-                    const selectedValue = selectElement.value;
-                    const selectedText = selectElement.options[selectElement.selectedIndex].text;
-                    const notes = document.getElementById('notesInput').value.trim();
-
-                    if (!selectedValue) return;
-
-                    if (selectedQualifications.some(q => q.qualification === selectedValue)) return;
-
-                    const qualificationData = {
-                        qualification: selectedValue,
-                        qualificationText: selectedText,
-                        notes: notes
-                    };
-
-                    selectedQualifications.push(qualificationData);
-                    addToTable(qualificationData);
-                    clearFormFields();
-                    document.getElementById('emptyRow').style.display = 'none';
-
-                    // Hide qualification error if previously shown
-                    const qualError = document.getElementById('qualification_error');
-                    if (qualError) qualError.style.display = 'none';
-                });
-
-                // ✅ Submit Handler
-                submitBtn.addEventListener('click', function () {
-                    const formData = new FormData(form);
-                    let isValid = true;
-
-                    // Validate required fields
-                    requiredFields.forEach(field => {
-                        const value = (field.type === 'file') ? field.files.length : field.value.trim();
-                        const errorElement = document.getElementById(`error_${field.id}`);
-
-                        if (!value) {
-                            isValid = false;
-                            if (errorElement) errorElement.style.display = 'block';
-                        } else {
-                            if (errorElement) errorElement.style.display = 'none';
-                        }
-                    });
-
-                    // Validate qualifications
-                    const qualError = document.getElementById('qualification_error');
-                    if (selectedQualifications.length === 0) {
-                        isValid = false;
-                        if (qualError) qualError.style.display = 'block';
-                    } else {
-                        if (qualError) qualError.style.display = 'none';
-                    }
-
-                    if (!isValid) return;
-
-                    // Append image
-                    const imageInput = document.getElementById('img_employee');
-                    formData.append('img_employee', imageInput.files[0]);
-
-                    // Append qualifications
-                    selectedQualifications.forEach((data, index) => {
-                        formData.append(`qualifications[${index}][qualification]`, data.qualification);
-                        formData.append(`qualifications[${index}][notes]`, data.notes || '');
-                    });
-
-                    // Submit via fetch
-                    fetch('<?php echo base_url(); ?>Employee_Management/ADD_Employees_Outside/Outside_insert_Data', {
-                        method: 'POST',
-                        body: formData
-                    })
-                        .then(response => response.text())
-                        .then(result => {
-                            console.log('Server Response:', result);
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: 'Form submitted successfully!',
-                                confirmButtonColor: '#3085d6',
-                                confirmButtonText: 'OK'
-                            });
-
-                            window.location.href = '<?php echo base_url(); ?>Employee_Management/ADD_Employees_Outside'; // Redirect to the same page or another page
-                            // alert('Form submitted successfully!');
-                            // form.reset(); // Optional
-                        })
-                        .catch(error => {
-                            console.error('Form submission error:', error);
-                            alert('An error occurred while submitting the form.');
-                        });
-                });
+                field.insertAdjacentElement('afterend', errorP);
             });
 
-            // Reusable functions
-            function addToTable(data) {
-                const tableBody = document.getElementById('qualificationTableBody');
-                const row = document.createElement('tr');
-                const index = selectedQualifications.length - 1;
-                row.id = 'row_' + index;
+            // Qualification Add Handler
+            document.getElementById('addQualification').addEventListener('click', function () {
+                const selectElement = document.getElementById('qualificationSelect');
+                const selectedValue = selectElement.value;
+                const selectedText = selectElement.options[selectElement.selectedIndex].text;
+                const notes = document.getElementById('notesInput').value.trim();
 
-                row.innerHTML = `
+                if (!selectedValue) return;
+
+                if (selectedQualifications.some(q => q.qualification === selectedValue)) return;
+
+                const qualificationData = {
+                    qualification: selectedValue,
+                    qualificationText: selectedText,
+                    notes: notes
+                };
+
+                selectedQualifications.push(qualificationData);
+                addToTable(qualificationData);
+                clearFormFields();
+                document.getElementById('emptyRow').style.display = 'none';
+
+                // Hide qualification error if previously shown
+                const qualError = document.getElementById('qualification_error');
+                if (qualError) qualError.style.display = 'none';
+            });
+
+            // ✅ Submit Handler
+            submitBtn.addEventListener('click', function () {
+                const formData = new FormData(form);
+                let isValid = true;
+
+                // Validate required fields
+                requiredFields.forEach(field => {
+                    const value = (field.type === 'file') ? field.files.length : field.value.trim();
+                    const errorElement = document.getElementById(`error_${field.id}`);
+
+                    if (!value) {
+                        isValid = false;
+                        if (errorElement) errorElement.style.display = 'block';
+                    } else {
+                        if (errorElement) errorElement.style.display = 'none';
+                    }
+                });
+
+                // Validate qualifications
+                const qualError = document.getElementById('qualification_error');
+                if (selectedQualifications.length === 0) {
+                    isValid = false;
+                    if (qualError) qualError.style.display = 'block';
+                } else {
+                    if (qualError) qualError.style.display = 'none';
+                }
+
+                if (!isValid) return;
+
+                // Append image
+                const imageInput = document.getElementById('img_employee');
+                formData.append('img_employee', imageInput.files[0]);
+
+                // Append qualifications
+                selectedQualifications.forEach((data, index) => {
+                    formData.append(`qualifications[${index}][qualification]`, data.qualification);
+                    formData.append(`qualifications[${index}][notes]`, data.notes || '');
+                });
+
+                // Submit via fetch
+                fetch('<?php echo base_url(); ?>Employee_Management/ADD_Employees_Outside/Outside_insert_Data', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log('Server Response:', result);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Form submitted successfully!',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+
+                        window.location.href = '<?php echo base_url(); ?>Employee_Management/ADD_Employees_Outside'; // Redirect to the same page or another page
+                        // alert('Form submitted successfully!');
+                        // form.reset(); // Optional
+                    })
+                    .catch(error => {
+                        console.error('Form submission error:', error);
+                        alert('An error occurred while submitting the form.');
+                    });
+            });
+        });
+
+        // Reusable functions
+        function addToTable(data) {
+            const tableBody = document.getElementById('qualificationTableBody');
+            const row = document.createElement('tr');
+            const index = selectedQualifications.length - 1;
+            row.id = 'row_' + index;
+
+            row.innerHTML = `
         <td>${data.qualificationText}</td>
         <td>${data.notes || '-'}</td>
         <td>
@@ -2070,30 +2120,30 @@
         </td>
     `;
 
-                tableBody.appendChild(row);
-            }
+            tableBody.appendChild(row);
+        }
 
-            function removeQualification(index) {
-                selectedQualifications.splice(index, 1);
-                rebuildTable();
-                if (selectedQualifications.length === 0) {
-                    document.getElementById('emptyRow').style.display = 'table-row';
-                }
+        function removeQualification(index) {
+            selectedQualifications.splice(index, 1);
+            rebuildTable();
+            if (selectedQualifications.length === 0) {
+                document.getElementById('emptyRow').style.display = 'table-row';
             }
+        }
 
-            function rebuildTable() {
-                const tableBody = document.getElementById('qualificationTableBody');
-                tableBody.innerHTML = `
+        function rebuildTable() {
+            const tableBody = document.getElementById('qualificationTableBody');
+            tableBody.innerHTML = `
         <tr id="emptyRow" style="display: ${selectedQualifications.length === 0 ? 'table-row' : 'none'}">
             <td colspan="3" class="text-center text-muted">No qualifications added</td>
         </tr>
     `;
 
-                selectedQualifications.forEach((data, index) => {
-                    const row = document.createElement('tr');
-                    row.id = 'row_' + index;
+            selectedQualifications.forEach((data, index) => {
+                const row = document.createElement('tr');
+                row.id = 'row_' + index;
 
-                    row.innerHTML = `
+                row.innerHTML = `
             <td>${data.qualificationText}</td>
             <td>${data.notes || '-'}</td>
             <td>
@@ -2103,84 +2153,84 @@
             </td>
         `;
 
-                    tableBody.appendChild(row);
-                });
-            }
-
-            function clearFormFields() {
-                document.getElementById('qualificationSelect').value = '';
-                document.getElementById('notesInput').value = '';
-            }
-
-        </script>
-
-        <script>
-            // JavaScript to handle the display of the department div when "Common" is selected
-            document.getElementById("cmb_percentage").addEventListener("change", function () {
-                var departmentDiv = document.getElementById("departmentDiv");
-
-                // Check if "Common" is selected
-                if (this.value === "Common") {
-                    departmentDiv.style.display = "block";  // Show the department div
-                } else {
-                    departmentDiv.style.display = "none";  // Hide the department div
-                }
+                tableBody.appendChild(row);
             });
+        }
 
-            document.getElementById("cmb_percentage").addEventListener("change", function () {
-                var departmentDiv1 = document.getElementById("departmentDiv1");
+        function clearFormFields() {
+            document.getElementById('qualificationSelect').value = '';
+            document.getElementById('notesInput').value = '';
+        }
 
-                // Check if "Common" is selected
-                if (this.value === "Common") {
-                    departmentDiv1.style.display = "block";  // Show the department div
-                } else {
-                    departmentDiv1.style.display = "none";  // Hide the department div
-                }
-            });
+    </script>
 
-            // JavaScript to handle adding the department and percentage to the table
-            document.getElementById("btn_add_department").addEventListener("click", function () {
-                var departmentSelect = document.getElementById("cmb_dep1"); // Ensure this ID matches your department select input
-                var percentageSelect = document.getElementById("cmb_percentage");
+    <script>
+        // JavaScript to handle the display of the department div when "Common" is selected
+        // document.getElementById("cmb_percentage").addEventListener("change", function () {
+        //     var departmentDiv = document.getElementById("departmentDiv");
 
-                var departmentId = departmentSelect.value;
-                var departmentName = departmentSelect.options[departmentSelect.selectedIndex].text;
-                var percentage = percentageSelect.value;
+        //     // Check if "Common" is selected
+        //     if (this.value === "Common") {
+        //         departmentDiv.style.display = "block";  // Show the department div
+        //     } else {
+        //         departmentDiv.style.display = "none";  // Hide the department div
+        //     }
+        // });
 
-                // Check if both department and percentage are selected
-                if (departmentId !== "") {
-                    var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
+        // document.getElementById("cmb_percentage").addEventListener("change", function () {
+        //     var departmentDiv1 = document.getElementById("departmentDiv1");
 
-                    // Create a new row and populate it with the department name and percentage
-                    var newRow = table.insertRow();
-                    var cell1 = newRow.insertCell(0);
-                    var cell2 = newRow.insertCell(1);
-                    var cell3 = newRow.insertCell(2);
+        //     // Check if "Common" is selected
+        //     if (this.value === "Common") {
+        //         departmentDiv1.style.display = "block";  // Show the department div
+        //     } else {
+        //         departmentDiv1.style.display = "none";  // Hide the department div
+        //     }
+        // });
 
-                    // Add department name to the first column
-                    cell1.innerHTML = departmentName;
+        // JavaScript to handle adding the department and percentage to the table
+        // document.getElementById("btn_add_department").addEventListener("click", function () {
+        //     var departmentSelect = document.getElementById("cmb_dep1"); // Ensure this ID matches your department select input
+        //     var percentageSelect = document.getElementById("cmb_percentage");
 
-                    // Add an input field to the second column for percentage, pre-filled with the selected percentage
-                    cell2.innerHTML = `<input type="text" class="form-control" value="" />`;
+        //     var departmentId = departmentSelect.value;
+        //     var departmentName = departmentSelect.options[departmentSelect.selectedIndex].text;
+        //     var percentage = percentageSelect.value;
 
-                    // Add an action button to the third column (remove button)
-                    cell3.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+        //     // Check if both department and percentage are selected
+        //     if (departmentId !== "") {
+        //         var table = document.getElementById("departmentTable").getElementsByTagName('tbody')[0];
 
-                    // Clear the selection after adding to the table
-                    departmentSelect.value = "";
-                    percentageSelect.value = "";
-                } else {
-                    alert("Please select both department and percentage!");
-                }
-            });
+        //         // Create a new row and populate it with the department name and percentage
+        //         var newRow = table.insertRow();
+        //         var cell1 = newRow.insertCell(0);
+        //         var cell2 = newRow.insertCell(1);
+        //         var cell3 = newRow.insertCell(2);
 
-            // Function to remove a row from the table
-            function removeRow(button) {
-                var row = button.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-            }
+        //         // Add department name to the first column
+        //         cell1.innerHTML = departmentName;
 
-        </script>
+        //         // Add an input field to the second column for percentage, pre-filled with the selected percentage
+        //         cell2.innerHTML = `<input type="text" class="form-control" value="" />`;
+
+        //         // Add an action button to the third column (remove button)
+        //         cell3.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+
+        //         // Clear the selection after adding to the table
+        //         departmentSelect.value = "";
+        //         percentageSelect.value = "";
+        //     } else {
+        //         alert("Please select both department and percentage!");
+        //     }
+        // });
+
+        // // Function to remove a row from the table
+        // function removeRow(button) {
+        //     var row = button.parentNode.parentNode;
+        //     row.parentNode.removeChild(row);
+        // }
+
+    </script>
 
 </body>
 

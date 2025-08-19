@@ -544,7 +544,7 @@
                                                                                 <?php foreach ($data_grp as $t_data) { ?>
                                                                                     <option
                                                                                         value="<?php echo $t_data->Grp_ID; ?>">
-                                                                                        <?php echo $t_data->EmpGroupName; ?>
+                                                                                        <?php echo $t_data->Sub_Dep_Name; ?>
                                                                                     </option>
 
                                                                                 <?php }

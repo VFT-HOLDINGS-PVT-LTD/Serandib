@@ -25,7 +25,8 @@ class ADD_Employees extends CI_Controller
         $data['title'] = "ADD Employees | HRM SYSTEM";
         $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
         $data['data_desig'] = $this->Db_model->getData('Des_ID,Desig_Name', 'tbl_designations');
-        $data['data_grp'] = $this->Db_model->getData('Grp_ID,EmpGroupName', 'tbl_emp_group');
+        // $data['data_grp'] = $this->Db_model->getData('Grp_ID,EmpGroupName', 'tbl_emp_group');
+        $data['data_grp'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_emp_group INNER JOIN tbl_sub_departments ON tbl_emp_group.EmpGroupName = tbl_sub_departments.Sub_Dep_ID");
         $data['data_u_lvl'] = $this->Db_model->getData('user_level_id,user_level_name', 'tbl_user_level_master');
         $data['data_Rstr'] = $this->Db_model->getData('RosterCode,RosterName', 'tbl_rosterpatternweeklyhd');
         $data['data_ot'] = $this->Db_model->getData('OTCode,OTName', 'tbl_ot_pattern_hd');

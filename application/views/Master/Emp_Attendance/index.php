@@ -381,8 +381,10 @@
 
             <div class="page-tabs new-page-tabs">
               <ul class="nav nav-tabs new-nav-tabs">
-                <li class="active new-tab-item"><a data-toggle="tab" href="#tab1" class="new-tab-link">APPROVE TYPE</a></li>
-                <li class="new-tab-item"><a data-toggle="tab" href="#tab2" class="new-tab-link">EDIT APPROVE TYPE</a></li>
+                <li class="active new-tab-item"><a data-toggle="tab" href="#tab1" class="new-tab-link">APPROVE TYPE</a>
+                </li>
+                <li class="new-tab-item"><a data-toggle="tab" href="#tab2" class="new-tab-link">EDIT APPROVE TYPE</a>
+                </li>
               </ul>
             </div>
 
@@ -638,7 +640,8 @@
                               <div class="form-group new-form-group">
                                 <div class="row new-duplicate-row">
                                   <div class="col-sm-8 new-select-col">
-                                    <label for="select_existing_group" class="new-input-label">Select Existing Approve Type</label>
+                                    <label for="select_existing_group" class="new-input-label">Select Existing Approve
+                                      Type</label>
                                     <select class="form-control new-select-control" id="select_existing_group">
                                       <option value="">-- Select Group --</option>
                                       <?php foreach ($data_grp as $group) { ?>
@@ -836,7 +839,7 @@
                                 <th>DEPARTMENT</th>
                                 <th>SUB DEPARTMENT</th>
                                 <th>EDIT</th>
-                                <th>DELETE</th>
+                                <!-- <th>DELETE</th> -->
                               </tr>
                             </thead>
                             <tbody class="new-grid-body">
@@ -856,13 +859,13 @@
                                       <i class="fa fa-edit new-edit-icon"></i>
                                     </a> -->
                                   </td>
-                                  <td>
+                                  <!-- <td>
                                     <button class="btn btn-danger new-delete-button" data-toggle="modal"
                                       href="javascript:void()" title="DELETE"
                                       onclick="delete_id(<?php echo $data->Grp_ID ?>)">
                                       <i class="fa fa-times-circle new-delete-icon"></i>
                                     </button>
-                                  </td>
+                                  </td> -->
                                 </tr>
                               <?php } ?>
                             </tbody>
@@ -945,43 +948,38 @@
     });
 
     function delete_id(id) {
-      swal({ title: "Are you sure?", text: "You will not be able to recover this data!", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, Delete This!", cancelButtonText: "No, Cancel This!", closeOnConfirm: false, closeOnCancel: false },
-        function (isConfirm) {
-          if (isConfirm) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You will not be able to recover this data!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Delete This!",
+        cancelButtonText: "No, Cancel This!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: baseurl + "index.php/Master/Emp_Attendance/ajax_delete/" + id,
+            type: "POST",
+            dataType: "JSON",
+            success: function (data) {
+              // console.log(data); // check response
+              $('#modal_form').modal('hide');
+              reload_table();
 
-            $.ajax({
-              url: baseurl + "index.php/Master/Employee_Groups/ajax_delete/" + id,
-              type: "POST",
-              dataType: "JSON",
-              success: function (data) {
+              Swal.fire("Deleted!", "Selected data has been deleted.", "success");
 
-                //if success reload ajax table
-                $('#modal_form').modal('hide');
-                reload_table();
-              }
-
-            });
-
-
-            swal("Deleted!", "Selected data has been deleted.", "success");
-
-
-            $(document).ready(function () {
               setTimeout(function () {
                 window.location.replace(baseurl + "Master/Employee_Groups/");
               }, 1000);
-            });
-
-
-          } else {
-            swal("Cancelled", "Selected data Cancelled", "error");
-
-          }
-
-        });
-
-
+            }
+          });
+        } else {
+          Swal.fire("Cancelled", "Selected data Cancelled", "error");
+        }
+      });
     }
+
   </script>
   <script>
     // Autocomplete
@@ -1348,14 +1346,14 @@
 
                 console.log("Success:", response);
                 if (response.success) {
-                    Swal.fire("Success", "Group and departments submitted successfully!", "success")
+                  Swal.fire("Success", "Group and departments submitted successfully!", "success")
                     .then(() => {
                       window.location.reload(); // Reload the page to see changes
                     });
                 } else {
                   Swal.fire("Info", "Sub-department data already exists for this department", "info");
                 }
-               
+
               },
               error: function (xhr, status, error) {
                 $("#uploadBar").css("width", "100%").css("background-color", "red").text("Failed");

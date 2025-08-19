@@ -24,6 +24,7 @@ class Sub_Department extends CI_Controller {
         $data['title'] = "Departmrnt | HRM System";
         $data['main_data_set'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
         $data['data_set'] = $this->Db_model->getData('Sub_Dep_ID,Sub_Dep_Name,Main_Dep_ID', 'tbl_sub_departments');
+        $data['data_full_dep'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_sub_departments INNER JOIN tbl_departments ON tbl_sub_departments.Main_Dep_ID = tbl_departments.Dep_ID");
         $this->load->view('Master/Sub_Department/index', $data);
     }
 
@@ -52,15 +53,14 @@ class Sub_Department extends CI_Controller {
      */
 
     public function get_details() {
-        $id = $this->input->post('id');
-        $whereArray = array('Sub_Dep_ID' => $id);
-
-        $this->Db_model->setWhere($whereArray);
-        $dataObject = $this->Db_model->getData('Sub_Dep_ID,Sub_Dep_Name', 'tbl_sub_departments');
-
-        $array = (array) $dataObject;
-        echo json_encode($array);
-    }
+    $id = $this->input->post('id');
+    $data['data'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_sub_departments 
+        INNER JOIN tbl_departments 
+        ON tbl_sub_departments.Main_Dep_ID = tbl_departments.Dep_ID  
+        WHERE tbl_sub_departments.Sub_Dep_ID = '".$id."' "); 
+    $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
+    echo json_encode($data);
+}
 
     /*
      * Edit Data
@@ -69,9 +69,13 @@ class Sub_Department extends CI_Controller {
     public function edit() {
         $ID = $this->input->post("id", TRUE);
         $D_Name = $this->input->post("Sub_Dep_Name", TRUE);
+        $Dep_Name = $this->input->post("department_select", TRUE);
 
+        // echo json_encode(array("Sub_Dep_ID" => $ID, "Sub_Dep_Name" => $D_Name));
 
-        $data = array("Sub_Dep_Name" => $D_Name);
+        $data = array("Sub_Dep_Name" => $D_Name,
+            "Main_Dep_ID" => $Dep_Name
+        );
         $whereArr = array("Sub_Dep_ID" => $ID);
         $result = $this->Db_model->updateData("tbl_sub_departments", $data, $whereArr);
         redirect(base_url() . "Master/Sub_Department");
@@ -82,10 +86,28 @@ class Sub_Department extends CI_Controller {
      */
 
     public function ajax_delete($id) {
-        $table = "tbl_sub_departments";
-        $where = 'Sub_Dep_ID';
-        $this->Db_model->delete_by_id($id, $where, $table);
-        echo json_encode(array("status" => TRUE));
+        // echo $id;
+
+        $tblAct = $this->Db_model->getfilteredData("SELECT * FROM tbl_sub_departments WHERE Sub_Dep_ID = '".$id."'");
+        $DepID = $tblAct[0]->Main_Dep_ID;
+        $Sub_Dep_Name = $tblAct[0]->Sub_Dep_ID;
+
+        // echo $DepID;
+        // echo $Sub_Dep_Name;
+
+        $tblGrp = $this->Db_model->getfilteredData("SELECT * FROM tbl_emp_group WHERE Sup_ID = '".$DepID."' AND EmpGroupName = '".$Sub_Dep_Name."'");
+
+        if (!empty($tblGrp)) {
+            echo json_encode(array("status" => FALSE, "message" => "This Sub Department is used in Approve Type. You cannot delete it."));
+            return;
+            // echo '1';
+        }else{
+            $table = "tbl_sub_departments";
+            $where = 'Sub_Dep_ID';
+            $this->Db_model->delete_by_id($id, $where, $table);
+            echo json_encode(array("status" => TRUE));
+        }
+
     }
 
 }

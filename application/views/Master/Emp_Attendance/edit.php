@@ -354,6 +354,40 @@
     tbody tr {
       cursor: move;
     }
+
+    .upload-progress {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 320px;
+      z-index: 9999;
+      background: rgba(0, 0, 0, .75);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial;
+    }
+
+    .uploading-text {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+    }
+
+    .progress-outer {
+      background: rgba(255, 255, 255, .2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-inner {
+      height: 12px;
+      line-height: 12px;
+      font-size: 11px;
+      text-align: center;
+      background: #4caf50;
+      transition: width .15s linear;
+    }
   </style>
 </head>
 
@@ -376,13 +410,14 @@
           <div class="page-content new-page-content">
             <ol class="breadcrumb new-breadcrumb">
               <li><a href="index.html">HOME</a></li>
-              <li class="active"><a href="index.html">APPROVE TYPE</a></li>
+              <li class="active"><a href="index.html">EDIT APPROVE TYPE</a></li>
             </ol>
 
             <div class="page-tabs new-page-tabs">
               <ul class="nav nav-tabs new-nav-tabs">
-                <li class="active new-tab-item"><a data-toggle="tab" href="#tab1" class="new-tab-link">APPROVE TYPE</a></li>
-                <li class="new-tab-item"><a data-toggle="tab" href="#tab2" class="new-tab-link">EDIT APPROVE TYPE</a></li>
+                <li class="active new-tab-item"><a data-toggle="tab" href="#tab1" class="new-tab-link">EDIT APPROVE TYPE</a></li>
+                <!-- <li class="new-tab-item"><a data-toggle="tab" href="#tab2" class="new-tab-link">EDIT SUB
+                    DEPARTMENT</a></li> -->
               </ul>
             </div>
 
@@ -392,18 +427,21 @@
                   <div class="row new-main-row">
                     <div class="col-xs-12 new-col-full">
                       <!-- Progress Bar -->
-                      <div id="uploadProgressBar" class="new-progress-container" style="display:none;">
-                        <div class="new-progress-track">
-                          <div id="uploadBar" class="new-progress-bar">0%</div>
+                      <!-- Upload Progress (fixed, bottom-right) -->
+                      <div id="uploadProgressBar" class="upload-progress" style="display:none">
+                        <p id="uploadingText" class="uploading-text"></p>
+                        <div class="progress-outer">
+                          <div id="uploadBar" class="progress-inner" style="width:0%">0%</div>
                         </div>
                       </div>
+
 
                       <div class="row new-content-row">
                         <!-- Left Panel - Add Sub Department -->
                         <div class="col-md-4 new-col-left">
                           <div class="panel panel-info new-panel">
                             <div class="panel-heading new-panel-heading">
-                              <h2 class="new-panel-title">ADD APPROVE TYPE DATA</h2>
+                              <h2 class="new-panel-title">EDIT APPROVE TYPE DATA </h2>
                             </div>
                             <div class="panel-body new-panel-body">
                               <!-- Success Message -->
@@ -422,37 +460,32 @@
                                 </div>
                               <?php } ?>
 
-                              <!-- <div class="form-row mb-5 new-form-row">
-                                <div class="form-group col-md-3 new-icon-container">
-                                  <img class="new-icon-image"
-                                    src="<?php echo base_url(); ?>assets/images/employee_group.png" alt="Group Icon">
-                                </div>
-                              </div> -->
-
                               <div class="form-group new-form-group">
                                 <label for="department_select" class="new-input-label">Department</label>
-                                <select class="form-control new-select-control" id="department_select"
-                                  name="department_select">
+                                <select class="form-control new-select-control" id="department_select" name="department_select">
                                   <option value="">-- Select --</option>
-                                  <?php foreach ($data_dep as $t_data) { ?>
+                                  <?php foreach ($grp_data_set as $t_data) {?>
+                                    <option value="<?php echo $t_data->Dep_ID; ?>"<?php echo($t_data->Dep_ID == $grp_data_set[0]->Dep_ID) ? 'selected' : ''; ?>>
+                                      <?php echo $t_data->Dep_Name; ?>
+                                    </option>
+                                  <?php }?>
+                                  <!--<?php foreach ($data_dep as $t_data) {?>
                                     <option value="<?php echo $t_data->Dep_ID; ?>"><?php echo $t_data->Dep_Name; ?>
                                     </option>
-                                  <?php } ?>
+                                  <?php }?> -->
                                 </select>
                               </div>
 
                               <div class="form-group new-form-group">
                                 <label for="txt_group_name" class="new-input-label">Sub Department Name</label>
-                                <!-- <input type="text" class="form-control new-input-control" id="txt_group_name"
-                                  name="txt_group_name" placeholder="Ex: Office"> -->
-                                <select class="form-control new-select-control" id="txt_group_name"
-                                  name="txt_group_name">
+                               <select class="form-control new-select-control" id="txt_group_name" name="txt_group_name">
                                   <option value="">-- Select --</option>
-                                  <?php foreach ($data_sub_dep as $t_data) { ?>
-                                    <option value="<?php echo $t_data->Sub_Dep_ID; ?>">
+                                  <?php foreach ($grp_data_set as $t_data) {?>
+                                    <option value="<?php echo $t_data->Sub_Dep_ID; ?>"
+                                      <?php echo($t_data->Sub_Dep_ID == $grp_data_set[0]->Sub_Dep_ID) ? 'selected' : ''; ?>>
                                       <?php echo $t_data->Sub_Dep_Name; ?>
                                     </option>
-                                  <?php } ?>
+                                  <?php }?>
                                 </select>
                               </div>
 
@@ -464,19 +497,19 @@
                                 <div class="col-md-6 new-checkbox-col">
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="ot_m"
-                                      id="chk_1st_morning">
+                                      id="chk_1st_morning" <?php echo ($grp_data_set[0]->Ot_m == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_1st_morning">OT
                                       Morning</label>
                                   </div>
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="late"
-                                      id="chk_late">
+                                      id="chk_late" <?php echo ($grp_data_set[0]->Late == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_late">Late
                                       Deduction</label>
                                   </div>
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="late_ot"
-                                      id="chk_late_ot">
+                                      id="chk_late_ot" <?php echo ($grp_data_set[0]->Ot_d_Late == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_late_ot">Late Deduct
                                       from OT</label>
                                   </div>
@@ -484,21 +517,21 @@
                                 <div class="col-md-6 new-checkbox-col">
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="ot_e"
-                                      id="chk_1st_evening">
+                                      id="chk_1st_evening" <?php echo ($grp_data_set[0]->Ot_e == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_1st_evening">OT
                                       Evening</label>
                                   </div>
                                   <div class="form-check new-form-check">
-                                    <input class="form-check-input new-checkbox" type="checkbox" name="ed" id="chk_ed">
+                                    <input class="form-check-input new-checkbox" type="checkbox" name="ed" id="chk_ed"
+                                      <?php echo ($grp_data_set[0]->Ed == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_ed">Early Departure
                                       Deduction</label>
                                   </div>
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="sh_lv"
-                                      id="chk_sh_lv">
+                                      id="chk_sh_lv" <?php echo ($grp_data_set[0]->Hd_d_from == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_sh_lv">Late Deduct for
-                                      Half
-                                      Day</label>
+                                      Half Day</label>
                                   </div>
                                 </div>
                               </div>
@@ -507,7 +540,7 @@
                                 <div class="col-md-6 new-checkbox-col">
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="dot_holyday"
-                                      id="chk_dot_holiday">
+                                      id="chk_dot_holiday" <?php echo ($grp_data_set[0]->Dot_f_holyday == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_dot_holiday">Double OT
                                       for Holiday Day</label>
                                   </div>
@@ -515,7 +548,7 @@
                                 <div class="col-md-6 new-checkbox-col">
                                   <div class="form-check new-form-check">
                                     <input class="form-check-input new-checkbox" type="checkbox" name="dot_offday"
-                                      id="chk_dot_offday">
+                                      id="chk_dot_offday" <?php echo ($grp_data_set[0]->Dot_f_offday == 1) ? 'checked' : ''; ?>>
                                     <label class="form-check-label new-checkbox-label" for="chk_dot_offday">Double OT
                                       for OFF Day</label>
                                   </div>
@@ -525,26 +558,29 @@
                               <div class="form-group new-form-group">
                                 <label for="min_t_ot" class="new-input-label">Min Time to Morning OT</label>
                                 <input type="number" class="form-control new-input-control" id="min_t_ot"
-                                  name="min_t_ot" placeholder="Ex: 120">
+                                  name="min_t_ot" value="<?php echo $grp_data_set[0]->Min_time_t_ot_m; ?>"
+                                  placeholder="Ex: 120">
                               </div>
 
                               <div class="form-group new-form-group">
                                 <label for="min_t_e_ot" class="new-input-label">Min Time to Evening OT</label>
                                 <input type="number" class="form-control new-input-control" id="min_t_e_ot"
-                                  name="min_t_e_ot" placeholder="Ex: 120">
+                                  name="min_t_e_ot" value="<?php echo $grp_data_set[0]->Min_time_t_ot_e; ?>"
+                                  placeholder="Ex: 120">
                               </div>
 
                               <div class="form-group new-form-group">
                                 <label for="round" class="new-input-label">Round Up</label>
                                 <input type="number" class="form-control new-input-control" id="round" name="round"
-                                  placeholder="Ex: 120">
+                                  value="<?php echo $grp_data_set[0]->Round; ?>" placeholder="Ex: 120">
                               </div>
 
                               <div class="form-group new-form-group">
                                 <label for="late_gp" class="new-input-label">Late Grace Period</label>
                                 <input type="number" class="form-control new-input-control" id="late_gp" name="late_gp"
-                                  placeholder="Ex: 120">
+                                  value="<?php echo $grp_data_set[0]->late_Grs_prd; ?>" placeholder="Ex: 120">
                               </div>
+
 
                               <div id="divmessage" class="new-message-container">
                                 <div id="spnmessage" class="new-message-text"></div>
@@ -557,7 +593,7 @@
                         <div class="col-md-8 new-col-right">
                           <div class="panel panel-info new-panel">
                             <div class="panel-heading new-panel-heading">
-                              <h2 class="new-panel-title">SET APPROVE TYPE AUTHORITY</h2>
+                              <h2 class="new-panel-title">EDIT APPROVE TYPE AUTHORITY</h2>
                             </div>
                             <div class="panel-body new-panel-body">
                               <!-- Success Message -->
@@ -635,14 +671,15 @@
 
                               <div class="new-divider"></div>
 
-                              <div class="form-group new-form-group">
+                              <!-- <div class="form-group new-form-group">
                                 <div class="row new-duplicate-row">
                                   <div class="col-sm-8 new-select-col">
-                                    <label for="select_existing_group" class="new-input-label">Select Existing Approve Type</label>
+                                    <label for="select_existing_group" class="new-input-label">Select Existing
+                                      Group</label>
                                     <select class="form-control new-select-control" id="select_existing_group">
                                       <option value="">-- Select Group --</option>
                                       <?php foreach ($data_grp as $group) { ?>
-                                        <option value="<?= $group->Grp_ID ?>"><?= $group->Sub_Dep_Name ?></option>
+                                        <option value="<?php echo $group->Grp_ID ?>"><?php echo $group->EmpGroupName ?></option>
                                       <?php } ?>
                                     </select>
                                   </div>
@@ -654,11 +691,11 @@
                                         <path fill-rule="evenodd"
                                           d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
                                       </svg>
-                                      Duplicate Approve Type
+                                      Duplicate Group
                                     </button>
                                   </div>
                                 </div>
-                              </div>
+                              </div> -->
 
 
                               <div id="divmessage" class="new-message-container">
@@ -669,7 +706,7 @@
                               <div class="new-authority-tables">
                                 <!-- Table 1 - Attendance -->
                                 <div class="col-md-12 new-table-container" id="departmentDiv1" style="display: none;">
-                                  <h5 class="new-section-title">Authority Tables</h5>
+                                  <h5 class="new-section-title">Edit Authority Tables</h5>
                                   <div class="panel panel-info new-table-panel">
                                     <div class="panel-body panel-no-padding new-table-body">
                                       <span class="new-table-title">Attendance</span>
@@ -825,7 +862,7 @@
                     <div class="col-md-12 new-grid-col">
                       <div class="panel panel-primary new-grid-panel">
                         <div class="panel-heading new-grid-heading">
-                          <h2 class="new-grid-title">APPROVE TYPE DETAILS</h2>
+                          <h2 class="new-grid-title">USER LEVEL DETAILS</h2>
                         </div>
                         <div class="panel-body panel-no-padding new-grid-body">
                           <table id="example" class="table table-striped table-bordered new-grid-table" cellspacing="0"
@@ -851,7 +888,7 @@
                                       href='<?php echo base_url(); ?>Master/Emp_Attendance/mainEdit/<?php echo $data->Grp_ID ?>'>
                                       <i class='fa fa-edit'></i> </a>
 
-                                    <!-- <?php $url = base_url() . "Master/Employee_Groups/updateAttView?id=$data->Grp_ID"; ?>
+                                    <!--                                         <?php $url = base_url() . "Master/Employee_Groups/updateAttView?id=$data->Grp_ID"; ?>
                                     <a class="btn btn-green new-edit-button" href="<?php echo $url; ?>" title="EDIT">
                                       <i class="fa fa-edit new-edit-icon"></i>
                                     </a> -->
@@ -1128,6 +1165,8 @@
     //   // Collect top-level input values
     //   var groupName = document.getElementById("txt_group_name").value.trim();
     //   var departmentSelect = document.getElementById("department_select").value;
+    //   var groupId = "<?php echo $data_id; ?>";
+
 
     //   if (!groupName || departmentSelect === "") {
     //     alert("Please enter Group Name and select a Department.");
@@ -1183,6 +1222,7 @@
     //   }
 
     //   const payload = {
+    //     groupId: groupId,
     //     group_name: groupName,
     //     department_id: departmentSelect,
     //     settings: settings,
@@ -1207,7 +1247,7 @@
     //       setTimeout(() => {
     //         // AJAX submission
     //         $.ajax({
-    //           url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
+    //           url: "<?php echo base_url(); ?>Master/Emp_Attendance/update_data_all",
     //           type: "POST",
     //           contentType: "application/json",
     //           data: JSON.stringify(payload),
@@ -1224,7 +1264,7 @@
 
     //             console.log("Success:", response);
     //             alert("Group and departments submitted successfully!");
-    //             window.location.reload(); // Reload the page to see changes
+    //             // window.location.reload(); // Reload the page to see changes
     //           },
     //           error: function (xhr, status, error) {
     //             $("#uploadBar").css("width", "100%").css("background-color", "red").text("Failed");
@@ -1246,19 +1286,42 @@
     //   }, 1.5); // 100 * 100 = 10,000 ms = 10 seconds
     // });
 
+    function showUploadProgress(startAt = 0, label = "Uploading") {
+      $("#uploadingText").text(label + "…");
+      $("#uploadBar").css("width", startAt + "%").text(startAt + "%");
+      $("#uploadProgressBar").stop(true, true).fadeIn(150);
+    }
+
+    function setUploadProgress(pct) {
+      const safe = Math.max(0, Math.min(100, Math.round(pct)));
+      $("#uploadBar").css("width", safe + "%").text(safe + "%");
+    }
+
+    function hideUploadProgress(afterMs = 1000, cb) {
+      // snap to 100% first
+      setUploadProgress(100);
+      setTimeout(function () {
+        $("#uploadProgressBar").fadeOut(200, function () {
+          // reset for next time
+          $("#uploadBar").css("width", "0%").text("0%");
+          $("#uploadingText").text("");
+          if (typeof cb === "function") cb();
+        });
+      }, afterMs);
+    }
+
     document.getElementById("submit_departments").addEventListener("click", function (e) {
       e.preventDefault();
 
-      // Collect top-level input values
       var groupName = document.getElementById("txt_group_name").value.trim();
       var departmentSelect = document.getElementById("department_select").value;
+      var groupId = "<?php echo $data_id; ?>";
 
       if (!groupName || departmentSelect === "") {
-        Swal.fire("Missing Input", "Please enter Group Name and select a Department.", "warning");
+        Swal.fire({ title: "⚠️ Missing Data", text: "Please enter Group Name and select a Department.", icon: "warning" });
         return;
       }
 
-      // Collect settings (checkboxes)
       var settings = {
         ot_morning: document.getElementById("chk_1st_morning").checked,
         ot_evening: document.getElementById("chk_1st_evening").checked,
@@ -1274,117 +1337,329 @@
         min_t_e_ot: document.getElementById("min_t_e_ot").value,
       };
 
-      // Collect departments from all 6 tables
       var departments = [];
-
       for (let i = 1; i <= 6; i++) {
-        var tableLabel = $("#departmentDiv" + i + " span").text().trim(); // Move this line here
-
+        var tableLabel = $("#departmentDiv" + i + " span").text().trim();
+        var breakAll = false;
         $("#sortableRows" + i + " tr").each(function () {
           var departmentId = $(this).find("td:nth-child(1)").text().trim();
           var departmentName = $(this).find("td:nth-child(2)").text().trim();
           var selectedValue = $(this).find("td:nth-child(3) select").val();
           var AuthorityValue = $(this).find("td:nth-child(4) select").val();
-
           if (!departmentId || !departmentName) {
-            Swal.fire("Incomplete Table", "Please fill all fields in table " + i + " before submitting.", "error");
-            return false; // break from .each
+            Swal.fire({ title: "⚠️ Incomplete Data", text: "Please fill all fields in table " + i + ".", icon: "warning" });
+            breakAll = true;
+            return false;
           }
-
           departments.push({
             id: departmentId,
             name: departmentName,
             selected: selectedValue,
             Authority: AuthorityValue,
-            button_name: tableLabel // ← Add the button label to the payload
+            button_name: tableLabel
           });
         });
+        if (breakAll) return;
       }
 
       if (departments.length === 0) {
-        Swal.fire("No Data", "No departments to submit.", "info");
+        Swal.fire({ title: "⚠️ No Departments", text: "No departments to submit.", icon: "warning" });
         return;
       }
 
       const payload = {
+        groupId: groupId, // <-- included
         group_name: groupName,
         department_id: departmentSelect,
         settings: settings,
         departments: departments
       };
 
-      console.log("Submitting payload:", payload); // For debugging
-
-      // Show and animate progress bar with "Uploading" text
-      $("#uploadProgressBar").show();
-      $("#uploadProgressBar").prepend("<p id='uploadingText'>Uploading</p>");
-
-      let progress = 0;
-      let interval = setInterval(() => {
-        if (progress < 100) {
-          progress += 1;
-          $("#uploadBar").css("width", progress + "%").text(progress + "%");
-        } else {
-          clearInterval(interval);
-
-          // Wait 3 seconds after reaching 100%
-          setTimeout(() => {
-            // AJAX submission
-            $.ajax({
-              url: "<?php echo base_url(); ?>Master/Emp_Attendance/insert_data",
-              type: "POST",
-              contentType: "application/json",
-              data: JSON.stringify(payload),
-              dataType: "json",
-              success: function (response) {
-                $("#uploadBar").css("width", "100%").text("100%");
-
-                setTimeout(() => {
-                  $("#uploadProgressBar").fadeOut(() => {
-                    $("#uploadBar").css("width", "0%").text("0%");
-                    $("#uploadingText").remove(); // remove "Uploading" text
-                  });
-                }, 1000);
-
-                console.log("Success:", response);
-                if (response.success) {
-                    Swal.fire("Success", "Group and departments submitted successfully!", "success")
-                    .then(() => {
-                      window.location.reload(); // Reload the page to see changes
-                    });
-                } else {
-                  Swal.fire("Info", "Sub-department data already exists for this department", "info");
-                }
-               
-              },
-              error: function (xhr, status, error) {
-                $("#uploadBar").css("width", "100%").css("background-color", "red").text("Failed");
-
-                setTimeout(() => {
-                  $("#uploadProgressBar").fadeOut(() => {
-                    $("#uploadBar").css("width", "0%").css("background-color", "#4caf50").text("0%");
-                    $("#uploadingText").remove(); // remove "Uploading" text
-                  });
-                }, 1500);
-
-                console.error("Error:", error);
-                console.error("Response:", xhr.responseText);
-                Swal.fire("Error", "An error occurred while submitting.", "error");
-              }
-            });
-          }, 1000); // ⏳ Delay of 1 seconds after reaching 100%
+      // Show progress (and fake it forward to 95% while waiting server)
+      showUploadProgress(0, "Uploading");
+      let pct = 0;
+      const tick = setInterval(function () {
+        if (pct < 95) {
+          pct += 1; setUploadProgress(pct);
         }
-      }, 1.5); // 100 * 100 = 10,000 ms = 10 seconds
+      }, 30);
+
+      $.ajax({
+        url: "<?php echo base_url(); ?>Master/Emp_Attendance/update_data_all", // or insert_data2
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        dataType: "json",
+        success: function (response) {
+          clearInterval(tick);
+          // finish and hide, then alert
+          hideUploadProgress(800, function () {
+            if (response && response.success) {
+              Swal.fire({ title: "✅ Success!", text: response.message || "Data updated successfully.", icon: "success" })
+                .then(() => location.reload());
+            } else {
+              Swal.fire({ title: "⚠️ Warning", text: (response && response.error) || "Something went wrong.", icon: "warning" });
+            }
+          });
+        },
+        error: function () {
+          clearInterval(tick);
+          hideUploadProgress(800, function () {
+            Swal.fire({ title: "❌ Error!", text: "Failed to process your request. Please try again.", icon: "error" });
+          });
+        }
+      });
     });
 
+    // Submit departments
+    // document.getElementById("submit_departments").addEventListener("click", function (e) {
+    //   e.preventDefault();
+
+    //   // Collect top-level input values
+    //   var groupName = document.getElementById("txt_group_name").value.trim();
+    //   var departmentSelect = document.getElementById("department_select").value;
+    //   var groupId = "<?php echo $data_id; ?>"; // <-- ✅ Include groupId
+
+    //   if (!groupName || departmentSelect === "") {
+    //     Swal.fire({
+    //       title: "⚠️ Missing Data",
+    //       text: "Please enter Group Name and select a Department.",
+    //       icon: "warning",
+    //       confirmButtonText: "OK"
+    //     });
+    //     return;
+    //   }
+
+    //   // Collect settings (checkboxes)
+    //   var settings = {
+    //     ot_morning: document.getElementById("chk_1st_morning").checked,
+    //     ot_evening: document.getElementById("chk_1st_evening").checked,
+    //     late_deduction: document.getElementById("chk_late").checked,
+    //     early_departure: document.getElementById("chk_ed").checked,
+    //     late_deduct_ot: document.getElementById("chk_late_ot").checked,
+    //     dot_holiday: document.getElementById("chk_dot_holiday").checked,
+    //     dot_offday: document.getElementById("chk_dot_offday").checked,
+    //     sh_leave: document.getElementById("chk_sh_lv").checked,
+    //     round: document.getElementById("round").value,
+    //     late_gp: document.getElementById("late_gp").value,
+    //     min_t_ot: document.getElementById("min_t_ot").value,
+    //     min_t_e_ot: document.getElementById("min_t_e_ot").value,
+    //   };
+
+    //   // Collect departments from all 6 tables
+    //   var departments = [];
+
+    //   for (let i = 1; i <= 6; i++) {
+    //     var tableLabel = $("#departmentDiv" + i + " span").text().trim();
+
+    //     $("#sortableRows" + i + " tr").each(function () {
+    //       var departmentId = $(this).find("td:nth-child(1)").text().trim();
+    //       var departmentName = $(this).find("td:nth-child(2)").text().trim();
+    //       var selectedValue = $(this).find("td:nth-child(3) select").val();
+    //       var AuthorityValue = $(this).find("td:nth-child(4) select").val();
+
+    //       if (!departmentId || !departmentName) {
+    //         Swal.fire({
+    //           title: "⚠️ Incomplete Data",
+    //           text: "Please fill all fields in table " + i + " before submitting.",
+    //           icon: "warning",
+    //           confirmButtonText: "OK"
+    //         });
+    //         return false; // break from .each
+    //       }
+
+    //       departments.push({
+    //         id: departmentId,
+    //         name: departmentName,
+    //         selected: selectedValue,
+    //         Authority: AuthorityValue,
+    //         button_name: tableLabel
+    //       });
+    //     });
+    //   }
+
+    //   if (departments.length === 0) {
+    //     Swal.fire({
+    //       title: "⚠️ No Departments",
+    //       text: "No departments to submit.",
+    //       icon: "warning",
+    //       confirmButtonText: "OK"
+    //     });
+    //     return;
+    //   }
+
+    //   // ✅ Final payload (with groupId included)
+    //   const payload = {
+    //     groupId: groupId,
+    //     group_name: groupName,
+    //     department_id: departmentSelect,
+    //     settings: settings,
+    //     departments: departments
+    //   };
+
+    //   console.log("Submitting payload:", payload);
+
+    //   // Show progress bar
+    //   $("#uploadProgressBar").show().html('<div id="uploadingText">Uploading...</div>');
+    //   $("#uploadBar").css("width", "0%").text("0%");
+
+    //   // Animate to 100%
+    //   $("#uploadBar").animate({ width: "100%" }, {
+    //     duration: 800,
+    //     step: function (now) {
+    //       $(this).text(Math.round(now) + "%");
+    //     },
+    //     complete: function () {
+    //       $("#uploadBar").text("100%");
+    //     }
+    //   });
+
+    //   // Send AJAX request
+    //   $.ajax({
+    //     url: "<?php echo base_url(); ?>Master/Emp_Attendance/update_data_all",
+    //     type: "POST",
+    //     contentType: "application/json",
+    //     data: JSON.stringify(payload),
+    //     dataType: "json",
+    //     success: function (response) {
+    //       setTimeout(() => {
+    //         $("#uploadProgressBar").fadeOut(() => {
+    //           $("#uploadBar").css("width", "0%").text("0%");
+    //           $("#uploadingText").remove();
+
+    //           if (response.success) {
+    //             Swal.fire({
+    //               title: "✅ Success!",
+    //               text: response.message,
+    //               icon: "success",
+    //               confirmButtonText: "OK"
+    //             }).then(() => location.reload());
+    //           } else {
+    //             Swal.fire({
+    //               title: "⚠️ Warning",
+    //               text: response.error || "Something went wrong!",
+    //               icon: "warning",
+    //               confirmButtonText: "OK"
+    //             });
+    //           }
+    //         });
+    //       }, 1000);
+    //     },
+    //     error: function () {
+    //       setTimeout(() => {
+    //         $("#uploadProgressBar").fadeOut(() => {
+    //           $("#uploadBar").css("width", "0%").text("0%");
+    //           $("#uploadingText").remove();
+
+    //           Swal.fire({
+    //             title: "❌ Error!",
+    //             text: "Failed to process your request. Please try again.",
+    //             icon: "error",
+    //             confirmButtonText: "OK"
+    //           });
+    //         });
+    //       }, 1000);
+    //     }
+    //   });
+    // });
+
     // dublicate row function
-    document.getElementById("btn_duplicate_group").addEventListener("click", function () {
-      var groupId = document.getElementById("select_existing_group").value;
+    // document.getElementById("btn_duplicate_group").addEventListener("click", function () {
+    //   // var groupId = document.getElementById("select_existing_group").value;
+
+    //   if (!groupId) {
+    //     alert("Please select a group to duplicate.");
+    //     return;
+    //   }
+
+    //   $.ajax({
+    //     url: "<?php echo base_url(); ?>Master/Emp_Attendance/get_group_data",
+    //     type: "POST",
+    //     data: { group_id: groupId },
+    //     dataType: "json",
+    //     success: function (response) {
+    //       if (response.success) {
+    //         const tables = response.tables;
+
+    //         for (let i = 1; i <= 6; i++) {
+    //           let tbody = $("#sortableRows" + i);
+    //           tbody.empty();
+
+    //           if (tables[i]) {
+    //             tables[i].forEach((row, index) => {
+    //               let html = `
+    //                             <tr data-id="${row.id}">
+    //                                 <td>${index + 1}</td>
+    //                                 <td>${row.emp_no}</td>
+    //                                 <td>
+    //                                     <div style="position: relative; width: 180px;">
+    //                                         <select class="modern-select" required="required"
+    //                                             style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
+    //                                                 background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
+    //                                                 border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
+    //                                             <option value="0">Choose option</option>
+    //                                                   <?php foreach ($data_level as $data_level1) { ?>
+    //                                                 <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
+    //                                                   <?php } ?>
+    //                                         </select>
+    //                                         <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
+    //                                                     pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    //                                             <polyline points="6,9 12,15 18,9"></polyline>
+    //                                         </svg>
+    //                                     </div>
+    //                                 </td>
+    //                                 <td>
+    //                                     <div style="position: relative; width: 180px;">
+    //                                         <select class="modern-select" required="required"
+    //                                             style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
+    //                                                 background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
+    //                                                 border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
+    //                                             <option value="0">Choose option</option>
+    //                                             <option value="1">Approve Type</option>
+    //                                             <option value="2">View Only Type</option>
+    //                                         </select>
+    //                                         <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
+    //                                                     pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    //                                             <polyline points="6,9 12,15 18,9"></polyline>
+    //                                         </svg>
+    //                                     </div>
+    //                                 </td>
+    //                                 <td>
+    //                                     <button class="btn btn-danger" onclick="removeRow(this)" style="width: 100%; border-radius: 10px; height:40px; margin-top:4px">Remove</button>
+    //                                 </td>
+    //                             </tr>
+    //                         `;
+    //               tbody.append(html);
+    //             });
+
+    //             $("#departmentDiv" + i).show();
+    //           } else {
+    //             $("#departmentDiv" + i).hide();
+    //           }
+    //         }
+    //       } else {
+    //         alert("No data found for this group.");
+    //       }
+    //     },
+    //     error: function (xhr, status, error) {
+    //       console.error("AJAX Error:", error);
+    //       alert("An error occurred while loading the group.");
+    //     }
+    //   });
+    // });
+
+  </script>
+  <script>
+    $(document).ready(function () {
+      // PHP variable injected into JS
+      var groupId = "<?php echo $data_id; ?>";
 
       if (!groupId) {
-        alert("Please select a group to duplicate.");
+        alert("No group ID provided.");
         return;
       }
+
+      // console.log("Tables data:", groupId); // For debugging
 
       $.ajax({
         url: "<?php echo base_url(); ?>Master/Emp_Attendance/get_group_data",
@@ -1394,7 +1669,6 @@
         success: function (response) {
           if (response.success) {
             const tables = response.tables;
-
             for (let i = 1; i <= 6; i++) {
               let tbody = $("#sortableRows" + i);
               tbody.empty();
@@ -1402,47 +1676,51 @@
               if (tables[i]) {
                 tables[i].forEach((row, index) => {
                   let html = `
-                                <tr data-id="${row.id}">
-                                    <td>${index + 1}</td>
-                                    <td>${row.emp_no}</td>
-                                    <td>
-                                        <div style="position: relative; width: 180px;">
-                                            <select class="modern-select" required="required"
-                                                style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
-                                                    background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
-                                                    border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
-                                                <option value="0">Choose option</option>
-                                                <?php foreach ($data_level as $data_level1) { ?>
-                                                    <option value="<?php echo $data_level1->user_level_id; ?>"><?php echo $data_level1->user_level_name; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
-                                                        pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <polyline points="6,9 12,15 18,9"></polyline>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div style="position: relative; width: 180px;">
-                                            <select class="modern-select" required="required"
-                                                style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
-                                                    background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
-                                                    border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
-                                                <option value="0">Choose option</option>
-                                                <option value="1">Approve Type</option>
-                                                <option value="2">View Only Type</option>
-                                            </select>
-                                            <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
-                                                        pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <polyline points="6,9 12,15 18,9"></polyline>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger" onclick="removeRow(this)" style="width: 100%; border-radius: 10px; height:40px; margin-top:4px">Remove</button>
-                                    </td>
-                                </tr>
-                            `;
+                  <tr data-id="${row.id}">
+                    <td>${index + 1}</td>
+                    <td>${row.emp_no}</td>
+                    <td>
+                      <div style="position: relative; width: 180px;">
+                        <select class="modern-select" required="required"
+                          style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
+                            background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
+                            border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
+                          <option value="0">Choose option</option>
+                          <?php foreach ($data_level as $data_level1) { ?>
+                            <option value="<?php echo $data_level1->user_level_id; ?>"
+                              ${row.level == <?php echo $data_level1->user_level_id; ?> ? "selected" : ""}>
+                              <?php echo $data_level1->user_level_name; ?>
+                            </option>
+                          <?php } ?>
+                        </select>
+                        <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
+                          pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="position: relative; width: 180px;">
+                        <select class="modern-select" required="required"
+                          style="appearance: none; width: 95%; padding: 10px 50px 16px 20px; font-size: 14px; color: #2d3748;
+                            background: rgba(255, 255, 255, 0.95); border: 2px solid rgb(143 142 142 / 29%);
+                            border-radius: 16px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); outline: none;">
+                          <option value="0">Choose option</option>
+                          <option value="1" ${row.authority == 1 ? "selected" : ""}>Approve Type</option>
+                          <option value="2" ${row.authority == 2 ? "selected" : ""}>View Only Type</option>
+                        </select>
+                        <svg style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;
+                          pointer-events: none; color: #667eea;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                      </div>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger" onclick="removeRow(this)"
+                        style="width: 100%; border-radius: 10px; height:40px; margin-top:4px">Remove</button>
+                    </td>
+                  </tr>
+                `;
                   tbody.append(html);
                 });
 
@@ -1461,8 +1739,6 @@
         }
       });
     });
-
-
   </script>
 
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>

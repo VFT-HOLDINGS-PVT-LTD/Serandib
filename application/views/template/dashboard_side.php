@@ -52,6 +52,10 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                     <li><a href="<?php echo base_url(); ?>Master/Sub_Department/">SUB DEPARTMENT</a></li>
                                 <?php endif; ?>
 
+                                <?php if ($currentUser[0]->user_level == 1): ?>
+                                    <li><a href="<?php echo base_url(); ?>Master/User_Levels/">USER LEVELS</a></li>
+                                <?php endif; ?>
+
                                 <?php if ($currentUser[0]->employee_groups == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Master/Emp_Attendance/">APPROVE TYPE</a></li>
                                 <?php endif; ?>
@@ -75,10 +79,7 @@ $User_Name = $currentUser[0]->Emp_Full_Name;
                                 <?php if ($currentUser[0]->weekly_roster == 1): ?>
                                     <li><a href="<?php echo base_url(); ?>Master/Weekly_Roster2/">WEEKLY ROSTER PATTERN</a></li>
                                 <?php endif; ?>
-
-                                <?php if ($currentUser[0]->user_level == 1): ?>
-                                    <li><a href="<?php echo base_url(); ?>Master/User_Levels/">USER LEVELS</a></li>
-                                <?php endif; ?>
+                                
 
                                 <?php if ($currentUser[0]->leave_types == 1): ?>
                                     <!--<li><a href="<?php echo base_url(); ?>Master/OT_Pattern/">OT PATTERN</a></li>-->

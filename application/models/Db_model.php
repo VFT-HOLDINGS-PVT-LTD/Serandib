@@ -146,6 +146,12 @@ class db_model extends CI_Model
         $this->db->delete($table);
     }
 
+    public function deleteData($table, $whereArr) {
+    $this->db->where($whereArr);
+    return $this->db->delete($table);
+}
+
+
     public function setWhere($whereArray)
     {
 

@@ -1,10 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Allowance_Types extends CI_Controller {
+class Allowance_Types extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         if (!($this->session->userdata('login_user'))) {
             redirect(base_url() . "");
@@ -18,32 +20,34 @@ class Allowance_Types extends CI_Controller {
     /*
      * Index page
      */
-    public function index() {
+    public function index()
+    {
 
         $this->load->helper('url');
         $data['title'] = "Allowance | HRM SYSTEM";
         $data['data_set'] = $this->Db_model->getData('Alw_ID,Allowance_name,IsActive,isFixed', 'tbl_allowance_type');
         $this->load->view('Master/Allowance_Types/index', $data);
     }
-    
+
     /*
      * Insert Data
      */
 
-    public function insert_data() {
-        
-        
-        $Fixed=$this->input->post('isFixed');
-        if($Fixed==null){
-            $Fixed=0;
-            
+    public function insert_data()
+    {
+
+
+        $Fixed = $this->input->post('isFixed');
+        if ($Fixed == null) {
+            $Fixed = 0;
+
         }
 
         $data = array(
             'Allowance_name' => $this->input->post('txt_allowance'),
             'IsActive' => 1,
             'isFixed' => $Fixed
-                
+
         );
 
         $result = $this->Db_model->insertData("tbl_allowance_type", $data);
@@ -60,49 +64,63 @@ class Allowance_Types extends CI_Controller {
         }
 
         redirect(base_url() . 'Master/Allowance_Types/'); //*********Redirect to designation form
-        
+
     }
-    
-       /*
+
+    /*
      * Get data
      */
 
-    public function get_details() {
+    //     public function get_details() {
+//         $id = $this->input->post('id');
+
+    // //                    echo "OkM " . $id;
+
+    //         $whereArray = array('Alw_ID' => $id);
+
+    //         $this->Db_model->setWhere($whereArray);
+//         $dataObject = $this->Db_model->getData('Alw_ID,Allowance_name,IsActive,isFixed', 'tbl_allowance_type');
+
+    //         $array = (array) $dataObject;
+//         echo json_encode($array);
+//     }
+
+    public function get_details()
+    {
         $id = $this->input->post('id');
-
-//                    echo "OkM " . $id;
-
         $whereArray = array('Alw_ID' => $id);
-
         $this->Db_model->setWhere($whereArray);
         $dataObject = $this->Db_model->getData('Alw_ID,Allowance_name,IsActive,isFixed', 'tbl_allowance_type');
-        
-       
 
-        $array = (array) $dataObject;
-        echo json_encode($array);
+        if ($dataObject) {
+            echo json_encode($dataObject[0]); // if it's array
+        } else {
+            echo json_encode([]);
+        }
     }
+
 
     /*
      * Edit Data
      */
 
-    public function edit() {
+    public function edit()
+    {
         $ID = $this->input->post("id");
         $Name = $this->input->post("Allowance_Name");
-       
-        
-        $BF=$this->input->post('is_Fixced');
+
+
+        $BF = $this->input->post('is_Fixced');
         if ($BF == null) {
             $BF = 0;
         } elseif ($BF == 'on') {
-            $BF=1;
+            $BF = 1;
         }
-        
-//        var_dump($Is_fxd.$Is_Act);die;
+
+        //        var_dump($Is_fxd.$Is_Act);die;
 
 
-        $data = array("Allowance_name" => $Name,"isFixed"=>$BF,"IsActive"=>1);
+        $data = array("Allowance_name" => $Name, "isFixed" => $BF, "IsActive" => 1);
         $whereArr = array("Alw_ID" => $ID);
         $result = $this->Db_model->updateData("tbl_allowance_type", $data, $whereArr);
         redirect(base_url() . "Master/Allowance_Types");
@@ -111,13 +129,18 @@ class Allowance_Types extends CI_Controller {
     /*
      * Delete Data
      */
-
-    public function ajax_delete($id) {
-        $table = "tbl_allowance_type";
-        $where = 'Alw_ID';
-        $this->Db_model->delete_by_id($id, $where, $table);
-        echo json_encode(array("status" => TRUE));
+    public function ajax_delete()
+    {
+        $id = $this->input->post('id');
+        if ($id) {
+            $whereArr = array("Alw_ID" => $id);
+            $this->Db_model->deleteData("tbl_allowance_type", $whereArr);
+            echo "success";
+        } else {
+            echo "error";
+        }
     }
+
 
 
 }

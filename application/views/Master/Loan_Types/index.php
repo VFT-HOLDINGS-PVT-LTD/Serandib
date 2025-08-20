@@ -244,7 +244,7 @@
             <!-- End loading page level scripts-->
 
             <!--Ajax-->
-            <script src="<?php echo base_url(); ?>system_js/Master/L_Types.js"></script>
+            <script src="<?php echo base_url(); ?>system_js/Master/Loan_types.js"></script>
             <script type="text/javascript">
             $(document).ready(function() {
                 $("#frm_loan_types").validate();

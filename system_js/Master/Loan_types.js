@@ -42,15 +42,15 @@ function delete_id(id)
                 if (isConfirm) {
 
                     $.ajax({
-                        url: baseurl + "index.php/Master/Department/ajax_delete/" + id,
+                        url: baseurl + "index.php/Master/Loan_Types/ajax_delete/" + id,
                         type: "POST",
                         dataType: "JSON",
                         success: function (data)
                         {
-
+// console.log(data);
                             //if success reload ajax table
-                            $('#modal_form').modal('hide');
-                            reload_table();
+                            // $('#modal_form').modal('hide');
+                            // reload_table();
                         }
 
                     });
@@ -61,7 +61,7 @@ function delete_id(id)
 
                     $(document).ready(function () {
                         setTimeout(function () {
-                            window.location.replace(baseurl + "Master/Department/");
+                            window.location.replace(baseurl + "Master/Loan_Types/");
                         }, 1000);
                     });
 

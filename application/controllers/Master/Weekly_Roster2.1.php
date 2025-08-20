@@ -25,11 +25,8 @@ class Weekly_Roster2 extends CI_Controller
     {
 
         $data['title'] = "Weekly Roster Pattern | HRM System";
-        // $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
-        $data['data_set_shift'] = $this->Db_model->getfilteredData("SELECT ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap FROM tbl_shifts ");
-        // $data['data_set'] = $this->Db_model->getData('RosterCode,RosterName', 'tbl_rosterpatternweeklyhd');
-        $data['data_set'] = $this->Db_model->getfilteredData("select RosterCode,RosterName from tbl_rosterpatternweeklyhd ");
-
+        $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
+        $data['data_set'] = $this->Db_model->getData('RosterCode,RosterName', 'tbl_rosterpatternweeklyhd');
 
 
         $serialdata = $this->Db_model->getData('serial', 'tbl_serials', array('code' => 'Roster'));
@@ -625,68 +622,6 @@ class Weekly_Roster2 extends CI_Controller
         $shfitData = $this->Db_model->getfilteredData($string);
 
         echo json_encode($shfitData);
-    }
-
-    /*
-    * Get data for update and view update page
-    */
-
-    public function get_weekly_roster_data($roaster_id){
-
-        $data['title'] = "Update Weekly Roster Pattern | HRM System";
-        $data['data_set_shift'] = $this->Db_model->getfilteredData("SELECT ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap FROM tbl_shifts WHERE ShiftCode > '165';");
-        $data['roaster_code'] = $roaster_id;
-        $result = $this->Db_model->getfilteredData("SELECT RosterName FROM tbl_rosterpatternweeklydtl WHERE RosterCode = '$roaster_id'");
-        $data['roster_name'] = (!empty($result) && isset($result[0]->RosterName)) ? $result[0]->RosterName : '';
-
-        $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
-                                                                ro.ID,
-                                                                sh.ShiftName as ShiftCodeName,
-                                                                ro.DayName,
-                                                                ro.ShiftCode,
-                                                                ro.ShiftType 
-                                                                FROM tbl_rosterpatternweeklydtl AS ro
-                                                                LEFT JOIN tbl_shifts as sh ON
-                                                                ro.ShiftCode =sh.ShiftCode
-                                                                WHERE RosterCode = '$roaster_id';");
-        //var_dump($data['data_set']);die;
-        $this->load->view('Master/Weekly_Roster2/update', $data);
-       
-    }
-
-    /*
-    * Update Weekly Roster Pattern
-    */
-    public function update_weekly_roster_pattern(){
-
-        $roaster_code = $this->input->post("txtRoster_Code");
-        $roaster_name = $this->input->post("txtRoster_Name");
-
-        $data_set = $this->Db_model->getfilteredData("SELECT ID FROM tbl_rosterpatternweeklydtl WHERE RosterCode = '$roaster_code'");
-        $index = 0;
-
-        foreach ($data_set as $row) {
-            $dayName = $this->input->post("DType{$index}");
-            $shiftCode = $this->input->post("SHType{$index}");
-            $shiftType = $this->input->post("txtSType{$index}");
-
-            $data_to_update = array(
-                'RosterCode' => $roaster_code,
-                'RosterName' => $roaster_name,
-                'ShiftCode' => $shiftCode,
-                'DayName' => $dayName,
-                'ShiftType' => $shiftType
-            );
-            // var_dump($data_to_update);die;
-            
-            $whereArr = array('ID' => $row->ID);
-            $result = $this->Db_model->updateData("tbl_rosterpatternweeklydtl", $data_to_update, $whereArr);
-
-            $index++;
-        }
-
-        $this->session->set_flashdata('success_message', 'Weekly Roster Pattern Updated Successfully');
-        redirect('Master/Weekly_Roster2/index');
     }
 
 }

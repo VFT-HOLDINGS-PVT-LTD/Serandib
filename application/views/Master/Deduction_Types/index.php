@@ -161,7 +161,7 @@
                                                                     <tr>
                                                                         <th>ID</th>
                                                                         <th>DEDUCTION NAME</th>
-                                                                        <th>IS FIXED</th>
+                                                                        <!-- <th>IS FIXED</th> -->
 
                                                                         <th>EDIT</th>
                                                                         <th>DELETE</th>
@@ -175,7 +175,7 @@
                                                                             </td>
                                                                             <td width="100">
                                                                                 <?php echo $data->Deduction_name; ?></td>
-                                                                            <td width="100"><?php echo $data->isFixed; ?>
+                                                                            <!-- <td width="100"><?php echo $data->isFixed; ?> -->
                                                                             </td>
 
 

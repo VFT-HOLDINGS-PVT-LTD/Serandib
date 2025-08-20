@@ -179,7 +179,7 @@
                                                                             class="col-sm-4 control-label">Appoint Date
                                                                             <span style="color: red;">*</span></label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
+                                                                            <input type="date" class="form-control"
                                                                                 id="txt_appoint_date"
                                                                                 name="txt_appoint_date" required=""
                                                                                 placeholder="Ex: Select Date">
@@ -774,7 +774,7 @@
                                                                                 Birth <span
                                                                                     style="color: red;">*</span></label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="date" class="form-control"
                                                                                     id="txt_dob"
                                                                                     placeholder="Select Date"
                                                                                     name="txt_dob" required="">
@@ -1076,7 +1076,7 @@
                                                                                 class="col-sm-4 control-label">Bond End
                                                                                 Date</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="date" class="form-control"
                                                                                     id="bond_end_date"
                                                                                     placeholder="Select Date"
                                                                                     name="bond_end_date">

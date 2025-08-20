@@ -25,12 +25,8 @@ class Weekly_Roster extends CI_Controller
     {
 
         $data['title'] = "Weekly Roster Pattern | HRM System";
-        // $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
-        $data['data_set_shift'] = $this->Db_model->getfilteredData("SELECT ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap FROM tbl_shifts;");
-
-        // $data['data_set'] = $this->Db_model->getData('RosterCode,RosterName,MonthType,CurrentYear,Data', 'tbl_rosterpatternweeklyhd');
-        $data['data_set'] = $this->Db_model->getfilteredData("select RosterCode,RosterName,MonthType,CurrentYear,Data from tbl_rosterpatternweeklyhd;");
-
+        $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
+        $data['data_set'] = $this->Db_model->getData('RosterCode,RosterName,MonthType,CurrentYear,Data', 'tbl_rosterpatternweeklyhd');
         // $data['data_set_emp'] = $this->Db_model->getData('EmpNo,Emp_Full_Name', 'tbl_empmaster');
 
         // $last_record = $this->Db_model->get_last_record('tbl_rosterpatternweeklyhd','RosterCode');
@@ -97,9 +93,7 @@ class Weekly_Roster extends CI_Controller
         $serial = "RS" . substr(("0000" . (int) $serialdata[0]->serial), strlen("0000" . $serialdata[0]->serial) - 4, 4);
         $data['serial'] = ++$serial;
         $data['title'] = "Monthly Roster Pattern | HRM System";
-        // $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
-        $data['data_set_shift'] = $this->Db_model->getfilteredData("SELECT ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap FROM tbl_shifts");
-
+        $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
 
 
         $RosterCode = $this->input->post('txtRoster_Code');
@@ -278,7 +272,7 @@ class Weekly_Roster extends CI_Controller
         $id = $this->input->get('id'); // Get the 'id' parameter from the request
 
         // Execute the SQL query to get all relevant data by joining the two tables
-        $data['emp_roster'] = $this->Db_model->getfilteredData("SELECT tbl_rosterpatternweeklydtl_monthly.ShiftCode,tbl_rosterpatternweeklydtl_monthly.Date,tbl_rosterpatternweeklydtl_monthly.DayName,tbl_shifts.FromTime,tbl_shifts.ToTime,tbl_rosterpatternweeklydtl_monthly.ShiftType,tbl_shifts.ShiftName FROM tbl_rosterpatternweeklydtl_monthly INNER JOIN tbl_shifts ON tbl_rosterpatternweeklydtl_monthly.ShiftCode = tbl_shifts.ShiftCode WHERE tbl_rosterpatternweeklydtl_monthly.RosterCode = '" . $id . "'");
+        $data['emp_roster'] = $this->Db_model->getfilteredData("SELECT tbl_rosterpatternweeklydtl.ShiftCode,tbl_rosterpatternweeklydtl.Date,tbl_rosterpatternweeklydtl.DayName,tbl_shifts.FromTime,tbl_shifts.ToTime,tbl_rosterpatternweeklydtl.ShiftType,tbl_shifts.ShiftName FROM tbl_rosterpatternweeklydtl INNER JOIN tbl_shifts ON tbl_rosterpatternweeklydtl.ShiftCode = tbl_shifts.ShiftCode WHERE tbl_rosterpatternweeklydtl.RosterCode = '" . $id . "'");
         $data['data_set_shift'] = $this->Db_model->getData('ShiftCode,ShiftName', 'tbl_shifts');
         $data['data_set'] = $this->Db_model->getData('RosterCode,RosterName', 'tbl_rosterpatternweeklyhd');
         $data['roster'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_rosterpatternweeklyhd WHERE RosterCode='" . $id . "'");
@@ -310,7 +304,7 @@ class Weekly_Roster extends CI_Controller
         $this->load->view('Master/Weekly_Roster/update', $data);
     }
 
-    public function update_data2()
+    public function update_data()
     {
         $data = json_decode(file_get_contents("php://input"), true);
 
@@ -379,84 +373,6 @@ class Weekly_Roster extends CI_Controller
         // }
 
     }
-    
-       public function update_data()
-        {
-            // Decode JSON input
-            $data = json_decode(file_get_contents("php://input"), true);
-            if (!$data) {
-                echo "Invalid input data";
-                return;
-            }
-        
-            // print_r($data);
-        
-            // die;
-        
-            // Extract and sanitize incoming data
-            $rosterCode  = trim($data['rosterCode'] ?? '');
-            $rosterName  = trim($data['rosterName'] ?? '');
-            $monthType   = trim($data['monthType'] ?? '');
-            $cat         = trim($data['rosterData'] ?? '');
-            $dates       = $data['dates'] ?? [];
-            $currentYear = date("Y");
-        
-            if (!$rosterCode || !$rosterName || !$monthType || empty($dates)) {
-                echo "Missing required fields";
-                return;
-            }
-        
-            // Prepare header data
-            $headerData = [
-                'RosterCode'   => $rosterCode,
-                'RosterName'   => $rosterName,
-                'MonthType'    => $monthType,
-                'CurrentYear'  => $currentYear,
-                'Data'         => $cat
-            ];
-        
-            // Begin database update
-            // Clear old header and detail records
-            $this->Db_model->getfilteredDelete("DELETE FROM tbl_rosterpatternweeklyhd WHERE RosterCode = '{$rosterCode}'");
-            $this->Db_model->getfilteredDelete("DELETE FROM tbl_rosterpatternweeklydtl_monthly WHERE RosterCode = '{$rosterCode}'");
-        
-            // Insert new header
-            $insertHeader = $this->Db_model->insertData('tbl_rosterpatternweeklyhd', $headerData);
-            if (!$insertHeader) {
-                echo "Error inserting header information";
-                return;
-            }
-        
-            // Insert detail rows
-            foreach ($dates as $date) {
-                $shiftCode  = $date['shType']    ?? '';
-                $dayName    = $date['dType']     ?? '';
-                $dateValue  = $date['todayType'] ?? '';
-                $shiftType  = $date['SType']     ?? '';
-        
-                if (!$shiftCode || !$dayName || !$dateValue || !$shiftType) {
-                    continue; // Skip incomplete records
-                }
-        
-                $detailData = [
-                    'RosterCode' => $rosterCode,
-                    'RosterName' => $rosterName,
-                    'ShiftCode'  => $shiftCode,
-                    'DayName'    => $dayName,
-                    'Date'       => $dateValue,
-                    'ShiftType'  => $shiftType
-                ];
-        
-                $insertDetail = $this->Db_model->insertData('tbl_rosterpatternweeklydtl_monthly', $detailData);
-                if (!$insertDetail) {
-                    echo "Error inserting detail record for date: {$dateValue}";
-                    return;
-                }
-            }
-        
-            echo "Success";
-        }
-
 
     // public function insert_data()
     // {

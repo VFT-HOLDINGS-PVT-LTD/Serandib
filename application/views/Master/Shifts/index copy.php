@@ -167,20 +167,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group col-md-12">
-
-                                                                    <div class="form-group col-sm-6">
-                                                                        <label for="focusedinput"
-                                                                            class="col-sm-4 control-label">Shift Gap</label>
-                                                                        <div class="col-sm-8">
-                                                                            <input type="text" class="form-control"
-                                                                                required="required" id="shift_Gap"
-                                                                                name="shift_Gap"
-                                                                                placeholder="Ex: 5">
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
 
 
                                                                 <!--submit button-->
@@ -236,7 +222,6 @@
                                                                         <th>NAME</th>
                                                                         <th>FROM TIME</th>
                                                                         <th>TO TIME</th>
-                                                                        <th>CUT-OFF TIME</th>
                                                                         <th>DAY TYPE</th>
                                                                         <th>NEXT DAY</th>
                                                                         <th>SHIFT GAP</th>
@@ -270,14 +255,13 @@
                                                                         echo "<td width='100'>" . $data->ShiftName . "</td>";
                                                                         echo "<td width='100'>" . $data->FromTime . "</td>";
                                                                         echo "<td width='100'>" . $data->ToTime . "</td>";
-                                                                         echo "<td width='100'>" . $data->FHDSessionEndTime . "</td>";
                                                                         echo "<td width='100'>" . $day . "</td>";
                                                                         echo "<td width='100'>" . $daytype . "</td>";
                                                                         echo "<td width='100'>" . $data->ShiftGap . "</td>";
-
-
                                                                         echo "<td width='15'>";
-                                                                        echo "<button class='get_data btn btn-green'  data-toggle='modal' data-target='#myModal' title='EDIT' data-id='$data->ShiftCode' href='" . base_url() . "index.php/Master/Department/get_details" . $data->ShiftCode . "'><i class='fa fa-edit'></i></button>";
+                                                                        echo "<button class='get_data btn btn-green' data-toggle='modal' data-target='#myModal' title='EDIT' data-id='$data->ShiftCode'>
+                                                                                <i class='fa fa-edit'></i>
+                                                                            </button>";
                                                                         echo "</td>";
 
                                                                         echo "<td width='15'>";
@@ -314,94 +298,95 @@
                                 aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
+
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-hidden="true">&times;</button>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                &times;
+                                            </button>
                                             <h2 class="modal-title">SHIFTS</h2>
                                         </div>
+
                                         <div class="modal-body">
                                             <form class="form-horizontal"
                                                 action="<?php echo base_url(); ?>Master/Shifts/edit" method="post">
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput" class="col-sm-4 control-label">SHIFT
-                                                        CODE</label>
+
+                                                <!-- SHIFT CODE -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">SHIFT CODE</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" readonly="readonly"
-                                                            name="ShiftCode" id="ShiftCode" class="m-wrap span3">
+                                                        <input type="text" class="form-control" readonly
+                                                            name="ShiftCode" id="ShiftCode">
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput"
-                                                        class="col-sm-4 control-label">NAME</label>
+                                                <!-- NAME -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">NAME</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" name="ShiftName" id="ShiftName"
-                                                            class="form-control m-wrap span6"><br>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput" class="col-sm-4 control-label">FROM
-                                                        TIME</label>
+                                                <!-- FROM TIME -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">FROM TIME</label>
                                                     <div class="col-sm-8">
                                                         <input type="time" name="FromTime" id="FromTime"
-                                                            class="form-control m-wrap span6"><br>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput" class="col-sm-4 control-label">TO
-                                                        TIME</label>
+
+                                                <!-- TO TIME -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">TO TIME</label>
                                                     <div class="col-sm-8">
                                                         <input type="time" name="ToTime" id="ToTime"
-                                                            class="form-control m-wrap span6"><br>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput" class="col-sm-4 control-label">CUT-OFF TIME</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="time" name="CutOffTime" id="CutOffTime"
-                                                            class="form-control m-wrap span6"><br>
+                                                <!-- CUTOFF TIME & NEXT DAY -->
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6">
+                                                        <label class="control-label">Cutoff Time</label>
+                                                        <input type="time" class="form-control" id="txt_cutoff"
+                                                            name="txt_cutoff">
+                                                    </div>
+                                                    <div class="col-sm-6 d-flex align-items-center">
+                                                        <input type="checkbox" id="vehicle1" name="day" value="1"
+                                                            class="mr-2">
+                                                        <label for="vehicle1">Next Day</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput" class="col-sm-4 control-label">Next
-                                                        Day</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="checkbox" id="nextDay" name="nextDay" value="1"
-                                                            class="mt-2">
+                                                <!-- DAY TYPE -->
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6">
+                                                        <label class="control-label">Day Type</label>
+                                                        <div>
+                                                            <label class="radio-inline icheck mr-3">
+                                                                <input type="radio" name="day_type" value="1"> Full Day
+                                                            </label>
+                                                            <label class="radio-inline icheck">
+                                                                <input type="radio" name="day_type" value="0.5"> Half
+                                                                Day
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group col-md-12">
-                                                    <label class="col-sm-4 control-label">Day
-                                                        Type</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="radio" id="dayType" value="1" name="dayType"
-                                                            required="required"> Full day
-
-                                                        <input type="radio" id="dayType" value="0.5" name="dayType">
-                                                        Half
-                                                        Day
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="form-group col-sm-12">
-                                                    <label for="focusedinput" class="col-sm-4 control-label">SHIFT
-                                                        GAP</label>
+                                                <!-- SHIFT GAP -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 control-label">SHIFT GAP</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" name="ShiftGap" id="ShiftGap"
-                                                            class="form-control m-wrap span6"><br>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
+                                        </div> <!-- modal-body -->
 
-                                        </div>
-
-                                        <br>
-                                        <!--<input class="btn green" type="submit" value="submit" id="submit">-->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default"
                                                 data-dismiss="modal">Close</button>
@@ -409,10 +394,12 @@
                                                 changes</button>
                                         </div>
                                         </form>
-                                    </div>
 
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
+                            </div>
+
+
 
 
 
@@ -426,6 +413,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
@@ -437,15 +425,58 @@
     <!-- End loading page level scripts-->
 
     <!--Ajax-->
-    <script src="<?php echo base_url(); ?>system_js/Master/Shifts.js"></script>
 
     <!--JQuary Validation-->
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#frm_shifts").validate();
-            $("#spnmessage").hide("shake", { times: 4 }, 1500);
+        // $(document).ready(function () {
+        //     $("#frm_shifts").validate();
+        //     $("#spnmessage").hide("shake", { times: 4 }, 1500);
+        // });
+        $(document).on("click", ".get_data", function () {
+            var shiftCode = $(this).data("id");
+
+            $.ajax({
+                url: "<?php echo base_url('Master/Shifts/get_details'); ?>",
+                type: "POST",
+                data: { ShiftCode: shiftCode },
+                dataType: "json",
+                success: function (res) {
+                    console.log("AJAX Response:", res); // 🔎 check in console
+                    console.log("ShiftCode:", res.NextDay); // 🔎 check ShiftCode
+                    // Populate the modal fields with the response data
+                    if (res) {
+                        $("#ShiftCode").val(res.ShiftCode);
+                        $("#ShiftName").val(res.ShiftName);
+                        $("#FromTime").val(res.FromTime);
+                        $("#ToTime").val(res.ToTime);
+                        $("#ShiftGap").val(res.ShiftGap);
+
+                        // Cutoff Time
+                        if (res.FHDSessionEndTime) {
+                            $("#txt_cutoff").val(res.FHDSessionEndTime);
+                        }
+
+                        // Next Day checkbox
+                        $("#vehicle1").prop("checked", res.NextDay == "1");
+
+                        // Day Type radio
+                        if (res.DayType) {
+                            $("input[name='day_type'][value='" + res.DayType + "']").prop("checked", true);
+                        }
+
+                        $("#myModal").modal("show");
+                    }
+                }
+        error: function (xhr, status, error) {
+                    console.error("AJAX Error: " + error);
+                    console.log(xhr.responseText);
+                }
+            });
         });
+
+
     </script>
+
 
 </body>
 

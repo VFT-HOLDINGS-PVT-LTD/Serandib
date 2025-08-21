@@ -1,6 +1,6 @@
 <!--Add Employee
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -185,7 +185,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput" class="col-sm-4 control-label">Full Name</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control" value="<?php echo $data_set[0]->Emp_Full_Name ?>" id="txt_emp_name" name="txt_emp_name" required="" placeholder="Ex: Ashan Rathsara">
+                                                                                <input type="text" class="form-control" value="<?php echo $data_set[0]->Emp_Full_Name ?>" id="txt_emp_name" name="txt_emp_name" required="" placeholder="Ex: VFT Software Team">
                                                                             </div>
 
                                                                         </div>
@@ -693,7 +693,7 @@
                                                                             <div class="form-group col-sm-6">
                                                                                 <label for="focusedinput" class="col-sm-2 control-label">Relation's Name</label>
                                                                                 <div class="col-sm-8">
-                                                                                    <input type="text" class="form-control" value="<?php echo $data_set[0]->Relations_name ?>" id="txt_rel_name" name="txt_rel_name" placeholder="Mr. Ashan Rathsara">
+                                                                                    <input type="text" class="form-control" value="<?php echo $data_set[0]->Relations_name ?>" id="txt_rel_name" name="txt_rel_name" placeholder="Mr. VFT Software Team">
                                                                                 </div>
 
                                                                             </div>

@@ -2060,6 +2060,7 @@
                 if (selectedQualifications.length === 0) {
                     isValid = false;
                     if (qualError) qualError.style.display = 'block';
+                    alert('Please select at least one qualification!');
                 } else {
                     if (qualError) qualError.style.display = 'none';
                 }
@@ -2069,6 +2070,11 @@
                 // Append image
                 const imageInput = document.getElementById('img_employee');
                 formData.append('img_employee', imageInput.files[0]);
+
+                if (imageInput.files.length === 0) {
+                    alert('Please upload an image.');
+                    return;
+                }
 
                 // Append qualifications
                 selectedQualifications.forEach((data, index) => {

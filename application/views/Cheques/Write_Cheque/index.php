@@ -3,7 +3,7 @@
 
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 <!--<script src="<?php echo base_url(); ?>system_js/Cheque/new.js"></script>
 <script src="<?php echo base_url(); ?>system_js/Cheque/toword.js"></script>-->

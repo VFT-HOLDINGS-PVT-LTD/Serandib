@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 
-
-<!--Add Employee
-
-@author Ashan Rathsara-->
-
-
 <html lang="en">
-
 
 <head>
     <title><?php echo $title ?></title>
@@ -386,7 +379,7 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name" name="txt_emp_name"
                                                                                 required=""
-                                                                                placeholder="Ex: Ashan Rathsara">
+                                                                                placeholder="Ex: VFT Software Team">
                                                                         </div>
 
                                                                     </div>
@@ -2862,6 +2855,7 @@
                 if (selectedQualifications.length === 0) {
                     isValid = false;
                     if (qualError) qualError.style.display = 'block';
+                    alert('Please select at least one qualification!');
                 } else {
                     if (qualError) qualError.style.display = 'none';
                 }
@@ -2871,6 +2865,11 @@
                 // Append image
                 const imageInput = document.getElementById('img_employee');
                 formData.append('img_employee', imageInput.files[0]);
+
+                if (imageInput.files.length === 0) {
+                    alert('Please upload an image.');
+                    return;
+                }
 
                 // Append qualifications
                 selectedQualifications.forEach((data, index) => {

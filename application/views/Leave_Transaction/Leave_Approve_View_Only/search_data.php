@@ -3,7 +3,7 @@
 
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <div class="panel panel-primary">

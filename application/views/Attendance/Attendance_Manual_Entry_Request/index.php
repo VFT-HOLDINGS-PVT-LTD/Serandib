@@ -5,7 +5,7 @@ $currentUser = $this->session->userdata('login_user');
 ?>
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">

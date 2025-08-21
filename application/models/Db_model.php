@@ -1,6 +1,6 @@
 <?php
 
-/* -------ASHAN RATHSARA---------
+/* -------VFT Software Team---------
  * 
  * Database model
  */

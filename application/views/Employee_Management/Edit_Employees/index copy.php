@@ -1,6 +1,6 @@
 <!--Add Employee
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -311,7 +311,7 @@
                                                                                 value="<?php echo $data_set[0]->Emp_Full_Name ?>"
                                                                                 id="txt_emp_name" name="txt_emp_name"
                                                                                 required=""
-                                                                                placeholder="Ex: Ashan Rathsara">
+                                                                                placeholder="Ex: VFT Software Team">
                                                                         </div>
 
                                                                     </div>
@@ -1397,7 +1397,7 @@ $paymentType = isset($data_set[0]->Advance_Payroll_Data) ? $data_set[0]->Advance
                                                                                         value="<?php echo $data_set[0]->Relations_name ?>"
                                                                                         id="txt_rel_name"
                                                                                         name="txt_rel_name"
-                                                                                        placeholder="Mr. Ashan Rathsara">
+                                                                                        placeholder="Mr. VFT Software Team">
                                                                                 </div>
 
                                                                             </div>

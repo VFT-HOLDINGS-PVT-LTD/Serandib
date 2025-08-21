@@ -634,7 +634,7 @@ class Weekly_Roster2 extends CI_Controller
     public function get_weekly_roster_data($roaster_id){
 
         $data['title'] = "Update Weekly Roster Pattern | HRM System";
-        $data['data_set_shift'] = $this->Db_model->getfilteredData("SELECT ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap FROM tbl_shifts WHERE ShiftCode > '165';");
+        $data['data_set_shift'] = $this->Db_model->getfilteredData("SELECT ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap FROM tbl_shifts;");
         $data['roaster_code'] = $roaster_id;
         $result = $this->Db_model->getfilteredData("SELECT RosterName FROM tbl_rosterpatternweeklydtl WHERE RosterCode = '$roaster_id'");
         $data['roster_name'] = (!empty($result) && isset($result[0]->RosterName)) ? $result[0]->RosterName : '';

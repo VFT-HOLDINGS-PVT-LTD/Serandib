@@ -156,7 +156,7 @@
                                                                                 value="<?php echo $data->ShiftCodeName;?>"
                                                                                 id="txtDayType<?php echo $index; ?>"
                                                                                 name="txtDayType<?php echo $index; ?>"
-                                                                                placeholder="">
+                                                                                placeholder="" readonly>
 
                                                                             <input type="hidden"
                                                                                 id="DType<?php echo $index; ?>"

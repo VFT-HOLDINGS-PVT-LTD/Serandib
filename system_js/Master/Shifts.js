@@ -68,10 +68,10 @@ $(".get_data").click(function () {
                 $('#ShiftName').val(response[i].ShiftName);
                 $('#FromTime').val(response[i].FromTime);
                 $('#ToTime').val(response[i].ToTime);
+                $('#CutOffTime').val(response[i].FHDSessionEndTime);
                 $('#ShiftGap').val(response[i].ShiftGap);
-                
-
-
+                $("#nextDay").prop("checked", response[i].NextDay == "1");
+                $("input[name='dayType'][value='" + response[i].DayType + "']").prop("checked", true);
             }
         }
     });

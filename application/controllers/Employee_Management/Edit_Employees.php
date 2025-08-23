@@ -50,6 +50,8 @@ class Edit_Employees extends CI_Controller
         $data['data_set'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_empmaster where Cmp_ID='" . $id . "'");
         $data['bond_data'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_bond_guarantor where CmpNo='" . $id . "'");
         $data['referee_data'] = $this->Db_model->getfilteredData("SELECT * FROM tbl_referee where CmpNo='" . $id . "'");
+        $data['data_dep'] = $this->Db_model->getData('Dep_ID,Dep_Name', 'tbl_departments');
+
         // $data['data_set'] = $this->Db_model->getfilteredData("SELECT 
         //                                                             tbl_empmaster.EmpNo,
         //                                                             tbl_empmaster.Enroll_No,
@@ -138,6 +140,21 @@ class Edit_Employees extends CI_Controller
 
         $this->load->view('Employee_Management/Edit_Employees/index', $data);
     }
+
+    public function getData($id)
+    {
+        $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,ADP_Sub_Department_Name FROM tbl_advance_payroll WHERE CmpNo = '" . $id . "'");
+        // $result = $this->Db_model->getfilteredData("SELECT ADP_Department_ID, ADP_Department_Percentage, ADP_Sub_Department_ID, ADP_Sub_Department_Percentage,Sub_Dep_Name FROM tbl_advance_payroll INNER JOIN tbl_sub_departments ON tbl_advance_payroll.ADP_Sub_Department_ID = tbl_sub_departments.Sub_Dep_ID WHERE CmpNo = '" . $id . "'");
+        echo json_encode(['advance_payroll_data' => $result]);
+    }
+
+    public function getAcademicData($id)
+    {
+        $result = $this->Db_model->getfilteredData("SELECT Q_ID,Qualifications_Types,Qualifications_Description FROM tbl_qualifications WHERE CmpNo = '" . $id . "'");
+        echo json_encode(['academic_data' => $result]);
+    }
+
+
 
     // public function update_emp()
     // {
@@ -271,17 +288,49 @@ class Edit_Employees extends CI_Controller
         $Comp_No = $this->input->post('txt_cmp_no');
         $Emp_No = $this->input->post('txt_emp_no');
 
+        $OldImage = $this->input->post('img_Data');
+        $OldImageData = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
 
-        $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+        if ($OldImageData[0]->Image == $OldImage) {
+            $Cmp_ID = $this->Db_model->getfilteredData("SELECT `Cmp_ID` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
 
-        if (empty($Cmp_ID)) {
-            $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
-        }else {
-            $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+            if (empty($Cmp_ID)) {
+                $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster WHERE Cmp_ID = '" . $Comp_No . "' ");
+            } else {
+                $DataID = $this->Db_model->getfilteredData("SELECT `Image` FROM tbl_empmaster_outside WHERE Cmp_ID = '" . $Comp_No . "' ");
+            }
+
+            $Image = $DataID[0]->Image;
+        } else {
+            // Image Upload Logic
+            $Image = md5($Comp_No);
+            $config['upload_path'] = 'assets/images/Employees/';
+            $config['allowed_types'] = 'jpg|png|docx';
+            $config['max_size'] = 100000;
+            $config['max_width'] = 4000;
+            $config['max_height'] = 4000;
+            $config['file_name'] = $Image . ".jpg";
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('img_employee')) {
+                $upload_data = $this->upload->data();
+                $uploaded_file = $upload_data['file_name'];
+            } else {
+                $uploaded_file = null;
+                // Optionally handle error
+                $error = $this->upload->display_errors();
+                log_message('error', $error);
+            }
+
+            $Image = $Image . ".jpg";
         }
 
+        // echo $Image; // Debugging line to check the image name
 
-        $Image = $DataID[0]->Image;
+        // die;
+
+
 
         $Is_Allow = $this->input->post('Is_Allow');
 
@@ -410,6 +459,7 @@ class Edit_Employees extends CI_Controller
         $User_Name = $this->input->post('txt_user_name');
         $User_Level = $this->input->post('cmb_user_level');
         $Is_Allow = $this->input->post('Is_Allow');
+        $adv = $this->input->post('cmb_percentage');
 
         // $OutSidedata = [
         //     'Is_Approve' => 1,
@@ -474,15 +524,15 @@ class Edit_Employees extends CI_Controller
             'Emergency_Contact_Telephone' => $Emergency_Tel,
             'Emergency_Contact_Address' => $Emergency_Address,
             'Emergency_Contact_Relationship' => $Emergency_Relationship,
-            'OL_Data' => $ol ? 1 : 0,
-            'AL_Data' => $al ? 1 : 0,
-            'Diploma_Data' => $diploma ? 1 : 0,
-            'HND_Data' => $hnd ? 1 : 0,
-            'Degree_Data' => $degree ? 1 : 0,
-            'Master_Data' => $master ? 1 : 0,
-            'Mphill_Data' => $mphil ? 1 : 0,
-            'PHD_Data' => $phd ? 1 : 0,
-            'Academic_Other_Data' => $other,
+            // 'OL_Data' => $ol ? 1 : 0,
+            // 'AL_Data' => $al ? 1 : 0,
+            // 'Diploma_Data' => $diploma ? 1 : 0,
+            // 'HND_Data' => $hnd ? 1 : 0,
+            // 'Degree_Data' => $degree ? 1 : 0,
+            // 'Master_Data' => $master ? 1 : 0,
+            // 'Mphill_Data' => $mphil ? 1 : 0,
+            // 'PHD_Data' => $phd ? 1 : 0,
+            // 'Academic_Other_Data' => $other,
             'username' => $User_Name,
             'password' => hash('sha512', $this->input->post('txt_nic')),
             'Is_allow_login' => $Is_Allow ? 1 : 0,
@@ -490,11 +540,13 @@ class Edit_Employees extends CI_Controller
             'Active_process' => 1,
             'Is_Approve' => 1,
             'Remarks' => $this->input->post('txt_remarks'),
-            'highlights' => $this->input->post('txt_high')
+            'highlights' => $this->input->post('txt_high'),
+            'Advance_Payroll_Data' => $adv ? 1 : 0,
         ];
         // $result = $this->Db_model->insertData("tbl_empmaster", $data);
 
         // echo '<pre>' . var_export($data, true) . '</pre>';
+        // die;
 
         $whereArr3 = ["Cmp_ID" => $Comp_No];
         $result = $this->Db_model->updateData("tbl_empmaster", $data, $whereArr3);
@@ -540,6 +592,127 @@ class Edit_Employees extends CI_Controller
             'Referee_Address' => $Ref2_Address,
         ];
         $result = $this->Db_model->insertData("tbl_referee", $data_referee2);
+
+        // 1. Get basic form data
+        $employee_id = $this->input->post('employee_id', TRUE); // Use your form field name
+
+        $this->Db_model->getfilteredDelete("DELETE FROM tbl_qualifications WHERE CmpNo = '" . $Comp_No . "'");
+
+        // 2. Qualifications
+        $qualifications = $this->input->post('qualifications');
+        if (!empty($qualifications)) {
+            // Example: Save or update qualification data
+            foreach ($qualifications as $q) {
+                $qualificationData = array(
+                    'Qualifications_Types' => $q['type'],
+                    'Qualifications_Description' => $q['notes'],
+                    'CmpNo' => $Comp_No
+                );
+                $result = $this->Db_model->insertData("tbl_qualifications", $qualificationData);
+            }
+        }
+
+        if ($adv == 1) {
+            $this->Db_model->getfilteredDelete("DELETE FROM tbl_advance_payroll WHERE CmpNo = '" . $Comp_No . "'");
+
+            // 3. Advance Payroll
+            $advance_payroll = $this->input->post('advance_payroll');
+
+            // print_r($advance_payroll);
+            // die;
+
+            // print_r($advance_payroll);
+            // die;
+            // if (!empty($advance_payroll)) {
+            //     foreach ($advance_payroll as $row) {
+            //         $dep_data = [
+            //             'Emp_ID' => $employee_id,
+            //             'ADP_Department_ID' => $row['department_id'],
+            //             'ADP_Department_Percentage' => $row['department_percentage']
+            //         ];
+            //         $dep_id = $this->Employee_model->saveDepartment($dep_data); // Save main dept and get ID
+
+            //         // Sub-departments
+            //         if (!empty($row['subdepartments'])) {
+            //             foreach ($row['subdepartments'] as $sub) {
+            //                 $sub_data = [
+            //                     'ADP_Department_ID' => $row['department_id'], // or use $dep_id
+            //                     'Emp_ID' => $employee_id,
+            //                     'ADP_Sub_Department_ID' => $sub['sub_id'],
+            //                     'ADP_Sub_Department_Name' => $sub['sub_name'],
+            //                     'ADP_Sub_Department_Percentage' => $sub['percentage']
+            //                 ];
+            //                 $this->Employee_model->saveSubDepartment($sub_data);
+            //             }
+            //         }
+            //     }
+            // }
+
+            foreach ($advance_payroll as $mainDept) {
+                $depId = $mainDept['department_id'];
+                // $deptName = $mainDept['department'];
+                $deptPercent = $mainDept['department_percentage'];
+                $subDepartments = $mainDept['subdepartments'];
+
+                // If sub-departments exist
+                if (!empty($subDepartments)) {
+                    foreach ($subDepartments as $subDept) {
+                        $subdId = $subDept['sub_id'];
+                        $subdName = $subDept['sub_name'];
+                        $subPercent = $subDept['percentage'];
+
+                        // print_r($subdId);
+                        // die;
+
+                        // Extract ID from "14 - HR1"
+                        // $parts = explode(' - ', $supervisor);
+                        // $subdid = isset($parts[0]) ? $parts[0] : null;
+                        // $subdName = isset($parts[1]) ? $parts[1] : null;
+
+                        // Insert with sub-department
+                        $data_advance_payroll = array(
+                            'CmpNo' => $Comp_No,
+                            'ADP_Department_ID' => $depId,
+                            'ADP_Department_Percentage' => $deptPercent,
+                            'ADP_Sub_Department_ID' => $subdId,
+                            'ADP_Sub_Department_Name' => $subdName,
+                            'ADP_Sub_Department_Percentage' => $subPercent,
+                        );
+
+                        $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
+                    }
+                } else {
+                    $subdId = '';
+                    // Insert only main department when no sub-departments
+                    if ($subdId = '' || $subdId == null) {
+                        $subdId = 0; // Default value if no sub-department
+                    } else {
+                        $subdId = $subdId;
+                    }
+                    $data_advance_payroll = array(
+                        'CmpNo' => $Comp_No,
+                        'ADP_Department_ID' => $depId,
+                        'ADP_Department_Percentage' => $deptPercent,
+                        'ADP_Sub_Department_ID' => $subdId,
+                        'ADP_Sub_Department_Name' => 0,
+                        'ADP_Sub_Department_Percentage' => 0,
+                    );
+
+                    $result = $this->Db_model->insertData("tbl_advance_payroll", $data_advance_payroll);
+                }
+            }
+        }else {
+            $this->Db_model->getfilteredDelete("DELETE FROM tbl_advance_payroll WHERE CmpNo = '" . $Comp_No . "'");
+        }
+
+
+
+        if ($result) {
+            echo json_encode(['status' => 'success', 'message' => 'Employee updated successfully']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to update employee']);
+        }
+
         // echo '<pre>' . var_export($data_referee2, true) . '</pre>';
 
         // $data = [
@@ -600,8 +773,8 @@ class Edit_Employees extends CI_Controller
         // $whereArr = ["EmpNo" => $this->input->post("txt_emp_no")];
         // $result   = $this->Db_model->updateData("tbl_empmaster", $data, $whereArr);
 
-        $this->session->set_flashdata('success_message', 'Update Employee has been updated successfully');
-        redirect('/Employee_Management/View_Employees/');
+        // $this->session->set_flashdata('success_message', 'Update Employee has been updated successfully');
+        // redirect('/Employee_Management/View_Employees/');
 
     }
 

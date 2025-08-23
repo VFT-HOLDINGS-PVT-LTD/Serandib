@@ -58,7 +58,8 @@ class Shifts extends CI_Controller {
             'ToTime' => $this->input->post('txt_to_time'),
             'FHDSessionEndTime' => $this->input->post('txt_cutoff'),
              'NextDay' => $day,
-            'DayType' => $this->input->post('day_type')
+            'DayType' => $this->input->post('day_type'),
+            'ShiftGap' => $this->input->post('shift_Gap')
         );
 
         $result = $this->Db_model->insertData("tbl_shifts", $data);
@@ -80,11 +81,25 @@ class Shifts extends CI_Controller {
         $whereArray = array('ShiftCode' => $ShiftCode);
 
         $this->Db_model->setWhere($whereArray);
-        $dataObject = $this->Db_model->getData('ShiftCode,ShiftName,FromTime,ToTime,ShiftGap', 'tbl_shifts');
+        $dataObject = $this->Db_model->getData('ShiftCode,ShiftName,FromTime,ToTime,NextDay,DayType,FHDSessionEndTime,SHDSessionStartTime,ShiftGap', 'tbl_shifts');
 
         $array = (array) $dataObject;
         echo json_encode($array);
     }
+
+//     public function get_details() {
+//     $ShiftCode = $this->input->post('ShiftCode');
+
+//     $query = $this->db->query("
+//         SELECT ShiftCode, ShiftName, FromTime, ToTime, NextDay, DayType, 
+//                FHDSessionEndTime, SHDSessionStartTime, ShiftGap
+//         FROM tbl_shifts 
+//         WHERE ShiftCode = ?", [$ShiftCode]);
+
+//     $row = $query->row_array(); // return single row as array
+
+//     echo json_encode($row);
+// }
 
     /*
      * Edit Data
@@ -96,10 +111,13 @@ class Shifts extends CI_Controller {
         $FromTime = $this->input->post("FromTime", TRUE);
         $ToTime = $this->input->post("ToTime", TRUE);
         $ShiftGap = $this->input->post("ShiftGap", TRUE);
+        $NextDay = $this->input->post("nextDay", TRUE);
+        $DayType = $this->input->post("dayType", TRUE);
+        $cutoff = $this->input->post("CutOffTime", TRUE);
         
         
         
-        $data = array("ShiftName" => $ShiftName,"FromTime"=>$FromTime,"ToTime"=>$ToTime,"ShiftGap"=>$ShiftGap,);
+        $data = array("ShiftName" => $ShiftName,"FromTime"=>$FromTime,"ToTime"=>$ToTime,"ShiftGap"=>$ShiftGap, "NextDay"=>$NextDay, "DayType"=>$DayType, "FHDSessionEndTime"=>$cutoff);
         $whereArr = array("ShiftCode" => $ShiftCode);
         $result = $this->Db_model->updateData("tbl_shifts", $data, $whereArr);
         redirect(base_url() . "Master/Shifts");

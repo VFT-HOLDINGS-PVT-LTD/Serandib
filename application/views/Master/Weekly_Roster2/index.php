@@ -3,7 +3,7 @@
 
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -46,7 +46,7 @@
                         <div class="page-tabs">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab1">WEEKLY ROSTER PATTERN</a></li>
-                                <!--<li><a data-toggle="tab" href="#tab2">VIEW WEEKLY ROSTER PATTERN</a></li>-->
+                                <li><a data-toggle="tab" href="#tab2">VIEW WEEKLY ROSTER PATTERN</a></li>
                             </ul>
                         </div>
                         <div class="container-fluid">
@@ -526,7 +526,7 @@
                                                                 <tbody>
                                                                     <?php
                                                                     foreach ($data_set as $data) {
-                                                                        if ($data->Status == 1) {
+                                                                        // if ($data->Status == 1) {
 
                                                                             echo "<tr class='odd gradeX'>";
 
@@ -537,7 +537,7 @@
 
 
                                                                             echo "<td width='15'>";
-                                                                            echo "<button class='get_data btn btn-green'  data-toggle='modal' data-target='#myModal' title='EDIT' data-id='$data->RosterCode' href='" . base_url() . "index.php/Master/Department/get_details" . $data->RosterCode . "'><i class='fa fa-edit'></i></button>";
+                                                                            echo "<a class='get_data btn btn-green' title='EDIT' href='" . base_url() . "Master/Weekly_Roster2/get_weekly_roster_data/" . $data->RosterCode . "'><i class='fa fa-edit'></i></a>";
                                                                             echo "</td>";
 
                                                                             // echo "<td width='15'>";
@@ -549,7 +549,7 @@
                                                                             // echo "</td>";
                                                                     
                                                                             echo "</tr>";
-                                                                        }
+                                                                        // }
                                                                     }
                                                                     ?>
                                                                 </tbody>

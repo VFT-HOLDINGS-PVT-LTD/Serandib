@@ -102,25 +102,25 @@ class Leave_Types extends CI_Controller {
     */
     public function ajax_delete($id)
 	{
-                $table = "tbl_designations";
-                $where ='Lv_T_ID';
+        $table = "tbl_leave_types";
+        $where ='Lv_T_ID';
 		$this->Db_model->delete_by_id($id,$where,$table);
 		echo json_encode(array("status" => TRUE));
 	}
     public function update_Data() {
 
-        $BF=$this->input->post('leavebf');
-        if ($BF == null) {
-            $BF = 0;
-        } elseif ($BF == 'on') {
-            $BF=1;
-        }
+        // $BF=$this->input->post('leavebf');
+        // if ($BF == null) {
+        //     $BF = 0;
+        // } elseif ($BF == 'on') {
+        //     $BF=1;
+        // }
         
         $data = array(
            
             'leave_name' => $this->input->post('leave_name'),
             'leave_entitle' => $this->input->post('leave_entitle'),
-            'leave_BF' => $BF,
+            'leave_BF' => 1,
             'IsActive' => 1,
         );
         // $result = $this->Db_model->insertData("tbl_leave_types", $data);

@@ -1,6 +1,6 @@
 <?php
 
-/* -------ASHAN RATHSARA---------
+/* -------VFT Software Team---------
  * 
  * Database model
  */
@@ -145,6 +145,12 @@ class db_model extends CI_Model
         $this->db->where($where, $id);
         $this->db->delete($table);
     }
+
+    public function deleteData($table, $whereArr) {
+    $this->db->where($whereArr);
+    return $this->db->delete($table);
+}
+
 
     public function setWhere($whereArray)
     {
@@ -403,6 +409,26 @@ class db_model extends CI_Model
             foreach ($query->result_array() as $row) {
                 $new_row['label'] = htmlentities(stripslashes($row['Emp_Full_Name']));
                 $new_row['value'] = htmlentities(stripslashes($row['EmpNo']));
+                $row_set[] = $new_row; //build an array
+            }
+            echo json_encode($row_set); //format the array into json data
+        }
+    }
+
+    function get_auto_sub_deparment($q)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_sub_departments');
+        $this->db->group_start();
+        $this->db->like('Sub_Dep_ID', $q);
+        $this->db->or_like('Sub_Dep_Name', $q);
+        $this->db->group_end();
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $new_row['label'] = htmlentities(stripslashes($row['Sub_Dep_Name']));
+                $new_row['value'] = htmlentities(stripslashes($row['Sub_Dep_ID']));
                 $row_set[] = $new_row; //build an array
             }
             echo json_encode($row_set); //format the array into json data

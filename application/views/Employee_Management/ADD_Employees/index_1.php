@@ -3,7 +3,7 @@
 
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -128,7 +128,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput" class="col-sm-4 control-label">Name with Initials</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="number" class="form-control" id="focusedinput" placeholder="Ex: L. Ashan Rathsara">
+                                                                                <input type="number" class="form-control" id="focusedinput" placeholder="Ex: L. VFT Software Team">
                                                                             </div>
 
                                                                         </div>

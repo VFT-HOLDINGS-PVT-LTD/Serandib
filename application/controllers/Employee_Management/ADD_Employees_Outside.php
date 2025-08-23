@@ -55,6 +55,13 @@ class ADD_Employees_Outside extends CI_Controller
         }
     }
 
+    public function getBranchesByBank() {
+        $bank_id = $this->input->post('bank_id');
+        $branches = $this->Db_model->getfilteredData("SELECT * FROM tbl_bank_branches WHERE tbl_bank_branches.Bank_Id = '$bank_id' "); // Replace with your model method to fetch branches
+    
+        echo json_encode($branches);
+    }
+
     //***** INsert Employee
     public function insert_Data()
     {
@@ -438,15 +445,15 @@ class ADD_Employees_Outside extends CI_Controller
                     'Emergency_Contact_Telephone' => $Emergency_Tel,
                     'Emergency_Contact_Address' => $Emergency_Address,
                     'Emergency_Contact_Relationship' => $Emergency_Relationship,
-                    'OL_Data' => $ol ? 1 : 0,
-                    'AL_Data' => $al ? 1 : 0,
-                    'Diploma_Data' => $diploma ? 1 : 0,
-                    'HND_Data' => $hnd ? 1 : 0,
-                    'Degree_Data' => $degree ? 1 : 0,
-                    'Master_Data' => $master ? 1 : 0,
-                    'Mphill_Data' => $mphil ? 1 : 0,
-                    'PHD_Data' => $phd ? 1 : 0,
-                    'Academic_Other_Data' => $other,
+                    // 'OL_Data' => $ol ? 1 : 0,
+                    // 'AL_Data' => $al ? 1 : 0,
+                    // 'Diploma_Data' => $diploma ? 1 : 0,
+                    // 'HND_Data' => $hnd ? 1 : 0,
+                    // 'Degree_Data' => $degree ? 1 : 0,
+                    // 'Master_Data' => $master ? 1 : 0,
+                    // 'Mphill_Data' => $mphil ? 1 : 0,
+                    // 'PHD_Data' => $phd ? 1 : 0,
+                    // 'Academic_Other_Data' => $other,
                     'username' => $User_Name,
                     'password' => hash('sha512', $this->input->post('txt_nic')),
                     'Is_allow_login' => 1,
@@ -517,6 +524,20 @@ class ADD_Employees_Outside extends CI_Controller
                 );
                 $result = $this->Db_model->insertData("tbl_referee", $data_referee2);
 
+                $qualifications = $this->input->post('qualifications');
+                // Example access
+                foreach ($qualifications as $q) {
+                    $qualificationType = $q['qualification'];
+                    $notes = $q['notes'];
+
+                    $data_qualifactions = array(
+                        'Qualifications_Types' => $qualificationType,
+                        'Qualifications_Description' => $notes,
+                        'CmpNo' => $Comp_No
+                    );
+
+                    $result = $this->Db_model->insertData("tbl_qualifications", $data_qualifactions);
+                }
                 $this->session->set_flashdata('success_message', 'Employee Data Added Successfully');
                 redirect('/Employee_Management/ADD_Employees_Outside/');
 

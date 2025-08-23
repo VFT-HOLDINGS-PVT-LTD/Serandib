@@ -4,8 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
-<meta name="description" content="Ashan Rathsara">
-<meta name="author" content="Ashan Rathsara">
+<meta name="description" content="VFT Software Team">
+<meta name="author" content="VFT Software Team">
 
 
 <link href="<?php echo base_url(); ?>assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">        <!-- Font Awesome -->

@@ -3,7 +3,7 @@
 
 <!--Add Employee
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -129,7 +129,7 @@
                                                                         <div class="form-group col-sm-6">
                                                                             <label for="focusedinput" class="col-sm-4 control-label">Full Name</label>
                                                                             <div class="col-sm-8">
-                                                                                <input type="text" class="form-control" id="txt_emp_name" name="txt_emp_name" required="" placeholder="Ex: Ashan Rathsara">
+                                                                                <input type="text" class="form-control" id="txt_emp_name" name="txt_emp_name" required="" placeholder="Ex: VFT Software Team">
                                                                             </div>
 
                                                                         </div>
@@ -485,7 +485,7 @@
                                                                     <div class="form-group col-sm-6">
                                                                         <label for="focusedinput" class="col-sm-2 control-label">Relation's Name</label>
                                                                         <div class="col-sm-8">
-                                                                            <input type="text" class="form-control" id="txt_sp_name" name="txt_sp_name" placeholder="Mr. Ashan Rathsara">
+                                                                            <input type="text" class="form-control" id="txt_sp_name" name="txt_sp_name" placeholder="Mr. VFT Software Team">
                                                                         </div>
 
                                                                     </div>

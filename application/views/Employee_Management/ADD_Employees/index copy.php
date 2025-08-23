@@ -3,7 +3,7 @@
 
 <!--Add Employee
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -283,7 +283,7 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name" name="txt_emp_name"
                                                                                 required=""
-                                                                                placeholder="Ex: Ashan Rathsara">
+                                                                                placeholder="Ex: VFT Software Team">
                                                                         </div>
 
                                                                     </div>
@@ -1170,7 +1170,7 @@
                                                                                 <input type="text" class="form-control"
                                                                                     id="txt_rel_name"
                                                                                     name="txt_rel_name"
-                                                                                    placeholder="Mr. Ashan Rathsara">
+                                                                                    placeholder="Mr. VFT Software Team">
                                                                             </div>
 
                                                                         </div>

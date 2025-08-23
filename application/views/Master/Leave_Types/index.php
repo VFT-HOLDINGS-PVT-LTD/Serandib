@@ -3,7 +3,7 @@
 
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 
 <html lang="en">
@@ -94,7 +94,7 @@
 
                                                                 </div>
 
-                                                                <div class="form-group col-sm-6">
+                                                                <!-- <div class="form-group col-sm-6">
                                                                     <label for="focusedinput" class="col-sm-4 control-label">Leave Balance Forward</label>
                                                                     <div class="col-sm-8 icheck-flat">
                                                                         <label class="checkbox green icheck col-sm-5">
@@ -102,7 +102,7 @@
                                                                         </label>
                                                                     </div>
 
-                                                                </div>
+                                                                </div> -->
 
 
                                                                 <hr>
@@ -153,8 +153,8 @@
                                                                         <th>ID</th>
                                                                         <th>LEAVE</th>
                                                                         <th>ENTITLE</th>
-                                                                        <th>LEAVE BF</th>
-                                                                        <th>IS ACTIVE</th>
+                                                                        <!-- <th>LEAVE BF</th>
+                                                                        <th>IS ACTIVE</th> -->
                                                                         <th>EDIT</th>
                                                                         <th>DELETE</th>
 
@@ -166,8 +166,8 @@
                                                                             <td width="100"><?php echo $data->Lv_T_ID; ?></td>
                                                                             <td width="100"><?php echo $data->leave_name; ?></td>
                                                                             <td width="100"><?php echo $data->leave_entitle; ?></td>
-                                                                            <td width="100"><?php echo $data->leave_BF; ?></td>
-                                                                            <td width="100"><?php echo $data->IsActive; ?></td>
+                                                                            <!-- <td width="100"><?php echo $data->leave_BF; ?></td>
+                                                                            <td width="100"><?php echo $data->IsActive; ?></td> -->
                                                                             <td width="15">
                                                                                 <button class="get_data btn btn-green" data-toggle="modal" data-target="#myModal" title="EDIT" data-id="<?php echo $data->Lv_T_ID; ?>" href=""><i class="fa fa-edit"></i></button>
                                                                             </td>
@@ -221,7 +221,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group col-sm-12">
+                                                    <!-- <div class="form-group col-sm-12">
                                                         <label for="focusedinput" class="col-sm-4 control-label">leave_BF</label>
                                                         <div class="col-sm-8">
 
@@ -239,7 +239,7 @@
                                                                 <input type="checkbox" name="isactive" id="isactive">
                                                             </label>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
                                             </div>
 

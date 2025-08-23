@@ -14,7 +14,7 @@ $currentUser
 
 <!--Description of dashboard page
 
-@author Ashan Rathsara-->
+@author VFT Software Team-->
 
 <style>
   .marquee {

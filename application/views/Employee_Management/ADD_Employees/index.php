@@ -238,7 +238,7 @@
                                                                         <div class="col-sm-8">
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_cmp_no" name="txt_cmp_no"
-                                                                                placeholder="Ex: 00001" required="">
+                                                                                placeholder="Ex: 1234ST" required="">
 
                                                                         </div>
 
@@ -379,7 +379,11 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name" name="txt_emp_name"
                                                                                 required=""
+
                                                                                 placeholder="Ex: VFT Software Team">
+
+                                                                                placeholder="Ex: Nimal Silva">
+
                                                                         </div>
 
                                                                     </div>
@@ -394,7 +398,7 @@
                                                                             <input type="text" class="form-control"
                                                                                 id="txt_emp_name_init"
                                                                                 name="txt_emp_name_init" required=""
-                                                                                placeholder="Ex: L.A.R">
+                                                                                placeholder="Ex: L.A.R Silva">
                                                                         </div>
 
                                                                     </div>
@@ -2297,8 +2301,62 @@
 
         });
 
+
         //function to check username availability
         function check_availability() {
+
+                $('#txt_dob').datepicker({
+                    format: "dd/mm/yyyy",
+                    "todayHighlight": true,
+                    autoclose: true,
+                    format: 'yyyy/mm/dd'
+                }).on('changeDate', function (ev) {
+                    $(this).datepicker('hide');
+                });
+
+                $('#bond_end_date').datepicker({
+                format: "dd/mm/yyyy",
+                "todayHighlight": true,
+                autoclose: true,
+                format: 'yyyy/mm/dd'
+            }).on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+            </script>
+
+
+            <script>
+                $(document).ready(function () {
+                    $("#img_employee").on('change', function () {
+                        //Get count of selected files
+                        var countFiles = $(this)[0].files.length;
+                        var imgPath = $(this)[0].value;
+                        var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                        var image_holder = $("#image-holder");
+                        image_holder.empty();
+                        if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                            if (typeof (FileReader) != "undefined") {
+                                //loop for each file selected for uploaded.
+                                for (var i = 0; i < countFiles; i++) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        $("<img />", {
+                                            "src": e.target.result,
+                                            "class": "thumb-image"
+                                        }).appendTo(image_holder);
+                                    }
+                                    image_holder.show();
+                                    reader.readAsDataURL($(this)[0].files[i]);
+                                }
+                            } else {
+                                alert("This browser does not support FileReader.");
+                            }
+                        } else {
+                            alert("Pls select only images");
+                        }
+                    });
+                });
+            </script>
 
             //get the username
             var username = $('#txt_emp_no').val();
